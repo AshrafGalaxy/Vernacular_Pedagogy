@@ -223,6 +223,16 @@ def export_train_val_splits(pairs, output_dir=BITEXT_DIR, train_ratio=0.9):
     print(f"  - Val Split:   {val_tsv} ({len(val_data)} records - {(1-train_ratio)*100:.0f}%)")
 
 if __name__ == "__main__":
+    if not os.path.exists(FLN_JSON):
+        print(f"[ERROR] FLN lexicon not found at: {FLN_JSON}")
+        print("Please run scripts/06_build_sqlite_lexicon.py first to generate the lexicon.")
+        sys.exit(1)
     records = load_fln_records(FLN_JSON)
+    if not records:
+        print(f"[ERROR] FLN lexicon at {FLN_JSON} is empty.")
+        sys.exit(1)
     pairs = generate_semantically_sound_bitext(records)
+    if not pairs:
+        print("[ERROR] No parallel pairs generated. Check FLN lexicon content.")
+        sys.exit(1)
     export_train_val_splits(pairs)
