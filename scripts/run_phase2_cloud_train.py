@@ -333,7 +333,44 @@ def setup_transformers_compat_shims():
         except Exception as e:
             print(f"  [SHIM WARN] _tie_or_clone_weights fallback skipped: {e}")
 
-        # Shim 5: Universal subprocess compatibility hook in site-packages
+        # Shim 5: Safe _get_tied_weight_keys for transformers v5.x (handles lists, tuples, dicts)
+        try:
+            import transformers.modeling_utils as t_mu
+            _orig_get_tied = getattr(t_mu, "_get_tied_weight_keys", None)
+            if _orig_get_tied is not None:
+                def safe_get_tied_weight_keys(module):
+                    tied_weight_keys = []
+                    for name, submodule in module.named_modules():
+                        tied = getattr(submodule, "_tied_weights_keys", {}) or {}
+                        if isinstance(tied, (list, tuple, set)):
+                            tied_weight_keys.extend([f"{name}.{k}" if name else k for k in tied])
+                        elif hasattr(tied, "keys"):
+                            tied_weight_keys.extend([f"{name}.{k}" if name else k for k in tied.keys()])
+                    return tied_weight_keys
+                t_mu._get_tied_weight_keys = safe_get_tied_weight_keys
+                print("  [SHIM] Safe _get_tied_weight_keys fallback injected into transformers.modeling_utils")
+        except Exception as e:
+            print(f"  [SHIM WARN] safe_get_tied_weight_keys skipped: {e}")
+
+        # Shim 6: Register IndicTransConfig in CTranslate2 converter registry
+        try:
+            import ctranslate2.converters.transformers as _ct_tr
+            from transformers import AutoModelForSeq2SeqLM
+            if "IndicTransConfig" not in _ct_tr._MODEL_LOADERS:
+                class IndicTransLoader(_ct_tr.M2M100Loader):
+                    @property
+                    def architecture_name(self):
+                        return "AutoModelForSeq2SeqLM"
+
+                    def get_model_class(self, config, model_class):
+                        return AutoModelForSeq2SeqLM
+
+                _ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
+                print("  [SHIM] Registered IndicTransConfig in CTranslate2 _MODEL_LOADERS")
+        except Exception as e:
+            print(f"  [SHIM WARN] CTranslate2 IndicTransLoader registration skipped: {e}")
+
+        # Shim 7: Universal subprocess compatibility hook in site-packages
         try:
             import site
             site_packages_dirs = site.getsitepackages() if hasattr(site, "getsitepackages") else []
@@ -364,6 +401,34 @@ def setup_transformers_compat_shims():
                             "        peft.import_utils.is_torchao_available = lambda: False\n"
                             "    except Exception:\n"
                             "        pass\n"
+                            "    try:\n"
+                            "        import transformers.modeling_utils as _mu\n"
+                            "        _orig = getattr(_mu, '_get_tied_weight_keys', None)\n"
+                            "        if _orig is not None:\n"
+                            "            def _safe_get_tied(mod):\n"
+                            "                keys = []\n"
+                            "                for n, sub in mod.named_modules():\n"
+                            "                    t = getattr(sub, '_tied_weights_keys', {}) or {}\n"
+                            "                    if isinstance(t, (list, tuple, set)):\n"
+                            "                        keys.extend([f'{n}.{k}' if n else k for k in t])\n"
+                            "                    elif hasattr(t, 'keys'):\n"
+                            "                        keys.extend([f'{n}.{k}' if n else k for k in t.keys()])\n"
+                            "                return keys\n"
+                            "            _mu._get_tied_weight_keys = _safe_get_tied\n"
+                            "    except Exception:\n"
+                            "        pass\n"
+                            "    try:\n"
+                            "        import ctranslate2.converters.transformers as _ct\n"
+                            "        from transformers import AutoModelForSeq2SeqLM\n"
+                            "        class IndicTransLoader(_ct.M2M100Loader):\n"
+                            "            @property\n"
+                            "            def architecture_name(self):\n"
+                            "                return 'AutoModelForSeq2SeqLM'\n"
+                            "            def get_model_class(self, cfg, m_cls):\n"
+                            "                return AutoModelForSeq2SeqLM\n"
+                            "        _ct._MODEL_LOADERS['IndicTransConfig'] = IndicTransLoader()\n"
+                            "    except Exception:\n"
+                            "        pass\n"
                         )
                     with open(pth_file, "w", encoding="utf-8") as pf:
                         pf.write("import indictrans_v5_compat_hook\n")
@@ -372,7 +437,7 @@ def setup_transformers_compat_shims():
         except Exception as e:
             print(f"  [SHIM WARN] Universal subprocess hook skipped: {e}")
 
-        # Shim 6: PEFT is_torchao_available bug fix
+        # Shim 8: PEFT is_torchao_available bug fix
         patch_peft_compat()
 
     else:
@@ -404,39 +469,24 @@ def patch_remote_tokenizer(model_name, auth_token=None):
     except Exception:
         pass  # Config load may fail but files should still be cached
 
-    # Find the cached tokenizer file
-    cache_base = os.path.expanduser("~/.cache/huggingface/modules/transformers_modules")
-    tokenizer_path = None
-    for root, dirs, files in os.walk(cache_base):
-        for f in files:
-            if f == "tokenization_indictrans.py":
-                tokenizer_path = os.path.join(root, f)
-                break
-        if tokenizer_path:
-            break
+    # Search across all HuggingFace cached module directories
+    search_dirs = [os.path.expanduser("~/.cache/huggingface/modules/transformers_modules")]
+    if os.path.exists("/content/indictrans2_sat_merged"):
+        search_dirs.append("/content/indictrans2_sat_merged")
 
-    if not tokenizer_path:
-        print("[PATCH] Remote tokenizer not yet cached — will retry after first load attempt.")
+    found_files = []
+    for sdir in search_dirs:
+        if not os.path.exists(sdir):
+            continue
+        for root, dirs, files in os.walk(sdir):
+            for f in files:
+                if f == "tokenization_indictrans.py":
+                    found_files.append(os.path.join(root, f))
+
+    if not found_files:
+        print("[PATCH] Remote tokenizer not yet cached — injecting fallback __setattr__ shim.")
+        _inject_tokenizer_compat_shim()
         return
-
-    with open(tokenizer_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Check if already patched (look for our marker)
-    if "# PATCHED_FOR_TRANSFORMERS_V5" in content:
-        print("[PATCH] Remote tokenizer already patched for v5.x. Skipping.")
-        return
-
-    # Check if the problematic pattern exists
-    if "self.unk_token = (" not in content or "super().__init__(" not in content:
-        print("[PATCH] Remote tokenizer has unexpected structure. Skipping auto-patch.")
-        return
-
-    # Strategy: Replace the __init__ body to move super().__init__() BEFORE
-    # any self.XXX_token = ... assignments.
-    #
-    # The fix: store special token strings in local variables, call super().__init__()
-    # first (which initializes _special_tokens_map), then set attributes.
 
     old_init_body = '''        self.src_vocab_fp = src_vocab_fp
         self.tgt_vocab_fp = tgt_vocab_fp
@@ -549,16 +599,27 @@ def patch_remote_tokenizer(model_name, auth_token=None):
         self.eos_token_id = self.src_encoder.get(_eos, 2)
         self.bos_token_id = self.src_encoder.get(_bos, 0)'''
 
-    if old_init_body in content:
-        content = content.replace(old_init_body, new_init_body)
-        with open(tokenizer_path, "w", encoding="utf-8") as f:
-            f.write(content)
-        print(f"[PATCH] Remote tokenizer patched for transformers v5.x: {tokenizer_path}")
-    else:
-        print("[PATCH WARN] Could not find exact __init__ pattern in remote tokenizer.")
-        print("  Attempting fallback: monkey-patching __setattr__...")
-        # Fallback: inject a compatibility wrapper at import time
-        _inject_tokenizer_compat_shim()
+    for tokenizer_path in found_files:
+        try:
+            with open(tokenizer_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            if "# PATCHED_FOR_TRANSFORMERS_V5" in content:
+                print(f"[PATCH] Remote tokenizer already patched: {tokenizer_path}")
+                continue
+
+            if old_init_body in content:
+                content = content.replace(old_init_body, new_init_body)
+                with open(tokenizer_path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                print(f"[PATCH] Remote tokenizer patched for transformers v5.x: {tokenizer_path}")
+            else:
+                print(f"[PATCH WARN] Could not find exact __init__ pattern in: {tokenizer_path}")
+        except Exception as err:
+            print(f"[PATCH WARN] Failed to patch tokenizer {tokenizer_path}: {err}")
+
+    # Always inject safe __setattr__ shim as secondary layer of defense
+    _inject_tokenizer_compat_shim()
 
 
 def _inject_tokenizer_compat_shim():
@@ -599,11 +660,17 @@ def patch_remote_modeling(model_name=None, auth_token=None):
     ROOT CAUSE 2: When external tools/subprocesses (like CTranslate2 converter) load
     configuration_indictrans.py in a fresh Python session, `transformers.onnx` is missing in v5.x.
 
+    ROOT CAUSE 3: In transformers v5.x, _get_tied_weight_keys() expects _tied_weights_keys to be a dict
+    with .keys(), but IndicTransForConditionalGeneration defines it as a list:
+        _tied_weights_keys = ["decoder.embed_tokens.weight", "lm_head.weight"]
+    Fails during save_pretrained() with: AttributeError: 'list' object has no attribute 'keys'
+
     FIX:
       1. Fetch remote code to HuggingFace modules cache if needed.
       2. Rewrite `def tie_weights(self):` in modeling_indictrans.py to accept `*args, **kwargs`.
-      3. Rewrite configuration_indictrans.py to guard `from transformers.onnx import ...`.
-      4. Dynamically monkey-patch any already loaded IndicTransForConditionalGeneration class in sys.modules.
+      3. Rewrite `_tied_weights_keys = [...]` in modeling_indictrans.py to dict `{"lm_head.weight": "model.decoder.embed_tokens.weight"}`.
+      4. Rewrite configuration_indictrans.py to guard `from transformers.onnx import ...`.
+      5. Dynamically monkey-patch any already loaded IndicTransForConditionalGeneration class in sys.modules.
     """
     import transformers  # type: ignore
     major_ver = int(getattr(transformers, "__version__", "0").split(".")[0])
@@ -641,6 +708,13 @@ def patch_remote_modeling(model_name=None, auth_token=None):
                             )
                             modified = True
 
+                        if '_tied_weights_keys = ["decoder.embed_tokens.weight", "lm_head.weight"]' in content:
+                            content = content.replace(
+                                '_tied_weights_keys = ["decoder.embed_tokens.weight", "lm_head.weight"]',
+                                '_tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}  # PATCHED_FOR_TRANSFORMERS_V5'
+                            )
+                            modified = True
+
                         if modified:
                             with open(mod_path, "w", encoding="utf-8") as fh:
                                 fh.write(content)
@@ -670,23 +744,28 @@ def patch_remote_modeling(model_name=None, auth_token=None):
     for name, mod in list(sys.modules.items()):
         if "indictrans" in name.lower() and mod is not None:
             cls = getattr(mod, "IndicTransForConditionalGeneration", None)
-            if cls is not None and hasattr(cls, "tie_weights"):
-                orig_tie = cls.tie_weights
-                try:
-                    import inspect
-                    sig = inspect.signature(orig_tie)
-                    if len(sig.parameters) == 1:
-                        def make_safe_tie(orig_fn):
-                            def safe_tie(self, *args, **kwargs):
-                                try:
-                                    return orig_fn(self)
-                                except TypeError:
-                                    return orig_fn(self, *args, **kwargs)
-                            return safe_tie
-                        cls.tie_weights = make_safe_tie(orig_tie)
-                        print(f"  [SHIM] Dynamically wrapped tie_weights on {name}.IndicTransForConditionalGeneration")
-                except Exception:
-                    pass
+            if cls is not None:
+                # Patch _tied_weights_keys
+                if isinstance(getattr(cls, "_tied_weights_keys", None), (list, tuple, set)):
+                    cls._tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}
+                # Patch tie_weights
+                if hasattr(cls, "tie_weights"):
+                    orig_tie = cls.tie_weights
+                    try:
+                        import inspect
+                        sig = inspect.signature(orig_tie)
+                        if len(sig.parameters) == 1:
+                            def make_safe_tie(orig_fn):
+                                def safe_tie(self, *args, **kwargs):
+                                    try:
+                                        return orig_fn(self)
+                                    except TypeError:
+                                        return orig_fn(self, *args, **kwargs)
+                                return safe_tie
+                            cls.tie_weights = make_safe_tie(orig_tie)
+                            print(f"  [SHIM] Dynamically wrapped tie_weights on {name}.IndicTransForConditionalGeneration")
+                    except Exception:
+                        pass
 
 
 def patch_peft_compat():
@@ -1114,6 +1193,13 @@ def main():
     merged = PeftModel.from_pretrained(raw_base, lora_final_path)
     merged = merged.merge_and_unload()
     merged_path = "/content/indictrans2_sat_merged"
+
+    # Crucial transformers v5.x fix: _tied_weights_keys must be a dict
+    for mod in [merged, raw_base] + list(merged.modules()):
+        tied = getattr(mod, "_tied_weights_keys", None)
+        if isinstance(tied, (list, tuple, set)):
+            mod._tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}
+
     merged.save_pretrained(merged_path)
     tokenizer.save_pretrained(merged_path)
     patch_remote_modeling(auth_token=auth_token)  # Ensure merged export is also patched
@@ -1124,12 +1210,50 @@ def main():
     # ──────────────────────────────────────────
     print("\n--- Step 9: Quantizing to CTranslate2 INT8 ---")
     ct2_path = "/content/indictrans2_sat_int8_ct2"
-    run_cmd_strict(
-        f"python -m ctranslate2.converters.transformers "
-        f"--model {merged_path} --output_dir {ct2_path} "
-        f"--quantization int8 --trust_remote_code --low_cpu_mem_usage",
-        description="CTranslate2 INT8 quantization"
-    )
+    if os.path.exists(ct2_path):
+        import shutil
+        shutil.rmtree(ct2_path)
+
+    conversion_done = False
+    try:
+        import ctranslate2.converters.transformers as ct_tr
+        class IndicTransLoader(ct_tr.M2M100Loader):
+            @property
+            def architecture_name(self):
+                return "AutoModelForSeq2SeqLM"
+
+            def get_model_class(self, config, model_class):
+                return AutoModelForSeq2SeqLM
+
+        ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
+
+        class InProcessConverter(ct_tr.TransformersConverter):
+            def load_model(self, model_class, model_name_or_path, **kwargs):
+                return merged
+
+            def load_tokenizer(self, tokenizer_class, model_name_or_path, **kwargs):
+                return tokenizer
+
+        print("[CT2] Converting merged model to CTranslate2 INT8 in-process...")
+        converter = InProcessConverter(
+            model_name_or_path=merged_path,
+            trust_remote_code=True,
+            low_cpu_mem_usage=True
+        )
+        converter.convert(ct2_path, quantization="int8")
+        if os.path.exists(os.path.join(ct2_path, "model.bin")):
+            conversion_done = True
+            print("[OK] In-process CTranslate2 INT8 conversion succeeded!")
+    except Exception as conv_err:
+        print(f"[WARN] In-process conversion encountered: {conv_err}. Falling back to CLI converter...")
+
+    if not conversion_done:
+        run_cmd_strict(
+            f"python -m ctranslate2.converters.transformers "
+            f"--model {merged_path} --output_dir {ct2_path} "
+            f"--quantization int8 --trust_remote_code --low_cpu_mem_usage",
+            description="CTranslate2 INT8 quantization"
+        )
 
     # ──────────────────────────────────────────
     # Step 10: Package Model Artifact

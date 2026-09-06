@@ -82,20 +82,23 @@ def run_wsl(command, desc=None, timeout=None):
 
 
 def ensure_colab_session(session_name="phase2-train", gpu="T4", max_retries=2):
-    """Ensure a Colab GPU session is active, provisioning one if necessary."""
+    """Ensure a Colab GPU session is active and responsive, provisioning one if necessary."""
     print(f"\n[ORCHESTRATOR] Checking Colab session '{session_name}'...", flush=True)
 
     for attempt in range(max_retries + 1):
         try:
             check = subprocess.run(
-                ["wsl", "-d", "Ubuntu", "bash", "-c", f"{COLAB_CLI} sessions"],
+                ["wsl", "-d", "Ubuntu", "bash", "-c", f"{COLAB_CLI} status -s {session_name}"],
                 capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30
             )
-            if session_name in check.stdout:
-                print(f"[ORCHESTRATOR] Active session '{session_name}' detected.", flush=True)
+            # colab status verifies active connection to the Colab server VM
+            if check.returncode == 0 and ("Status:" in check.stdout or "Variant: GPU" in check.stdout):
+                print(f"[ORCHESTRATOR] Active session '{session_name}' verified on Colab server.", flush=True)
                 return True
+            else:
+                print(f"[INFO] Session '{session_name}' status check: {check.stdout.strip()}", flush=True)
         except subprocess.TimeoutExpired:
-            print(f"[WARN] Session check timed out (attempt {attempt + 1}/{max_retries + 1}).", flush=True)
+            print(f"[WARN] Session status check timed out (attempt {attempt + 1}/{max_retries + 1}).", flush=True)
         except FileNotFoundError:
             print("[ERROR] WSL not found. Cannot check Colab sessions.", flush=True)
             sys.exit(1)
@@ -108,8 +111,7 @@ def ensure_colab_session(session_name="phase2-train", gpu="T4", max_retries=2):
                 desc=f"Provisioning Google Colab {gpu} GPU Session"
             )
             if code == 0:
-                # Wait a moment for session to stabilize
-                time.sleep(5)
+                time.sleep(6)
                 continue
             else:
                 print(f"[WARN] Provisioning attempt {attempt + 1} failed.", flush=True)
@@ -134,21 +136,21 @@ def inject_hf_token(token, session_name="phase2-train"):
         f"open('/content/.hf_token', 'w').write(t); "
         f"print('Remote HF_TOKEN configured!')"
     )
-    inject_cmd = f"echo \"{inject_script}\" | {COLAB_CLI} exec -s {session_name}"
-    code = run_wsl(inject_cmd, desc="Injecting HF_TOKEN into Colab Session", timeout=60)
+    inject_cmd = f"echo \"{inject_script}\" | {COLAB_CLI} exec -s {session_name} --timeout 120"
+    code = run_wsl(inject_cmd, desc="Injecting HF_TOKEN into Colab Session", timeout=150)
     if code != 0:
         print("[WARN] HF_TOKEN injection failed or timed out. Attempting self-healing recovery...", flush=True)
         # Attempt 1: Restart kernel
-        run_wsl(f"{COLAB_CLI} restart-kernel -s {session_name}", desc="Restarting Colab Kernel", timeout=30)
-        time.sleep(3)
-        code = run_wsl(inject_cmd, desc="Retrying HF_TOKEN injection after kernel restart", timeout=60)
+        run_wsl(f"{COLAB_CLI} restart-kernel -s {session_name}", desc="Restarting Colab Kernel", timeout=45)
+        time.sleep(5)
+        code = run_wsl(inject_cmd, desc="Retrying HF_TOKEN injection after kernel restart", timeout=150)
         if code != 0:
             # Attempt 2: Re-provision fresh session
             print("[WARN] Kernel unresponsive. Stopping and provisioning fresh session...", flush=True)
             run_wsl(f"{COLAB_CLI} stop -s {session_name}", timeout=30)
             ensure_colab_session(session_name, gpu="T4")
-            time.sleep(5)
-            run_wsl(inject_cmd, desc="Injecting HF_TOKEN into fresh session", timeout=60)
+            time.sleep(6)
+            run_wsl(inject_cmd, desc="Injecting HF_TOKEN into fresh session", timeout=150)
 
 
 def main():
