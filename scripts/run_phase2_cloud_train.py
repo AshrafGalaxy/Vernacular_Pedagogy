@@ -356,17 +356,45 @@ def setup_transformers_compat_shims():
         try:
             import ctranslate2.converters.transformers as _ct_tr
             from transformers import AutoModelForSeq2SeqLM
-            if "IndicTransConfig" not in _ct_tr._MODEL_LOADERS:
-                class IndicTransLoader(_ct_tr.M2M100Loader):
-                    @property
-                    def architecture_name(self):
-                        return "AutoModelForSeq2SeqLM"
+            class IndicTransLoader(_ct_tr.M2M100Loader):
+                @property
+                def architecture_name(self):
+                    return "AutoModelForSeq2SeqLM"
 
-                    def get_model_class(self, config, model_class):
-                        return AutoModelForSeq2SeqLM
+                def get_model_class(self, config, model_class):
+                    return AutoModelForSeq2SeqLM
 
-                _ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
-                print("  [SHIM] Registered IndicTransConfig in CTranslate2 _MODEL_LOADERS")
+                def get_model_spec(self, model):
+                    model.config.normalize_before = True
+                    model.config.normalize_embedding = True
+                    return super(_ct_tr.M2M100Loader, self).get_model_spec(model)
+
+                def get_vocabulary(self, model, tokenizer):
+                    if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
+                        src_vocab = [None] * len(tokenizer.src_encoder)
+                        for token, idx in tokenizer.src_encoder.items():
+                            if idx < len(src_vocab):
+                                src_vocab[idx] = token
+                        tgt_vocab = [None] * len(tokenizer.tgt_encoder)
+                        for token, idx in tokenizer.tgt_encoder.items():
+                            if idx < len(tgt_vocab):
+                                tgt_vocab[idx] = token
+                        self._src_vocab = [t or "<unk>" for t in src_vocab]
+                        self._tgt_vocab = [t or "<unk>" for t in tgt_vocab]
+                        return self._src_vocab
+                    return super().get_vocabulary(model, tokenizer)
+
+                def set_vocabulary(self, spec, tokens):
+                    if hasattr(self, "_src_vocab") and hasattr(self, "_tgt_vocab"):
+                        spec.register_source_vocabulary(self._src_vocab)
+                        spec.register_target_vocabulary(self._tgt_vocab)
+                        print(f"  [VOCAB] Registered dual vocabularies: src={len(self._src_vocab)}, tgt={len(self._tgt_vocab)}")
+                    else:
+                        spec.register_source_vocabulary(tokens)
+                        spec.register_target_vocabulary(tokens)
+
+            _ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
+            print("  [SHIM] Registered IndicTransConfig in CTranslate2 _MODEL_LOADERS (with dual vocabs and layernorm_embedding)")
         except Exception as e:
             print(f"  [SHIM WARN] CTranslate2 IndicTransLoader registration skipped: {e}")
 
@@ -426,6 +454,29 @@ def setup_transformers_compat_shims():
                             "                return 'AutoModelForSeq2SeqLM'\n"
                             "            def get_model_class(self, cfg, m_cls):\n"
                             "                return AutoModelForSeq2SeqLM\n"
+                            "            def get_model_spec(self, m):\n"
+                            "                m.config.normalize_before = True\n"
+                            "                m.config.normalize_embedding = True\n"
+                            "                return super(_ct.M2M100Loader, self).get_model_spec(m)\n"
+                            "            def get_vocabulary(self, m, tok):\n"
+                            "                if hasattr(tok, 'src_encoder') and hasattr(tok, 'tgt_encoder'):\n"
+                            "                    sv = [None] * len(tok.src_encoder)\n"
+                            "                    for t, i in tok.src_encoder.items():\n"
+                            "                        if i < len(sv): sv[i] = t\n"
+                            "                    tv = [None] * len(tok.tgt_encoder)\n"
+                            "                    for t, i in tok.tgt_encoder.items():\n"
+                            "                        if i < len(tv): tv[i] = t\n"
+                            "                    self._sv = [t or '<unk>' for t in sv]\n"
+                            "                    self._tv = [t or '<unk>' for t in tv]\n"
+                            "                    return self._sv\n"
+                            "                return super().get_vocabulary(m, tok)\n"
+                            "            def set_vocabulary(self, spec, tokens):\n"
+                            "                if hasattr(self, '_sv') and hasattr(self, '_tv'):\n"
+                            "                    spec.register_source_vocabulary(self._sv)\n"
+                            "                    spec.register_target_vocabulary(self._tv)\n"
+                            "                else:\n"
+                            "                    spec.register_source_vocabulary(tokens)\n"
+                            "                    spec.register_target_vocabulary(tokens)\n"
                             "        _ct._MODEL_LOADERS['IndicTransConfig'] = IndicTransLoader()\n"
                             "    except Exception:\n"
                             "        pass\n"
@@ -1042,168 +1093,188 @@ def main():
             raise
     print(f"[OK] Model loaded: {model_name}")
 
-    # ──────────────────────────────────────────
-    # Step 5: Setup LoRA
-    # ──────────────────────────────────────────
-    print("\n--- Step 5: Configuring LoRA Adapter ---")
-    patch_peft_compat()
-    lora_config = LoraConfig(
-        task_type=TaskType.SEQ_2_SEQ_LM,
-        r=16,
-        lora_alpha=32,
-        lora_dropout=0.05,
-        target_modules=["q_proj", "v_proj", "k_proj", "out_proj"],
-        bias="none"
-    )
-    try:
-        peft_model = get_peft_model(base_model, lora_config)
-    except (ImportError, Exception) as e:
-        if "torchao" in str(e):
-            print(f"[WARN] torchao conflict caught in get_peft_model ({e}). Purging torchao package and re-patching PEFT...")
-            run_cmd("pip uninstall -y torchao")
-            patch_peft_compat()
-            peft_model = get_peft_model(base_model, lora_config)
-        else:
-            raise
-    peft_model.print_trainable_parameters()
-
-    # ──────────────────────────────────────────
-    # Step 6: Load & Tokenize Datasets
-    # ──────────────────────────────────────────
-    print("\n--- Step 6: Tokenizing Bitext ---")
-    train_tsv = os.path.join(repo_dir, "data", "processed", "bitext", "train.tsv")
-    val_tsv = os.path.join(repo_dir, "data", "processed", "bitext", "val.tsv")
-
-    # Validate dataset files before proceeding
-    validate_tsv_file(train_tsv, min_rows=10)
-    validate_tsv_file(val_tsv, min_rows=2)
-
-    def load_ds(path):
-        df = pd.read_csv(path, sep="\t")
-        # Drop any rows with NaN values in source/target columns
-        df = df.dropna(subset=["source", "target"])
-        src = df["source"].astype(str).tolist()
-        tgt = df["target"].astype(str).tolist()
-        if not src:
-            raise ValueError(f"[FATAL] No valid rows found in {path} after cleaning.")
-        prepped = ip.preprocess_batch(src, src_lang=src_lang, tgt_lang=tgt_lang)
-        return Dataset.from_dict({"source": prepped, "target": tgt})
-
-    train_ds = load_ds(train_tsv)
-    val_ds = load_ds(val_tsv)
-
-    def tokenize_fn(examples):
-        inputs = tokenizer(examples["source"], max_length=128, truncation=True, padding="max_length")
-        labels = tokenizer(text_target=examples["target"], max_length=128, truncation=True, padding="max_length")
-        labels["input_ids"] = [
-            [(l if l != tokenizer.pad_token_id else -100) for l in label]
-            for label in labels["input_ids"]
-        ]
-        inputs["labels"] = labels["input_ids"]
-        return inputs
-
-    tok_train = train_ds.map(tokenize_fn, batched=True, remove_columns=["source", "target"])
-    tok_val = val_ds.map(tokenize_fn, batched=True, remove_columns=["source", "target"])
-    print(f"Samples: Train={len(tok_train)}, Val={len(tok_val)}")
-
-    # ──────────────────────────────────────────
-    # Step 7: Fine-Tune Model
-    # ──────────────────────────────────────────
-    print("\n--- Step 7: Starting GPU LoRA Fine-Tuning ---")
-    out_lora = "/content/indictrans2_sat_lora"
-
-    # Handle API differences between transformers versions
-    # v5.x uses eval_strategy, v4.x uses evaluation_strategy
-    try:
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=out_lora,
-            per_device_train_batch_size=8,
-            per_device_eval_batch_size=8,
-            gradient_accumulation_steps=2,
-            learning_rate=3e-4,
-            num_train_epochs=3,
-            fp16=torch.cuda.is_available(),
-            eval_strategy="epoch",
-            save_strategy="epoch",
-            save_total_limit=1,
-            logging_steps=20,
-            report_to="none"
-        )
-    except TypeError:
-        # Older transformers versions use evaluation_strategy
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=out_lora,
-            per_device_train_batch_size=8,
-            per_device_eval_batch_size=8,
-            gradient_accumulation_steps=2,
-            learning_rate=3e-4,
-            num_train_epochs=3,
-            fp16=torch.cuda.is_available(),
-            evaluation_strategy="epoch",
-            save_strategy="epoch",
-            save_total_limit=1,
-            logging_steps=20,
-            report_to="none"
-        )
-
-    try:
-        trainer = Seq2SeqTrainer(
-            model=peft_model,
-            args=training_args,
-            train_dataset=tok_train,
-            eval_dataset=tok_val,
-            processing_class=tokenizer
-        )
-    except TypeError:
-        trainer = Seq2SeqTrainer(
-            model=peft_model,
-            args=training_args,
-            train_dataset=tok_train,
-            eval_dataset=tok_val,
-            tokenizer=tokenizer
-        )
-
-    t0 = time.time()
-    trainer.train()
-    elapsed_min = (time.time() - t0) / 60
-    print(f"Training completed in {elapsed_min:.1f} minutes!")
-    lora_final_path = "/content/indictrans2_sat_lora_final"
-    trainer.save_model(lora_final_path)
-    print(f"[OK] LoRA adapter saved to {lora_final_path}")
-
-    # ──────────────────────────────────────────
-    # Step 8: Merge LoRA Weights
-    # ──────────────────────────────────────────
-    print("\n--- Step 8: Merging LoRA Weights with Base Model ---")
-    patch_remote_modeling(model_name, auth_token=auth_token)
-    try:
-        raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
-    except (TypeError, AttributeError) as e:
-        if "tie_weights" in str(e) or "recompute_mapping" in str(e):
-            print(f"[WARN] Step 8 model load failed ({e}), re-applying patches and retrying...")
-            mods_to_clear = [k for k in list(sys.modules.keys())
-                             if "indictrans" in k.lower() or "modeling_indictrans" in k.lower()]
-            for m in mods_to_clear:
-                del sys.modules[m]
-            patch_remote_modeling(model_name, auth_token=auth_token)
-            raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
-        else:
-            raise
-    patch_peft_compat()
-    merged = PeftModel.from_pretrained(raw_base, lora_final_path)
-    merged = merged.merge_and_unload()
     merged_path = "/content/indictrans2_sat_merged"
+    has_merged = os.path.exists(os.path.join(merged_path, "model.safetensors")) or os.path.exists(os.path.join(merged_path, "pytorch_model.bin"))
+    force_retrain = os.environ.get("FORCE_RETRAIN", "0") == "1"
 
-    # Crucial transformers v5.x fix: _tied_weights_keys must be a dict
-    for mod in [merged, raw_base] + list(merged.modules()):
-        tied = getattr(mod, "_tied_weights_keys", None)
-        if isinstance(tied, (list, tuple, set)):
-            mod._tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}
+    if has_merged and not force_retrain:
+        print(f"\n[RESUME] Found existing merged model at {merged_path}!")
+        print("[RESUME] Loading merged model directly for Step 9: CTranslate2 INT8 quantization...")
+        elapsed_min = 0.0
+        try:
+            merged = AutoModelForSeq2SeqLM.from_pretrained(
+                merged_path,
+                trust_remote_code=True,
+                torch_dtype=torch.float16,
+                device_map="auto"
+            )
+            print("[OK] Existing merged model loaded successfully.")
+        except Exception as e:
+            print(f"[WARN] Failed to load existing merged model ({e}). Retraining from scratch...")
+            has_merged = False
 
-    merged.save_pretrained(merged_path)
-    tokenizer.save_pretrained(merged_path)
-    patch_remote_modeling(auth_token=auth_token)  # Ensure merged export is also patched
-    print(f"[OK] Merged model saved to: {merged_path}")
+    if not has_merged or force_retrain:
+        # ──────────────────────────────────────────
+        # Step 5: Setup LoRA
+        # ──────────────────────────────────────────
+        print("\n--- Step 5: Configuring LoRA Adapter ---")
+        patch_peft_compat()
+        lora_config = LoraConfig(
+            task_type=TaskType.SEQ_2_SEQ_LM,
+            r=16,
+            lora_alpha=32,
+            lora_dropout=0.05,
+            target_modules=["q_proj", "v_proj", "k_proj", "out_proj"],
+            bias="none"
+        )
+        try:
+            peft_model = get_peft_model(base_model, lora_config)
+        except (ImportError, Exception) as e:
+            if "torchao" in str(e):
+                print(f"[WARN] torchao conflict caught in get_peft_model ({e}). Purging torchao package and re-patching PEFT...")
+                run_cmd("pip uninstall -y torchao")
+                patch_peft_compat()
+                peft_model = get_peft_model(base_model, lora_config)
+            else:
+                raise
+        peft_model.print_trainable_parameters()
+
+        # ──────────────────────────────────────────
+        # Step 6: Load & Tokenize Datasets
+        # ──────────────────────────────────────────
+        print("\n--- Step 6: Tokenizing Bitext ---")
+        train_tsv = os.path.join(repo_dir, "data", "processed", "bitext", "train.tsv")
+        val_tsv = os.path.join(repo_dir, "data", "processed", "bitext", "val.tsv")
+
+        # Validate dataset files before proceeding
+        validate_tsv_file(train_tsv, min_rows=10)
+        validate_tsv_file(val_tsv, min_rows=2)
+
+        def load_ds(path):
+            df = pd.read_csv(path, sep="\t")
+            # Drop any rows with NaN values in source/target columns
+            df = df.dropna(subset=["source", "target"])
+            src = df["source"].astype(str).tolist()
+            tgt = df["target"].astype(str).tolist()
+            if not src:
+                raise ValueError(f"[FATAL] No valid rows found in {path} after cleaning.")
+            prepped = ip.preprocess_batch(src, src_lang=src_lang, tgt_lang=tgt_lang)
+            return Dataset.from_dict({"source": prepped, "target": tgt})
+
+        train_ds = load_ds(train_tsv)
+        val_ds = load_ds(val_tsv)
+
+        def tokenize_fn(examples):
+            inputs = tokenizer(examples["source"], max_length=128, truncation=True, padding="max_length")
+            labels = tokenizer(text_target=examples["target"], max_length=128, truncation=True, padding="max_length")
+            labels["input_ids"] = [
+                [(l if l != tokenizer.pad_token_id else -100) for l in label]
+                for label in labels["input_ids"]
+            ]
+            inputs["labels"] = labels["input_ids"]
+            return inputs
+
+        tok_train = train_ds.map(tokenize_fn, batched=True, remove_columns=["source", "target"])
+        tok_val = val_ds.map(tokenize_fn, batched=True, remove_columns=["source", "target"])
+        print(f"Samples: Train={len(tok_train)}, Val={len(tok_val)}")
+
+        # ──────────────────────────────────────────
+        # Step 7: Fine-Tune Model
+        # ──────────────────────────────────────────
+        print("\n--- Step 7: Starting GPU LoRA Fine-Tuning ---")
+        out_lora = "/content/indictrans2_sat_lora"
+
+        # Handle API differences between transformers versions
+        # v5.x uses eval_strategy, v4.x uses evaluation_strategy
+        try:
+            training_args = Seq2SeqTrainingArguments(
+                output_dir=out_lora,
+                per_device_train_batch_size=8,
+                per_device_eval_batch_size=8,
+                gradient_accumulation_steps=2,
+                learning_rate=3e-4,
+                num_train_epochs=3,
+                fp16=torch.cuda.is_available(),
+                eval_strategy="epoch",
+                save_strategy="epoch",
+                save_total_limit=1,
+                logging_steps=20,
+                report_to="none"
+            )
+        except TypeError:
+            # Older transformers versions use evaluation_strategy
+            training_args = Seq2SeqTrainingArguments(
+                output_dir=out_lora,
+                per_device_train_batch_size=8,
+                per_device_eval_batch_size=8,
+                gradient_accumulation_steps=2,
+                learning_rate=3e-4,
+                num_train_epochs=3,
+                fp16=torch.cuda.is_available(),
+                evaluation_strategy="epoch",
+                save_strategy="epoch",
+                save_total_limit=1,
+                logging_steps=20,
+                report_to="none"
+            )
+
+        try:
+            trainer = Seq2SeqTrainer(
+                model=peft_model,
+                args=training_args,
+                train_dataset=tok_train,
+                eval_dataset=tok_val,
+                processing_class=tokenizer
+            )
+        except TypeError:
+            trainer = Seq2SeqTrainer(
+                model=peft_model,
+                args=training_args,
+                train_dataset=tok_train,
+                eval_dataset=tok_val,
+                tokenizer=tokenizer
+            )
+
+        t0 = time.time()
+        trainer.train()
+        elapsed_min = (time.time() - t0) / 60
+        print(f"Training completed in {elapsed_min:.1f} minutes!")
+        lora_final_path = "/content/indictrans2_sat_lora_final"
+        trainer.save_model(lora_final_path)
+        print(f"[OK] LoRA adapter saved to {lora_final_path}")
+
+        # ──────────────────────────────────────────
+        # Step 8: Merge LoRA Weights
+        # ──────────────────────────────────────────
+        print("\n--- Step 8: Merging LoRA Weights with Base Model ---")
+        patch_remote_modeling(model_name, auth_token=auth_token)
+        try:
+            raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+        except (TypeError, AttributeError) as e:
+            if "tie_weights" in str(e) or "recompute_mapping" in str(e):
+                print(f"[WARN] Step 8 model load failed ({e}), re-applying patches and retrying...")
+                mods_to_clear = [k for k in list(sys.modules.keys())
+                                 if "indictrans" in k.lower() or "modeling_indictrans" in k.lower()]
+                for m in mods_to_clear:
+                    del sys.modules[m]
+                patch_remote_modeling(model_name, auth_token=auth_token)
+                raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+            else:
+                raise
+        patch_peft_compat()
+        merged = PeftModel.from_pretrained(raw_base, lora_final_path)
+        merged = merged.merge_and_unload()
+
+        # Crucial transformers v5.x fix: _tied_weights_keys must be a dict
+        for mod in [merged, raw_base] + list(merged.modules()):
+            tied = getattr(mod, "_tied_weights_keys", None)
+            if isinstance(tied, (list, tuple, set)):
+                mod._tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}
+
+        merged.save_pretrained(merged_path)
+        tokenizer.save_pretrained(merged_path)
+        patch_remote_modeling(auth_token=auth_token)  # Ensure merged export is also patched
+        print(f"[OK] Merged model saved to: {merged_path}")
 
     # ──────────────────────────────────────────
     # Step 9: Quantize to CTranslate2 INT8
@@ -1224,6 +1295,35 @@ def main():
 
             def get_model_class(self, config, model_class):
                 return AutoModelForSeq2SeqLM
+
+            def get_model_spec(self, model):
+                model.config.normalize_before = True
+                model.config.normalize_embedding = True
+                return super(ct_tr.M2M100Loader, self).get_model_spec(model)
+
+            def get_vocabulary(self, model, tokenizer):
+                if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
+                    src_vocab = [None] * len(tokenizer.src_encoder)
+                    for token, idx in tokenizer.src_encoder.items():
+                        if idx < len(src_vocab):
+                            src_vocab[idx] = token
+                    tgt_vocab = [None] * len(tokenizer.tgt_encoder)
+                    for token, idx in tokenizer.tgt_encoder.items():
+                        if idx < len(tgt_vocab):
+                            tgt_vocab[idx] = token
+                    self._src_vocab = [t or "<unk>" for t in src_vocab]
+                    self._tgt_vocab = [t or "<unk>" for t in tgt_vocab]
+                    return self._src_vocab
+                return super().get_vocabulary(model, tokenizer)
+
+            def set_vocabulary(self, spec, tokens):
+                if hasattr(self, "_src_vocab") and hasattr(self, "_tgt_vocab"):
+                    spec.register_source_vocabulary(self._src_vocab)
+                    spec.register_target_vocabulary(self._tgt_vocab)
+                    print(f"  [VOCAB] Registered dual vocabularies: src={len(self._src_vocab)}, tgt={len(self._tgt_vocab)}")
+                else:
+                    spec.register_source_vocabulary(tokens)
+                    spec.register_target_vocabulary(tokens)
 
         ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
 
