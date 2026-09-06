@@ -24,7 +24,10 @@ from typing import List, Dict, Tuple, Optional
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+try:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+except NameError:
+    BASE_DIR = os.getcwd()
 ENV_FILE = os.path.join(BASE_DIR, ".env")
 DEFAULT_OUTPUT_DIR = os.path.join(BASE_DIR, "data", "processed", "voice_bank")
 
