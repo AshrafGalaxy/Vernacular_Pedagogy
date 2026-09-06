@@ -23,9 +23,12 @@ import glob
 import shutil
 
 
-def run_cmd(cmd, cwd=None, capture=False):
+def run_cmd(cmd, cwd=None, description="", capture=False):
     """Run a shell command, print output, return exit code (non-fatal)."""
-    print(f"\n[EXEC] {cmd}", flush=True)
+    if description:
+        print(f"\n[EXEC] {description}: {cmd}", flush=True)
+    else:
+        print(f"\n[EXEC] {cmd}", flush=True)
     if capture:
         res = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True)
         if res.stdout:
