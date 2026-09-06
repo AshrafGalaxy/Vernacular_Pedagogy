@@ -180,20 +180,25 @@ def fetch_from_huggingface(
         if target_cap and saved_count >= target_cap:
             break
 
-        # Extract transcript
-        raw_text = item.get("transcription") or item.get("sentence") or item.get("text") or ""
+        # Extract transcript (support normalized, transcription, sentence, text)
+        raw_text = item.get("normalized") or item.get("transcription") or item.get("sentence") or item.get("text") or ""
         norm_text = normalize_olchiki(raw_text)
 
         if not is_valid_olchiki_sentence(norm_text):
             continue
 
-        # Extract audio
-        audio_info = item.get("audio")
-        if not audio_info:
-            continue
+        # Extract audio (support standard dict or torchcodec AudioDecoder)
+        audio_array = None
+        orig_sr = 16000
+        if "audio" in item and isinstance(item["audio"], dict):
+            audio_array = item["audio"].get("array")
+            orig_sr = item["audio"].get("sampling_rate", 16000)
+        elif "audio_filepath" in item and hasattr(item["audio_filepath"], "get_all_samples"):
+            samples_obj = item["audio_filepath"].get_all_samples()
+            audio_tensor = samples_obj.data.squeeze().cpu().numpy()
+            audio_array = audio_tensor
+            orig_sr = samples_obj.sample_rate
 
-        audio_array = audio_info.get("array")
-        orig_sr = audio_info.get("sampling_rate", 16000)
         if audio_array is None or len(audio_array) == 0:
             continue
 
@@ -261,18 +266,17 @@ def main():
     print(f"Hugging Face Auth: {'Detected' if token else 'None'}")
     print("=" * 60)
 
-    # Source 1: AI4Bharat IndicVoices-R (Dedicated TTS Dataset for Indian Languages)
-    print("\nAttempting Source 1: AI4Bharat IndicVoices-R ('ai4bharat/indicvoices_r', sat)...")
-    c1, t1 = fetch_from_huggingface("ai4bharat/indicvoices_r", config="sat", split="train", hf_token=token, output_dir=args.output_dir, max_samples=args.max_samples)
+    # Source 1: AI4Bharat IndicVoices-R (Studio-quality Indian Vernacular Speech)
+    print("\nAttempting Source 1: AI4Bharat IndicVoices-R ('ai4bharat/indicvoices_r', Santali)...")
+    c1, t1 = fetch_from_huggingface("ai4bharat/indicvoices_r", config="Santali", split="train", hf_token=token, output_dir=args.output_dir, max_samples=500)
     total_clips += c1
     total_time += t1
 
-    # Source 2: Mozilla Common Voice Santali
-    if total_clips < 200:
-        print("\nAttempting Source 2: Mozilla Common Voice ('fsicoli/common_voice_19_0', sat)...")
-        c2, t2 = fetch_from_huggingface("fsicoli/common_voice_19_0", config="sat", split="train", hf_token=token, output_dir=args.output_dir, max_samples=args.max_samples)
-        total_clips += c2
-        total_time += t2
+    # Source 2: XKaab Santhali Speech Corpus (Acoustic Diversity)
+    print("\nAttempting Source 2: XKaab Santali Speech Corpus ('XKaab/ASR-Santali_4hrs', valid)...")
+    c2, t2 = fetch_from_huggingface("XKaab/ASR-Santali_4hrs", config=None, split="valid", hf_token=token, output_dir=args.output_dir, max_samples=200)
+    total_clips += c2
+    total_time += t2
 
     if total_clips > 0:
         package_voicebank(args.output_dir)

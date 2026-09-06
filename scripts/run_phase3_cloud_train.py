@@ -68,10 +68,11 @@ def install_dependencies():
     run_cmd("apt-get update -qq && apt-get install -y -qq espeak-ng ffmpeg sox libsndfile1", capture=True)
 
     # Python packages
-    # Pinning pytorch-lightning to 1.9.5 and torchmetrics to 0.11.4 for Piper VITS compatibility
+    # Pinning pytorch-lightning to 1.9.5, torchmetrics to 0.11.4, and numpy<2.0 for Piper VITS compatibility
     packages = [
         "pytorch-lightning==1.9.5",
         "torchmetrics==0.11.4",
+        "\"numpy<2.0\"",
         "onnx",
         "onnxruntime",
         "soundfile",
@@ -102,21 +103,62 @@ def install_dependencies():
         with open(req_path, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
-    # Patch 2: Make piper_phonemize optional in preprocess.py
+    # Patch 2: Pure-Python Ol Chiki codepoints phonemizer in preprocess.py
     prep_path = os.path.join(piper_dir, "src", "python", "piper_train", "preprocess.py")
     if os.path.exists(prep_path):
         with open(prep_path, "r", encoding="utf-8") as f:
             prep_code = f.read()
-        if "from piper_phonemize import (" in prep_code and "except ImportError:" not in prep_code:
-            prep_code = prep_code.replace(
-                "from piper_phonemize import (",
-                "try:\n    from piper_phonemize import ("
-            ).replace(
-                "    tashkeel_run,\n)",
-                "    tashkeel_run,\n)\nexcept ImportError:\n    phonemize_espeak = None\n    phonemize_codepoints = None\n    phoneme_ids_espeak = None\n    phoneme_ids_codepoints = None\n    get_codepoints_map = None\n    get_espeak_map = None\n    get_max_phonemes = None\n    tashkeel_run = None"
-            )
-            with open(prep_path, "w", encoding="utf-8") as f:
-                f.write(prep_code)
+        pure_py = '''def _build_sat_map():
+    m = {"_": [0], "^": [1], "$": [2], " ": [3]}
+    punct = [".", ",", "!", "?", "-", ":", ";", "\'", \'"\', "(", ")", "[", "]", "/", "`", "~", chr(0x1C7E), chr(0x1C7F)]
+    cid = 4
+    for p in punct:
+        if p not in m:
+            m[p] = [cid]
+            cid += 1
+    for code in range(0x1C50, 0x1C80):
+        c = chr(code)
+        if c not in m:
+            m[c] = [cid]
+            cid += 1
+    return m
+
+_GLOBAL_CODEPOINTS = {"sat": _build_sat_map(), "default": _build_sat_map()}
+
+def get_codepoints_map():
+    return _GLOBAL_CODEPOINTS
+
+def get_max_phonemes():
+    return 256
+
+def phonemize_codepoints(text):
+    return [[c for c in text]]
+
+def phoneme_ids_codepoints(language, phonemes, missing_phonemes=None):
+    cmap = _GLOBAL_CODEPOINTS.get(language, _GLOBAL_CODEPOINTS["sat"])
+    pad = cmap.get("_", [0])[0]
+    bos = cmap.get("^", [1])[0]
+    eos = cmap.get("$", [2])[0]
+    ids = [bos]
+    for p in phonemes:
+        if p in cmap:
+            ids.extend(cmap[p])
+            ids.append(pad)
+        elif missing_phonemes is not None:
+            missing_phonemes[p] += 1
+    ids.append(eos)
+    return ids
+
+def tashkeel_run(t):
+    return t
+
+phonemize_espeak = None
+phoneme_ids_espeak = None
+get_espeak_map = None'''
+        import re
+        prep_code = re.sub(r'from piper_phonemize import[\s\S]+?tashkeel_run,\n\)', pure_py, prep_code)
+        with open(prep_path, "w", encoding="utf-8") as f:
+            f.write(prep_code)
 
     # Patch 3: Build monotonic_align Cython extension in-place
     run_cmd_strict(
@@ -177,8 +219,8 @@ def prepare_dataset(repo_dir: str, auth_token: str = ""):
         # Run 04_fetch_santhali_audio.py to stream from Hugging Face
         print("[INGEST] Running 04_fetch_santhali_audio.py...", flush=True)
         token_arg = f"--hf-token {auth_token}" if auth_token else ""
-        run_cmd(
-            f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir} --max-samples 600",
+        run_cmd_strict(
+            f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir} --max-samples 700",
             description="Fetch Santhali speech dataset"
         )
 
@@ -245,7 +287,7 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 50):
         f"--batch-size 16 "
         f"--validation-split 0.05 "
         f"--checkpoint-epochs 10 "
-        f"--max-epochs {max_epochs} "
+        f"--max_epochs {max_epochs} "
         f"--resume_from_checkpoint {base_ckpt}"
     )
     t0 = time.time()
