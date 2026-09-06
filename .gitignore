@@ -15,8 +15,11 @@ ENV/
 *.bin
 *.safetensors
 *.ckpt
+*.onnx
 *.tar.gz
 *.zip
+models/tts/samples/
+Get_started_managed_agents.ipynb
 
 # Audio raw dumps (keep cache seeds, ignore large scrapes)
 data/raw/youtube_audio/*.mp3

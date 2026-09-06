@@ -48,10 +48,11 @@
 ---
 
 ## Phase 3: Voice Synthesis (Piper TTS VITS Architecture)
-- [ ] **Task 3.1:** Execute audio standardization (16 kHz 16-bit Mono WAV) via `colab_phase1_audio_prep.ipynb`.
-- [ ] **Task 3.2:** Execute Piper TTS VITS fine-tuning on Colab GPU via `colab_phase3_piper_tts.ipynb`.
-- [ ] **Task 3.3:** Export trained acoustic and vocoder model to **ONNX format** (`sat_piper_model.onnx` ~30 MB).
-- [ ] **Task 3.4:** Download ONNX model package into local `models/tts/`.
+- [x] **Task 3.1:** Build Santhali speech corpus fetcher and preprocessor (`scripts/04_fetch_santhali_audio.py`) supporting AI4Bharat IndicVoices-R & Common Voice with 16 kHz Mono WAV standardization.
+- [x] **Task 3.2:** Build autonomous cloud training worker (`scripts/run_phase3_cloud_train.py`) and update Colab notebook (`notebooks/colab_phase3_piper_tts.ipynb`) with deterministic Ol Chiki character alignment (`--phoneme-type text`).
+- [x] **Task 3.3:** Build local cloud orchestrator (`scripts/launch_phase3_on_colab.py`) for automated Colab T4 GPU execution and artifact download.
+- [x] **Task 3.4:** Build local ONNX CPU verification and latency benchmark harness (`scripts/verify_tts.py`).
+- [ ] **Task 3.5:** Execute training on Colab Tesla T4 GPU, export `sat_piper_model.onnx` (~30 MB), and verify FLN audio synthesis.
 
 ---
 

@@ -14,7 +14,7 @@ Last Updated: Phase 1 Completion
 | **Common Voice Audio Preprocessor** | **100% COMPLETE** | Local / Cloud | **NONE** (`scripts/02_audio_common_voice_prep.py` ready) |
 | **AI4Bharat Ingestion Pipeline** | **100% COMPLETE** | Google Colab | **NONE** (Ingested & Processed) |
 | **IndicTrans2 LoRA MT & INT8** | **100% COMPLETE** | Google Colab (T4) | **NONE** (`models/mt/indictrans2_sat_int8_ct2.tar.gz` ready) |
-| **Piper TTS Cloud Notebook** | **100% CODE READY** | Google Colab (T4) | **Next Step: Run Notebook for Voice Bank Training** |
+| **Piper TTS Cloud Training Stack** | **100% CODE READY** | Google Colab (T4) | **Ready: Run via `launch_phase3_on_colab.py`** |
 | **Android Asset Packaging** | **PENDING** | Local Workstation | **Waiting for TTS ONNX Voice Export** |
 
 ---
@@ -38,11 +38,12 @@ Last Updated: Phase 1 Completion
    - Exported and verified archive locally at `models/mt/indictrans2_sat_int8_ct2.tar.gz` (286.7 MB).
    - Full technical report available at [`docs/PHASE2_EXECUTION_AND_OPTIMIZATION_REPORT.md`](file:///c:/Users/Ashraf/Desktop/26042/docs/PHASE2_EXECUTION_AND_OPTIMIZATION_REPORT.md).
 
-4. **Self-Contained Cloud Notebooks & Cloud Scripts:**
-   - `notebooks/colab_phase1_audio_prep.ipynb`
-   - `notebooks/colab_phase2_indictrans2_lora.ipynb`
-   - `notebooks/colab_phase3_piper_tts.ipynb`
-   - `scripts/run_phase2_cloud_train.py`
+4. **Phase 3 Voice Synthesis Stack & Scaffolding:**
+   - `scripts/04_fetch_santhali_audio.py`: Speech corpus fetcher & 16 kHz Mono WAV standardizer.
+   - `scripts/run_phase3_cloud_train.py`: Autonomous cloud training worker for Piper TTS on Colab T4.
+   - `scripts/launch_phase3_on_colab.py`: Local orchestrator via WSL / Colab-CLI.
+   - `scripts/verify_tts.py`: Local ONNX CPU inference verification & RTF benchmark harness.
+   - `notebooks/colab_phase3_piper_tts.ipynb`: Browser-runnable Colab notebook.
    - `scripts/launch_phase2_on_colab.py`
 
 ---
