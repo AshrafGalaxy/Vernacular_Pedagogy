@@ -367,7 +367,7 @@ def setup_transformers_compat_shims():
                 def get_model_spec(self, model):
                     model.config.normalize_before = True
                     model.config.normalize_embedding = True
-                    return super().get_model_spec(model)
+                    return _ct_tr.BartLoader.get_model_spec(self, model)
 
                 def get_vocabulary(self, model, tokenizer):
                     if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
@@ -457,7 +457,7 @@ def setup_transformers_compat_shims():
                             "            def get_model_spec(self, m):\n"
                             "                m.config.normalize_before = True\n"
                             "                m.config.normalize_embedding = True\n"
-                            "                return super().get_model_spec(m)\n"
+                            "                return _ct.BartLoader.get_model_spec(self, m)\n"
                             "            def get_vocabulary(self, m, tok):\n"
                             "                if hasattr(tok, 'src_encoder') and hasattr(tok, 'tgt_encoder'):\n"
                             "                    sv = [None] * len(tok.src_encoder)\n"
@@ -1316,7 +1316,7 @@ def main():
             def get_model_spec(self, model):
                 model.config.normalize_before = True
                 model.config.normalize_embedding = True
-                return super().get_model_spec(model)
+                return ct_tr.BartLoader.get_model_spec(self, model)
 
             def get_vocabulary(self, model, tokenizer):
                 if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):

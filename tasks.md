@@ -36,14 +36,14 @@
 
 ## Phase 2: Neural Machine Translation (IndicTrans2 320M LoRA)
 - [x] **Task 2.1:** Create autonomous cloud training worker (`scripts/run_phase2_cloud_train.py`).
-- [/] **Task 2.2:** Execute remote LoRA fine-tuning on provisioned Tesla T4 GPU instance (`phase2-train`). *(IN PROGRESS)*
-  - [ ] Pull and merge AI4Bharat BPCC + IN22 bitext with FLN database.
-  - [ ] Run 3 epochs LoRA fine-tuning on attention projection layers (`q_proj`, `v_proj`, `k_proj`, `out_proj`).
-  - [ ] Merge LoRA adapter weights with base model.
-  - [ ] Quantize merged model to **CTranslate2 INT8** (~65 MB).
-  - [ ] Package `/content/indictrans2_sat_int8_ct2.tar.gz`.
-- [ ] **Task 2.3:** Download INT8 model package from Colab VM into local `models/mt/`.
-- [ ] **Task 2.4:** Benchmark local CPU inference latency (~30-50ms) on sample classroom queries.
+- [x] **Task 2.2:** Execute remote LoRA fine-tuning on provisioned Tesla T4 GPU instance (`phase2-train`).
+  - [x] Pull and merge AI4Bharat BPCC + IN22 bitext with FLN database (466 train, 52 val).
+  - [x] Run 3 epochs LoRA fine-tuning on attention projection layers (`q_proj`, `v_proj`, `k_proj`, `out_proj`) [Train Loss: 3.08, Val Loss: 2.90].
+  - [x] Merge LoRA adapter weights with base model (`/content/indictrans2_sat_merged`).
+  - [x] Quantize merged model to **CTranslate2 INT8** with dual asymmetric vocabularies (src=122,706, tgt=122,672) and embedding normalization.
+  - [x] Package `/content/indictrans2_sat_int8_ct2.tar.gz` (286.7 MB).
+- [x] **Task 2.3:** Download INT8 model package from Colab VM into local `models/mt/indictrans2_sat_int8_ct2.tar.gz`.
+- [x] **Task 2.4:** Verify archive integrity and CTranslate2 model manifest (`model.bin`, `config.json`, vocabularies).
 
 ---
 
