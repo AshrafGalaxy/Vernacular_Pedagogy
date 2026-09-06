@@ -1,0 +1,19 @@
+{
+  "include": [
+    "scripts",
+    "assets"
+  ],
+  "exclude": [
+    "**/__pyrefly_virtual__/**",
+    "**/*.ipynb",
+    "notebooks/**",
+    "models/**"
+  ],
+  "ignore": [
+    "**/__pyrefly_virtual__/**",
+    "**/*.ipynb",
+    "notebooks/**"
+  ],
+  "reportMissingImports": "none",
+  "reportUndefinedVariable": "none"
+}
