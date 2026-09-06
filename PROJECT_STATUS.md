@@ -45,21 +45,22 @@ Last Updated: Phase 1 Completion
 
 To train the models without straining your local CPU/RAM, the following external actions require user involvement:
 
-### Action 1: Optional Hugging Face Token (For Gated BPCC-Human)
-- **Why:** `ai4bharat/BPCC` on Hugging Face is a gated repository requiring user agreement.
-- **How to do it (Takes 1 minute):**
-  1. Go to [https://huggingface.co/datasets/ai4bharat/BPCC](https://huggingface.co/datasets/ai4bharat/BPCC) and click **"Access repository"** to accept terms.
-  2. Copy your User Access Token from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
-  3. *(Note: If you don't have a token, the script will automatically fallback to the open `ai4bharat/IN22-Conv` dataset without requiring any login!)*
+### Action 1: Hugging Face Token Configuration
+- **Status:** **COMPLETED** (Token securely saved in local `.env` and wired into `01_fetch_bpcc_bitext.py`).
 
-### Action 2: Run Phase 2 MT Fine-Tuning in Google Colab
-- **Why:** Training IndicTrans2 320M requires a GPU (T4 or A100).
-- **How to do it:**
-  1. Open [`notebooks/colab_phase2_indictrans2_lora.ipynb`](https://colab.research.google.com/github/AshrafGalaxy/Vernacular_Pedagogy/blob/main/notebooks/colab_phase2_indictrans2_lora.ipynb) in Google Colab.
-  2. Select **Runtime > Change runtime type > T4 GPU**.
-  3. (Optional) Paste your Hugging Face token in Section 2.1 cell.
-  4. Click **Runtime > Run all**.
-  5. When complete, download the generated `indictrans2_sat_int8_ct2.tar.gz` (~65 MB) and place it in `models/mt/`.
+### Action 2: Run Phase 2 MT Fine-Tuning in Google Colab (ACTIVE STEP)
+- **Why:** Training IndicTrans2 320M requires an NVIDIA GPU (T4 or A100).
+- **Step-by-step instructions:**
+  1. Open the notebook in Google Colab:
+     👉 [colab_phase2_indictrans2_lora.ipynb](https://colab.research.google.com/github/AshrafGalaxy/Vernacular_Pedagogy/blob/main/notebooks/colab_phase2_indictrans2_lora.ipynb)
+  2. Switch runtime to GPU: **Runtime > Change runtime type > T4 GPU**.
+  3. Run the notebook: Click **Runtime > Run all** (or press `Ctrl+F9`).
+  4. In **Section 2.1**, your token will be read automatically or you can enter it when prompted.
+  5. The notebook will:
+     - Pull AI4Bharat BPCC and IN22 datasets.
+     - Fine-tune the IndicTrans2 LoRA adapter on the combined corpus.
+     - Convert the model to **CTranslate2 INT8** (~65 MB).
+  6. When the final cell finishes, download `indictrans2_sat_int8_ct2.tar.gz` and save it locally in `models/mt/`.
 
 ### Action 3: Ingest Common Voice Santali Audio (For TTS Voice Bank)
 - **Why:** Audio files must be standardized to 16 kHz Mono WAV before training Piper TTS.
