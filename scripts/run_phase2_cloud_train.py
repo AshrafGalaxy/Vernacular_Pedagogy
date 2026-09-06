@@ -367,7 +367,7 @@ def setup_transformers_compat_shims():
                 def get_model_spec(self, model):
                     model.config.normalize_before = True
                     model.config.normalize_embedding = True
-                    return super(_ct_tr.M2M100Loader, self).get_model_spec(model)
+                    return super().get_model_spec(model)
 
                 def get_vocabulary(self, model, tokenizer):
                     if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
@@ -457,7 +457,7 @@ def setup_transformers_compat_shims():
                             "            def get_model_spec(self, m):\n"
                             "                m.config.normalize_before = True\n"
                             "                m.config.normalize_embedding = True\n"
-                            "                return super(_ct.M2M100Loader, self).get_model_spec(m)\n"
+                            "                return super().get_model_spec(m)\n"
                             "            def get_vocabulary(self, m, tok):\n"
                             "                if hasattr(tok, 'src_encoder') and hasattr(tok, 'tgt_encoder'):\n"
                             "                    sv = [None] * len(tok.src_encoder)\n"
@@ -632,6 +632,10 @@ def patch_remote_tokenizer(model_name, auth_token=None):
         # Initialize current settings
         self._switch_to_input_mode()
 
+        # PREVENT_KWARGS_COLLISION: Prevent duplicate keyword arguments
+        for _k in ["src_vocab_file", "tgt_vocab_file", "do_lower_case", "unk_token", "bos_token", "eos_token", "pad_token"]:
+            kwargs.pop(_k, None)
+
         # Call super().__init__() FIRST — this initializes _special_tokens_map
         super().__init__(
             src_vocab_file=self.src_vocab_fp,
@@ -655,8 +659,21 @@ def patch_remote_tokenizer(model_name, auth_token=None):
             with open(tokenizer_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            if "# PATCHED_FOR_TRANSFORMERS_V5" in content:
-                print(f"[PATCH] Remote tokenizer already patched: {tokenizer_path}")
+            if "# PREVENT_KWARGS_COLLISION" in content:
+                print(f"[PATCH] Remote tokenizer already fully patched: {tokenizer_path}")
+                continue
+
+            if "# PATCHED_FOR_TRANSFORMERS_V5" in content and "PREVENT_KWARGS_COLLISION" not in content:
+                content = content.replace(
+                    "        # Call super().__init__() FIRST",
+                    "        # PREVENT_KWARGS_COLLISION: Prevent duplicate keyword arguments\n"
+                    "        for _k in ['src_vocab_file', 'tgt_vocab_file', 'do_lower_case', 'unk_token', 'bos_token', 'eos_token', 'pad_token']:\n"
+                    "            kwargs.pop(_k, None)\n\n"
+                    "        # Call super().__init__() FIRST"
+                )
+                with open(tokenizer_path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                print(f"[PATCH] Remote tokenizer upgraded with kwargs collision prevention: {tokenizer_path}")
                 continue
 
             if old_init_body in content:
@@ -1299,7 +1316,7 @@ def main():
             def get_model_spec(self, model):
                 model.config.normalize_before = True
                 model.config.normalize_embedding = True
-                return super(ct_tr.M2M100Loader, self).get_model_spec(model)
+                return super().get_model_spec(model)
 
             def get_vocabulary(self, model, tokenizer):
                 if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
@@ -1326,6 +1343,14 @@ def main():
                     spec.register_target_vocabulary(tokens)
 
         ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
+
+        # CRITICAL: Move model to CPU before passing to CTranslate2 converter!
+        # PyTorch tensors on CUDA cannot be converted to numpy directly:
+        # "can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first."
+        if hasattr(merged, "cpu"):
+            merged = merged.cpu()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
         class InProcessConverter(ct_tr.TransformersConverter):
             def load_model(self, model_class, model_name_or_path, **kwargs):
