@@ -1,0 +1,5 @@
+# Local Lightweight Data & Verification Pipeline (CPU-only, no heavy training)
+pandas>=2.0.0
+
+# Note: Cloud GPU dependencies (transformers, torch, peft, ctranslate2, piper-tts)
+# are configured inside the cloud notebooks (Google Colab / Kaggle).
