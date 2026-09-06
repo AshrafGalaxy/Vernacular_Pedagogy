@@ -72,7 +72,6 @@ def install_dependencies():
     packages = [
         "pytorch-lightning==1.9.5",
         "torchmetrics==0.11.4",
-        "\"numpy<2.0\"",
         "onnx",
         "onnxruntime",
         "soundfile",
@@ -178,6 +177,19 @@ get_espeak_map = None'''
             )
             with open(ma_init, "w", encoding="utf-8") as f:
                 f.write(ma_code)
+
+    # Patch 5: NumPy 2.x backward compatibility for PyTorch Lightning in piper_train
+    compat_np = "import numpy as np\nnp.Inf = np.inf\nnp.NAN = np.nan\nnp.PINF = np.inf\nnp.NINF = -np.inf\n"
+    for py_file in [
+        os.path.join(piper_dir, "src", "python", "piper_train", "__main__.py"),
+        os.path.join(piper_dir, "src", "python", "piper_train", "vits", "lightning.py")
+    ]:
+        if os.path.exists(py_file):
+            with open(py_file, "r", encoding="utf-8") as f:
+                content = f.read()
+            if "np.Inf = np.inf" not in content:
+                with open(py_file, "w", encoding="utf-8") as f:
+                    f.write(compat_np + content)
 
     # Install piper_train package with --no-deps
     run_cmd_strict(
