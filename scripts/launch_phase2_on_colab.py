@@ -12,6 +12,14 @@ import subprocess
 import time
 import re
 
+# Force UTF-8 I/O for Windows consoles and subprocess communication
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENV_FILE = os.path.join(BASE_DIR, ".env")
 MODELS_MT = os.path.join(BASE_DIR, "models", "mt")
@@ -54,6 +62,8 @@ def run_wsl(command, desc=None, timeout=None):
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             bufsize=1
         )
         if process.stdout:
@@ -79,7 +89,7 @@ def ensure_colab_session(session_name="phase2-train", gpu="T4", max_retries=2):
         try:
             check = subprocess.run(
                 ["wsl", "-d", "Ubuntu", "bash", "-c", f"{COLAB_CLI} sessions"],
-                capture_output=True, text=True, timeout=30
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30
             )
             if session_name in check.stdout:
                 print(f"[ORCHESTRATOR] Active session '{session_name}' detected.", flush=True)
