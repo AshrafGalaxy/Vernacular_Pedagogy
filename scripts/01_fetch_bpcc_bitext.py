@@ -109,13 +109,27 @@ def download_and_extract_bpcc(hf_token: str = None, output_tsv: str = "data/proc
         print("\n[WARNING] No pairs extracted. Run this script in Google Colab where Hugging Face access is unrestricted.")
         return False
 
+def load_env_token():
+    """Attempts to read HF_TOKEN from environment or local .env file."""
+    token = os.environ.get("HF_TOKEN")
+    if token:
+        return token.strip()
+    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip().startswith("HF_TOKEN="):
+                    return line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
 def main():
     parser = argparse.ArgumentParser(description="Ingest AI4Bharat BPCC & IN22 parallel bitext")
     parser.add_argument("--hf-token", type=str, default=None, help="Hugging Face User Access Token for gated BPCC")
     parser.add_argument("--output", type=str, default="data/processed/bitext/bpcc_hin_sat.tsv", help="Output TSV path")
     args = parser.parse_args()
 
-    download_and_extract_bpcc(hf_token=args.hf_token, output_tsv=args.output)
+    token = args.hf_token or load_env_token()
+    download_and_extract_bpcc(hf_token=token, output_tsv=args.output)
 
 if __name__ == "__main__":
     main()
