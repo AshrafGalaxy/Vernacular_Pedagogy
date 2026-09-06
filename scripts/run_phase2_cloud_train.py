@@ -41,7 +41,7 @@ def main():
     run_cmd("pip install -q torch transformers datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub")
     if not os.path.exists("/content/IndicTransToolkit"):
         run_cmd("git clone https://github.com/VarunGumma/IndicTransToolkit.git /content/IndicTransToolkit")
-        run_cmd("cd /content/IndicTransToolkit && pip install -q -e .")
+    run_cmd("pip install -q -e /content/IndicTransToolkit")
 
     # 2. Clone/Update Repo
     print("\n--- Step 2: Syncing Repository ---")
@@ -60,11 +60,18 @@ def main():
 
     # 4. Load Models & Tokenizer
     print("\n--- Step 4: Loading IndicTrans2 Base Model ---")
+    import sys
+    if "/content/IndicTransToolkit" not in sys.path:
+        sys.path.insert(0, "/content/IndicTransToolkit")
+    try:
+        from IndicTransToolkit import IndicProcessor
+    except ImportError:
+        from IndicTransToolkit.IndicTransToolkit import IndicProcessor
+
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer
     from peft import LoraConfig, get_peft_model, TaskType, PeftModel
     from datasets import Dataset
     import pandas as pd
-    from IndicTransToolkit import IndicProcessor
 
     model_name = "ai4bharat/indictrans2-indic-indic-dist-320M"
     src_lang = "hin_Deva"
