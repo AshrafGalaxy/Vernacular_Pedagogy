@@ -137,7 +137,18 @@ def inject_hf_token(token, session_name="phase2-train"):
     inject_cmd = f"echo \"{inject_script}\" | {COLAB_CLI} exec -s {session_name}"
     code = run_wsl(inject_cmd, desc="Injecting HF_TOKEN into Colab Session", timeout=60)
     if code != 0:
-        print("[WARN] HF_TOKEN injection may have failed. The worker will try /content/.hf_token fallback.", flush=True)
+        print("[WARN] HF_TOKEN injection failed or timed out. Attempting self-healing recovery...", flush=True)
+        # Attempt 1: Restart kernel
+        run_wsl(f"{COLAB_CLI} restart-kernel -s {session_name}", desc="Restarting Colab Kernel", timeout=30)
+        time.sleep(3)
+        code = run_wsl(inject_cmd, desc="Retrying HF_TOKEN injection after kernel restart", timeout=60)
+        if code != 0:
+            # Attempt 2: Re-provision fresh session
+            print("[WARN] Kernel unresponsive. Stopping and provisioning fresh session...", flush=True)
+            run_wsl(f"{COLAB_CLI} stop -s {session_name}", timeout=30)
+            ensure_colab_session(session_name, gpu="T4")
+            time.sleep(5)
+            run_wsl(inject_cmd, desc="Injecting HF_TOKEN into fresh session", timeout=60)
 
 
 def main():
