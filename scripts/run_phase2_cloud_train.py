@@ -43,7 +43,7 @@ def main():
 
     # 1. Install Training Dependencies
     print("\n--- Step 1: Installing Cloud Dependencies ---")
-    run_cmd("pip install -q torch transformers datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub")
+    run_cmd("pip install -q transformers datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub sacremoses indic-nlp-library")
     if not os.path.exists("/content/IndicTransToolkit"):
         run_cmd("git clone https://github.com/VarunGumma/IndicTransToolkit.git /content/IndicTransToolkit")
     run_cmd("pip install -q -e /content/IndicTransToolkit")
@@ -136,20 +136,36 @@ def main():
     # 7. Fine-Tune Model
     print("\n--- Step 7: Starting GPU LoRA Fine-Tuning ---")
     out_lora = "/content/indictrans2_sat_lora"
-    training_args = Seq2SeqTrainingArguments(
-        output_dir=out_lora,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
-        gradient_accumulation_steps=2,
-        learning_rate=3e-4,
-        num_train_epochs=3,
-        fp16=torch.cuda.is_available(),
-        evaluation_strategy="epoch",
-        save_strategy="epoch",
-        save_total_limit=1,
-        logging_steps=20,
-        report_to="none"
-    )
+    try:
+        training_args = Seq2SeqTrainingArguments(
+            output_dir=out_lora,
+            per_device_train_batch_size=8,
+            per_device_eval_batch_size=8,
+            gradient_accumulation_steps=2,
+            learning_rate=3e-4,
+            num_train_epochs=3,
+            fp16=torch.cuda.is_available(),
+            eval_strategy="epoch",
+            save_strategy="epoch",
+            save_total_limit=1,
+            logging_steps=20,
+            report_to="none"
+        )
+    except TypeError:
+        training_args = Seq2SeqTrainingArguments(
+            output_dir=out_lora,
+            per_device_train_batch_size=8,
+            per_device_eval_batch_size=8,
+            gradient_accumulation_steps=2,
+            learning_rate=3e-4,
+            num_train_epochs=3,
+            fp16=torch.cuda.is_available(),
+            evaluation_strategy="epoch",
+            save_strategy="epoch",
+            save_total_limit=1,
+            logging_steps=20,
+            report_to="none"
+        )
 
     trainer = Seq2SeqTrainer(
         model=peft_model,
@@ -177,7 +193,7 @@ def main():
     # 9. Quantize to CTranslate2 INT8
     print("\n--- Step 9: Quantizing to CTranslate2 INT8 ---")
     ct2_path = "/content/indictrans2_sat_int8_ct2"
-    run_cmd(f"ctranslate2-transformers-converter --model {merged_path} --output_dir {ct2_path} --quantization int8 --low_cpu_mem_usage")
+    run_cmd(f"python -m ctranslate2.converters.transformers --model {merged_path} --output_dir {ct2_path} --quantization int8 --trust_remote_code --low_cpu_mem_usage")
 
     # 10. Package Model Artifact
     print("\n--- Step 10: Packaging INT8 Model Artifact ---")
