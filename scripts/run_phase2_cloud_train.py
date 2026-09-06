@@ -134,6 +134,15 @@ def install_dependencies():
     else:
         print("\n[OK] All required packages are already installed!")
 
+    # Purge incompatible torchao (< 0.16.0) that causes PEFT 0.20+ dispatch crash
+    try:
+        import torchao  # type: ignore
+        tao_ver = getattr(torchao, "__version__", "0.0.0")
+        print(f"  [INFO] Detected torchao: {tao_ver} — uninstalling to prevent PEFT dispatch crash...")
+        run_cmd("pip uninstall -y torchao")
+    except ImportError:
+        pass
+
 
 # ═══════════════════════════════════════════════════════════════
 # INDICTRANSTOOLKIT COMPATIBILITY
@@ -350,6 +359,11 @@ def setup_transformers_compat_shims():
                             "        mu = types.ModuleType('transformers.onnx.utils')\n"
                             "        mu.compute_effective_axis_dimension = lambda *a, **k: 0\n"
                             "        sys.modules['transformers.onnx.utils'] = mu\n"
+                            "    try:\n"
+                            "        import peft.import_utils\n"
+                            "        peft.import_utils.is_torchao_available = lambda: False\n"
+                            "    except Exception:\n"
+                            "        pass\n"
                         )
                     with open(pth_file, "w", encoding="utf-8") as pf:
                         pf.write("import indictrans_v5_compat_hook\n")
@@ -357,6 +371,9 @@ def setup_transformers_compat_shims():
                     break
         except Exception as e:
             print(f"  [SHIM WARN] Universal subprocess hook skipped: {e}")
+
+        # Shim 6: PEFT is_torchao_available bug fix
+        patch_peft_compat()
 
     else:
         print("[INFO] transformers v4.x detected — no shims needed.")
@@ -672,6 +689,42 @@ def patch_remote_modeling(model_name=None, auth_token=None):
                     pass
 
 
+def patch_peft_compat():
+    """
+    Ensure PEFT layer dispatch never crashes on torchao version checks.
+
+    ROOT CAUSE: In peft 0.20+, peft.tuners.lora.torchao.dispatch_torchao calls
+    peft.import_utils.is_torchao_available(). That function checks torchao_version < 0.16.0
+    and RAISES an ImportError instead of returning False. When torchao 0.10.0 (pre-installed
+    on Colab) is present, get_peft_model() crashes during standard LoRA Linear layer dispatch.
+
+    FIX:
+      1. Monkey-patch peft.import_utils.is_torchao_available = lambda: False
+      2. Monkey-patch peft.tuners.lora.torchao.is_torchao_available = lambda: False
+      3. Scan sys.modules for all loaded peft modules and patch is_torchao_available
+    """
+    import sys
+    try:
+        import peft.import_utils  # type: ignore
+        peft.import_utils.is_torchao_available = lambda: False
+    except Exception:
+        pass
+
+    try:
+        import peft.tuners.lora.torchao as _p_tao  # type: ignore
+        _p_tao.is_torchao_available = lambda: False
+    except Exception:
+        pass
+
+    for mod_name, mod in list(sys.modules.items()):
+        if "peft" in mod_name and mod is not None:
+            if hasattr(mod, "is_torchao_available"):
+                try:
+                    setattr(mod, "is_torchao_available", lambda: False)
+                except Exception:
+                    pass
+
+
 # ═══════════════════════════════════════════════════════════════
 # AUTHENTICATION & DATA LOADING
 # ═══════════════════════════════════════════════════════════════
@@ -914,6 +967,7 @@ def main():
     # Step 5: Setup LoRA
     # ──────────────────────────────────────────
     print("\n--- Step 5: Configuring LoRA Adapter ---")
+    patch_peft_compat()
     lora_config = LoraConfig(
         task_type=TaskType.SEQ_2_SEQ_LM,
         r=16,
@@ -922,7 +976,16 @@ def main():
         target_modules=["q_proj", "v_proj", "k_proj", "out_proj"],
         bias="none"
     )
-    peft_model = get_peft_model(base_model, lora_config)
+    try:
+        peft_model = get_peft_model(base_model, lora_config)
+    except (ImportError, Exception) as e:
+        if "torchao" in str(e):
+            print(f"[WARN] torchao conflict caught in get_peft_model ({e}). Purging torchao package and re-patching PEFT...")
+            run_cmd("pip uninstall -y torchao")
+            patch_peft_compat()
+            peft_model = get_peft_model(base_model, lora_config)
+        else:
+            raise
     peft_model.print_trainable_parameters()
 
     # ──────────────────────────────────────────
@@ -1038,6 +1101,7 @@ def main():
             raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
         else:
             raise
+    patch_peft_compat()
     merged = PeftModel.from_pretrained(raw_base, lora_final_path)
     merged = merged.merge_and_unload()
     merged_path = "/content/indictrans2_sat_merged"
