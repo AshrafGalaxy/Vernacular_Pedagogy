@@ -43,7 +43,7 @@ def main():
 
     # 1. Install Training Dependencies
     print("\n--- Step 1: Installing Cloud Dependencies ---")
-    run_cmd("pip install -q transformers datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub sacremoses indic-nlp-library")
+    run_cmd("pip install -q 'transformers>=4.39.0,<4.44.0' datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub sacremoses indic-nlp-library")
     if not os.path.exists("/content/IndicTransToolkit"):
         run_cmd("git clone https://github.com/VarunGumma/IndicTransToolkit.git /content/IndicTransToolkit")
     run_cmd("sed -i 's/transformers.tokenization_utils/transformers.tokenization_utils_base/g' /content/IndicTransToolkit/IndicTransToolkit/collator.py 2>/dev/null || true")
@@ -73,7 +73,18 @@ def main():
     # 4. Load Models & Tokenizer
     print("\n--- Step 4: Loading IndicTrans2 Base Model ---")
     import sys
+    import types
     import transformers  # type: ignore
+
+    # Compatibility bridge for IndicTrans2 remote code (transformers.onnx was removed in transformers v5)
+    try:
+        import transformers.onnx  # type: ignore
+    except (ImportError, ModuleNotFoundError):
+        onnx_mod = types.ModuleType("transformers.onnx")
+        onnx_mod.OnnxConfig = object  # type: ignore
+        onnx_mod.OnnxSeq2SeqConfigWithPast = object  # type: ignore
+        sys.modules["transformers.onnx"] = onnx_mod
+
     try:
         import transformers.tokenization_utils  # type: ignore
         from transformers.tokenization_utils_base import PreTrainedTokenizerBase  # type: ignore
