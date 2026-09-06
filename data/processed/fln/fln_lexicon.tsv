@@ -199,3 +199,171 @@ FLN_NUM_047	numeracy	Grade 3	एक कदम पीछे हटो	ᱢᱤᱫ �
 FLN_NUM_048	numeracy	Grade 3	यह रेखा मोटी है	ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱢᱚᱴᱟ ᱜᱮᱭᱟ	नोवा गार दो मोटा गेया
 FLN_NUM_049	numeracy	Grade 3	यह रेखा पतली है	ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱯᱟᱛᱞᱟ ᱜᱮᱭᱟ	नोवा गार दो पातला गेया
 FLN_NUM_050	numeracy	Grade 3	हमने गणित का खेल पूरा कर लिया	ᱟᱵᱚ ᱞᱮᱠᱷᱟ ᱮᱱᱮᱡᱵᱚ ᱯᱩᱨᱟᱹᱣ ᱠᱮᱫᱟ	आबो लेखा एनेजबो पुरा़व केदा
+FLN_VOC_NUM_001	vocabulary_numbers	Grade 1	एक	ᱢᱤᱫ	मिद
+FLN_VOC_NUM_002	vocabulary_numbers	Grade 1	दो	ᱵᱟᱨ	बार
+FLN_VOC_NUM_003	vocabulary_numbers	Grade 1	तीन	ᱯᱮ	पे
+FLN_VOC_NUM_004	vocabulary_numbers	Grade 1	चार	ᱯᱩᱱ	पुन
+FLN_VOC_NUM_005	vocabulary_numbers	Grade 1	पाँच	ᱢᱚᱬᱮ	मोणे
+FLN_VOC_NUM_006	vocabulary_numbers	Grade 1	छह	ᱛᱩᱨᱩᱭ	तुरुय
+FLN_VOC_NUM_007	vocabulary_numbers	Grade 1	सात	ᱮᱭᱟᱭ	एयाय
+FLN_VOC_NUM_008	vocabulary_numbers	Grade 1	आठ	ᱤᱨᱟᱹᱞ	इरा़ल
+FLN_VOC_NUM_009	vocabulary_numbers	Grade 1	नौ	ᱟᱨᱮ	आरे
+FLN_VOC_NUM_010	vocabulary_numbers	Grade 1	दस	ᱜᱮᱞ	गेल
+FLN_VOC_NUM_011	vocabulary_numbers	Grade 1	ग्यारह	ᱜᱮᱞ ᱢᱤᱫ	गेल मिद
+FLN_VOC_NUM_012	vocabulary_numbers	Grade 1	बारह	ᱜᱮᱞ ᱵᱟᱨ	गेल बार
+FLN_VOC_NUM_013	vocabulary_numbers	Grade 1	तेरह	ᱜᱮᱞ ᱯᱮ	गेल पे
+FLN_VOC_NUM_014	vocabulary_numbers	Grade 1	चौदह	ᱜᱮᱞ ᱯᱩᱱ	गेल पुन
+FLN_VOC_NUM_015	vocabulary_numbers	Grade 1	पंद्रह	ᱜᱮᱞ ᱢᱚᱬᱮ	गेल मोणे
+FLN_VOC_NUM_016	vocabulary_numbers	Grade 2	सोलह	ᱜᱮᱞ ᱛᱩᱨᱩᱭ	गेल तुरुय
+FLN_VOC_NUM_017	vocabulary_numbers	Grade 2	सत्रह	ᱜᱮᱞ ᱮᱭᱟᱭ	गेल एयाय
+FLN_VOC_NUM_018	vocabulary_numbers	Grade 2	अट्ठारह	ᱜᱮᱞ ᱤᱨᱟᱹᱞ	गेल इरा़ल
+FLN_VOC_NUM_019	vocabulary_numbers	Grade 2	उन्नीस	ᱜᱮᱞ ᱟᱨᱮ	गेल आरे
+FLN_VOC_NUM_020	vocabulary_numbers	Grade 2	बीस	ᱤᱥᱤ	इसी
+FLN_VOC_NUM_021	vocabulary_numbers	Grade 2	तीस	ᱤᱥᱤ ᱜᱮᱞ	इसी गेल
+FLN_VOC_NUM_022	vocabulary_numbers	Grade 2	चालीस	ᱵᱟᱨ ᱤᱥᱤ	बार इसी
+FLN_VOC_NUM_023	vocabulary_numbers	Grade 2	पचास	ᱵᱟᱨ ᱤᱥᱤ ᱜᱮᱞ	बार इसी गेल
+FLN_VOC_NUM_024	vocabulary_numbers	Grade 3	साठ	ᱯᱮ ᱤᱥᱤ	पे इसी
+FLN_VOC_NUM_025	vocabulary_numbers	Grade 3	सत्तर	ᱯᱮ ᱤᱥᱤ ᱜᱮᱞ	पे इसी गेल
+FLN_VOC_NUM_026	vocabulary_numbers	Grade 3	अस्सी	ᱯᱩᱱ ᱤᱥᱤ	पुन इसी
+FLN_VOC_NUM_027	vocabulary_numbers	Grade 3	नब्बे	ᱯᱩᱱ ᱤᱥᱤ ᱜᱮᱞ	पुन इसी गेल
+FLN_VOC_NUM_028	vocabulary_numbers	Grade 3	सौ	ᱥᱟᱭ	साय
+FLN_VOC_FRU_001	vocabulary_fruits_food	Grade 1	आम	ᱩᱞ	उल
+FLN_VOC_FRU_002	vocabulary_fruits_food	Grade 1	महुआ	ᱢᱟᱛᱠᱚᱢ	मातकोम
+FLN_VOC_FRU_003	vocabulary_fruits_food	Grade 1	केला	ᱠᱟᱭᱨᱟ	कायरा
+FLN_VOC_FRU_004	vocabulary_fruits_food	Grade 1	जामुन	ᱠᱩᱫᱽ	कूद
+FLN_VOC_FRU_005	vocabulary_fruits_food	Grade 1	अमरूद	ᱵᱮᱞᱟᱹᱛᱤ ᱟᱛᱷᱟ	बेला़ती आथा
+FLN_VOC_FRU_006	vocabulary_fruits_food	Grade 2	कटहल	ᱠᱟᱱᱴᱷᱟᱲ	कान्ठाड़
+FLN_VOC_FRU_007	vocabulary_fruits_food	Grade 2	पपीता	ᱟᱢᱨᱤᱛ	अमृत
+FLN_VOC_FRU_008	vocabulary_fruits_food	Grade 2	बेर	ᱡᱟᱹᱱᱩᱢ ᱡᱚ	जा़नुम जो
+FLN_VOC_FRU_009	vocabulary_fruits_food	Grade 2	इमली	ᱡᱚᱡᱚ	जोजो
+FLN_VOC_FRU_010	vocabulary_fruits_food	Grade 2	केंदु (तेंदू)	ᱛᱤᱨᱤᱞ	तीरील
+FLN_VOC_FRU_011	vocabulary_fruits_food	Grade 1	पानी	ᱫᱟᱜ	दाग
+FLN_VOC_FRU_012	vocabulary_fruits_food	Grade 1	दूध	ᱛᱚᱣᱟ	तोवा
+FLN_VOC_FRU_013	vocabulary_fruits_food	Grade 1	भात (पका चावल)	ᱫᱟᱠᱟ	दाका
+FLN_VOC_FRU_014	vocabulary_fruits_food	Grade 1	चावल (कच्चा)	ᱪᱟᱣᱞᱮ	चावले
+FLN_VOC_FRU_015	vocabulary_fruits_food	Grade 1	नमक	ᱵᱩᱞᱩᱝ	बुलुंग
+FLN_VOC_FRU_016	vocabulary_fruits_food	Grade 2	तेल	ᱥᱩᱱᱩᱢ	सुनुम
+FLN_VOC_FRU_017	vocabulary_fruits_food	Grade 2	दाल	ᱫᱟᱹᱞ	दा़ल
+FLN_VOC_FRU_018	vocabulary_fruits_food	Grade 2	रोटी (पीठा)	ᱯᱤᱴᱷᱟᱹ	पीठा़
+FLN_VOC_FRU_019	vocabulary_fruits_food	Grade 2	गुड़	ᱜᱩᱲ	गुड़
+FLN_VOC_FRU_020	vocabulary_fruits_food	Grade 3	शहद	ᱧᱮᱞᱮ ᱨᱟᱥᱟ	ञेले रासा
+FLN_VOC_VEG_001	vocabulary_vegetables	Grade 1	आलू	ᱟᱹᱞᱩ	आ़लू
+FLN_VOC_VEG_002	vocabulary_vegetables	Grade 1	प्याज	ᱯᱮᱭᱟᱸᱡᱽ	पेयांज
+FLN_VOC_VEG_003	vocabulary_vegetables	Grade 1	टमाटर	ᱵᱤᱞᱟᱹᱛᱤ	बीला़ती
+FLN_VOC_VEG_004	vocabulary_vegetables	Grade 1	बैंगन	ᱵᱮᱸᱜᱟᱲ	बेंगाड़
+FLN_VOC_VEG_005	vocabulary_vegetables	Grade 1	कद्दू (लौकी)	ᱦᱚᱛᱚᱫ	होतोद
+FLN_VOC_VEG_006	vocabulary_vegetables	Grade 2	कोहड़ा (पीला कद्दू)	ᱠᱟᱠᱷᱟᱨᱩ	काखारु
+FLN_VOC_VEG_007	vocabulary_vegetables	Grade 1	हरी पत्ती / साग	ᱟᱲᱟᱜ	आड़ाग
+FLN_VOC_VEG_008	vocabulary_vegetables	Grade 1	हरी मिर्च	ᱢᱟᱹᱨᱤᱪ	मा़रीच
+FLN_VOC_VEG_009	vocabulary_vegetables	Grade 2	अदरक	ᱟᱫᱟ	आदा
+FLN_VOC_VEG_010	vocabulary_vegetables	Grade 2	लहसुन	ᱨᱟᱹᱥᱩᱬ	रा़सुण
+FLN_VOC_VEG_011	vocabulary_vegetables	Grade 2	मूली	ᱢᱩᱞᱟᱹ	मुला़
+FLN_VOC_VEG_012	vocabulary_vegetables	Grade 2	करेला	ᱠᱟᱨᱞᱟ	कारला
+FLN_VOC_VEG_013	vocabulary_vegetables	Grade 2	खीरा	ᱛᱟᱹᱦᱩᱸ	ता़हुँ
+FLN_VOC_VEG_014	vocabulary_vegetables	Grade 3	मशरूम (कुकुड़मुत्ता)	ᱚᱛ	ओत
+FLN_VOC_ANI_001	vocabulary_animals_fauna	Grade 1	गाय	ᱜᱟᱹᱭ	गा़य
+FLN_VOC_ANI_002	vocabulary_animals_fauna	Grade 1	बैल	ᱰᱟᱝᱜᱽᱨᱟ	डांगरा
+FLN_VOC_ANI_003	vocabulary_animals_fauna	Grade 1	बछड़ा	ᱫᱟᱢᱲᱟ	दामड़ा
+FLN_VOC_ANI_004	vocabulary_animals_fauna	Grade 1	भैंस	ᱠᱟᱰᱟ	काडा
+FLN_VOC_ANI_005	vocabulary_animals_fauna	Grade 1	बकरी	ᱢᱮᱨᱚᱢ	मेरोम
+FLN_VOC_ANI_006	vocabulary_animals_fauna	Grade 1	भेड़	ᱵᱷᱤᱰᱤ	भीडी
+FLN_VOC_ANI_007	vocabulary_animals_fauna	Grade 1	कुत्ता	ᱥᱮᱛᱟ	सेता
+FLN_VOC_ANI_008	vocabulary_animals_fauna	Grade 1	बिल्ली	ᱯᱩᱥᱤ	पुसी
+FLN_VOC_ANI_009	vocabulary_animals_fauna	Grade 2	घोड़ा	ᱥᱟᱫᱚᱢ	सादोम
+FLN_VOC_ANI_010	vocabulary_animals_fauna	Grade 2	सुअर	ᱥᱩᱠᱨᱤ	सुकरी
+FLN_VOC_ANI_011	vocabulary_animals_fauna	Grade 2	बाघ	ᱛᱟᱹᱨᱩᱵ	ता़रुब
+FLN_VOC_ANI_012	vocabulary_animals_fauna	Grade 2	भालू	ᱵᱟᱱᱟ	बाना
+FLN_VOC_ANI_013	vocabulary_animals_fauna	Grade 2	हाथी	ᱦᱟᱹᱛᱤ	हा़ती
+FLN_VOC_ANI_014	vocabulary_animals_fauna	Grade 2	बंदर	ᱜᱟᱹᱰᱤ	गा़डी
+FLN_VOC_ANI_015	vocabulary_animals_fauna	Grade 2	हिरण	ᱡᱷᱚᱝᱠᱟᱨ	झोंकार
+FLN_VOC_ANI_016	vocabulary_animals_fauna	Grade 2	खरगोश	ᱠᱩᱞᱟᱹᱭ	कुला़य
+FLN_VOC_ANI_017	vocabulary_animals_fauna	Grade 2	चूहा	ᱜᱩᱛᱩ	गुतू
+FLN_VOC_ANI_018	vocabulary_animals_fauna	Grade 1	साँप	ᱵᱤᱧ	बिञ
+FLN_VOC_ANI_019	vocabulary_animals_fauna	Grade 1	मेंढक	ᱨᱚᱴᱮ	रोटे
+FLN_VOC_ANI_020	vocabulary_animals_fauna	Grade 1	मछली	ᱦᱟᱹᱠᱩ	हा़कु
+FLN_VOC_ANI_021	vocabulary_animals_fauna	Grade 1	चिड़िया	ᱪᱮᱬᱮ	चेणे
+FLN_VOC_ANI_022	vocabulary_animals_fauna	Grade 1	कौआ	ᱠᱟᱣᱟ	कावा
+FLN_VOC_ANI_023	vocabulary_animals_fauna	Grade 1	कबूतर	ᱯᱚᱛᱟᱢ	पोताम
+FLN_VOC_ANI_024	vocabulary_animals_fauna	Grade 1	तोता	ᱢᱤᱨᱩ	मीरू
+FLN_VOC_ANI_025	vocabulary_animals_fauna	Grade 2	मोर	ᱢᱟᱨᱟᱜ	माराग
+FLN_VOC_ANI_026	vocabulary_animals_fauna	Grade 1	मुर्गी	ᱥᱤᱢ	सीम
+FLN_VOC_ANI_027	vocabulary_animals_fauna	Grade 1	मुर्गा	ᱥᱟᱺᱰᱤ ᱥᱤᱢ	साँडी सीम
+FLN_VOC_ANI_028	vocabulary_animals_fauna	Grade 2	बत्तख	ᱜᱷᱮᱸᱣᱮ	घेंवे
+FLN_VOC_ANI_029	vocabulary_animals_fauna	Grade 1	तितली	ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ	पीपीड़िया़ंग
+FLN_VOC_ANI_030	vocabulary_animals_fauna	Grade 1	चींटी	ᱢᱩᱡᱽ	मुज
+FLN_VOC_ANI_031	vocabulary_animals_fauna	Grade 2	मक्खी	ᱨᱳ	रो
+FLN_VOC_ANI_032	vocabulary_animals_fauna	Grade 2	मधुमक्खी	ᱧᱮᱞᱮ	ञेले
+FLN_VOC_ANI_033	vocabulary_animals_fauna	Grade 3	कछुआ	ᱦᱚᱨᱚ	होरो
+FLN_VOC_OBJ_001	vocabulary_classroom_objects	Grade 1	किताब	ᱯᱩᱛᱷᱤ	पुथी
+FLN_VOC_OBJ_002	vocabulary_classroom_objects	Grade 1	कॉपी	ᱠᱷᱟᱛᱟ	खाता
+FLN_VOC_OBJ_003	vocabulary_classroom_objects	Grade 1	कलम	ᱠᱚᱞᱚᱢ	कोलोम
+FLN_VOC_OBJ_004	vocabulary_classroom_objects	Grade 1	पेंसिल	ᱯᱮᱱᱥᱤᱞ	पेन्सिल
+FLN_VOC_OBJ_005	vocabulary_classroom_objects	Grade 1	स्लेट	ᱥᱞᱮᱴ	स्लेट
+FLN_VOC_OBJ_006	vocabulary_classroom_objects	Grade 1	चॉक	ᱪᱚᱠ	चोक
+FLN_VOC_OBJ_007	vocabulary_classroom_objects	Grade 1	श्यामपट्ट	ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ	हेंदे पाटा
+FLN_VOC_OBJ_008	vocabulary_classroom_objects	Grade 1	बस्ता (थैला)	ᱛᱷᱟᱹᱞᱤ	था़ली
+FLN_VOC_OBJ_009	vocabulary_classroom_objects	Grade 1	मेज़	ᱴᱮᱵᱩᱞ	डेबुल
+FLN_VOC_OBJ_010	vocabulary_classroom_objects	Grade 1	कुर्सी	ᱢᱟᱹᱪᱤ	मा़ची
+FLN_VOC_OBJ_011	vocabulary_classroom_objects	Grade 2	कागज़	ᱠᱟᱜᱚᱡᱽ	कागोज
+FLN_VOC_OBJ_012	vocabulary_classroom_objects	Grade 2	घंटी	ᱜᱷᱟᱹᱱᱴᱤ	घा़न्टी
+FLN_VOC_OBJ_013	vocabulary_classroom_objects	Grade 1	विद्यालय (स्कूल)	ᱟᱥᱲᱟ	आसड़ा
+FLN_VOC_OBJ_014	vocabulary_classroom_objects	Grade 1	कक्षा	ᱪᱟᱱᱟᱪ	चानाच
+FLN_VOC_COL_001	vocabulary_colors_attributes	Grade 1	लाल	ᱟᱨᱟᱜ	आरा़ग
+FLN_VOC_COL_002	vocabulary_colors_attributes	Grade 1	हरा	ᱦᱟᱹᱨᱤᱭᱟᱹᱲ	हा़रिया़ड़
+FLN_VOC_COL_003	vocabulary_colors_attributes	Grade 1	पीला	ᱥᱟᱥᱟᱝ	सासांग
+FLN_VOC_COL_004	vocabulary_colors_attributes	Grade 1	नीला	ᱞᱤᱞ	लील
+FLN_VOC_COL_005	vocabulary_colors_attributes	Grade 1	सफेद	ᱯᱩᱸᱰ	पुंड
+FLN_VOC_COL_006	vocabulary_colors_attributes	Grade 1	काला	ᱦᱮᱸᱫᱮ	हेंदे
+FLN_VOC_COL_007	vocabulary_colors_attributes	Grade 1	गोल	ᱜᱩᱞᱟᱹᱭ	गुला़य
+FLN_VOC_COL_008	vocabulary_colors_attributes	Grade 2	चौकोर	ᱯᱩᱱᱠᱚᱬ	पुनकोण
+FLN_VOC_COL_009	vocabulary_colors_attributes	Grade 1	बड़ा	ᱢᱟᱨᱟᱝ	मारांग
+FLN_VOC_COL_010	vocabulary_colors_attributes	Grade 1	छोटा	ᱦᱩᱰᱤᱧ	हुडीञ
+FLN_VOC_COL_011	vocabulary_colors_attributes	Grade 1	लंबा	ᱡᱤᱞᱤᱧ	जीलीञ
+FLN_VOC_COL_012	vocabulary_colors_attributes	Grade 1	नाटा (छोटा)	ᱠᱷᱟᱴᱚ	खाटो
+FLN_VOC_COL_013	vocabulary_colors_attributes	Grade 2	भारी	ᱦᱟᱢᱟᱞ	हामाल
+FLN_VOC_COL_014	vocabulary_colors_attributes	Grade 2	हल्का	ᱨᱟᱣᱟᱞ	रावाल
+FLN_VOC_COL_015	vocabulary_colors_attributes	Grade 2	नया	ᱱᱟᱣᱟ	नावा
+FLN_VOC_COL_016	vocabulary_colors_attributes	Grade 2	पुराना	ᱢᱟᱨᱮ	मारे
+FLN_VOC_COL_017	vocabulary_colors_attributes	Grade 2	मीठा	ᱦᱮᱲᱮᱢ	हेड़ेम
+FLN_VOC_COL_018	vocabulary_colors_attributes	Grade 2	खट्टा	ᱡᱚᱡᱚ	जोजो
+FLN_VOC_COL_019	vocabulary_colors_attributes	Grade 3	तीखा	ᱦᱟᱫᱽ	हाद
+FLN_VOC_BOD_001	vocabulary_body_parts	Grade 1	सिर	ᱵᱚᱦᱚᱜ	बोहोग
+FLN_VOC_BOD_002	vocabulary_body_parts	Grade 1	आँख	ᱢᱮᱫ	मेद
+FLN_VOC_BOD_003	vocabulary_body_parts	Grade 1	कान	ᱞᱩᱛᱩᱨ	लुतुर
+FLN_VOC_BOD_004	vocabulary_body_parts	Grade 1	नाक	ᱢᱩᱸ	मुँ
+FLN_VOC_BOD_005	vocabulary_body_parts	Grade 1	मुँह	ᱢᱚᱪᱟ	मोचा
+FLN_VOC_BOD_006	vocabulary_body_parts	Grade 1	दाँत	ᱫᱟᱛᱟ	दाता
+FLN_VOC_BOD_007	vocabulary_body_parts	Grade 1	जीभ	ᱟᱞᱟᱝ	आलांग
+FLN_VOC_BOD_008	vocabulary_body_parts	Grade 1	हाथ	ᱛᱤ	ती
+FLN_VOC_BOD_009	vocabulary_body_parts	Grade 1	पैर	ᱡᱟᱸᱜᱟ	जा़न्गा
+FLN_VOC_BOD_010	vocabulary_body_parts	Grade 1	पेट	ᱞᱟᱡ	लाज
+FLN_VOC_BOD_011	vocabulary_body_parts	Grade 1	बाल	ᱩᱵ	उब
+FLN_VOC_BOD_012	vocabulary_body_parts	Grade 2	नाखून	ᱨᱟᱢᱟ	रामा
+FLN_VOC_BOD_013	vocabulary_body_parts	Grade 2	गर्दन	ᱦᱚᱴᱚᱜ	होटोग
+FLN_VOC_BOD_014	vocabulary_body_parts	Grade 2	उँगली	ᱠᱟᱹᱴᱩᱵ	का़टुब
+FLN_VOC_BOD_015	vocabulary_body_parts	Grade 2	पीठ	ᱫᱮᱭᱟ	देया
+FLN_VOC_BOD_016	vocabulary_body_parts	Grade 3	छाती	ᱠᱚᱲᱟᱢ	कोड़ाम
+FLN_VOC_ACT_001	vocabulary_actions	Grade 1	बैठो	ᱫᱩᱲᱩᱵ ᱢᱮ	दुड़ुब मे
+FLN_VOC_ACT_002	vocabulary_actions	Grade 1	खड़े हो जाओ	ᱛᱤᱸᱜᱩᱱ ᱢᱮ	ति़ंगुन मे
+FLN_VOC_ACT_003	vocabulary_actions	Grade 1	आओ	ᱦᱤᱡᱩᱜ ᱢᱮ	हीजुग मे
+FLN_VOC_ACT_004	vocabulary_actions	Grade 1	जाओ	ᱪᱟᱞᱟᱜ ᱢᱮ	चालाग मे
+FLN_VOC_ACT_005	vocabulary_actions	Grade 1	खाओ	ᱡᱚᱢ ᱢᱮ	जोम मे
+FLN_VOC_ACT_006	vocabulary_actions	Grade 1	पियो	ᱧᱩᱭ ᱢᱮ	ञुय मे
+FLN_VOC_ACT_007	vocabulary_actions	Grade 1	सोओ	ᱜᱤᱛᱤᱡ ᱢᱮ	गीतीज मे
+FLN_VOC_ACT_008	vocabulary_actions	Grade 1	जागो	ᱵᱮᱨᱮᱫ ᱢᱮ	बेरेद मे
+FLN_VOC_ACT_009	vocabulary_actions	Grade 1	पढ़ो	ᱯᱟᱲᱦᱟᱣ ᱢᱮ	पाड़हाव मे
+FLN_VOC_ACT_010	vocabulary_actions	Grade 1	लिखो	ᱚᱞ ᱢᱮ	ओल मे
+FLN_VOC_ACT_011	vocabulary_actions	Grade 1	सुनो	ᱟᱧᱡᱚᱢ ᱢᱮ	आंजोम मे
+FLN_VOC_ACT_012	vocabulary_actions	Grade 1	बोलो	ᱨᱚᱲ ᱢᱮ	रोड़ मे
+FLN_VOC_ACT_013	vocabulary_actions	Grade 1	देखो	ᱧᱮᱞ ᱢᱮ	ञेल मे
+FLN_VOC_ACT_014	vocabulary_actions	Grade 1	दिखाओ	ᱩᱫᱩᱜ ᱢᱮ	उदुक मे
+FLN_VOC_ACT_015	vocabulary_actions	Grade 1	दे दो	ᱮᱢ ᱢᱮ	एम मे
+FLN_VOC_ACT_016	vocabulary_actions	Grade 1	लो	ᱦᱟᱛᱟᱣ ᱢᱮ	हाताव मे
+FLN_VOC_ACT_017	vocabulary_actions	Grade 1	खेलो	ᱮᱱᱮᱡ ᱢᱮ	एनेज मे
+FLN_VOC_ACT_018	vocabulary_actions	Grade 1	दौड़ो	ᱫᱟᱹᱲ ᱢᱮ	दा़ड़ मे
+FLN_VOC_ACT_019	vocabulary_actions	Grade 1	चलो (कदम बढ़ाओ)	ᱛᱟᱲᱟᱢ ᱢᱮ	ताड़ाम मे
+FLN_VOC_ACT_020	vocabulary_actions	Grade 1	हँसो	ᱞᱟᱸᱫᱟᱭ ᱢᱮ	ला़न्दाय मे
+FLN_VOC_ACT_021	vocabulary_actions	Grade 1	धोओ	ᱟᱹᱨᱩᱵ ᱢᱮ	आ़रुब मे
+FLN_VOC_ACT_022	vocabulary_actions	Grade 1	खोलो	ᱡᱷᱤᱡᱽ ᱢᱮ	झिज मे
+FLN_VOC_ACT_023	vocabulary_actions	Grade 1	बंद करो	ᱯᱚᱴᱚᱢ ᱢᱮ	पोटोम मे
+FLN_VOC_ACT_024	vocabulary_actions	Grade 1	शांत रहो	ᱛᱷᱤᱨᱩᱜ ᱢᱮ	थीरुग मे
