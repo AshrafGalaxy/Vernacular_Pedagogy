@@ -116,7 +116,7 @@ def install_dependencies():
                 f.write(prep_code)
 
     # Patch 3: Build monotonic_align Cython extension in-place
-    run_cmd(
+    run_cmd_strict(
         f"cd {piper_dir}/src/python && python3 piper_train/vits/monotonic_align/setup.py build_ext --inplace",
         description="Build monotonic_align Cython extension"
     )
