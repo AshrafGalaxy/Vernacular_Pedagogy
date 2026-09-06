@@ -77,153 +77,68 @@ All modules must be retrieved, compiled, and pinned to the following specificati
 
 ## 3. Directory Layout
 
-The workspace root must follow this structure:
+The workspace root follows this structure:
 
 ```bash
-webverse_pipeline/
+Vernacular_Pedagogy/
 ├── assets/
 │   ├── audio_cache/                 # Pre-sliced FLN MP3/WAV files for direct playback
-│   ├── fonts/                       # NotoSansOlChiki-Regular.ttf, NotoSansWarangChiti-Regular.ttf
-│   └── fln_lexicon.sqlite           # Optimized Trie SQLite database
+│   ├── fonts/                       # NotoSansOlChiki-Regular.ttf
+│   └── fln_lexicon.sqlite           # Optimized Trie SQLite database (sub-millisecond fast path)
 ├── data/
 │   ├── raw/
-│   │   ├── ocr_scans/               # Ho & Mundari scanned PDFs / TIFFs
-│   │   ├── scraped_web/             # Raw HTML / text rips
-│   │   └── youtube_audio/           # Downloaded educational audio tracks
-│   ├── processed/
-│   │   ├── bitext/                  # Clean TSV parallel sentences (hin-sat, hin-hoc)
-│   │   └── voice_bank/              # 16kHz Mono WAV clips mapped to transcripts
+│   │   └── common_voice_sat/        # Mozilla Common Voice Santali v26.0 (validated.tsv, clips/)
+│   └── processed/
+│       ├── fln/                     # fln_lexicon.json, fln_lexicon.tsv (368 validated seeds)
+│       ├── bitext/                  # Clean parallel TSVs: train.tsv (1,878), val.tsv (209)
+│       └── voice_bank/              # 16kHz Mono WAV clips mapped to Piper metadata.csv
 ├── models/
 │   ├── asr/                         # Sherpa-ONNX or Vosk Hindi models
 │   ├── mt/                          # CTranslate2 INT8 converted translation models
 │   └── tts/                         # Fine-tuned Piper TTS ONNX models
+├── notebooks/
+│   ├── colab_phase1_audio_prep.ipynb       # 1-Click Colab audio transcode & metadata prep
+│   ├── colab_phase2_indictrans2_lora.ipynb # 1-Click Colab LoRA fine-tuning & CT2 INT8 export
+│   └── colab_phase3_piper_tts.ipynb        # 1-Click Colab Piper TTS VITS training & ONNX export
 ├── scripts/
-│   ├── 01_ocr_ingestion.py
-│   ├── 02_audio_vad_slicer.py
-│   ├── 03_bitext_normalizer.py
-│   ├── 04_train_indictrans2_lora.py
-│   ├── 05_quantize_ctranslate2.py
-│   └── 06_build_sqlite_lexicon.py
+│   ├── 02_audio_common_voice_prep.py       # Mozilla Common Voice Santali preprocessor & Piper formatter
+│   ├── 03_bitext_normalizer.py             # Script normalizer & FLN template slot-filling engine
+│   ├── 06_build_sqlite_lexicon.py          # SQLite Fast-Path B-Tree database builder
+│   └── verify_fln_data.py                  # Linguistic schema and Unicode verification
 └── requirements.txt
 
 ```
 
 ---
 
-## 4. Phase 1: Multimodal Data Ingestion & Extraction
+## 4. Phase 1: Curated Corpus Ingestion & Preprocessing (Santhali sat_Olck Focus)
 
-### 4.1. Multi-Script OCR Extraction Pipeline (Ho & Mundari Dictionaries)
+> [!NOTE]
+> **Scope Refinement:** Per pedagogical requirements, scanned textbook OCR and ad-hoc YouTube scraping are eliminated for Santhali. We leverage pre-made curated datasets and synthetic expansion:
+> 1. **Speech Corpus:** Mozilla Common Voice Santali v26.0 (`cmqie985k00cbnr07z9cea5wy`) standardized to 16 kHz Mono 16-bit PCM WAV.
+> 2. **Parallel Bitext:** AI4Bharat BPCC (`hin_Deva` $\leftrightarrow$ `sat_Olck`) + NIPUN Bharat pedagogical template expansion over the verified 368-entry FLN database.
+> *(OCR and YouTube scraping pipelines for Ho and Mundari are deferred to Appendix A).*
 
-Scanned bilingual dictionaries (e.g., Ho-Hindi-English by Deeney or CIIL field scans) contain print skew, two-column formats, and mixed typography.
+### 4.1. Mozilla Common Voice Santali Audio Preprocessor & Piper Formatter
 
-```python
-# scripts/01_ocr_ingestion.py
-import cv2
-import numpy as np
-import pytesseract
-from paddleocr import PaddleOCR
-import re
-import json
-
-def preprocess_page(image_path: str) -> np.ndarray:
-    """Deskews and adapts threshold for yellowed textbook scans."""
-    src = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    # Adaptive thresholding to isolate faded ink bleed
-    thresh = cv2.adaptiveThreshold(
-        src, 255, cv2.ADAPTIVE_THRESH_SAUVOLA if hasattr(cv2, 'ADAPTIVE_THRESH_SAUVOLA') 
-        else cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-        cv2.THRESH_BINARY, 25, 11
-    )
-    # Hough Transform for deskewing
-    coords = np.column_stack(np.where(thresh > 0))
-    angle = cv2.minAreaRect(coords)[-1]
-    if angle < -45:
-        angle = -(90 + angle)
-    else:
-        angle = -angle
-    (h, w) = src.shape[:2]
-    center = (w // 2, h // 2)
-    M = cv2.getRotationMatrix2D(center, angle, 1.0)
-    rotated = cv2.warpAffine(thresh, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
-    return rotated
-
-def extract_bilingual_pairs(image_path: str):
-    processed = preprocess_page(image_path)
-    ocr_deva = PaddleOCR(use_angle_cls=True, lang='hi') # Devanagari extraction
-    result = ocr_deva.ocr(processed, cls=True)
-
-    extracted_lexicon = []
-    # Pattern matching for [Tribal Word] - [Grammar/POS] - [Hindi Translation]
-    pattern = re.compile(r"^([\u118A0-\u118FF\u0900-\u097F\w]+)\s*[-—:]\s*(?:\[.*?\])?\s*(.*)$")
-
-    for line in result[0]:
-        text = line[1][0]
-        match = pattern.match(text)
-        if match:
-            headword, meaning = match.groups()
-            extracted_lexicon.append({
-                "source_token": headword.strip(),
-                "hindi_meaning": meaning.strip(),
-                "script_block": "Warang_Chiti" if any('\u118A0' <= c <= '\u118FF' for c in headword) else "Devanagari"
-            })
-
-    with open("data/processed/bitext/ocr_lexicon.json", "w", encoding="utf-8") as f:
-        json.dump(extracted_lexicon, f, ensure_ascii=False, indent=2)
-
-if __name__ == "__main__":
-    extract_bilingual_pairs("data/raw/ocr_scans/ho_dictionary_p12.png")
-
-```
-
-### 4.2. Audio Ingestion & Silero VAD Slicing (YouTube & Open Corpora)
-
-Transform multi-minute tribal pronunciation videos and field recordings into 16 kHz Mono WAV clips sliced strictly along sentence energy boundaries.
+Converts Common Voice releases into Piper TTS / VITS LJSpeech format (`clip_id|transcript`) with strict Unicode Ol Chiki character filtering (`U+1C50 - U+1C7F`).
 
 ```python
-# scripts/02_audio_vad_slicer.py
-import os
-import torch
-import torchaudio
-import subprocess
-
-def standardize_audio(input_file: str, output_file: str):
-    """Downsamples audio to mandatory 16kHz mono 16-bit PCM WAV."""
-    cmd = [
-        "ffmpeg", "-y", "-i", input_file,
-        "-acodec", "pcm_s16le",
-        "-ar", "16000",
-        "-ac", "1",
-        output_file
-    ]
-    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-def slice_on_speech(wav_path: str, output_dir: str):
-    os.makedirs(output_dir, exist_ok=True)
-    model, utils = torch.hub.load(repo_or_dir='snakers4/silero-vad', model='silero_vad', force_reload=False)
-    (get_speech_timestamps, save_audio, read_audio, VADIterator, collect_chunks) = utils
-
-    wav = read_audio(wav_path, sampling_rate=16000)
-    # Speech timestamps with 400ms silence margin
-    speech_timestamps = get_speech_timestamps(
-        wav, model, 
-        sampling_rate=16000, 
-        min_speech_duration_ms=500,
-        min_silence_duration_ms=400
-    )
-
-    base_name = os.path.splitext(os.path.basename(wav_path))[0]
-    for idx, segment in enumerate(speech_timestamps):
-        chunk = wav[segment['start']:segment['end']]
-        chunk_file = os.path.join(output_dir, f"{base_name}_chunk_{idx:04d}.wav")
-        save_audio(chunk_file, chunk, sampling_rate=16000)
-
-if __name__ == "__main__":
-    raw_mp3 = "data/raw/youtube_audio/ho_alphabet_pronunciation.mp3"
-    cleaned_wav = "data/raw/youtube_audio/ho_cleaned.wav"
-    standardize_audio(raw_mp3, cleaned_wav)
-    slice_on_speech(cleaned_wav, "data/processed/voice_bank/")
-
+# scripts/02_audio_common_voice_prep.py
+# Standardizes validated.tsv into metadata.csv with 16 kHz mono transcoding
 ```
+
+Cloud execution is handled seamlessly via `notebooks/colab_phase1_audio_prep.ipynb` on Google Colab to protect local developer machines from heavy audio transcoding.
+
+### 4.2. Parallel Bitext Normalization & Pedagogical Template Slot-Filling
+
+Extracts nouns, verbs, adjectives, numbers, fruits, animals, and body parts from `fln_lexicon.json` and synthesizes 2,000+ parallel classroom utterances across 9 pedagogical domains.
+
+```python
+# scripts/03_bitext_normalizer.py
+# Generates data/processed/bitext/train.tsv (90%) and val.tsv (10%) with 100% Ol Chiki compliance
+```
+
 
 ---
 
@@ -623,14 +538,33 @@ if __name__ == "__main__":
 
 Run the implementation stages in this sequence:
 
-1. **Bootstrap Workspace:** Run the directory setup and pull base packages via `pip install -r requirements.txt`.
+1. **Bootstrap Workspace:** Run the lightweight directory setup and verify zero local heavy compute dependencies.
 
-2. **Build Foundations (Tier 1):** Execute `06_build_sqlite_lexicon.py` to establish instant caching for core Grade 1–3 classroom commands.
+2. **Build Foundations (Tier 1 Fast-Path):** Execute `06_build_sqlite_lexicon.py` to establish instant caching (<0.1ms) for core Grade 1–3 classroom commands and atomic vocabulary.
 
-3. **Format Speech Data:** Run `02_audio_vad_slicer.py` on Common Voice clips to populate the 16 kHz Mono WAV audio bank.
+3. **Ingest & Normalize Corpus (Phase 1):**
+   - Execute `03_bitext_normalizer.py` to synthesize parallel bitexts (`train.tsv`, `val.tsv`) via NIPUN Bharat slot-filling.
+   - Run `scripts/02_audio_common_voice_prep.py` or launch `notebooks/colab_phase1_audio_prep.ipynb` on Google Colab to normalize Mozilla Common Voice Santali clips and produce Piper `metadata.csv` + 16kHz Mono WAVs.
 
-4. **Prepare Machine Translation:** Run `03_bitext_normalizer.py` to synthesize parallel bitexts using template slot-filling.
+4. **Neural Machine Translation (Phase 2):** Launch `notebooks/colab_phase2_indictrans2_lora.ipynb` on Colab GPU to fine-tune `indictrans2-indic-indic-dist-320M`, merge LoRA weights, and export the quantized INT8 CTranslate2 model (~65 MB).
 
-5. **Fine-Tune & Quantize:** Execute `04_train_indictrans2_lora.py`, followed by `05_quantize_ctranslate2.py` to export the INT8 model.
+5. **Voice Synthesis (Phase 3):** Launch `notebooks/colab_phase3_piper_tts.ipynb` on Colab GPU to fine-tune Piper TTS (VITS) and export `sat_piper_model.onnx` (~30 MB).
 
-6. **Deploy & Validate:** Run `verify_pipeline.py` to verify that end-to-end execution stays under the 3.0-second latency ceiling on local CPU.
+6. **Deploy & Validate (Phase 4):** Package models into Android asset bundles and verify that total spoken translation latency stays under the 3.0-second budget on local CPU.
+
+---
+
+## Appendix A: Deferred Multi-Language Pipelines (Ho & Mundari)
+
+*Retained for secondary project expansion after Santhali FLN deployment is completed.*
+
+### A.1. Multi-Script Textbook OCR Pipeline (Ho `hoc` & Mundari `unr`)
+For scanned bilingual dictionaries (e.g. Ho-Hindi-English by Deeney or CIIL field scans):
+- Adaptive thresholding (Sauvola / Gaussian) with Hough transform deskewing.
+- Multi-script OCR via PaddleOCR (Devanagari + Warang Chiti / Latin).
+- Regular expression parsing for headwords, POS tags, and Hindi glosses.
+
+### A.2. YouTube Audio VAD Slicing Pipeline
+For long-form YouTube field recordings and pronunciation guides:
+- FFmpeg standardization to 16 kHz Mono 16-bit PCM WAV.
+- Silero VAD energy segmentation with 400ms silence margin and 500ms minimum speech duration.
