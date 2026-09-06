@@ -52,9 +52,9 @@ def main():
 
     os.makedirs(MODELS_MT, exist_ok=True)
 
-    # 1. Inject HF_TOKEN into remote Colab kernel os.environ
+    # 1. Inject HF_TOKEN into remote Colab kernel os.environ and /content/.hf_token
     if token:
-        inject_script = f"import os; os.environ['HF_TOKEN'] = '{token}'; print('Remote HF_TOKEN configured!')"
+        inject_script = f"import os; os.environ['HF_TOKEN'] = '{token}'; open('/content/.hf_token', 'w').write('{token}'); print('Remote HF_TOKEN configured!')"
         inject_cmd = f"echo \"{inject_script}\" | /home/ashraf/.local/bin/colab exec -s phase2-train"
         run_wsl(inject_cmd, desc="Injecting HF_TOKEN into Colab Session")
 

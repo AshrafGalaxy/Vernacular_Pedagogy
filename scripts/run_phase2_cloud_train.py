@@ -60,6 +60,12 @@ def main():
     # 3. Ingest Authentic Bitext Datasets
     print("\n--- Step 3: Fetching Authentic AI4Bharat BPCC & IN22 Data ---")
     hf_token = os.environ.get("HF_TOKEN", "")
+    if not hf_token and os.path.exists("/content/.hf_token"):
+        try:
+            with open("/content/.hf_token", "r") as f:
+                hf_token = f.read().strip()
+        except Exception:
+            pass
     token_arg = f"--hf-token {hf_token}" if hf_token else ""
     run_cmd(f"python scripts/01_fetch_bpcc_bitext.py {token_arg}", cwd=repo_dir)
     run_cmd("python scripts/03_bitext_normalizer.py", cwd=repo_dir)
@@ -74,6 +80,14 @@ def main():
         transformers.tokenization_utils.PreTrainedTokenizerBase = PreTrainedTokenizerBase
     except Exception:
         pass
+
+    if hf_token:
+        try:
+            from huggingface_hub import login  # type: ignore
+            login(token=hf_token, add_to_git_credential=False)
+            print("[INFO] Authenticated with Hugging Face Hub successfully!")
+        except Exception as e:
+            print(f"[WARN] Hugging Face Hub login warning: {e}")
 
     if "/content/IndicTransToolkit" not in sys.path:
         sys.path.insert(0, "/content/IndicTransToolkit")
@@ -91,12 +105,15 @@ def main():
     src_lang = "hin_Deva"
     tgt_lang = "sat_Olck"
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    auth_token = hf_token if hf_token else None
+    print(f"Fetching gated model with auth token: {'Yes' if auth_token else 'No'}")
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
     base_model = AutoModelForSeq2SeqLM.from_pretrained(
         model_name,
         trust_remote_code=True,
         torch_dtype=torch.float16,
-        device_map="auto"
+        device_map="auto",
+        token=auth_token
     )
     ip = IndicProcessor(inference=False)
 
@@ -191,7 +208,7 @@ def main():
 
     # 8. Merge LoRA Weights
     print("\n--- Step 8: Merging LoRA Weights with Base Model ---")
-    raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True)
+    raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
     merged = PeftModel.from_pretrained(raw_base, "/content/indictrans2_sat_lora_final")
     merged = merged.merge_and_unload()
     merged_path = "/content/indictrans2_sat_merged"
