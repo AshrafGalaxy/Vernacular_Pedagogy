@@ -308,6 +308,213 @@ def setup_transformers_compat_shims():
         print("[INFO] transformers v4.x detected — no shims needed.")
 
 
+def patch_remote_tokenizer(model_name, auth_token=None):
+    """
+    Patch the IndicTrans2 remote tokenizer code for transformers v5.x compatibility.
+
+    ROOT CAUSE: In transformers v5.x, PreTrainedTokenizerBase.__setattr__() requires
+    `_special_tokens_map` to be initialized (done by super().__init__()). But the
+    IndicTrans2 tokenizer sets `self.unk_token = ...` BEFORE calling super().__init__(),
+    causing: AttributeError: IndicTransTokenizer has no attribute _special_tokens_map
+
+    FIX: Rewrite the __init__ method to store special tokens in temporary variables
+    first, then set them properly AFTER super().__init__() is called.
+    """
+    import transformers  # type: ignore
+    major_ver = int(getattr(transformers, "__version__", "0").split(".")[0])
+    if major_ver < 5:
+        return  # Only needed for v5+
+
+    # First, trigger the download of remote code by attempting a config load
+    # This ensures the tokenizer file is cached locally
+    try:
+        from transformers import AutoConfig  # type: ignore
+        AutoConfig.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+    except Exception:
+        pass  # Config load may fail but files should still be cached
+
+    # Find the cached tokenizer file
+    cache_base = os.path.expanduser("~/.cache/huggingface/modules/transformers_modules")
+    tokenizer_path = None
+    for root, dirs, files in os.walk(cache_base):
+        for f in files:
+            if f == "tokenization_indictrans.py":
+                tokenizer_path = os.path.join(root, f)
+                break
+        if tokenizer_path:
+            break
+
+    if not tokenizer_path:
+        print("[PATCH] Remote tokenizer not yet cached — will retry after first load attempt.")
+        return
+
+    with open(tokenizer_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Check if already patched (look for our marker)
+    if "# PATCHED_FOR_TRANSFORMERS_V5" in content:
+        print("[PATCH] Remote tokenizer already patched for v5.x. Skipping.")
+        return
+
+    # Check if the problematic pattern exists
+    if "self.unk_token = (" not in content or "super().__init__(" not in content:
+        print("[PATCH] Remote tokenizer has unexpected structure. Skipping auto-patch.")
+        return
+
+    # Strategy: Replace the __init__ body to move super().__init__() BEFORE
+    # any self.XXX_token = ... assignments.
+    #
+    # The fix: store special token strings in local variables, call super().__init__()
+    # first (which initializes _special_tokens_map), then set attributes.
+
+    old_init_body = '''        self.src_vocab_fp = src_vocab_fp
+        self.tgt_vocab_fp = tgt_vocab_fp
+        self.src_spm_fp = src_spm_fp
+        self.tgt_spm_fp = tgt_spm_fp
+
+        # Store token content directly instead of accessing .content
+        self.unk_token = (
+            hasattr(unk_token, "content") and unk_token.content or unk_token
+        )
+        self.pad_token = (
+            hasattr(pad_token, "content") and pad_token.content or pad_token
+        )
+        self.eos_token = (
+            hasattr(eos_token, "content") and eos_token.content or eos_token
+        )
+        self.bos_token = (
+            hasattr(bos_token, "content") and bos_token.content or bos_token
+        )
+
+        # Load vocabularies
+        self.src_encoder = self._load_json(self.src_vocab_fp)
+        self.tgt_encoder = self._load_json(self.tgt_vocab_fp)
+
+        # Validate tokens
+        if self.unk_token not in self.src_encoder:
+            raise KeyError("<unk> token must be in vocab")
+        if self.pad_token not in self.src_encoder:
+            raise KeyError("<pad> token must be in vocab")
+
+        # Pre-compute reverse mappings
+        self.src_decoder = {v: k for k, v in self.src_encoder.items()}
+        self.tgt_decoder = {v: k for k, v in self.tgt_encoder.items()}
+
+        # Load SPM models
+        self.src_spm = self._load_spm(self.src_spm_fp)
+        self.tgt_spm = self._load_spm(self.tgt_spm_fp)
+
+        # Initialize current settings
+        self._switch_to_input_mode()
+
+        # Cache token IDs
+        self.unk_token_id = self.src_encoder[self.unk_token]
+        self.pad_token_id = self.src_encoder[self.pad_token]
+        self.eos_token_id = self.src_encoder[self.eos_token]
+        self.bos_token_id = self.src_encoder[self.bos_token]
+
+        super().__init__(
+            src_vocab_file=self.src_vocab_fp,
+            tgt_vocab_file=self.tgt_vocab_fp,
+            do_lower_case=do_lower_case,
+            unk_token=unk_token,
+            bos_token=bos_token,
+            eos_token=eos_token,
+            pad_token=pad_token,
+            **kwargs,
+        )'''
+
+    new_init_body = '''        # PATCHED_FOR_TRANSFORMERS_V5: Reordered __init__ to call super().__init__()
+        # BEFORE setting special token attributes, which is required by
+        # transformers v5.x (PreTrainedTokenizerBase.__setattr__ needs
+        # _special_tokens_map to be initialized first).
+        self.src_vocab_fp = src_vocab_fp
+        self.tgt_vocab_fp = tgt_vocab_fp
+        self.src_spm_fp = src_spm_fp
+        self.tgt_spm_fp = tgt_spm_fp
+
+        # Resolve token strings from AddedToken objects if needed
+        _unk = hasattr(unk_token, "content") and unk_token.content or (unk_token if isinstance(unk_token, str) else str(unk_token))
+        _pad = hasattr(pad_token, "content") and pad_token.content or (pad_token if isinstance(pad_token, str) else str(pad_token))
+        _eos = hasattr(eos_token, "content") and eos_token.content or (eos_token if isinstance(eos_token, str) else str(eos_token))
+        _bos = hasattr(bos_token, "content") and bos_token.content or (bos_token if isinstance(bos_token, str) else str(bos_token))
+
+        # Load vocabularies (needed before super().__init__ for token ID lookups)
+        self.src_encoder = self._load_json(self.src_vocab_fp)
+        self.tgt_encoder = self._load_json(self.tgt_vocab_fp)
+
+        # Validate tokens
+        if _unk not in self.src_encoder:
+            raise KeyError("<unk> token must be in vocab")
+        if _pad not in self.src_encoder:
+            raise KeyError("<pad> token must be in vocab")
+
+        # Pre-compute reverse mappings
+        self.src_decoder = {v: k for k, v in self.src_encoder.items()}
+        self.tgt_decoder = {v: k for k, v in self.tgt_encoder.items()}
+
+        # Load SPM models
+        self.src_spm = self._load_spm(self.src_spm_fp)
+        self.tgt_spm = self._load_spm(self.tgt_spm_fp)
+
+        # Initialize current settings
+        self._switch_to_input_mode()
+
+        # Call super().__init__() FIRST — this initializes _special_tokens_map
+        super().__init__(
+            src_vocab_file=self.src_vocab_fp,
+            tgt_vocab_file=self.tgt_vocab_fp,
+            do_lower_case=do_lower_case,
+            unk_token=_unk,
+            bos_token=_bos,
+            eos_token=_eos,
+            pad_token=_pad,
+            **kwargs,
+        )
+
+        # Cache token IDs (after super().__init__ sets up token infrastructure)
+        self.unk_token_id = self.src_encoder.get(_unk, 0)
+        self.pad_token_id = self.src_encoder.get(_pad, 1)
+        self.eos_token_id = self.src_encoder.get(_eos, 2)
+        self.bos_token_id = self.src_encoder.get(_bos, 0)'''
+
+    if old_init_body in content:
+        content = content.replace(old_init_body, new_init_body)
+        with open(tokenizer_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"[PATCH] Remote tokenizer patched for transformers v5.x: {tokenizer_path}")
+    else:
+        print("[PATCH WARN] Could not find exact __init__ pattern in remote tokenizer.")
+        print("  Attempting fallback: monkey-patching __setattr__...")
+        # Fallback: inject a compatibility wrapper at import time
+        _inject_tokenizer_compat_shim()
+
+
+def _inject_tokenizer_compat_shim():
+    """
+    Fallback shim: If we can't patch the source file, monkey-patch
+    PreTrainedTokenizerBase.__setattr__ to gracefully handle missing
+    _special_tokens_map during __init__.
+    """
+    from transformers.tokenization_utils_base import PreTrainedTokenizerBase  # type: ignore
+
+    original_setattr = PreTrainedTokenizerBase.__setattr__
+
+    def safe_setattr(self, key, value):
+        try:
+            original_setattr(self, key, value)
+        except AttributeError as e:
+            if "_special_tokens_map" in str(e):
+                # Initialize _special_tokens_map if it doesn't exist yet
+                object.__setattr__(self, "_special_tokens_map", {})
+                original_setattr(self, key, value)
+            else:
+                raise
+
+    PreTrainedTokenizerBase.__setattr__ = safe_setattr
+    print("  [SHIM] Injected safe __setattr__ for PreTrainedTokenizerBase")
+
+
 # ═══════════════════════════════════════════════════════════════
 # AUTHENTICATION & DATA LOADING
 # ═══════════════════════════════════════════════════════════════
@@ -498,7 +705,24 @@ def main():
 
     auth_token = hf_token if hf_token else None
     print(f"Fetching gated model with auth token: {'Yes' if auth_token else 'No'}")
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+
+    # Patch remote tokenizer for transformers v5.x compatibility
+    patch_remote_tokenizer(model_name, auth_token=auth_token)
+
+    # Load tokenizer with retry: if first attempt fails due to cached stale
+    # code, clear module cache and retry after patching
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+    except (AttributeError, TypeError) as e:
+        print(f"[WARN] Tokenizer load failed ({e}), applying fallback shim and retrying...")
+        _inject_tokenizer_compat_shim()
+        # Clear any cached modules from the failed attempt
+        mods_to_clear = [k for k in list(sys.modules.keys())
+                         if "indictrans" in k.lower() or "tokenization_indictrans" in k.lower()]
+        for m in mods_to_clear:
+            del sys.modules[m]
+        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+
     base_model = AutoModelForSeq2SeqLM.from_pretrained(
         model_name,
         trust_remote_code=True,
