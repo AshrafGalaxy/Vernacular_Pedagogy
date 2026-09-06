@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 # -*- coding: utf-8 -*-
 """
 Phase 2 Cloud Training Worker (Runs on Google Colab T4 GPU VM)
@@ -8,6 +9,10 @@ Automates the full MT pipeline on the remote Colab instance:
 4. Fine-tunes IndicTrans2 320M Distilled with LoRA on NVIDIA T4 GPU.
 5. Merges weights and quantizes to CTranslate2 INT8 format (~65 MB).
 6. Packages /content/indictrans2_sat_int8_ct2.tar.gz ready for download.
+
+Note: Heavy ML dependencies (torch, transformers, peft, datasets, IndicTransToolkit)
+are provisioned remotely in the Colab VM runtime and intentionally omitted from the
+local workstation to adhere to zero-heavy-local-compute project guardrails.
 """
 
 import os
@@ -28,7 +33,7 @@ def main():
     print("=" * 60)
     
     # Check GPU
-    import torch
+    import torch  # type: ignore
     print(f"CUDA Available: {torch.cuda.is_available()}")
     if torch.cuda.is_available():
         print(f"GPU Device:     {torch.cuda.get_device_name(0)}")
@@ -64,14 +69,14 @@ def main():
     if "/content/IndicTransToolkit" not in sys.path:
         sys.path.insert(0, "/content/IndicTransToolkit")
     try:
-        from IndicTransToolkit import IndicProcessor
-    except ImportError:
-        from IndicTransToolkit.IndicTransToolkit import IndicProcessor
+        from IndicTransToolkit import IndicProcessor  # type: ignore
+    except (ImportError, ModuleNotFoundError):
+        from IndicTransToolkit.IndicTransToolkit import IndicProcessor  # type: ignore
 
-    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer
-    from peft import LoraConfig, get_peft_model, TaskType, PeftModel
-    from datasets import Dataset
-    import pandas as pd
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer  # type: ignore
+    from peft import LoraConfig, get_peft_model, TaskType, PeftModel  # type: ignore
+    from datasets import Dataset  # type: ignore
+    import pandas as pd  # type: ignore
 
     model_name = "ai4bharat/indictrans2-indic-indic-dist-320M"
     src_lang = "hin_Deva"

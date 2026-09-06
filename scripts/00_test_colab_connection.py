@@ -1,4 +1,5 @@
-import torch
+# pyright: reportMissingImports=false
+import torch  # type: ignore
 import sys
 
 print("Python version:", sys.version)

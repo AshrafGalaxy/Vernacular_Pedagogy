@@ -28,14 +28,20 @@ def get_hf_token():
 
 def run_wsl(command, desc=None):
     if desc:
-        print(f"\n[ORCHESTRATOR] {desc}")
-    print(f"Command: {command}")
-    res = subprocess.run(["wsl", "-d", "Ubuntu", "bash", "-c", command], capture_output=True, text=True)
-    if res.stdout:
-        print(res.stdout)
-    if res.stderr:
-        print(res.stderr, file=sys.stderr)
-    return res.returncode
+        print(f"\n[ORCHESTRATOR] {desc}", flush=True)
+    print(f"Command: {command}", flush=True)
+    process = subprocess.Popen(
+        ["wsl", "-d", "Ubuntu", "bash", "-c", command],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1
+    )
+    if process.stdout:
+        for line in iter(process.stdout.readline, ""):
+            print(line, end="", flush=True)
+        process.stdout.close()
+    return process.wait()
 
 def main():
     token = get_hf_token()
@@ -62,10 +68,10 @@ def main():
         sys.exit(code)
 
     # 3. Download the quantized INT8 model package
-    download_cmd = "/home/ashraf/.local/bin/colab download -s phase2-train /content/indictrans2_sat_int8_ct2.tar.gz /mnt/c/Users/Ashraf/Desktop/26042/models/mt/"
+    target_archive = os.path.join(MODELS_MT, "indictrans2_sat_int8_ct2.tar.gz")
+    download_cmd = f"/home/ashraf/.local/bin/colab download -s phase2-train /content/indictrans2_sat_int8_ct2.tar.gz /mnt/c/Users/Ashraf/Desktop/26042/models/mt/indictrans2_sat_int8_ct2.tar.gz"
     run_wsl(download_cmd, desc="Downloading CTranslate2 INT8 Model Package")
 
-    target_archive = os.path.join(MODELS_MT, "indictrans2_sat_int8_ct2.tar.gz")
     if os.path.exists(target_archive):
         print(f"\n[SUCCESS] Model successfully downloaded to: {target_archive} ({os.path.getsize(target_archive)/(1024*1024):.1f} MB)")
     else:
