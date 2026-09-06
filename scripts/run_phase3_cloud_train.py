@@ -75,7 +75,8 @@ def install_dependencies():
         "scipy",
         "datasets",
         "huggingface_hub",
-        "librosa"
+        "librosa",
+        "cython"
     ]
     run_cmd_strict(
         f"pip install -q {' '.join(packages)}",
@@ -89,11 +90,56 @@ def install_dependencies():
             f"git clone https://github.com/rhasspy/piper.git {piper_dir}",
             description="Clone rhasspy/piper repository"
         )
+
+    # Patch 1: Remove unbuildable piper-phonemize from requirements.txt (not needed for --phoneme-type text)
+    req_path = os.path.join(piper_dir, "src", "python", "requirements.txt")
+    if os.path.exists(req_path):
+        with open(req_path, "r", encoding="utf-8") as f:
+            lines = [l for l in f if "piper-phonemize" not in l]
+        with open(req_path, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+
+    # Patch 2: Make piper_phonemize optional in preprocess.py
+    prep_path = os.path.join(piper_dir, "src", "python", "piper_train", "preprocess.py")
+    if os.path.exists(prep_path):
+        with open(prep_path, "r", encoding="utf-8") as f:
+            prep_code = f.read()
+        if "from piper_phonemize import (" in prep_code and "except ImportError:" not in prep_code:
+            prep_code = prep_code.replace(
+                "from piper_phonemize import (",
+                "try:\n    from piper_phonemize import ("
+            ).replace(
+                "    tashkeel_run,\n)",
+                "    tashkeel_run,\n)\nexcept ImportError:\n    phonemize_espeak = None\n    phonemize_codepoints = None\n    phoneme_ids_espeak = None\n    phoneme_ids_codepoints = None\n    get_codepoints_map = None\n    get_espeak_map = None\n    get_max_phonemes = None\n    tashkeel_run = None"
+            )
+            with open(prep_path, "w", encoding="utf-8") as f:
+                f.write(prep_code)
+
+    # Patch 3: Build monotonic_align Cython extension in-place
+    run_cmd(
+        f"cd {piper_dir}/src/python && python3 piper_train/vits/monotonic_align/setup.py build_ext --inplace",
+        description="Build monotonic_align Cython extension"
+    )
+
+    # Patch 4: Fix relative import in monotonic_align/__init__.py
+    ma_init = os.path.join(piper_dir, "src", "python", "piper_train", "vits", "monotonic_align", "__init__.py")
+    if os.path.exists(ma_init):
+        with open(ma_init, "r", encoding="utf-8") as f:
+            ma_code = f.read()
+        if "from .monotonic_align.core import maximum_path_c" in ma_code:
+            ma_code = ma_code.replace(
+                "from .monotonic_align.core import maximum_path_c",
+                "try:\n    from .core import maximum_path_c\nexcept ImportError:\n    from .monotonic_align.core import maximum_path_c"
+            )
+            with open(ma_init, "w", encoding="utf-8") as f:
+                f.write(ma_code)
+
+    # Install piper_train package with --no-deps
     run_cmd_strict(
-        f"cd {piper_dir}/src/python && pip install -q -e .",
+        f"cd {piper_dir}/src/python && pip install -q -e . --no-deps",
         description="Install piper_train package"
     )
-    print("[OK] Dependencies installed successfully!", flush=True)
+    print("[OK] Dependencies and Piper VITS extensions installed successfully!", flush=True)
 
 
 def setup_repository():
