@@ -46,6 +46,7 @@ def main():
     run_cmd("pip install -q transformers datasets evaluate sacrebleu peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub sacremoses indic-nlp-library")
     if not os.path.exists("/content/IndicTransToolkit"):
         run_cmd("git clone https://github.com/VarunGumma/IndicTransToolkit.git /content/IndicTransToolkit")
+    run_cmd("sed -i 's/transformers.tokenization_utils/transformers.tokenization_utils_base/g' /content/IndicTransToolkit/IndicTransToolkit/collator.py 2>/dev/null || true")
     run_cmd("pip install -q -e /content/IndicTransToolkit")
 
     # 2. Clone/Update Repo
@@ -66,6 +67,14 @@ def main():
     # 4. Load Models & Tokenizer
     print("\n--- Step 4: Loading IndicTrans2 Base Model ---")
     import sys
+    import transformers  # type: ignore
+    try:
+        import transformers.tokenization_utils  # type: ignore
+        from transformers.tokenization_utils_base import PreTrainedTokenizerBase  # type: ignore
+        transformers.tokenization_utils.PreTrainedTokenizerBase = PreTrainedTokenizerBase
+    except Exception:
+        pass
+
     if "/content/IndicTransToolkit" not in sys.path:
         sys.path.insert(0, "/content/IndicTransToolkit")
     try:
