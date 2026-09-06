@@ -304,6 +304,60 @@ def setup_transformers_compat_shims():
         except Exception as e:
             print(f"  [SHIM WARN] tokenization_utils bridge failed (non-fatal): {e}")
 
+        # Shim 4: PreTrainedModel._tie_or_clone_weights
+        try:
+            from transformers.modeling_utils import PreTrainedModel  # type: ignore
+            import torch.nn.functional as F  # type: ignore
+            if not hasattr(PreTrainedModel, "_tie_or_clone_weights"):
+                def _tie_or_clone_weights(self, output_embeddings, input_embeddings):
+                    output_embeddings.weight = input_embeddings.weight
+                    if getattr(output_embeddings, "bias", None) is not None:
+                        padding_size = output_embeddings.weight.shape[0] - output_embeddings.bias.shape[0]
+                        if padding_size > 0:
+                            output_embeddings.bias.data = F.pad(
+                                output_embeddings.bias.data, (0, padding_size), "constant", 0
+                            )
+                    if hasattr(output_embeddings, "out_features") and hasattr(input_embeddings, "num_embeddings"):
+                        output_embeddings.out_features = input_embeddings.num_embeddings
+                PreTrainedModel._tie_or_clone_weights = _tie_or_clone_weights
+                print("  [SHIM] PreTrainedModel._tie_or_clone_weights fallback injected")
+        except Exception as e:
+            print(f"  [SHIM WARN] _tie_or_clone_weights fallback skipped: {e}")
+
+        # Shim 5: Universal subprocess compatibility hook in site-packages
+        try:
+            import site
+            site_packages_dirs = site.getsitepackages() if hasattr(site, "getsitepackages") else []
+            for sp in site_packages_dirs:
+                if os.path.exists(sp) and os.access(sp, os.W_OK):
+                    pth_file = os.path.join(sp, "indictrans_v5_compat.pth")
+                    hook_file = os.path.join(sp, "indictrans_v5_compat_hook.py")
+                    with open(hook_file, "w", encoding="utf-8") as hf:
+                        hf.write(
+                            "import sys, types\n"
+                            "if 'transformers.onnx' not in sys.modules:\n"
+                            "    try:\n"
+                            "        import transformers.onnx\n"
+                            "    except (ImportError, ModuleNotFoundError):\n"
+                            "        m = types.ModuleType('transformers.onnx')\n"
+                            "        m.__package__ = 'transformers.onnx'\n"
+                            "        m.OnnxConfig = object\n"
+                            "        m.OnnxSeq2SeqConfigWithPast = object\n"
+                            "        sys.modules['transformers.onnx'] = m\n"
+                            "    try:\n"
+                            "        import transformers.onnx.utils\n"
+                            "    except (ImportError, ModuleNotFoundError):\n"
+                            "        mu = types.ModuleType('transformers.onnx.utils')\n"
+                            "        mu.compute_effective_axis_dimension = lambda *a, **k: 0\n"
+                            "        sys.modules['transformers.onnx.utils'] = mu\n"
+                        )
+                    with open(pth_file, "w", encoding="utf-8") as pf:
+                        pf.write("import indictrans_v5_compat_hook\n")
+                    print(f"  [SHIM] Universal subprocess compat hook installed: {pth_file}")
+                    break
+        except Exception as e:
+            print(f"  [SHIM WARN] Universal subprocess hook skipped: {e}")
+
     else:
         print("[INFO] transformers v4.x detected — no shims needed.")
 
@@ -515,6 +569,109 @@ def _inject_tokenizer_compat_shim():
     print("  [SHIM] Injected safe __setattr__ for PreTrainedTokenizerBase")
 
 
+def patch_remote_modeling(model_name=None, auth_token=None):
+    """
+    Patch the IndicTrans2 remote modeling and configuration code for transformers v5.x compatibility.
+
+    ROOT CAUSE 1: In transformers v5.x, PreTrainedModel.init_weights() calls:
+        self.tie_weights(recompute_mapping=False)
+    IndicTransForConditionalGeneration.tie_weights(self) only accepts `(self)` and
+    fails with:
+        TypeError: IndicTransForConditionalGeneration.tie_weights() got an unexpected keyword argument 'recompute_mapping'
+
+    ROOT CAUSE 2: When external tools/subprocesses (like CTranslate2 converter) load
+    configuration_indictrans.py in a fresh Python session, `transformers.onnx` is missing in v5.x.
+
+    FIX:
+      1. Fetch remote code to HuggingFace modules cache if needed.
+      2. Rewrite `def tie_weights(self):` in modeling_indictrans.py to accept `*args, **kwargs`.
+      3. Rewrite configuration_indictrans.py to guard `from transformers.onnx import ...`.
+      4. Dynamically monkey-patch any already loaded IndicTransForConditionalGeneration class in sys.modules.
+    """
+    import transformers  # type: ignore
+    major_ver = int(getattr(transformers, "__version__", "0").split(".")[0])
+    if major_ver < 5:
+        return
+
+    # Trigger download of remote code if model_name is provided
+    if model_name:
+        try:
+            from transformers import AutoConfig  # type: ignore
+            AutoConfig.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+        except Exception:
+            pass
+
+    search_dirs = [os.path.expanduser("~/.cache/huggingface/modules/transformers_modules")]
+    if os.path.exists("/content/indictrans2_sat_merged"):
+        search_dirs.append("/content/indictrans2_sat_merged")
+
+    for sdir in search_dirs:
+        if not os.path.exists(sdir):
+            continue
+        for root, dirs, files in os.walk(sdir):
+            for f in files:
+                if f == "modeling_indictrans.py":
+                    mod_path = os.path.join(root, f)
+                    try:
+                        with open(mod_path, "r", encoding="utf-8") as fh:
+                            content = fh.read()
+
+                        modified = False
+                        if "def tie_weights(self):" in content:
+                            content = content.replace(
+                                "def tie_weights(self):",
+                                "def tie_weights(self, *args, **kwargs):  # PATCHED_FOR_TRANSFORMERS_V5"
+                            )
+                            modified = True
+
+                        if modified:
+                            with open(mod_path, "w", encoding="utf-8") as fh:
+                                fh.write(content)
+                            print(f"[PATCH] Remote modeling patched for transformers v5.x: {mod_path}")
+                        elif "# PATCHED_FOR_TRANSFORMERS_V5" in content:
+                            print(f"[PATCH] Remote modeling already patched: {mod_path}")
+                    except Exception as err:
+                        print(f"[PATCH WARN] Failed to patch modeling file {mod_path}: {err}")
+
+                elif f == "configuration_indictrans.py":
+                    cfg_path = os.path.join(root, f)
+                    try:
+                        with open(cfg_path, "r", encoding="utf-8") as fh:
+                            content = fh.read()
+                        if "from transformers.onnx import" in content and "# ONNX_PATCHED" not in content:
+                            content = content.replace(
+                                "from transformers.onnx import OnnxConfig, OnnxSeq2SeqConfigWithPast",
+                                "# ONNX_PATCHED\ntry:\n    from transformers.onnx import OnnxConfig, OnnxSeq2SeqConfigWithPast\nexcept (ImportError, ModuleNotFoundError):\n    OnnxConfig = object\n    OnnxSeq2SeqConfigWithPast = object\n"
+                            )
+                            with open(cfg_path, "w", encoding="utf-8") as fh:
+                                fh.write(content)
+                            print(f"[PATCH] Remote configuration patched on disk: {cfg_path}")
+                    except Exception as err:
+                        print(f"[PATCH WARN] Failed to patch config file {cfg_path}: {err}")
+
+    # Dynamic monkey-patching for any already loaded class in sys.modules
+    for name, mod in list(sys.modules.items()):
+        if "indictrans" in name.lower() and mod is not None:
+            cls = getattr(mod, "IndicTransForConditionalGeneration", None)
+            if cls is not None and hasattr(cls, "tie_weights"):
+                orig_tie = cls.tie_weights
+                try:
+                    import inspect
+                    sig = inspect.signature(orig_tie)
+                    if len(sig.parameters) == 1:
+                        def make_safe_tie(orig_fn):
+                            def safe_tie(self, *args, **kwargs):
+                                try:
+                                    return orig_fn(self)
+                                except TypeError:
+                                    return orig_fn(self, *args, **kwargs)
+                            return safe_tie
+                        cls.tie_weights = make_safe_tie(orig_tie)
+                        print(f"  [SHIM] Dynamically wrapped tie_weights on {name}.IndicTransForConditionalGeneration")
+                except Exception:
+                    pass
+
+
 # ═══════════════════════════════════════════════════════════════
 # AUTHENTICATION & DATA LOADING
 # ═══════════════════════════════════════════════════════════════
@@ -709,6 +866,9 @@ def main():
     # Patch remote tokenizer for transformers v5.x compatibility
     patch_remote_tokenizer(model_name, auth_token=auth_token)
 
+    # Patch remote modeling for transformers v5.x compatibility
+    patch_remote_modeling(model_name, auth_token=auth_token)
+
     # Load tokenizer with retry: if first attempt fails due to cached stale
     # code, clear module cache and retry after patching
     try:
@@ -723,13 +883,31 @@ def main():
             del sys.modules[m]
         tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
 
-    base_model = AutoModelForSeq2SeqLM.from_pretrained(
-        model_name,
-        trust_remote_code=True,
-        torch_dtype=torch.float16,
-        device_map="auto",
-        token=auth_token
-    )
+    try:
+        base_model = AutoModelForSeq2SeqLM.from_pretrained(
+            model_name,
+            trust_remote_code=True,
+            torch_dtype=torch.float16,
+            device_map="auto",
+            token=auth_token
+        )
+    except (TypeError, AttributeError) as e:
+        if "tie_weights" in str(e) or "recompute_mapping" in str(e):
+            print(f"[WARN] Model load failed ({e}), re-applying modeling patches and retrying...")
+            mods_to_clear = [k for k in list(sys.modules.keys())
+                             if "indictrans" in k.lower() or "modeling_indictrans" in k.lower()]
+            for m in mods_to_clear:
+                del sys.modules[m]
+            patch_remote_modeling(model_name, auth_token=auth_token)
+            base_model = AutoModelForSeq2SeqLM.from_pretrained(
+                model_name,
+                trust_remote_code=True,
+                torch_dtype=torch.float16,
+                device_map="auto",
+                token=auth_token
+            )
+        else:
+            raise
     print(f"[OK] Model loaded: {model_name}")
 
     # ──────────────────────────────────────────
@@ -846,12 +1024,26 @@ def main():
     # Step 8: Merge LoRA Weights
     # ──────────────────────────────────────────
     print("\n--- Step 8: Merging LoRA Weights with Base Model ---")
-    raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+    patch_remote_modeling(model_name, auth_token=auth_token)
+    try:
+        raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+    except (TypeError, AttributeError) as e:
+        if "tie_weights" in str(e) or "recompute_mapping" in str(e):
+            print(f"[WARN] Step 8 model load failed ({e}), re-applying patches and retrying...")
+            mods_to_clear = [k for k in list(sys.modules.keys())
+                             if "indictrans" in k.lower() or "modeling_indictrans" in k.lower()]
+            for m in mods_to_clear:
+                del sys.modules[m]
+            patch_remote_modeling(model_name, auth_token=auth_token)
+            raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+        else:
+            raise
     merged = PeftModel.from_pretrained(raw_base, lora_final_path)
     merged = merged.merge_and_unload()
     merged_path = "/content/indictrans2_sat_merged"
     merged.save_pretrained(merged_path)
     tokenizer.save_pretrained(merged_path)
+    patch_remote_modeling(auth_token=auth_token)  # Ensure merged export is also patched
     print(f"[OK] Merged model saved to: {merged_path}")
 
     # ──────────────────────────────────────────
