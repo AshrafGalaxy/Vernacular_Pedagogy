@@ -1067,13 +1067,22 @@ def main():
             report_to="none"
         )
 
-    trainer = Seq2SeqTrainer(
-        model=peft_model,
-        args=training_args,
-        train_dataset=tok_train,
-        eval_dataset=tok_val,
-        tokenizer=tokenizer
-    )
+    try:
+        trainer = Seq2SeqTrainer(
+            model=peft_model,
+            args=training_args,
+            train_dataset=tok_train,
+            eval_dataset=tok_val,
+            processing_class=tokenizer
+        )
+    except TypeError:
+        trainer = Seq2SeqTrainer(
+            model=peft_model,
+            args=training_args,
+            train_dataset=tok_train,
+            eval_dataset=tok_val,
+            tokenizer=tokenizer
+        )
 
     t0 = time.time()
     trainer.train()
