@@ -178,7 +178,7 @@ def prepare_dataset(repo_dir: str, auth_token: str = ""):
         print("[INGEST] Running 04_fetch_santhali_audio.py...", flush=True)
         token_arg = f"--hf-token {auth_token}" if auth_token else ""
         run_cmd(
-            f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir}",
+            f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir} --max-samples 600",
             description="Fetch Santhali speech dataset"
         )
 

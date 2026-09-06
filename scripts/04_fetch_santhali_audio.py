@@ -149,24 +149,35 @@ def fetch_from_huggingface(
     meta_path = os.path.join(output_dir, "metadata.csv")
 
     token = get_hf_token(hf_token)
-    print(f"\n[FETCH] Connecting to Hugging Face dataset: '{dataset_name}' (config={config}, split={split})...")
+    target_cap = max_samples if max_samples is not None else 600
+    print(f"\n[FETCH] Connecting to Hugging Face dataset: '{dataset_name}' (config={config}, split={split}, cap={target_cap})...")
 
     try:
         if config:
-            ds = load_dataset(dataset_name, config, split=split, token=token or None)
+            ds = load_dataset(dataset_name, config, split=split, token=token or None, streaming=True)
         else:
-            ds = load_dataset(dataset_name, split=split, token=token or None)
-    except Exception as e:
-        print(f"[WARN] Failed to load {dataset_name} ({config}): {e}")
-        return 0, 0.0
+            ds = load_dataset(dataset_name, split=split, token=token or None, streaming=True)
+        is_streaming = True
+        print(f"[FETCH] Connected in streaming mode for {dataset_name}.")
+    except Exception as e_stream:
+        print(f"[WARN] Streaming mode failed ({e_stream}), trying standard download...")
+        try:
+            if config:
+                ds = load_dataset(dataset_name, config, split=split, token=token or None)
+            else:
+                ds = load_dataset(dataset_name, split=split, token=token or None)
+            is_streaming = False
+            print(f"[FETCH] Loaded {len(ds)} raw samples from {dataset_name}.")
+        except Exception as e:
+            print(f"[WARN] Failed to load {dataset_name} ({config}): {e}")
+            return 0, 0.0
 
-    print(f"[FETCH] Loaded {len(ds)} raw samples from {dataset_name}.")
     saved_count = 0
     total_duration = 0.0
     records = []
 
     for i, item in enumerate(ds):
-        if max_samples and saved_count >= max_samples:
+        if target_cap and saved_count >= target_cap:
             break
 
         # Extract transcript
@@ -195,8 +206,8 @@ def fetch_from_huggingface(
                 records.append((clip_id, norm_text))
                 total_duration += dur
                 saved_count += 1
-                if saved_count % 100 == 0:
-                    print(f"  Processed {saved_count} clips ({total_duration/60:.1f} minutes)...")
+                if saved_count % 50 == 0:
+                    print(f"  Processed {saved_count}/{target_cap} clips ({total_duration/60:.1f} minutes)...")
         except Exception as err:
             if os.path.exists(wav_path):
                 os.remove(wav_path)
@@ -237,7 +248,7 @@ def main():
     parser = argparse.ArgumentParser(description="Fetch and preprocess Santhali speech data for Piper TTS")
     parser.add_argument("--hf-token", type=str, default=None, help="Hugging Face User Access Token")
     parser.add_argument("--output-dir", type=str, default=DEFAULT_OUTPUT_DIR, help="Output directory for voicebank")
-    parser.add_argument("--max-samples", type=int, default=None, help="Optional maximum sample cap")
+    parser.add_argument("--max-samples", type=int, default=600, help="Optional maximum sample cap (default: 600)")
     args = parser.parse_args()
 
     token = get_hf_token(args.hf_token)
