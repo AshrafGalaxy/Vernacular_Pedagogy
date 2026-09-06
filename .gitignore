@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large model binaries and weight checkpoints (handled via Hugging Face / Cloud)
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.tar.gz
+*.zip
+
+# Audio raw dumps (keep cache seeds, ignore large scrapes)
+data/raw/youtube_audio/*.mp3
+data/raw/common_voice/clips/
+
+# IDE and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Scratch & temporary logs
+scratch/
+*.log
