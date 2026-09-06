@@ -10,9 +10,20 @@ Automates the full MT pipeline on the remote Colab instance:
 5. Merges weights and quantizes to CTranslate2 INT8 format (~65 MB).
 6. Packages /content/indictrans2_sat_int8_ct2.tar.gz ready for download.
 
-Note: Heavy ML dependencies (torch, transformers, peft, datasets, IndicTransToolkit)
-are provisioned remotely in the Colab VM runtime and intentionally omitted from the
-local workstation to adhere to zero-heavy-local-compute project guardrails.
+COMPATIBILITY NOTE:
+  This script is designed to work with the Colab 2026 pre-installed environment:
+  - transformers 5.x  (NOT downgraded — we shim for IndicTrans2 compat)
+  - peft 0.20+, accelerate 1.14+, datasets 4.0+, torch 2.11+
+  - Python 3.13+
+
+  We do NOT downgrade transformers because:
+  1. peft/accelerate/datasets all require transformers>=5
+  2. tokenizers 0.19.x has no Python 3.13 wheels (Rust build fails)
+  3. Our compatibility shims handle all IndicTrans2 v5.x breakage
+
+Note: Heavy ML dependencies are provisioned remotely in the Colab VM runtime
+and intentionally omitted from the local workstation to adhere to
+zero-heavy-local-compute project guardrails.
 """
 
 import os
@@ -21,19 +32,35 @@ import subprocess
 import time
 
 
-def run_cmd(cmd, cwd=None):
+def run_cmd(cmd, cwd=None, capture=False):
     """Run a shell command, print output, return exit code (non-fatal)."""
     print(f"\n[EXEC] {cmd}")
-    res = subprocess.run(cmd, shell=True, cwd=cwd)
+    if capture:
+        res = subprocess.run(cmd, shell=True, cwd=cwd,
+                             capture_output=True, text=True)
+        if res.stdout:
+            print(res.stdout[-2000:])
+        if res.stderr:
+            print(res.stderr[-2000:])
+    else:
+        res = subprocess.run(cmd, shell=True, cwd=cwd)
     if res.returncode != 0:
         print(f"[WARN] Command exited with code {res.returncode}")
     return res.returncode
 
 
-def run_cmd_strict(cmd, cwd=None, description=""):
+def run_cmd_strict(cmd, cwd=None, description="", capture=False):
     """Run a shell command and abort the pipeline on failure."""
     print(f"\n[EXEC] {cmd}")
-    res = subprocess.run(cmd, shell=True, cwd=cwd)
+    if capture:
+        res = subprocess.run(cmd, shell=True, cwd=cwd,
+                             capture_output=True, text=True)
+        if res.stdout:
+            print(res.stdout[-2000:])
+        if res.stderr:
+            print(res.stderr[-2000:])
+    else:
+        res = subprocess.run(cmd, shell=True, cwd=cwd)
     if res.returncode != 0:
         msg = f"[FATAL] {description or 'Command'} failed with exit code {res.returncode}: {cmd}"
         print(msg)
@@ -41,14 +68,93 @@ def run_cmd_strict(cmd, cwd=None, description=""):
     return res.returncode
 
 
+# ═══════════════════════════════════════════════════════════════
+# DEPENDENCY MANAGEMENT — Work WITH the Colab environment
+# ═══════════════════════════════════════════════════════════════
+
+def install_dependencies():
+    """
+    Smart dependency installer that works WITH Colab's pre-installed environment.
+
+    Colab 2026 ships with: transformers 5.16+, peft 0.20+, accelerate 1.14+,
+    datasets 4.0+, torch 2.11+, ctranslate2 4.8+, sentencepiece, bitsandbytes.
+
+    Strategy:
+      1. Keep ALL pre-installed packages as-is (no downgrades)
+      2. Only install genuinely missing packages
+      3. Use verbose output so failures are diagnosable
+    """
+    print("\n--- Step 1: Installing Cloud Dependencies ---")
+
+    # Check what's already installed
+    preinstalled = {}
+    for pkg_name, import_name in [
+        ("transformers", "transformers"),
+        ("peft", "peft"),
+        ("accelerate", "accelerate"),
+        ("datasets", "datasets"),
+        ("torch", "torch"),
+        ("ctranslate2", "ctranslate2"),
+        ("sentencepiece", "sentencepiece"),
+        ("bitsandbytes", "bitsandbytes"),
+        ("evaluate", "evaluate"),
+        ("sacrebleu", "sacrebleu"),
+        ("sacremoses", "sacremoses"),
+        ("pandas", "pandas"),
+        ("huggingface_hub", "huggingface_hub"),
+    ]:
+        try:
+            mod = __import__(import_name)
+            ver = getattr(mod, "__version__", "?")
+            preinstalled[pkg_name] = ver
+        except ImportError:
+            preinstalled[pkg_name] = None
+
+    print("\nPre-installed packages:")
+    for pkg, ver in preinstalled.items():
+        status = f"  ✓ {pkg}: {ver}" if ver else f"  ✗ {pkg}: MISSING"
+        print(status)
+
+    # Only install what's actually missing
+    missing = [pkg for pkg, ver in preinstalled.items() if ver is None]
+
+    # Always ensure indic-nlp-library (import name differs from pip name)
+    try:
+        import indicnlp  # type: ignore
+    except ImportError:
+        missing.append("indic-nlp-library")
+
+    if missing:
+        missing_str = " ".join(missing)
+        print(f"\nInstalling missing packages: {missing_str}")
+        run_cmd_strict(
+            f"pip install {missing_str}",
+            description=f"Install missing packages: {missing_str}"
+        )
+    else:
+        print("\n[OK] All required packages are already installed!")
+
+
+# ═══════════════════════════════════════════════════════════════
+# INDICTRANSTOOLKIT COMPATIBILITY
+# ═══════════════════════════════════════════════════════════════
+
 def patch_indictrans_toolkit(toolkit_dir="/content/IndicTransToolkit"):
     """
-    Idempotent patch for IndicTransToolkit compatibility with transformers 4.39-4.43.
-    Fixes known import breakage: `from transformers.tokenization_utils import ...`
-    must become `from transformers.tokenization_utils_base import ...` in newer versions.
+    Comprehensive, idempotent patch for IndicTransToolkit compatibility
+    with transformers 5.x on Colab 2026.
 
-    CRITICAL: Uses a precise regex with word-boundary anchors to prevent the
-    double-suffix bug (tokenization_utils_base -> tokenization_utils_base_base).
+    Fixes ALL known import breakages in collator.py:
+      1. `from transformers.tokenization_utils import` →
+         `from transformers.tokenization_utils_base import`
+      2. `from transformers.tokenization_utils_base_base import` →
+         `from transformers.tokenization_utils_base import`
+         (repairs the double-suffix bug from previous sed corruption)
+      3. `from transformers.data.data_collator import pad_without_fast_tokenizer_warning`
+         (may have been moved/removed in v5)
+
+    CRITICAL: This function is fully idempotent — running it multiple times
+    on already-patched files produces no changes.
     """
     collator_path = os.path.join(toolkit_dir, "IndicTransToolkit", "collator.py")
     if not os.path.exists(collator_path):
@@ -56,67 +162,155 @@ def patch_indictrans_toolkit(toolkit_dir="/content/IndicTransToolkit"):
         return
 
     with open(collator_path, "r", encoding="utf-8") as f:
-        original = f.read()
+        content = f.read()
 
-    # Only patch if the OLD import exists and the NEW one does NOT
+    original_content = content
+    patches_applied = []
+
+    # Patch 1: Fix the _base_base double-suffix corruption from previous sed runs
+    bad_import = "from transformers.tokenization_utils_base_base import"
+    correct_import = "from transformers.tokenization_utils_base import"
+    if bad_import in content:
+        content = content.replace(bad_import, correct_import)
+        patches_applied.append("Fixed _base_base double-suffix corruption")
+
+    # Patch 2: Fix the original tokenization_utils → tokenization_utils_base
     old_import = "from transformers.tokenization_utils import"
-    new_import = "from transformers.tokenization_utils_base import"
+    if old_import in content and correct_import not in content:
+        content = content.replace(old_import, correct_import)
+        patches_applied.append("Fixed tokenization_utils → tokenization_utils_base")
 
-    if old_import in original and new_import not in original:
-        patched = original.replace(old_import, new_import)
+    # Patch 3: Handle pad_without_fast_tokenizer_warning (moved/removed in v5)
+    pad_import = "from transformers.data.data_collator import pad_without_fast_tokenizer_warning"
+    if pad_import in content:
+        # Check if the function still exists
+        try:
+            from transformers.data.data_collator import pad_without_fast_tokenizer_warning  # type: ignore
+            # Function exists, no patch needed
+        except ImportError:
+            # Function was removed/moved — provide a no-op fallback
+            replacement = (
+                "try:\n"
+                "        from transformers.data.data_collator import pad_without_fast_tokenizer_warning\n"
+                "    except ImportError:\n"
+                "        # Removed in transformers v5.x — use inline fallback\n"
+                "        def pad_without_fast_tokenizer_warning(tokenizer, *args, **kwargs):\n"
+                "            return tokenizer.pad(*args, **kwargs)"
+            )
+            content = content.replace(
+                "    " + pad_import,
+                "    " + replacement
+            )
+            patches_applied.append("Added pad_without_fast_tokenizer_warning fallback")
+
+    # Write back only if changes were made
+    if content != original_content:
         with open(collator_path, "w", encoding="utf-8") as f:
-            f.write(patched)
-        print(f"[PATCH] Fixed collator.py: tokenization_utils -> tokenization_utils_base")
-    elif new_import in original:
-        print(f"[PATCH] collator.py already patched (tokenization_utils_base). Skipping.")
+            f.write(content)
+        for p in patches_applied:
+            print(f"[PATCH] {p}")
     else:
-        print(f"[PATCH] collator.py has no known import to patch. Skipping.")
+        print("[PATCH] collator.py is already correctly patched. No changes needed.")
 
+
+def setup_indictrans_toolkit(toolkit_dir="/content/IndicTransToolkit"):
+    """
+    Full setup of IndicTransToolkit: clone, patch, install.
+    Handles fresh installs AND recovery from previously corrupted state.
+    """
+    print("\n--- Setting up IndicTransToolkit ---")
+
+    # Clone if not present
+    if not os.path.exists(toolkit_dir):
+        run_cmd_strict(
+            f"git clone https://github.com/VarunGumma/IndicTransToolkit.git {toolkit_dir}",
+            description="IndicTransToolkit clone"
+        )
+    else:
+        print(f"[OK] IndicTransToolkit already cloned at {toolkit_dir}")
+        # Reset to clean state if previously corrupted
+        collator_path = os.path.join(toolkit_dir, "IndicTransToolkit", "collator.py")
+        if os.path.exists(collator_path):
+            with open(collator_path, "r") as f:
+                content = f.read()
+            if "tokenization_utils_base_base" in content:
+                print("[RECOVERY] Detected corrupted collator.py — resetting from git...")
+                run_cmd(f"cd {toolkit_dir} && git checkout -- IndicTransToolkit/collator.py")
+
+    # Apply comprehensive idempotent patches
+    patch_indictrans_toolkit(toolkit_dir)
+
+    # Install as editable package
+    run_cmd_strict(
+        f"pip install -q -e {toolkit_dir}",
+        description="IndicTransToolkit install"
+    )
+
+
+# ═══════════════════════════════════════════════════════════════
+# TRANSFORMERS v5.x COMPATIBILITY SHIMS
+# ═══════════════════════════════════════════════════════════════
 
 def setup_transformers_compat_shims():
     """
-    Install compatibility shims for modules removed in transformers v5.x:
-    - transformers.onnx (removed: OnnxConfig, OnnxSeq2SeqConfigWithPast)
-    - transformers.tokenization_utils.PreTrainedTokenizerBase (moved to _base)
+    Install compatibility shims for IndicTrans2 model remote code
+    that uses APIs removed/moved in transformers v5.x:
 
-    These shims allow IndicTrans2 remote code to load without error.
+    Shim 1: transformers.onnx (removed in v5)
+      - The model's configuration_indictrans.py imports OnnxConfig and
+        OnnxSeq2SeqConfigWithPast from transformers.onnx
+    Shim 2: transformers.onnx.utils (removed in v5)
+      - compute_effective_axis_dimension utility
+    Shim 3: transformers.tokenization_utils.PreTrainedTokenizerBase
+      - Moved to transformers.tokenization_utils_base in newer versions
     """
     import types
     import transformers  # type: ignore
 
-    # Shim 1: transformers.onnx (removed in v5)
-    try:
-        import transformers.onnx  # type: ignore
-    except (ImportError, ModuleNotFoundError):
-        onnx_mod = types.ModuleType("transformers.onnx")
-        onnx_mod.OnnxConfig = object  # type: ignore
-        onnx_mod.OnnxSeq2SeqConfigWithPast = object  # type: ignore
-        sys.modules["transformers.onnx"] = onnx_mod
-        print("[SHIM] Injected transformers.onnx stub module")
+    transformers_version = getattr(transformers, "__version__", "0.0.0")
+    major_ver = int(transformers_version.split(".")[0])
+    print(f"[INFO] transformers version: {transformers_version} (major={major_ver})")
 
-    # Shim 2: transformers.tokenization_utils.PreTrainedTokenizerBase
-    try:
-        import transformers.tokenization_utils  # type: ignore
-        from transformers.tokenization_utils_base import PreTrainedTokenizerBase  # type: ignore
-        if not hasattr(transformers.tokenization_utils, "PreTrainedTokenizerBase"):
-            transformers.tokenization_utils.PreTrainedTokenizerBase = PreTrainedTokenizerBase
-            print("[SHIM] Injected PreTrainedTokenizerBase into transformers.tokenization_utils")
-    except Exception as e:
-        print(f"[SHIM WARN] tokenization_utils shim failed (non-fatal): {e}")
+    if major_ver >= 5:
+        print("[INFO] Applying transformers v5.x compatibility shims...")
+
+        # Shim 1: transformers.onnx module
+        if "transformers.onnx" not in sys.modules:
+            try:
+                import transformers.onnx  # type: ignore
+            except (ImportError, ModuleNotFoundError):
+                onnx_mod = types.ModuleType("transformers.onnx")
+                onnx_mod.__package__ = "transformers.onnx"
+                onnx_mod.OnnxConfig = object  # type: ignore
+                onnx_mod.OnnxSeq2SeqConfigWithPast = object  # type: ignore
+                sys.modules["transformers.onnx"] = onnx_mod
+                print("  [SHIM] transformers.onnx stub injected")
+
+        # Shim 2: transformers.onnx.utils
+        if "transformers.onnx.utils" not in sys.modules:
+            onnx_utils_mod = types.ModuleType("transformers.onnx.utils")
+            onnx_utils_mod.__package__ = "transformers.onnx"
+            onnx_utils_mod.compute_effective_axis_dimension = lambda *a, **kw: 0  # type: ignore
+            sys.modules["transformers.onnx.utils"] = onnx_utils_mod
+            print("  [SHIM] transformers.onnx.utils stub injected")
+
+        # Shim 3: tokenization_utils.PreTrainedTokenizerBase
+        try:
+            import transformers.tokenization_utils  # type: ignore
+            from transformers.tokenization_utils_base import PreTrainedTokenizerBase  # type: ignore
+            if not hasattr(transformers.tokenization_utils, "PreTrainedTokenizerBase"):
+                transformers.tokenization_utils.PreTrainedTokenizerBase = PreTrainedTokenizerBase
+                print("  [SHIM] PreTrainedTokenizerBase bridged to tokenization_utils")
+        except Exception as e:
+            print(f"  [SHIM WARN] tokenization_utils bridge failed (non-fatal): {e}")
+
+    else:
+        print("[INFO] transformers v4.x detected — no shims needed.")
 
 
-def authenticate_huggingface(hf_token):
-    """Authenticate with Hugging Face Hub using the provided token."""
-    if not hf_token:
-        print("[WARN] No HF_TOKEN provided. Gated model access may fail.")
-        return
-    try:
-        from huggingface_hub import login  # type: ignore
-        login(token=hf_token, add_to_git_credential=False)
-        print("[INFO] Authenticated with Hugging Face Hub successfully!")
-    except Exception as e:
-        print(f"[WARN] Hugging Face Hub login warning: {e}")
-
+# ═══════════════════════════════════════════════════════════════
+# AUTHENTICATION & DATA LOADING
+# ═══════════════════════════════════════════════════════════════
 
 def get_hf_token():
     """Retrieve HF token from environment or persisted file."""
@@ -135,40 +329,59 @@ def get_hf_token():
     return ""
 
 
+def authenticate_huggingface(hf_token):
+    """Authenticate with Hugging Face Hub using the provided token."""
+    if not hf_token:
+        print("[WARN] No HF_TOKEN provided. Gated model access may fail.")
+        return
+    try:
+        from huggingface_hub import login  # type: ignore
+        login(token=hf_token, add_to_git_credential=False)
+        print("[INFO] Authenticated with Hugging Face Hub successfully!")
+    except Exception as e:
+        print(f"[WARN] Hugging Face Hub login warning: {e}")
+
+
 def load_indic_processor():
     """
     Robustly load IndicProcessor with multiple fallback strategies.
     Returns the IndicProcessor instance configured for training.
     """
-    if "/content/IndicTransToolkit" not in sys.path:
-        sys.path.insert(0, "/content/IndicTransToolkit")
+    toolkit_dir = "/content/IndicTransToolkit"
+    if toolkit_dir not in sys.path:
+        sys.path.insert(0, toolkit_dir)
 
-    # Strategy 1: Direct import
+    # Strategy 1: Direct import (works when pip install -e succeeded)
     try:
         from IndicTransToolkit import IndicProcessor  # type: ignore
-        print("[INFO] IndicProcessor loaded via direct import")
-        return IndicProcessor(inference=False)
+        ip = IndicProcessor(inference=False)
+        print("[OK] IndicProcessor loaded via direct import")
+        return ip
     except (ImportError, ModuleNotFoundError) as e:
         print(f"[INFO] Direct import failed ({e}), trying fallback...")
 
-    # Strategy 2: Nested module path
+    # Strategy 2: Clear stale module cache, re-patch, retry
+    print("[INFO] Clearing module cache and re-patching...")
+    mods_to_clear = [k for k in list(sys.modules.keys()) if "IndicTransToolkit" in k]
+    for m in mods_to_clear:
+        del sys.modules[m]
+
+    patch_indictrans_toolkit(toolkit_dir)
+
+    try:
+        from IndicTransToolkit import IndicProcessor  # type: ignore
+        ip = IndicProcessor(inference=False)
+        print("[OK] IndicProcessor loaded after re-patching")
+        return ip
+    except (ImportError, ModuleNotFoundError) as e:
+        print(f"[INFO] Re-patched import failed ({e}), trying nested path...")
+
+    # Strategy 3: Nested module path
     try:
         from IndicTransToolkit.IndicTransToolkit import IndicProcessor  # type: ignore
-        print("[INFO] IndicProcessor loaded via nested import")
-        return IndicProcessor(inference=False)
-    except (ImportError, ModuleNotFoundError) as e:
-        print(f"[INFO] Nested import failed ({e}), trying inline patch...")
-
-    # Strategy 3: Inline patch and retry
-    try:
-        patch_indictrans_toolkit("/content/IndicTransToolkit")
-        # Clear cached module imports
-        mods_to_clear = [k for k in sys.modules if "IndicTransToolkit" in k]
-        for m in mods_to_clear:
-            del sys.modules[m]
-        from IndicTransToolkit import IndicProcessor  # type: ignore
-        print("[INFO] IndicProcessor loaded after inline patch")
-        return IndicProcessor(inference=False)
+        ip = IndicProcessor(inference=False)
+        print("[OK] IndicProcessor loaded via nested import")
+        return ip
     except Exception as e:
         raise RuntimeError(
             f"[FATAL] Cannot import IndicProcessor after all strategies. "
@@ -199,6 +412,10 @@ def validate_tsv_file(path, min_rows=5):
     return True
 
 
+# ═══════════════════════════════════════════════════════════════
+# MAIN PIPELINE
+# ═══════════════════════════════════════════════════════════════
+
 def main():
     print("=" * 60)
     print("PHASE 2: IndicTrans2 LoRA Cloud Training & CTranslate2 INT8")
@@ -216,32 +433,19 @@ def main():
         print("[WARNING] CUDA not detected. Training will be extremely slow on CPU.")
 
     # ──────────────────────────────────────────
-    # Step 1: Install Training Dependencies
+    # Step 1: Smart Dependency Installation
     # ──────────────────────────────────────────
-    print("\n--- Step 1: Installing Cloud Dependencies ---")
-    run_cmd_strict(
-        "pip install -q 'transformers>=4.39.0,<4.44.0' datasets evaluate sacrebleu "
-        "peft bitsandbytes accelerate sentencepiece ctranslate2 huggingface_hub "
-        "sacremoses indic-nlp-library pandas",
-        description="Dependency installation"
-    )
+    install_dependencies()
 
-    # Clone IndicTransToolkit (idempotent)
-    toolkit_dir = "/content/IndicTransToolkit"
-    if not os.path.exists(toolkit_dir):
-        run_cmd_strict(
-            f"git clone https://github.com/VarunGumma/IndicTransToolkit.git {toolkit_dir}",
-            description="IndicTransToolkit clone"
-        )
+    # ──────────────────────────────────────────
+    # Step 1b: Setup IndicTransToolkit
+    # ──────────────────────────────────────────
+    setup_indictrans_toolkit()
 
-    # Apply idempotent Python-based patch (NOT sed — avoids double-suffix bug)
-    patch_indictrans_toolkit(toolkit_dir)
-
-    # Install IndicTransToolkit as editable package
-    run_cmd_strict(
-        f"pip install -q -e {toolkit_dir}",
-        description="IndicTransToolkit install"
-    )
+    # ──────────────────────────────────────────
+    # Step 1c: Install Compatibility Shims (BEFORE any model imports)
+    # ──────────────────────────────────────────
+    setup_transformers_compat_shims()
 
     # ──────────────────────────────────────────
     # Step 2: Clone/Update Repository
@@ -276,16 +480,14 @@ def main():
     # ──────────────────────────────────────────
     print("\n--- Step 4: Loading IndicTrans2 Base Model ---")
 
-    # Install compatibility shims before importing model code
-    setup_transformers_compat_shims()
-
     # Authenticate with HF Hub for gated model access
     authenticate_huggingface(hf_token)
 
     # Load IndicProcessor with robust fallback chain
     ip = load_indic_processor()
 
-    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer  # type: ignore
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer  # type: ignore
+    from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer  # type: ignore
     from peft import LoraConfig, get_peft_model, TaskType, PeftModel  # type: ignore
     from datasets import Dataset  # type: ignore
     import pandas as pd  # type: ignore
@@ -367,6 +569,7 @@ def main():
     out_lora = "/content/indictrans2_sat_lora"
 
     # Handle API differences between transformers versions
+    # v5.x uses eval_strategy, v4.x uses evaluation_strategy
     try:
         training_args = Seq2SeqTrainingArguments(
             output_dir=out_lora,
