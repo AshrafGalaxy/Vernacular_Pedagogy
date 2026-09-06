@@ -43,6 +43,20 @@ def run_wsl(command, desc=None):
         process.stdout.close()
     return process.wait()
 
+def ensure_colab_session(session_name="phase2-train", gpu="T4"):
+    print(f"\n[ORCHESTRATOR] Checking Colab session '{session_name}'...", flush=True)
+    check = subprocess.run(["wsl", "-d", "Ubuntu", "bash", "-c", "/home/ashraf/.local/bin/colab sessions"], capture_output=True, text=True)
+    if session_name in check.stdout:
+        print(f"[ORCHESTRATOR] Active session '{session_name}' detected.", flush=True)
+        return True
+    
+    print(f"[ORCHESTRATOR] Session '{session_name}' not active. Provisioning fresh Tesla {gpu} GPU session...", flush=True)
+    code = run_wsl(f"/home/ashraf/.local/bin/colab new -s {session_name} --gpu {gpu}", desc=f"Provisioning Google Colab {gpu} GPU Session")
+    if code != 0:
+        print(f"[ERROR] Failed to provision Colab session '{session_name}'.")
+        sys.exit(code)
+    return True
+
 def main():
     token = get_hf_token()
     print("=" * 65)
@@ -51,6 +65,9 @@ def main():
     print(f"HF Token detected: {'Yes (Length ' + str(len(token)) + ')' if token else 'No'}")
 
     os.makedirs(MODELS_MT, exist_ok=True)
+
+    # 0. Ensure remote GPU session is alive
+    ensure_colab_session("phase2-train", gpu="T4")
 
     # 1. Inject HF_TOKEN into remote Colab kernel os.environ and /content/.hf_token
     if token:
