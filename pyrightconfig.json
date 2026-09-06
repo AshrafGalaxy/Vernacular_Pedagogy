@@ -4,13 +4,19 @@
     "assets"
   ],
   "exclude": [
+    "*__pyrefly_virtual__*",
     "**/__pyrefly_virtual__/**",
+    "C:/__pyrefly_virtual__/**",
+    "c:/__pyrefly_virtual__/**",
     "**/*.ipynb",
     "notebooks/**",
     "models/**"
   ],
   "ignore": [
+    "*__pyrefly_virtual__*",
     "**/__pyrefly_virtual__/**",
+    "C:/__pyrefly_virtual__/**",
+    "c:/__pyrefly_virtual__/**",
     "**/*.ipynb",
     "notebooks/**"
   ],
