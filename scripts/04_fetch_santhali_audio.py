@@ -110,7 +110,7 @@ def resample_and_save_wav(audio_array, orig_sr: int, target_path: str, target_sr
 
     # Resample if sample rates differ
     if orig_sr != target_sr:
-        num_target_samples = int(round(len(audio) * float(target_sr) / orig_sr))
+        num_target_samples = round(len(audio) * float(target_sr) / orig_sr)
         audio = resample(audio, num_target_samples)
 
     # Convert to 16-bit PCM integer values
