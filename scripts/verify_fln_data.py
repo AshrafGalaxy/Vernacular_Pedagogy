@@ -1,80 +1,75 @@
 import csv
 import json
 import os
-import re
 import sys
 import unicodedata
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-def load_and_clean_raw_fln(raw_path: str):
-    with open(raw_path, 'r', encoding='utf-8') as f:
-        content = f.read().strip()
-    
-    # Handle multiple JSON arrays pasted consecutively: [ ... ] \n [ ... ] -> [ ... , ... ]
-    merged = re.sub(r'\]\s*\[', ',', content)
-    records = json.loads(merged)
-    
+def verify_and_clean_santhali_fln(json_path: str):
+    """
+    Validates Santhali FLN records:
+    1. Canonical Unicode normalization (NFC)
+    2. Strict Ol Chiki Unicode range verification (U+1C50 - U+1C7F)
+    3. Lean schema enforcement (id, domain, nipun_target_grade, source_hindi_normalized, target_olchiki_santhali, phonetic_deva_santhali)
+    """
+    with open(json_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        
     clean_records = []
     seen_ids = set()
+    seen_hindi = set()
     
-    for item in records:
+    for item in data:
         rec_id = item.get('id', '').strip()
         if rec_id in seen_ids:
-            print(f"Warning: Duplicate ID '{rec_id}' skipped.")
+            print(f"[DUPLICATE ID] Skipped {rec_id}")
             continue
         seen_ids.add(rec_id)
         
-        cleaned = {}
-        for k, v in item.items():
-            if isinstance(v, str):
-                cleaned[k] = unicodedata.normalize('NFC', v).strip()
-            else:
-                cleaned[k] = v
-                
-        # Validate Ol Chiki characters
-        ol_text = cleaned.get('target_olchiki_santhali', '')
-        invalid_ol = [
-            c for c in ol_text 
+        hindi_norm = unicodedata.normalize('NFC', item.get('source_hindi_normalized', '')).strip()
+        olchiki_norm = unicodedata.normalize('NFC', item.get('target_olchiki_santhali', '')).strip()
+        deva_norm = unicodedata.normalize('NFC', item.get('phonetic_deva_santhali', '')).strip()
+        
+        # Verify Ol Chiki characters
+        invalid_chars = [
+            c for c in olchiki_norm 
             if not ('\u1C50' <= c <= '\u1C7F' or c.isspace() or c in ".,!?-—:;'\"()[]/`")
         ]
-        if invalid_ol:
-            print(f"[REJECTED] {rec_id}: Invalid Ol Chiki characters {invalid_ol}")
+        if invalid_chars:
+            print(f"[INVALID OL CHIKI] {rec_id}: {invalid_chars} in '{olchiki_norm}'")
             continue
             
-        clean_records.append(cleaned)
+        clean_records.append({
+            "id": rec_id,
+            "domain": item.get("domain", "general").strip(),
+            "nipun_target_grade": item.get("nipun_target_grade", "Grade 1").strip(),
+            "source_hindi_normalized": hindi_norm,
+            "target_olchiki_santhali": olchiki_norm,
+            "phonetic_deva_santhali": deva_norm
+        })
         
+    print(f"Verified {len(clean_records)} / {len(data)} Santhali FLN records successfully.")
     return clean_records
 
-def export_fln_datasets(raw_file: str, out_dir: str):
-    os.makedirs(out_dir, exist_ok=True)
-    records = load_and_clean_raw_fln(raw_file)
+def export_lean_fln(json_path: str, tsv_path: str):
+    records = verify_and_clean_santhali_fln(json_path)
     
-    # 1. Export JSON
-    out_json = os.path.join(out_dir, 'fln_lexicon.json')
-    with open(out_json, 'w', encoding='utf-8') as f:
+    # Write back clean JSON
+    with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(records, f, ensure_ascii=False, indent=2)
         
-    # 2. Export TSV
-    out_tsv = os.path.join(out_dir, 'fln_lexicon.tsv')
-    if records:
-        fieldnames = [
-            'id', 'domain', 'nipun_target_grade', 'source_hindi_normalized',
-            'target_olchiki_santhali', 'phonetic_deva_santhali',
-            'target_warang_chiti_ho', 'phonetic_deva_ho',
-            'target_mundari_deva', 'phonetic_deva_mundari',
-            'linguistic_validation_notes'
-        ]
-        with open(out_tsv, 'w', encoding='utf-8', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t', extrasaction='ignore')
-            writer.writeheader()
-            writer.writerows(records)
-            
-    print(f"Exported {len(records)} clean records to:")
-    print(f"  - JSON: {out_json}")
-    print(f"  - TSV:  {out_tsv}")
+    # Write clean TSV
+    fieldnames = ['id', 'domain', 'nipun_target_grade', 'source_hindi_normalized', 'target_olchiki_santhali', 'phonetic_deva_santhali']
+    with open(tsv_path, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+        writer.writeheader()
+        writer.writerows(records)
+        
+    print(f"Export complete:\n  JSON: {json_path}\n  TSV:  {tsv_path}")
 
 if __name__ == '__main__':
-    raw_file = r'c:\Users\Ashraf\Desktop\26042\FLN'
-    out_dir = r'c:\Users\Ashraf\Desktop\26042\data\processed\fln'
-    export_fln_datasets(raw_file, out_dir)
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    json_p = os.path.join(base_dir, 'data', 'processed', 'fln', 'fln_lexicon.json')
+    tsv_p = os.path.join(base_dir, 'data', 'processed', 'fln', 'fln_lexicon.tsv')
+    export_lean_fln(json_p, tsv_p)

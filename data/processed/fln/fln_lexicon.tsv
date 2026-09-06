@@ -1,51 +1,201 @@
-id	domain	nipun_target_grade	source_hindi_normalized	target_olchiki_santhali	phonetic_deva_santhali	target_warang_chiti_ho	phonetic_deva_ho	target_mundari_deva	phonetic_deva_mundari	linguistic_validation_notes
-FLN_NUM_001	numeracy	Grade 1	एक से पाँच तक गिनो	ᱢᱤᱫ ᱠᱷᱚᱱ ᱢᱚᱬᱮ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ	मिद खोन मोणे ध़ाबिज लेखाय मे	𑣖𑣂𑣓𑣁𑣉 𑣈𑣕𑣈 𑣖𑣉𑣑𑣈 𑣌𑣁𑣌𑣂 𑣚𑣈𑣌𑣁𑣂 𑣖𑣈	मियाद एते मोड़े जाकि लेखाए मे	मियाद एते मोड़े जाकि लेखाए मे	मियाद एते मोड़े जाकि लेखाए मे	Cardinal numerals 1 to 5: Santhali root 'mit'' (ᱢᱤᱫ) to 'mõṛẽ' (ᱢᱚᱬᱮ); Mundari and Ho preserve ancestral 'miyad' to 'moṛe'. Ablative marker differs: Santhali postposition '-khon' (ᱠᱷᱚᱱ) vs. North Munda sister postposition 'ete' (𑣈𑣕𑣈 / एते). Terminative focus marked by 'dhạbij' (ᱫᱷᱟᱹᱵᱤᱡ) in Santhali and 'jaki' in Mundari/Ho. Bound singular familiar imperative clitic '-me' applies across all three branches.
-FLN_NUM_002	numeracy	Grade 1	चलो हम सब मिलकर दस तक गिनती करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱵᱚ	देलाबो सानाम को मेसा काते गेल ध़ाबिज लेखाय बो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣈𑣚 𑣌𑣁𑣌𑣂 𑣚𑣈𑣌𑣁𑣂𑣎𑣂	देलाबु सबिन मिसा केते गेल जाकि लेखाएबु	देलाबु सोबेनते गेल जाकि लेखाएबु	देलाबु सोबेनते गेल जाकि लेखाएबु	Enforces foundational inclusive cohortative morphology: Santhali initial cohortative 'delabo' (ᱫᱮᱞᱟᱵᱚ) coordinated with verb-final inclusive plural clitic '-bo' (ᱞᱮᱠᱷᱟᱭ ᱵᱚ); Mundari and Ho utilize 'delabu' (देलाबु / 𑣖𑣈𑣚𑣁𑣎𑣂) harmonized with verbal clitic '-bu' (𑣎𑣂 / -बु). The base-10 numeral 'gel' (ᱜᱮᱞ / 𑣋𑣈𑣚 / गेल) is perfectly cognate and invariant.
-FLN_NUM_003	numeracy	Grade 1	यह बड़ा पत्थर है और वह छोटा कंकड़ है	ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱨᱟᱝ ᱫᱷᱤᱨᱤ ᱠᱟᱱᱟ ᱟᱨ ᱦᱟᱱᱟ ᱫᱚ ᱦᱩᱰᱤᱧ ᱜᱤᱴᱤᱞ ᱠᱟᱱᱟ	नोवा दो मारांग धीरी काना आर हाना दो हुडिञ गिटील काना	𑣑𑣈𑣁 𑣖𑣁𑣑𑣁𑣀 𑣑𑣂𑣑𑣂 𑣕𑣁𑣓𑣁 𑣁𑣑 𑣕𑣈𑣁 𑣟𑣃𑣑𑣂𑣑 𑣞𑣈𑣑𑣉 𑣕𑣁𑣓𑣁	नेआ मरांग दिरी तना आर तेआ हुड़िंग सेड़ो तना	नेआ मरांग दिरी तना अन्दो तेआ हुड़िंग रोड़ा तना	नेआ मरांग दिरी तना अन्दो तेआ हुड़िंग रोड़ा तना	Early spatial and dimensional comparison (big vs. small). Proximal vs. distal demonstrative contrast: Santhali 'nowa' / 'hana' (ᱱᱚᱣᱟ / ᱦᱟᱱᱟ) vs. Mundari/Ho 'nea' / 'tea' (नेआ / तेआ). Dimension statives: 'marang' (ᱢᱟᱨᱟᱝ / big) and 'huḍiñ' / 'huṛing' (ᱦᱩᱰᱤᱧ / small). Lithic terms: Proto-Munda 'dhiri'/'diri' (stone) alongside local realia terms 'giṭil' (grit/gravel), 'seṛo' (pebble), and 'roṛa' (broken ballast).
-FLN_NUM_004	numeracy	Grade 1	इसमें एक और जोड़ो	ᱱᱚᱣᱟ ᱨᱮ ᱟᱨ ᱢᱤᱫᱴᱟᱝ ᱡᱩᱲᱟᱹᱣ ᱢᱮ	नोवा रे आर मिदटांग जुड़ा़व मे	𑣑𑣈𑣁 𑣜𑣈 𑣉𑣑𑣉𑣀 𑣖𑣂𑣓𑣁𑣉 𑣖𑣈𑣞𑣁𑣂 𑣖𑣈	नेआ रे ओड़ोअ मियाद मेसाइ मे	नेआ रे अन्दो मियाद मेसाए मे	नेआ रे अन्दो मियाद मेसाए मे	Concrete conceptualization of addition (increment of 1). Santhali utilizes the inanimate numeral classifier '-ṭang' in 'mit'-ṭang' (ᱢᱤᱫᱴᱟᱝ), whereas Mundari and Ho retain the bare cardinal 'miyad'. Ingress/additive operators: Santhali 'juṛạw' (ᱡᱩᱲᱟᱹᱣ) from IA contact vs. native Austroasiatic integration root 'mesa' (to blend/combine) with imperative '-me'.
-FLN_NUM_005	numeracy	Grade 1	दो में से एक निकाल लो	ᱵᱟᱨᱭᱟ ᱠᱷᱚᱱ ᱢᱤᱫᱴᱟᱝ ᱚᱰᱚᱠ ᱢᱮ	बारया खोन मिदटांग ओडोक मे	𑣎𑣁𑣑𑣂𑣁 𑣈𑣕𑣈 𑣖𑣂𑣓𑣁𑣉 𑣉𑣑𑣉𑣀 𑣖𑣈	बारिया एते मियाद ओड़ोअ मे	बारिया एते मियाद उडुक़ मे	बारिया एते मियाद उडुक़ मे	Concrete subtraction through physical removal from a set. Inanimate form of 'two' carries the dual/inanimate marker '-ya': Santhali 'barya' (ᱵᱟᱨᱭᱟ) vs. Mundari/Ho 'baria' (बारिया). Separation is governed by ablative clitics '-khon' (Santhali) and '-ete' (Ho/Mundari) followed by the checked-stop egress verb 'oḍok'' / 'oṛoʔ' / 'uḍuk़'.
-FLN_NUM_006	numeracy	Grade 1	गोल घेरे को पहचानो	ᱜᱩᱞᱟᱹᱭ ᱠᱷᱚᱸᱫᱽ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	गुला़य खोंद चीन्हा़व मे	𑣋𑣂𑣑𑣁 𑣌𑣉𑣑𑣉 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈	गुड़ा खोंद चीनाइ मे	गोल घेरा के चिनहाव मे	गोल घेरा के चिनहाव मे	FLN foundational 2D geometry. Santhali forms nominal geometric compounds using 'gulạy' (ᱜᱩᱞᱟᱹᱭ / round) and 'khond' (ᱠᱷᱚᱸᱫᱽ / boxed demarcated space). Ho parallels this with 'guṛa khond'. Mundari primary classrooms in Ranchi/Khunti adopt 'gol ghera' inflected with accusative marker 'ke'. Recognition imperative is marked by 'cinhạw-me' / 'cinai-me'.
-FLN_NUM_007	numeracy	Grade 1	कौन सी रस्सी लंबी है और कौन सी छोटी?	ᱚᱠᱟᱴᱟᱜ ᱫᱚᱣᱨᱤ ᱡᱤᱞᱤᱧᱟ ᱟᱨ ᱚᱠᱟᱴᱟᱜ ᱠᱷᱟᱴᱚᱣᱟ?	ओकाटाग दोवरी जीलिञा आर ओकाटाग खाटोवा?	𑣉𑣌𑣉𑣁 𑣎𑣁𑣂𑣑 𑣎𑣂𑣚𑣂𑣑 𑣕𑣁𑣓𑣁 𑣁𑣑 𑣉𑣌𑣉𑣁 𑣌𑣁𑣕𑣉 𑣕𑣁𑣓𑣁?	ओकोआ बइर जिलिंग तना आर ओकोआ खाटो तना?	ओकोटाः बइर जिलिंग तना अन्दो ओकोटाः खाटो तना?	ओकोटाः बइर जिलिंग तना अन्दो ओकोटाः खाटो तना?	Non-standard measurement comparative inquiry. Inanimate selective interrogative: Santhali 'oka-ṭag' (ᱚᱠᱟᱴᱟᱜ) with inherent unreleased velar stop; Mundari 'oko-ṭaḥ' (checked with glottal closure); Ho 'okoa'. Dimension predicates: Proto-Munda 'jiling' (long) paired with 'khaṭo' (short).
-FLN_NUM_008	numeracy	Grade 1	इन कंकड़ों को गिनकर बताओ	ᱱᱚᱣᱟ ᱜᱤᱴᱤᱞ ᱠᱚ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱢᱮ	नोवा गिटील को लेखा काते ला़य मे	𑣑𑣈 𑣞𑣈𑣑𑣉 𑣌𑣉 𑣚𑣈𑣌𑣁 𑣌𑣈𑣕𑣈 𑣌𑣁𑣌𑣂 𑣖𑣈	ने सेड़ो को लेखा केते काजी मे	ने रोड़ा को लेखा केते काजी मे	ने रोड़ा को लेखा केते काजी मे	Manipulative-based enumeration. Plural marker '-ko' pluralizes inanimate realia when counted as discrete tokens. Participle chaining uses '-kate' (Santhali ᱠᱟᱛᱮ) and '-kete' (Ho/Mundari केते). Communicative request takes singular imperative: Santhali 'lạy-me' (ᱞᱟᱹᱭ ᱢᱮ) vs. Mundari/Ho 'kaji-me' (काजी मे).
-FLN_NUM_009	numeracy	Grade 1	तीन चिड़ियाँ पेड़ पर बैठी हैं	ᱯᱮᱭᱟ ᱪᱮᱬᱮ ᱫᱟᱨᱮ ᱨᱮᱠᱚ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ	पेया चेणे़ दारे रेको दुड़ुब आकाना	𑣁𑣑𑣈𑣂𑣁 𑣏𑣈𑣑𑣈 𑣑𑣁𑣑𑣃 𑣜𑣈𑣌𑣉 𑣉𑣂𑣎 𑣁𑣌𑣁𑣓𑣁	अपिया चेड़े दारु रेको दुब अकाना	अपिया चेंड़े दारु रेको दुब़ अकना	अपिया चेंड़े दारु रेको दुब़ अकना	Cardinal agreement with animate count nouns. Number 'three': Santhali 'peya' (ᱯᱮᱭᱟ) vs. Ho/Mundari 'apiya' (𑣁𑣑𑣈𑣂𑣁 / अपिया). Because the subject contains three animate entities, the verb obligatorily indexes the 3rd person plural animate subject marker '-ko' inside the predicate clitic chain ('re-ko duṛup' akana').
-FLN_NUM_010	numeracy	Grade 2	चार और दो मिलकर कितने होते हैं?	ᱯᱩᱱᱭᱟᱹ ᱟᱨ ᱵᱟᱨᱭᱟ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱤᱱᱟᱹᱜ ᱦᱩᱭᱩᱜ-ᱟ?	पुन्या़ आर बारया मेसा काते तीना़ग हुयुग-आ?	𑣂𑣑𑣃𑣑𑣂𑣁 𑣁𑣑 𑣎𑣁𑣑𑣂𑣁 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣏𑣂𑣖𑣂𑣓 𑣟𑣉𑣎𑣉𑣁?	उपुनिया आर बारिया मिसा केते चिमिन होबाओआ?	उपुनिया अन्दो बारिया मेसा केते चिमिन हुयुःआ?	उपुनिया अन्दो बारिया मेसा केते चिमिन हुयुःआ?	Mathematical word formulation for addition. Numerals 4 and 2: Santhali 'punyạ' (ᱯᱩᱱᱭᱟᱹ) and 'barya' (ᱵᱟᱨᱭᱟ) vs. Ho/Mundari 'upuniya' and 'baria'. Interrogative quantifiers: Santhali 'tinạk'' (ᱛᱤᱱᱟᱹᱜ) ending in glottal stop vs. Mundari/Ho 'cimin' (𑣏𑣂𑣖𑣂𑣓 / चिमिन). Future-habitual copular result: 'huyuk'-a' / 'hobao-a'.
-FLN_NUM_011	numeracy	Grade 2	यह चौकोर आकृति बनाओ	ᱱᱚᱣᱟ ᱯᱩᱱᱠᱚᱬ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ	नोवा पुनकोण चीता़र बेनाव मे	𑣑𑣈 𑣂𑣑𑣃𑣑 𑣌𑣉𑣓𑣁 𑣏𑣂𑣕𑣁𑣑 𑣎𑣁𑣂 𑣖𑣈	ने उपुन कोना चितार बाइ मे	ने उपुन कोना मूरत बाइ मे	ने उपुन कोना मूरत बाइ मे	2D Geometric shape production (quadrilateral/square). Santhali forms the descriptive compound 'pun-koṇ' (ᱯᱩᱱ + ᱠᱚᱬ / four-cornered); Mundari and Ho preserve prefixal cardinal form 'upun' in 'upun kona'. Verb 'benaw' (ᱵᱮᱱᱟᱣ) in Santhali contrasts with root 'bai' (बाइ / 𑣎𑣁𑣂 / to make/construct) in Mundari and Ho.
-FLN_NUM_012	numeracy	Grade 2	कम और ज़्यादा की पहचान करो	ᱠᱚᱢ ᱟᱨ ᱵᱟᱹᱲᱛᱤ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	कोम आर बा़ड़ती चीन्हा़व मे	𑣌𑣉𑣖 𑣁𑣑 𑣑𑣂𑣑𑣋𑣁𑣚 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈	कोम आर पुरगाल चीनाइ मे	कम अन्दो पुराः के चिनहाव मे	कम अन्दो पुराः के चिनहाव मे	Relational quantity evaluation. Santhali contrasts loan 'kom' with native adjectival 'bạṛti' (ᱵᱟᱹᱲᱛᱤ). Ho utilizes 'purgal' (abundant/more), while Mundari employs 'puraḥ' (पुराः / checked stop). Transitive identification takes singular imperative '-me' across all three languages.
-FLN_NUM_013	numeracy	Grade 2	पाँच में तीन जोड़ने पर आठ बनता है	ᱢᱚᱬᱮ ᱨᱮ ᱯᱮ ᱡᱩᱲᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱤᱨᱟᱹᱞ ᱦᱩᱭᱩᱜ-ᱟ	मोणे़ रे पे जुड़ा़व लेखान इरा़ल हुयुग-आ	𑣖𑣉𑣑𑣈 𑣜𑣈 𑣁𑣑𑣈 𑣖𑣂𑣞𑣁 𑣚𑣈𑣜𑣈 𑣂𑣑𑣂𑣚 𑣟𑣉𑣎𑣉𑣁	मोड़े रे ape मिसा लेरे इरिल होबाओआ	मोड़े रे अपिया मेसा लेरे इरिल हुयुःआ	मोड़े रे अपिया मेसा लेरे इरिल हुयुःआ	Conditional arithmetic formulation. Conditional clause marked by '-lekhan' (ᱞᱮᱠᱷᱟᱱ) in Santhali and '-lere' (𑣚𑣈𑣜𑣈 / लेरे) in Ho and Mundari. Numeral 8 is phonologically aligned: Santhali 'irạl' (ᱤᱨᱟᱹᱞ) with Ahd vowel modification vs. Mundari/Ho 'iril' (𑣂𑣑𑣂𑣚 / इरिल).
-FLN_NUM_014	numeracy	Grade 2	इस पंक्ति में पहला बच्चा कौन है?	ᱱᱚᱣᱟ ᱛᱷᱟᱨ ᱨᱮ ᱯᱟᱹᱦᱤᱞ ᱜᱤᱫᱽᱨᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?	नोवा थार रे पा़हिल गिदरा़ दो ओकोय कानाय?	𑣑𑣈 𑣕𑣁𑣑 𑣜𑣈 𑣑𑣁𑣟𑣂𑣚 𑣟𑣉𑣓 𑣉𑣌𑣉𑣂 𑣕𑣁𑣓𑣂?	ने थाड़ रे पहिल होन ओकोई तनी?	ने थाड़ रे सिदा होन ओकोए तनी?	ने थाड़ रे सिदा होन ओकोए तनी?	Ordinal position competency. Santhali and Ho use the assimilated ordinal 'pạhil' / 'pahil', while Hasada Mundari enforces native 'sida' (initial/foremost). Third-person singular animate pronominal clitic '-y' / '-i' obligatorily attaches to copular predicates: 'kana-y' (Santhali) / 'tan-i' (Ho/Mundari).
-FLN_NUM_015	numeracy	Grade 2	चलो हम सब मिलकर बीस तक उल्टी गिनती करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱠᱷᱚᱱ ᱩᱞᱴᱟᱹᱣ ᱞᱮᱠᱷᱟᱭ ᱵᱚ	देलाबो सानाम को मेसा काते इसी खोन उलटा़व लेखाय बो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂 𑣟𑣂𑣞𑣂 𑣈𑣕𑣈 𑣂𑣚𑣁𑣔𑣁 𑣚𑣈𑣌𑣁𑣂𑣎𑣂	देलाबु सबिन मि इसी एते उलटा लेखाएबु	देलाबु सोबेनते बीस एते उलटा लेखाएबु	देलाबु सोबेनते बीस एते उलटा लेखाएबु	Higher-order backward counting (reverse sequencing from 20). Base-20 (vigesimal) structure: Santhali 'isi' (ᱤᱥᱤ) and Ho 'mi hisi' (one score) reflect indigenous counting traditions. Inclusive plural imperative frame ('delabo...-bo' / 'delabu...-bu') establishes democratic, teacher-participatory pedagogical register.
-FLN_NUM_016	numeracy	Grade 2	आठ में से चार घटाने पर कितना बचेगा?	ᱤᱨᱟᱹᱞ ᱠᱷᱚᱱ ᱯᱩᱱ ᱜᱷᱟᱴᱟᱣ ᱞᱮᱠᱷᱟᱱ ᱛᱤᱱᱟᱹᱜ ᱥᱟᱨᱮᱲᱚᱜ-ᱟ?	इरा़ल खोन पुन घाटाव लेखान तीना़ग सारेड़౉ग-आ?	𑣂𑣑𑣂𑣚 𑣈𑣕𑣈 𑣂𑣑𑣃𑣑 𑣋𑣁𑣔𑣁𑣉 𑣚𑣈𑣜𑣈 𑣏𑣂𑣖𑣂𑣓 𑣞𑣁𑣑𑣈𑣀𑣁?	इरिल एते उपुन घटाव लेरे चिमिन सारेअआ?	इरिल एते उपुन घटाव लेरे चिमिन सारेःआ?	इरिल एते उपुन घटाव लेरे चिमिन सारेःआ?	Mathematical subtraction remainder inquiry. Demonstrates the North Munda root for remainder/leftover: Santhali 'sarec'' (ᱥᱟᱨᱮᱲ) with middle voice marker '-oɡ-a'; Mundari 'sareḥ-a' (सारेःआ) containing final debuccalized glottal checked stop; Ho 'sareʔ-a'.
-FLN_NUM_017	numeracy	Grade 2	इन डंडियों को बराबर-बराबर बाँटो	ᱱᱚᱣᱟ ᱴᱷᱮᱝᱜᱟ ᱠᱚ ᱥᱚᱢᱟᱱ-ᱥᱚᱢᱟᱱ ᱦᱟᱹᱴᱤᱧ ᱯᱮ	नोवा ठेंगा को सोमान-सोमान हा़टिञ पे	𑣑𑣈 𑣑𑣁𑣓𑣑𑣂 𑣌𑣉 𑣎𑣁𑣑𑣁𑣎𑣁𑣑 𑣟𑣁𑣕𑣂𑣑 𑣕𑣈	ने डण्डी को बराबर हाटिंग पे	ने डण्डा को बराबर-बराबर हाटिंग पे	ने डण्डा को बराबर-बराबर हाटिंग पे	Foundational equal distribution and division concept. The North Munda root for equitable partitioning is invariant: Santhali 'haṭiñ' (ᱦᱟᱹᱴᱤᱧ) and Mundari/Ho 'hating' (𑣟𑣁𑣕𑣂𑣑 / हाटिंग). Plural child addressee imperative marker '-pe' is strictly enforced.
-FLN_NUM_018	numeracy	Grade 2	किस टोकरी में ज़्यादा आम हैं?	ᱚᱠᱟ ᱴᱩᱠᱨᱤ ᱨᱮ ᱵᱟᱹᱲᱛᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ?	ओका टुकरी रे बा़ड़ती उल मेनाग-आ?	𑣉𑣌𑣉𑣁 𑣔𑣃𑣌𑣂𑣑𑣂 𑣜𑣈 𑣑𑣂𑣑𑣋𑣁𑣚 𑣂𑣚𑣂 𑣖𑣈𑣑𑣁𑣀?	ओकोआ टुकिरी रे पुरगाल उली मेनाअ?	ओको टुकिरी रे पुराः उली मेनाः?	ओको टुकिरी रे पुराः उली मेनाः?	Comparative capacity evaluation with local fauna/flora. Austroasiatic botanical cognate 'ul' (ᱩᱞ / Santhali) and 'uli' (𑣂𑣚𑣂 / Mundari/Ho / mango). Inanimate existential verb is explicitly marked: Santhali 'menak'-a' (ᱢᱮᱱᱟᱜ-ᱟ) vs. Mundari 'menaḥ' (मेनाः) vs. Ho 'menaʔ' (𑣖𑣈𑣑𑣁𑣀).
-FLN_NUM_019	numeracy	Grade 2	दस और पाँच मिलकर पंद्रह होते हैं	ᱜᱮᱞ ᱟᱨ ᱢᱚᱬᱮ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱢᱚᱬᱮ ᱦᱩᱭᱩᱜ-ᱟ	गेल आर मोणे़ मेसा काते गेल मोणे़ हुयुग-आ	𑣋𑣈𑣚 𑣁𑣑 𑣖𑣉𑣑𑣈 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣈𑣚 𑣖𑣉𑣑𑣈 𑣟𑣉𑣎𑣉𑣁	गेल आर मोड़े मिसा केते गेल मोड़े होबाओआ	गेल अन्दो मोड़े मेसा केते गेल मोड़े हुयुःआ	गेल अन्दो मोड़े मेसा केते गेल मोड़े हुयुःआ	Base-10 compound additive morphology for teens (11–19). 15 is systematically formed by juxtaposition of decade base 10 ('gel') + digit 5 ('mõṛẽ' / 'moṛe') across all three languages: Santhali 'gel mõṛẽ', Ho 'gel moṛe', Mundari 'gel moड़े'.
-FLN_NUM_020	numeracy	Grade 3	भारी वस्तु को उठाओ और हल्की को पहचानो	ᱦᱟᱢᱟᱞ ᱡᱤᱱᱤᱥ ᱛᱩᱞ ᱢᱮ ᱟᱨ ᱨᱟᱣᱟᱞᱟᱜ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	हामाल जीनिस तुल मे आर रावालाग चीन्हा़व मे	𑣟𑣁𑣖𑣎𑣚 𑣏𑣂𑣎 𑣕𑣃𑣚 𑣖𑣈 𑣁𑣑 𑣑𑣈𑣉𑣁𑣚 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈	हांबाल चीज तुल मे आर रेवाल चीनाइ मे	हाम्बल जिनिस तुल मे अन्दो रेवाल तेआः चिनहाव मे	हाम्बल जिनिस तुल मे अन्दो रेवाल तेआः चिनहाव मे	Weight discrimination competency. Demonstrates Proto-Munda adjectival antonym pair for weight: 'hamal'/'hambal' (ᱦᱟᱢᱟᱞ / heavy) and 'rawal'/'rewal' (lightweight). Nominalization of property: Santhali inanimate genitive marker '-ak'' in 'rawal-ak'' vs. Mundari nominalizer '-teaḥ' in 'rewal teaḥ'.
-FLN_NUM_021	numeracy	Grade 3	इस पैटर्न को आगे बढ़ाओ	ᱱᱚᱣᱟ ᱛᱷᱟᱨ-ᱛᱚᱦᱚᱨ ᱞᱟᱦᱟ ᱛᱮ ᱤᱫᱤ ᱢᱮ	नोवा थार-तोहोर लाहा ते इदी मे	𑣑𑣈 𑣑𑣈𑣔𑣁𑣑𑣓 𑣖𑣁𑣑𑣁𑣀 𑣕𑣈 𑣂𑣑𑣂 𑣖𑣈	ने पैटर्न मारांग ते इदी मे	ने ढाँचा के मारांग ते इदी मे	ने ढाँचा के मारांग ते इदी मे	Abstract geometric and numerical patterning. JCERT Santhali academic curriculum renders 'pattern' as the rhyming compound 'thar-tohor' (ordering sequence). Mundari accepts 'dhãca'. Transitive directional motion verb 'idi' (to take forward) is marked with instrumental-directional postposition 'te'.
-FLN_NUM_022	numeracy	Grade 3	तीन का पहाड़ा सब मिलकर बोलो	ᱯᱮ ᱨᱮᱱᱟᱜ ᱯᱟᱦᱟᱲᱟ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱯᱮ	पे रेनाग पाहाड़ा सानाम को मेसा काते ला़य पे	𑣁𑣑𑣈𑣂𑣁 𑣜𑣈𑣁𑣀 𑣑𑣁𑣟𑣁𑣑𑣁 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣌𑣁𑣌𑣂 𑣕𑣈	अपिया रेआः पाहाड़ा सबिन मिसा केते काजी पे	अपिया रेआः पाहाड़ा सोबेनको मेसा केते काजी पे	अपिया रेआः पाहाड़ा सोबेनको मेसा केते काजी पे	Multiplication table drill. Inanimate genitive clitic attached to the numeral: Santhali '-renak'' (ᱨᱮᱱᱟᱜ) vs. Mundari/Ho '-reaḥ' (𑣜𑣈𑣁𑣀 / रेआः). Plural imperative marker '-pe' coordinates class-wide choral recitation.
-FLN_NUM_023	numeracy	Grade 3	दस के दो बंडल मिलकर बीस बनते हैं	ᱜᱮᱞ-ᱜᱮᱞ ᱨᱮᱱᱟᱜ ᱵᱟᱨᱭᱟ ᱯᱚᱴᱚᱢ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱦᱩᱭᱩᱜ-ᱟ	गेल-गेल रेनाग बारया पोटोम मेसा काते इसी हुयुग-आ	𑣋𑣈𑣚-𑣋𑣈𑣚 𑣜𑣈𑣁𑣀 𑣎𑣁𑣑𑣂𑣁 𑣎𑣁𑣓𑣑𑣂𑣚 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣖𑣂 𑣟𑣂𑣞𑣂 𑣟𑣉𑣎𑣉𑣁	गेल-गेल रेआः बारिया बण्डल मिसा केते मि इसी होबाओआ	गेल-गेल रेआः बारिया बण्डल मेसा केते बीस हुयुःआ	गेल-गेल रेआः बारिया बण्डल मेसा केते बीस हुयुःआ	Place-value foundational bundling (ten-bundles forming decades). Distributive reduplicated numeral 'gel-gel' (tens-groups). Santhali preserves indigenous concrete packaging classifier 'potom' (ᱯᱚᱴᱚᱢ), while Ho/Mundari adapt 'banḍal'. Product yields indigenous score 'isi' / 'mi hisi'.
-FLN_NUM_024	numeracy	Grade 3	मापक छड़ी से मेज़ की लंबाई नापो	ᱡᱚᱠᱷᱟ ᱴᱷᱮᱝᱜᱟ ᱛᱮ ᱴᱮᱵᱩᱞ ᱨᱮᱱᱟᱜ ᱡᱤᱞᱤᱧ ᱡᱚᱠᱷᱟᱭ ᱢᱮ	जोखा ठेंगा ते डेबुल रेनाग जीलिञ जोखाय मे	𑣌𑣉𑣌𑣁 𑣑𑣁𑣓𑣑𑣂 𑣕𑣈 𑣔𑣈𑣎𑣃𑣚 𑣜𑣈𑣁𑣀 𑣎𑣂𑣚𑣂𑣑 𑣌𑣉𑣌𑣁𑣂 𑣖𑣈	जोखा डण्डी ते डेबुल रेआः जिलिंग जोकाइ मे	जोखा डण्डा ते मेज रेआः जिलिंग जोखाए मे	जोखा डण्डा ते मेज रेआः जिलिंग जोखाए मे	Informal and non-standard measurement units. Root 'jokha' (measurement) functions both as modifier ('jokha ṭhenga' / measuring rod) and verbal head ('jokhạy-me' / 'jokhae-me'). Instrumental case marker '-te' indicates the tool of measurement.
-FLN_NUM_025	numeracy	Grade 3	चलो हम सब मिलकर गणित का खेल खेलें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱮᱠᱷᱟ ᱨᱮᱱᱟᱜ ᱮᱱᱮᱡ ᱮᱱᱮᱡᱟᱵᱚ	देलाबो सानाम को मेसा काते लेखा रेनाग एनेज एनेजाबो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣚𑣈𑣌𑣁 𑣜𑣈𑣁𑣀 𑣂𑣓𑣃𑣑 𑣂𑣓𑣃𑣑𑣎𑣂	देलाबु सबिन लेखा रेआः इनुं इनुंबु	देलाबु सोबेनते लेखा रेआः इनुं इनुंबु	देलाबु सोबेनते लेखा रेआः इनुं इनुंबु	Pedagogical play-based numeracy integration. Play cognates diverge systematically between Kherwarian branches: Santhali root 'enej' (ᱮᱱᱮᱡ) vs. Ho/Mundari cognate 'inuñ'/'inuṅ' (𑣂𑣓𑣃𑣑 / इनुं). Inclusive first-person plural marking ('delabo...-bo' / 'delabu...-bu') completes the collaborative cycle.
-FLN_CMD_001	classroom_command	Grade 1	अपनी जगह पर बैठो	ᱟᱢᱟᱜ ᱡᱟᱜᱟ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ	आमाग जागा रे दुड़ुब मे	𑢢𑣆𑣁𑣀 𑣕𑣁𑣓𑣈𑣉 𑣜𑣈 𑣉𑣂𑣎 𑣖𑣈	आमाः ताएद रे दुब मे	अमाः तायद रे दुब़ मे	आमाः तायद रे दुब़ मे	Santhali uses the 2nd person singular genitive 'amag' (ᱟᱢᱟᱜ), locative postposition '-re' (ᱨᱮ), and root verb 'duṛup'' with singular familiar imperative suffix '-me' (ᱢᱮ). Mundari and Ho preserve checked bilabial stop [b'] in 'dub़' with identical familiar imperative clitic '-me'.
-FLN_CMD_002	classroom_command	Grade 1	सब बच्चे सीधे खड़े हो जाओ	ᱡᱚᱛᱚ ᱜᱤᱫᱽᱨᱟᱹ ᱥᱚᱡᱷᱮ ᱛᱤᱸᱜᱩᱱ ᱯᱮ	जोतो गिदरा़ सोज्हे ति़ंगुन पे	𑣞𑣉𑣎𑣈𑣑 𑣟𑣉𑣑𑣌𑣉 𑣞𑣉𑣌𑣈 𑣕𑣈 𑣕𑣂𑣑𑣋𑣂 𑣕𑣈	सोबेन होनको सोजे ते तिङ्गु पे	सोबेन होनको सोजे ते तिङ्गु पे	सोबेन होनको सोजे ते तिङ्गु पे	Addresses the whole class using the 2nd person plural imperative marker: Santhali '-pe' (ᱯᱮ), Mundari and Ho '-pe' (पे). The quantifier 'soben' (Mundari/Ho) and 'joto' (Santhali) denote totality. Mundari/Ho use the plural animate marker '-ko'.
-FLN_CMD_003	classroom_command	Grade 1	अपनी किताब खोलो	ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ	आमाग पुथि झिज मे	𑢢𑣆𑣁𑣀 𑣑𑣉𑣔𑣉𑣎 𑣉𑣚𑣉 𑣖𑣈	आमाः पोतोब ओलो मे	अमाः पुथी उतास मे	आमाः पुथी उतास मे	Singular familiar imperative directed to an individual learner. Santhali verb 'jhij' carries the checked consonant modifier Ahd (ᱽ). Mundari employs 'utas' (to open/spread out sheets), while Ho colloquially uses 'olo' or 'jhij'.
-FLN_CMD_004	classroom_command	Grade 1	किताब बंद करो	ᱯᱩᱛᱷᱤ ᱯᱚᱴᱚᱢ ᱢᱮ	पुथि पोटोम मे	𑣑𑣉𑣔𑣉𑣎 𑣑𑣉𑣔𑣉𑣆 𑣖𑣈	पोतोब पोतोम मे	पुथी पोतोम मे	पुथी पोतोम मे	The verbal root 'poṭom' (ᱯᱚᱴᱚᱢ) across all three North Munda languages fundamentally signifies wrapping or folding together, conventionally standardized in primary pedagogic registers for closing a codex/book.
-FLN_CMD_005	classroom_command	Grade 1	सब शांत रहो और ध्यान से सुनो	ᱥᱟᱱᱟᱢ ᱠᱚ ᱛᱷᱤᱨᱩᱜ ᱯᱮ ᱟᱨ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱯᱮ	सानाम को थिरुग पे आर धेयान ते आंजोम पे	𑣞𑣁𑣎𑣂𑣑 𑣌𑣉 𑣕𑣕𑣂𑣑 𑣑𑣈 𑣁𑣑 𑣖𑣓𑣁𑣑 𑣕𑣈 𑣁𑣓𑣂𑣆 𑣕𑣈	सबिन को थिर पे आर ध्यान ते आयूम पे	सोबेनको थिर कोअः पे अन्दो मन लगाके आयुम पे	सोबेनको थिर कोअः पे अन्दो मन लगाके आयुम पे	Plural imperative '-pe' applied symmetrically to both coordinated clauses. 'Thir' (stasis/silence) followed by middle/intransitive markers. 'Ajom' (Santhali) and 'Ayum' (Ho/Mundari) represent the common proto-Munda auditory root.
-FLN_CMD_006	classroom_command	Grade 1	अपनी स्लेट दिखाओ	ᱟᱢᱟᱜ ᱥᱞᱮᱴ ᱩᱫᱩᱜ ᱢᱮ	आमाग स्लेट उदुक मे	𑢢𑣆𑣁𑣀 𑣞𑣚𑣈𑣔 𑣂𑣉𑣂𑣀 𑣖𑣈	आमाः स्लेट उदुअ मे	अमाः स्लेट उदुः मे	आमाः स्लेट उदुः मे	Direct transitive command targeting the individual child. The verb 'uduk'' features an unreleased velar stop [k'] in Santhali, realized with debuccalization to a glottal stop /u-duʔ/ in Mundari (written उदुः with visarga) and Ho.
-FLN_CMD_007	classroom_command	Grade 1	हाथ धोकर आओ	ᱛᱤ ᱟᱹᱨᱩᱵ ᱠᱟᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ	ती आ़रुब काते हिजुग मे	𑣕𑣂 𑣁𑣎𑣂𑣙 𑣌𑣈𑣕𑣈 𑣟𑣂𑣌𑣂𑣀 𑣖𑣈	ती अबुं केते हिजुअ मे	ती अबुब़ केते हिजुः मे	ती अबुब़ केते हिजुः मे	Conjunctive sequential participle structure: verbal root + '-kate' (Santhali) / '-kete' (Ho/Mundari). Lexical cognates: 'ti' (hand) across all three, with specific washing verb 'aṛup'' (Santhali) vs 'abub'' (Mundari/Ho specifically for limbs).
-FLN_CMD_008	classroom_command	Grade 1	एक सीधी कतार बनाओ	ᱢᱤᱫᱴᱟᱝ ᱥᱚᱡᱷᱮ ᱛᱷᱟᱨ ᱵᱮᱱᱟᱣ ᱯᱮ	मिदटांग सोज्हे थार बेनाव पे	𑣖𑣂𑣓𑣁𑣉 𑣞𑣉𑣌𑣈 𑣕𑣁𑣑 𑣎𑣁𑣂 𑣕𑣈	मियाद सोजे थाड़ बाइ पे	मियाद सोजे थाड़ बाइ पे	मियाद सोजे थाड़ बाइ पे	Numeral 'one' shows the classifier '-ṭang' in Santhali ('mit'-ṭang'), contrasting with the standalone cardinal form 'miyad' in Mundari and Ho. Plural imperative '-pe' addresses the student group.
-FLN_CMD_009	classroom_command	Grade 1	श्यामपट्ट की ओर देखो	ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ ᱥᱮᱫ ᱠᱚᱭᱚᱜ ᱢᱮ	हेंदे पाटा सेद कोयोक मे	𑣟𑣈𑣑𑣉𑣈 𑣎𑣉𑣑𑣉 𑣑𑣁𑣀 𑣑𑣈𑣚 𑣖𑣈	हेन्दे बोर्ड पाः नेल मे	हेन्दे पाटा पाः नेल मे	हेन्दे पाटा पाः नेल मे	'Blackboard' is natively expressed via descriptive compound 'hende paṭa' (black board) in Santhali and Mundari. Directional postpositions: Santhali 'sed' (towards) vs Mundari/Ho 'paḥ' (side/direction). Verbs differentiate: Santhali 'koyok'' (look up towards) vs Mundari 'nel' (see/look).
-FLN_CMD_010	classroom_command	Grade 1	पेंसिल और कॉपी निकालो	ᱯᱮᱱᱥᱤᱞ ᱟᱨ ᱠᱷᱟᱛᱟ ᱚᱰᱚᱠ ᱢᱮ	पेन्सिल आर खाता ओडोक मे	𑣑𑣈𑣑𑣞𑣂𑣚 𑣁𑣑 𑣌𑣁𑣕𑣁 𑣉𑣑𑣉𑣀 𑣖𑣈	पेन्सिल आर खाता ओड़ोअ मे	पेन्सिल अन्दो खाता उडुक़ मे	पेन्सिल अन्दो खाता उडुक़ मे	Loan realia 'pensil' and 'khata' integrated with native Munda syntax. Egress verb: Santhali 'oḍok'' (ᱚᱰᱚᱠ), Ho 'oṛoʔ', and Mundari 'uḍuk़' (उडुक़). Conjunction: Santhali/Ho 'ar' vs Mundari 'ando'.
-FLN_CMD_011	classroom_command	Grade 2	अपने साथी की मदद करो	ᱟᱢᱨᱮᱱ ᱜᱟᱛᱮ ᱜᱚᱲᱚ ᱟᱭ ᱢᱮ	आमरेन गाते गोड़ो आय मे	𑢢𑣆𑣑𑣈𑣑 𑣋𑣁𑣕𑣈 𑣉𑣈𑣙𑣋𑣁𑣂 𑣖𑣈	अमरेन गाते देंगा-इ मे	अमरेन गाते के गोड़ो आइ मे	अमरेन गाते के गोड़ो आइ मे	Demonstrates the essential animate genitive marker '-ren' (ᱟᱢᱨᱮᱱ / अमरेन) distinguishing animate relations from inanimate '-ak''. Direct pronominal object incorporation '-ay' / '-i' marks the 3rd person singular beneficiary before the imperative marker '-me'.
-FLN_CMD_012	classroom_command	Grade 2	यह पाठ ज़ोर से पढ़ो	ᱱᱚᱣᱟ ᱯᱟᱲᱦᱟᱣ ᱟᱲᱟᱝ ᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ	नोवा पाड़हाव आड़ांग ते पाड़हाव मे	𑣑𑣈 𑣑𑣁𑣕 𑣌𑣁𑣏𑣈𑣉 𑣕𑣈 𑣑𑣁𑣑𑣟𑣁𑣉 𑣖𑣈	ने पाठ कचेद ते पढाव मे	ने पाठ कचेद साड़े ते पढाव मे	ने पाठ कचेद साड़े ते पढाव मे	Proximal demonstrative base differs: Santhali 'nowa' (ᱱᱚᱣᱟ) vs Ho/Mundari 'ne' (ने). 'Loudly' is expressed idiomatically using instrumental '-te' with acoustic nouns: Santhali 'aṛang te' (by voice), Mundari 'kaced saṛe te' (with sharp/clear sound).
-FLN_CMD_013	classroom_command	Grade 2	साफ़-साफ़ अक्षरों में लिखो	ᱥᱟᱯᱷᱟ-ᱥᱟᱯᱷᱟ ᱟᱠᱷᱚᱨ ᱛᱮ ᱚᱞ ᱢᱮ	साफा-साफा आखोर ते ओल मे	𑣞𑣁𑣑𑣁 𑣁𑣌𑣉𑣑 𑣕𑣈 𑣉𑣚 𑣖𑣈	सफा अखोर ते ओल मे	सफा-सफा ओओल ते ओल मे	सफा-सफा ओओल ते ओल मे	The North Munda ancestral literacy verb 'ol' (ᱚᱞ / ओल) governs the predicate. Santhali and Ho use loan root 'akhor', while Mundari accepts 'o-ol' (nominalized reduplicated stem of 'ol') marked by the instrumental postposition '-te'.
-FLN_CMD_014	classroom_command	Grade 1	हाथ ऊपर उठाओ	ᱟᱢᱟᱜ ᱛᱤ ᱪᱮᱛᱟᱱ ᱛᱩᱞ ᱢᱮ	आमाग ती चेतान तुल मे	𑣕𑣂 𑣏𑣈𑣕𑣁𑣑 𑣕𑣂𑣚 𑣖𑣈	ती चेतान तुल मे	ती चेतान तुल मे	ती चेतान तुल मे	Complete three-way North Munda lexical unity: 'ti' (hand), 'cetan' (above/upward), and 'tul' (raise/elevate), closed by the singular imperative clitic '-me'.
-FLN_CMD_015	classroom_command	Grade 2	चलो, हम सब मिलकर गोल घेरा बनाएँ	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱩᱞᱟᱹᱭ ᱵᱮᱱᱟᱣᱟᱵᱚ	देलाबो सानाम को मेसा काते गुला़य बेनावाबो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣂𑣑𑣁 𑣎𑣁𑣂𑣎𑣂	देलाबु सबिन मिसा केते गुड़ा बाइबु	देलाबु सोबेनते गोल घेरा बाइबु	देलाबु सोबेनते गोल घेरा बाइबु	Strict pedagogical enforcement of the First-Person Inclusive Plural: Santhali clitic '-bo' (ᱫᱮᱞᱟᱵᱚ / ᱵᱮᱱᱟᱣᱟᱵᱚ), Mundari/Ho '-bu' (देलाबु / बाइबु). This grammatical form mandatorily binds the teacher and all pupils together, strictly precluding exclusive 'ale'.
-FLN_CMD_016	classroom_command	Grade 2	कचरा कूड़ेदान में डालो	ᱡᱟᱵᱽᱨᱟ ᱠᱩᱲᱟᱹᱫᱟᱱ ᱨᱮ ᱜᱤᱰᱤ ᱢᱮ	जाबरा कुड़ा़दान रे गिडी मे	𑣉𑣂𑣑𑣁 𑣌𑣂𑣉𑣁𑣉𑣁𑣑 𑣜𑣈 𑣋𑣂𑣉𑣂 𑣖𑣈	धुरा कूड़ादान रे गिड़ी मे	मैला जाबरा कूड़ादान रे सामा मे	मैला जाबरा कूड़ादान रे सामा मे	Santhali/Ho use 'giḍi' (discard/drop), whereas Mundari standardizes 'sama' (insert/deposit into a receptacle). All three employ locative postposition '-re' on the borrowed compound 'kuṛadan'.
-FLN_CMD_017	classroom_command	Grade 2	अपने बस्ते को व्यवस्थित रखो	ᱟᱢᱟᱜ ᱡᱷᱳᱞᱟ ᱥᱟᱡᱟᱣ ᱠᱟᱛᱮ ᱫᱚᱦᱚᱭ ᱢᱮ	आमाग झोला साजाव काते दोहोय मे	𑢢𑣆𑣁𑣀 𑣌𑣉𑣚𑣁 𑣎𑣈𑣞 𑣕𑣈 𑣉𑣉𑣟𑣉𑣂 𑣖𑣈	आमाः झोला बेस ते दोहोइ मे	अमाः झोला बेस लेका दोहोइ मे	आमाः झोला बेस लेका दोहोइ मे	Root 'doho' (ᱫᱚᱦᱚ / दोहो - to keep/place) is shared across all three languages. Santhali takes participial compound 'sajaw kate' (arranging), while Mundari/Ho prefer adverbial compounds 'bes leka' / 'bes te' (properly).
-FLN_CMD_018	classroom_command	Grade 2	अपनी-अपनी जगह पर वापस जाओ	ᱟᱯᱱᱟᱨ-ᱟᱯᱱᱟᱨ ᱡᱟᱜᱟ ᱛᱮ ᱨᱩᱣᱟᱹᱲ ᱯᱮ	आपनार-आपनार जागा ते रुवा़ड़ पे	𑢢𑣑𑣑𑣁𑣑 𑣕𑣁𑣓𑣈𑣉 𑣕𑣈 𑣜𑣂𑣒𑣁𑣑 𑣕𑣈	अप्पन ताएद ते रुवाड़ पे	अप्पन-अप्पन तायद ते रुवाड़ पे	अप्पन-अप्पन तायद ते रुवाड़ पे	Distributive possession expressed through reduplicated reflexive 'apnar-apnar' (Santhali) / 'appan-appan' (Mundari). Intransitive return motion verb 'ruwaṛ' takes the 2nd person plural imperative marker '-pe' addressing children collectively.
-FLN_CMD_019	classroom_command	Grade 2	चलो, हम सब मिलकर प्रार्थना गाएँ	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧᱟᱵᱚ	देलाबो सानाम को मेसा काते बिन्ति सेरेञाबो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣎𑣂𑣑𑣕𑣂 𑣉𑣂𑣑𑣁𑣙𑣈𑣎𑣂	देलाबु सबिन बिनती दुरङ्गेबु	देलाबु सोबेनते बिनती दुरङेबु	देलाबु सोबेनते बिनती दुरङेबु	Rigid inclusive cohortative: Mundari/Ho combine 'durang' (song/sing) + '-e-' (transitive) + '-bu' (1st person inclusive plural). Santhali uses 'sereñ' (ᱥᱮᱨᱮᱧ) + indicative 'a' + inclusive suffix '-bo' (ᱵᱚ).
-FLN_CMD_020	classroom_command	Grade 1	सब मिलकर ताली बजाओ	ᱡᱚᱛᱚ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱟᱹᱞᱤ ᱛᱷᱟᱯᱟᱭ ᱯᱮ	जोतो को मेसा काते ता़ली थापाय पे	𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣕𑣁𑣚𑣂 𑣕𑣁𑣑𑣁𑣈 𑣕𑣈	सबिन मिसा केते ताली थपाए पे	सोबेनको मेसा केते ताली थपाए पे	सोबेनको मेसा केते ताली थपाए पे	Compound action: 'tạli' (clap) + 'thapay'/'thapae' (slap/strike rhythmically). Collective participial linker: 'mesa kate' (Santhali) / 'mesa kete' (Mundari/Ho). Plural addressee marked by '-pe'.
-FLN_CMD_021	classroom_command	Grade 3	जो पूछना है, बारी-बारी से पूछो	ᱡᱟᱦᱟᱸ ᱠᱩᱠᱞᱤ ᱢᱮᱱᱟᱜ-ᱟ, ᱵᱟᱨᱤ-ᱵᱟᱨᱤ ᱛᱮ ᱠᱩᱞᱤᱭ ᱯᱮ	जाहां कुकली मेनाग-आ, बारी-बारी ते कुलिय पे	𑣌𑣁𑣟𑣁𑣑 𑣌𑣂𑣚𑣂 𑣖𑣈𑣑𑣁𑣀, 𑣎𑣁𑣑𑣂 𑣕𑣈 𑣌𑣂𑣚𑣂 𑣕𑣈	जहां कुली मेनाअ, बारी ते कुली पे	जहां कुली मेनाः, बारी-बारी ते कुली पे	जहां कुली मेनाः, बारी-बारी ते कुली पे	Relative clause syntax: indefinite relative pronoun 'jahã' (ᱡᱟᱦᱟᱸ / जहां), nominalized question stem 'kukli' / 'kuli', existential verb 'menak'-a' (ᱢᱮᱱᱟᱜ-ᱟ) / 'menaḥ'. Iterative adverb marked by instrumental '-te', governing plural imperative 'kuli-pe'.
-FLN_CMD_022	classroom_command	Grade 3	चित्र देखकर कहानी बताओ	ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ	चीता़र ञेल काते का़ह्नी ला़य मे	𑣏𑣂𑣕𑣁𑣑 𑣑𑣈𑣚 𑣌𑣈𑣕𑣈 𑣌𑣁𑣟𑣁𑣑𑣂 𑣌𑣁𑣌𑣂 𑣖𑣈	चितार नेल केते कहनी काजी मे	मूरत नेल केते कहनी काजी मे	मूरत नेल केते कहनी काजी मे	Sequential verbal action: visual perception 'ñel' (ᱧᱮᱞ / नेल) + conjunctive coordinator '-kate'/'-kete', followed by speech act verb: Santhali 'lạy' (ᱞᱟᱹᱭ - narrate/tell) vs Mundari/Ho 'kaji' (speak/state), with singular imperative '-me'.
-FLN_CMD_023	classroom_command	Grade 3	अपना काम पूरा करके दिखाओ	ᱟᱢᱟᱜ ᱠᱟᱹᱢᱤ ᱯᱩᱨᱟᱹᱣ ᱠᱟᱛᱮ ᱩᱫᱩᱜ ᱢᱮ	आमाग का़मी पुरा़व काते उदुक मे	𑢢𑣆𑣁𑣀 𑣌𑣁𑣖𑣂 𑣏𑣁𑣎𑣁 𑣌𑣈𑣕𑣈 𑣂𑣉𑣂𑣀 𑣖𑣈	आमाः कामी चबा केते उदुअ मे	अमाः कामी चबा केते उदुः मे	आमाः कामी चबा केते उदुः मे	Santhali employs loan completion root 'purạw' (ᱯᱩᱨᱟᱹᱣ), whereas Mundari and Ho utilize the native Austroasiatic completive aspect verb 'caba' (चबा - to exhaust/finish entirely). Displays checked velar stops in both 'uduk'' and 'uduḥ'.
-FLN_CMD_024	classroom_command	Grade 3	कक्षा में दौड़ो मत, आराम से चलो	ᱪᱟᱱᱟᱪ ᱨᱮ ᱟᱞᱚᱯᱮ ᱫᱟᱹᱲᱟ, ᱵᱷᱟᱹᱜᱤ ᱛᱮ ᱛᱟᱲᱟᱢ ᱯᱮ	चानाच रे आलोपे दा़ड़ा, भागी ते ताड़ाम पे	𑣌𑣚𑣁𑣞 𑣜𑣈 𑣁𑣚𑣉𑣑𑣈 𑣑𑣂𑣑𑣁, 𑣎𑣈𑣞 𑣕𑣈 𑣞𑣈𑣑 𑣕𑣈	क्लास रे आलोपे नीरा, बेस ते सेन पे	कछा रे आलोपे निर-बाड़ाए, बिश्राम ते सेन पे	कछा रे आलोपे निर-बाड़ाए, बिश्राम ते सेन पे	Prohibitive negative particle incorporating the 2nd person plural marker: 'alo-pe' (ᱟᱞᱚᱯᱮ / आलोपे - do not!). Velocity contrasts: Santhali 'dạṛ' (run) / 'taṛam' (walk step-by-step) vs Mundari/Ho 'nir' (run) / 'sen' (walk/go).
-FLN_CMD_025	classroom_command	Grade 3	चलो, हम सब मिलकर गतिविधि शुरू करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱠᱟᱹᱢᱤᱦᱚᱨᱟ ᱮᱦᱚᱵᱟᱵᱚ	देलाबो सानाम को मेसा काते का़मीहोरा एह౉बाबो	𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣌𑣁𑣖𑣂𑣟𑣉𑣑𑣁 𑣈𑣕𑣉𑣟𑣉𑣎𑣈𑣎𑣂	देलाबु सबिन कामीहोरा एतोहॊबेबु	देलाबु सोबेनते कामीहोरा एतोहब़ेबु	देलाबु सोबेनते कामीहोरा एतोहब़ेबु	'Activity' is rendered by the standardized JCERT academic neologism 'kạmihora' (ᱠᱟᱹᱢᱤᱦᱚᱨᱟ / कामीहोरा - work-way). Strict adherence to inclusive cohortative morpheme: Santhali '-bo' (ᱮᱦᱚᱵᱟᱵᱚ) and Mundari/Ho '-bu' (एतोहब़ेबु), uniting the instructor and learners in the learning task.
+id	domain	nipun_target_grade	source_hindi_normalized	target_olchiki_santhali	phonetic_deva_santhali
+FLN_NUM_001	numeracy	Grade 1	एक से पाँच तक गिनो	ᱢᱤᱫ ᱠᱷᱚᱱ ᱢᱚᱬᱮ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ	मिद खोन मोणे ध़ाबिज लेखाय मे
+FLN_NUM_002	numeracy	Grade 1	चलो हम सब मिलकर दस तक गिनती करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱵᱚ	देलाबो सानाम को मेसा काते गेल ध़ाबिज लेखाय बो
+FLN_NUM_003	numeracy	Grade 1	यह बड़ा पत्थर है और वह छोटा कंकड़ है	ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱨᱟᱝ ᱫᱷᱤᱨᱤ ᱠᱟᱱᱟ ᱟᱨ ᱦᱟᱱᱟ ᱫᱚ ᱦᱩᱰᱤᱧ ᱜᱤᱴᱤᱞ ᱠᱟᱱᱟ	नोवा दो मारांग धीरी काना आर हाना दो हुडिञ गिटील काना
+FLN_NUM_004	numeracy	Grade 1	इसमें एक और जोड़ो	ᱱᱚᱣᱟ ᱨᱮ ᱟᱨ ᱢᱤᱫᱴᱟᱝ ᱡᱩᱲᱟᱹᱣ ᱢᱮ	नोवा रे आर मिदटांग जुड़ा़व मे
+FLN_NUM_005	numeracy	Grade 1	दो में से एक निकाल लो	ᱵᱟᱨᱭᱟ ᱠᱷᱚᱱ ᱢᱤᱫᱴᱟᱝ ᱚᱰᱚᱠ ᱢᱮ	बारया खोन मिदटांग ओडोक मे
+FLN_NUM_006	numeracy	Grade 1	गोल घेरे को पहचानो	ᱜᱩᱞᱟᱹᱭ ᱠᱷᱚᱸᱫᱽ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	गुला़य खोंद चीन्हा़व मे
+FLN_NUM_007	numeracy	Grade 1	कौन सी रस्सी लंबी है और कौन सी छोटी?	ᱚᱠᱟᱴᱟᱜ ᱫᱚᱣᱨᱤ ᱡᱤᱞᱤᱧᱟ ᱟᱨ ᱚᱠᱟᱴᱟᱜ ᱠᱷᱟᱴᱚᱣᱟ?	ओकाटाग दोवरी जीलिञा आर ओकाटाग खाटोवा?
+FLN_NUM_008	numeracy	Grade 1	इन कंकड़ों को गिनकर बताओ	ᱱᱚᱣᱟ ᱜᱤᱴᱤᱞ ᱠᱚ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱢᱮ	नोवा गिटील को लेखा काते ला़य मे
+FLN_NUM_009	numeracy	Grade 1	तीन चिड़ियाँ पेड़ पर बैठी हैं	ᱯᱮᱭᱟ ᱪᱮᱬᱮ ᱫᱟᱨᱮ ᱨᱮᱠᱚ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ	पेया चेणे़ दारे रेको दुड़ुब आकाना
+FLN_NUM_010	numeracy	Grade 2	चार और दो मिलकर कितने होते हैं?	ᱯᱩᱱᱭᱟᱹ ᱟᱨ ᱵᱟᱨᱭᱟ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱤᱱᱟᱹᱜ ᱦᱩᱭᱩᱜ-ᱟ?	पुन्या़ आर बारया मेसा काते तीना़ग हुयुग-आ?
+FLN_NUM_011	numeracy	Grade 2	यह चौकोर आकृति बनाओ	ᱱᱚᱣᱟ ᱯᱩᱱᱠᱚᱬ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ	नोवा पुनकोण चीता़र बेनाव मे
+FLN_NUM_012	numeracy	Grade 2	कम और ज़्यादा की पहचान करो	ᱠᱚᱢ ᱟᱨ ᱵᱟᱹᱲᱛᱤ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	कोम आर बा़ड़ती चीन्हा़व मे
+FLN_NUM_013	numeracy	Grade 2	पाँच में तीन जोड़ने पर आठ बनता है	ᱢᱚᱬᱮ ᱨᱮ ᱯᱮ ᱡᱩᱲᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱤᱨᱟᱹᱞ ᱦᱩᱭᱩᱜ-ᱟ	मोणे़ रे पे जुड़ा़व लेखान इरा़ल हुयुग-आ
+FLN_NUM_014	numeracy	Grade 2	इस पंक्ति में पहला बच्चा कौन है?	ᱱᱚᱣᱟ ᱛᱷᱟᱨ ᱨᱮ ᱯᱟᱹᱦᱤᱞ ᱜᱤᱫᱽᱨᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?	नोवा थार रे पा़हिल गिदरा़ दो ओकोय कानाय?
+FLN_NUM_015	numeracy	Grade 2	चलो हम सब मिलकर बीस तक उल्टी गिनती करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱠᱷᱚᱱ ᱩᱞᱴᱟᱹᱣ ᱞᱮᱠᱷᱟᱭ ᱵᱚ	देलाबो सानाम को मेसा काते इसी खोन उलटा़व लेखाय बो
+FLN_NUM_016	numeracy	Grade 2	आठ में से चार घटाने पर कितना बचेगा?	ᱤᱨᱟᱹᱞ ᱠᱷᱚᱱ ᱯᱩᱱ ᱜᱷᱟᱴᱟᱣ ᱞᱮᱠᱷᱟᱱ ᱛᱤᱱᱟᱹᱜ ᱥᱟᱨᱮᱲᱚᱜ-ᱟ?	इरा़ल खोन पुन घाटाव लेखान तीना़ग सारेड़౉ग-आ?
+FLN_NUM_017	numeracy	Grade 2	इन डंडियों को बराबर-बराबर बाँटो	ᱱᱚᱣᱟ ᱴᱷᱮᱝᱜᱟ ᱠᱚ ᱥᱚᱢᱟᱱ-ᱥᱚᱢᱟᱱ ᱦᱟᱹᱴᱤᱧ ᱯᱮ	नोवा ठेंगा को सोमान-सोमान हा़टिञ पे
+FLN_NUM_018	numeracy	Grade 2	किस टोकरी में ज़्यादा आम हैं?	ᱚᱠᱟ ᱴᱩᱠᱨᱤ ᱨᱮ ᱵᱟᱹᱲᱛᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ?	ओका टुकरी रे बा़ड़ती उल मेनाग-आ?
+FLN_NUM_019	numeracy	Grade 2	दस और पाँच मिलकर पंद्रह होते हैं	ᱜᱮᱞ ᱟᱨ ᱢᱚᱬᱮ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱢᱚᱬᱮ ᱦᱩᱭᱩᱜ-ᱟ	गेल आर मोणे़ मेसा काते गेल मोणे़ हुयुग-आ
+FLN_NUM_020	numeracy	Grade 3	भारी वस्तु को उठाओ और हल्की को पहचानो	ᱦᱟᱢᱟᱞ ᱡᱤᱱᱤᱥ ᱛᱩᱞ ᱢᱮ ᱟᱨ ᱨᱟᱣᱟᱞᱟᱜ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ	हामाल जीनिस तुल मे आर रावालाग चीन्हा़व मे
+FLN_NUM_021	numeracy	Grade 3	इस पैटर्न को आगे बढ़ाओ	ᱱᱚᱣᱟ ᱛᱷᱟᱨ-ᱛᱚᱦᱚᱨ ᱞᱟᱦᱟ ᱛᱮ ᱤᱫᱤ ᱢᱮ	नोवा थार-तोहोर लाहा ते इदी मे
+FLN_NUM_022	numeracy	Grade 3	तीन का पहाड़ा सब मिलकर बोलो	ᱯᱮ ᱨᱮᱱᱟᱜ ᱯᱟᱦᱟᱲᱟ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱯᱮ	पे रेनाग पाहाड़ा सानाम को मेसा काते ला़य पे
+FLN_NUM_023	numeracy	Grade 3	दस के दो बंडल मिलकर बीस बनते हैं	ᱜᱮᱞ-ᱜᱮᱞ ᱨᱮᱱᱟᱜ ᱵᱟᱨᱭᱟ ᱯᱚᱴᱚᱢ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱦᱩᱭᱩᱜ-ᱟ	गेल-गेल रेनाग बारया पोटोम मेसा काते इसी हुयुग-आ
+FLN_NUM_024	numeracy	Grade 3	मापक छड़ी से मेज़ की लंबाई नापो	ᱡᱚᱠᱷᱟ ᱴᱷᱮᱝᱜᱟ ᱛᱮ ᱴᱮᱵᱩᱞ ᱨᱮᱱᱟᱜ ᱡᱤᱞᱤᱧ ᱡᱚᱠᱷᱟᱭ ᱢᱮ	जोखा ठेंगा ते डेबुल रेनाग जीलिञ जोखाय मे
+FLN_NUM_025	numeracy	Grade 3	चलो हम सब मिलकर गणित का खेल खेलें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱮᱠᱷᱟ ᱨᱮᱱᱟᱜ ᱮᱱᱮᱡ ᱮᱱᱮᱡᱟᱵᱚ	देलाबो सानाम को मेसा काते लेखा रेनाग एनेज एनेजाबो
+FLN_CMD_001	classroom_command	Grade 1	अपनी जगह पर बैठो	ᱟᱢᱟᱜ ᱡᱟᱜᱟ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ	आमाग जागा रे दुड़ुब मे
+FLN_CMD_002	classroom_command	Grade 1	सब बच्चे सीधे खड़े हो जाओ	ᱡᱚᱛᱚ ᱜᱤᱫᱽᱨᱟᱹ ᱥᱚᱡᱷᱮ ᱛᱤᱸᱜᱩᱱ ᱯᱮ	जोतो गिदरा़ सोज्हे ति़ंगुन पे
+FLN_CMD_003	classroom_command	Grade 1	अपनी किताब खोलो	ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ	आमाग पुथि झिज मे
+FLN_CMD_004	classroom_command	Grade 1	किताब बंद करो	ᱯᱩᱛᱷᱤ ᱯᱚᱴᱚᱢ ᱢᱮ	पुथि पोटोम मे
+FLN_CMD_005	classroom_command	Grade 1	सब शांत रहो और ध्यान से सुनो	ᱥᱟᱱᱟᱢ ᱠᱚ ᱛᱷᱤᱨᱩᱜ ᱯᱮ ᱟᱨ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱯᱮ	सानाम को थिरुग पे आर धेयान ते आंजोम पे
+FLN_CMD_006	classroom_command	Grade 1	अपनी स्लेट दिखाओ	ᱟᱢᱟᱜ ᱥᱞᱮᱴ ᱩᱫᱩᱜ ᱢᱮ	आमाग स्लेट उदुक मे
+FLN_CMD_007	classroom_command	Grade 1	हाथ धोकर आओ	ᱛᱤ ᱟᱹᱨᱩᱵ ᱠᱟᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ	ती आ़रुब काते हिजुग मे
+FLN_CMD_008	classroom_command	Grade 1	एक सीधी कतार बनाओ	ᱢᱤᱫᱴᱟᱝ ᱥᱚᱡᱷᱮ ᱛᱷᱟᱨ ᱵᱮᱱᱟᱣ ᱯᱮ	मिदटांग सोज्हे थार बेनाव पे
+FLN_CMD_009	classroom_command	Grade 1	श्यामपट्ट की ओर देखो	ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ ᱥᱮᱫ ᱠᱚᱭᱚᱜ ᱢᱮ	हेंदे पाटा सेद कोयोक मे
+FLN_CMD_010	classroom_command	Grade 1	पेंसिल और कॉपी निकालो	ᱯᱮᱱᱥᱤᱞ ᱟᱨ ᱠᱷᱟᱛᱟ ᱚᱰᱚᱠ ᱢᱮ	पेन्सिल आर खाता ओडोक मे
+FLN_CMD_011	classroom_command	Grade 2	अपने साथी की मदद करो	ᱟᱢᱨᱮᱱ ᱜᱟᱛᱮ ᱜᱚᱲᱚ ᱟᱭ ᱢᱮ	आमरेन गाते गोड़ो आय मे
+FLN_CMD_012	classroom_command	Grade 2	यह पाठ ज़ोर से पढ़ो	ᱱᱚᱣᱟ ᱯᱟᱲᱦᱟᱣ ᱟᱲᱟᱝ ᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ	नोवा पाड़हाव आड़ांग ते पाड़हाव मे
+FLN_CMD_013	classroom_command	Grade 2	साफ़-साफ़ अक्षरों में लिखो	ᱥᱟᱯᱷᱟ-ᱥᱟᱯᱷᱟ ᱟᱠᱷᱚᱨ ᱛᱮ ᱚᱞ ᱢᱮ	साफा-साफा आखोर ते ओल मे
+FLN_CMD_014	classroom_command	Grade 1	हाथ ऊपर उठाओ	ᱟᱢᱟᱜ ᱛᱤ ᱪᱮᱛᱟᱱ ᱛᱩᱞ ᱢᱮ	आमाग ती चेतान तुल मे
+FLN_CMD_015	classroom_command	Grade 2	चलो, हम सब मिलकर गोल घेरा बनाएँ	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱩᱞᱟᱹᱭ ᱵᱮᱱᱟᱣᱟᱵᱚ	देलाबो सानाम को मेसा काते गुला़य बेनावाबो
+FLN_CMD_016	classroom_command	Grade 2	कचरा कूड़ेदान में डालो	ᱡᱟᱵᱽᱨᱟ ᱠᱩᱲᱟᱹᱫᱟᱱ ᱨᱮ ᱜᱤᱰᱤ ᱢᱮ	जाबरा कुड़ा़दान रे गिडी मे
+FLN_CMD_017	classroom_command	Grade 2	अपने बस्ते को व्यवस्थित रखो	ᱟᱢᱟᱜ ᱡᱷᱳᱞᱟ ᱥᱟᱡᱟᱣ ᱠᱟᱛᱮ ᱫᱚᱦᱚᱭ ᱢᱮ	आमाग झोला साजाव काते दोहोय मे
+FLN_CMD_018	classroom_command	Grade 2	अपनी-अपनी जगह पर वापस जाओ	ᱟᱯᱱᱟᱨ-ᱟᱯᱱᱟᱨ ᱡᱟᱜᱟ ᱛᱮ ᱨᱩᱣᱟᱹᱲ ᱯᱮ	आपनार-आपनार जागा ते रुवा़ड़ पे
+FLN_CMD_019	classroom_command	Grade 2	चलो, हम सब मिलकर प्रार्थना गाएँ	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧᱟᱵᱚ	देलाबो सानाम को मेसा काते बिन्ति सेरेञाबो
+FLN_CMD_020	classroom_command	Grade 1	सब मिलकर ताली बजाओ	ᱡᱚᱛᱚ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱟᱹᱞᱤ ᱛᱷᱟᱯᱟᱭ ᱯᱮ	जोतो को मेसा काते ता़ली थापाय पे
+FLN_CMD_021	classroom_command	Grade 3	जो पूछना है, बारी-बारी से पूछो	ᱡᱟᱦᱟᱸ ᱠᱩᱠᱞᱤ ᱢᱮᱱᱟᱜ-ᱟ, ᱵᱟᱨᱤ-ᱵᱟᱨᱤ ᱛᱮ ᱠᱩᱞᱤᱭ ᱯᱮ	जाहां कुकली मेनाग-आ, बारी-बारी ते कुलिय पे
+FLN_CMD_022	classroom_command	Grade 3	चित्र देखकर कहानी बताओ	ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ	चीता़र ञेल काते का़ह्नी ला़य मे
+FLN_CMD_023	classroom_command	Grade 3	अपना काम पूरा करके दिखाओ	ᱟᱢᱟᱜ ᱠᱟᱹᱢᱤ ᱯᱩᱨᱟᱹᱣ ᱠᱟᱛᱮ ᱩᱫᱩᱜ ᱢᱮ	आमाग का़मी पुरा़व काते उदुक मे
+FLN_CMD_024	classroom_command	Grade 3	कक्षा में दौड़ो मत, आराम से चलो	ᱪᱟᱱᱟᱪ ᱨᱮ ᱟᱞᱚᱯᱮ ᱫᱟᱹᱲᱟ, ᱵᱷᱟᱹᱜᱤ ᱛᱮ ᱛᱟᱲᱟᱢ ᱯᱮ	चानाच रे आलोपे दा़ड़ा, भागी ते ताड़ाम पे
+FLN_CMD_025	classroom_command	Grade 3	चलो, हम सब मिलकर गतिविधि शुरू करें	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱠᱟᱹᱢᱤᱦᱚᱨᱟ ᱮᱦᱚᱵᱟᱵᱚ	देलाबो सानाम को मेसा काते का़मीहोरा एह౉बाबो
+FLN_ENV_001	environment_realia	Grade 1	यह महुआ का पेड़ है	ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱛᱠᱚᱢ ᱫᱟᱨᱮ ᱠᱟᱱᱟ	नोवा दो मातकोम दारे काना
+FLN_ENV_002	environment_realia	Grade 1	साल का पत्ता हरा होता है	ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱮᱭᱟ	सारजोम साकाम हा़रिया़ड़ गेया
+FLN_ENV_003	environment_realia	Grade 1	मिट्टी के बर्तन में पानी रखो	ᱦᱟᱥᱟ ᱴᱩᱠᱩᱡ ᱨᱮ ᱫᱟᱜ ᱫᱚᱦᱚᱭ ᱢᱮ	हासा टुकुज रे दाग दोहोय मे
+FLN_ENV_004	environment_realia	Grade 1	गाय हमें दूध देती है	ᱜᱟᱹᱭ ᱫᱚ ᱛᱚᱣᱟᱭ ᱮᱢᱟᱵᱚᱱᱟ	गा़य दो तोवाय एमाबोना
+FLN_ENV_005	environment_realia	Grade 1	कुत्ता घर की रखवाली करता है	ᱥᱮᱛᱟ ᱫᱚ ᱚᱲᱟᱜ-ᱮ ᱨᱩᱠᱷᱤᱭᱟᱹᱭᱟ	सेता दो ओड़ाग-ए रुखिया़या
+FLN_ENV_006	environment_realia	Grade 1	बिल्ली दूध पीती है	ᱯᱩᱥᱤ ᱫᱚ ᱛᱚᱣᱟᱭ ᱧᱩᱭᱟ	पुसी दो तोवाय ञुआ
+FLN_ENV_007	environment_realia	Grade 1	चिड़िया आकाश में उड़ती है	ᱪᱮᱬᱮ ᱫᱚ ᱥᱮᱨᱢᱟ ᱨᱮᱭ ᱩᱰᱟᱹᱣᱜ-ᱟ	चेणे़ दो सेरमा रेय उडा़वग-आ
+FLN_ENV_008	environment_realia	Grade 1	नदी में बहुत पानी बह रहा है	ᱜᱟᱰᱟ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱜ ᱞᱤᱸᱜᱤᱱ ᱠᱟᱱᱟ	गाडा रे अ़डी आयमा दाग लिंगीन काना
+FLN_ENV_009	environment_realia	Grade 2	जंगल में बहुत सारे पेड़ हैं	ᱵᱤᱨ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ	बीर रे अ़डी आयमा दारे मेनाग-आ
+FLN_ENV_010	environment_realia	Grade 2	सूरज पूरब से निकलता है	ᱥᱤᱧ ᱪᱟᱸᱫᱚ ᱫᱚ ᱥᱟᱢᱟᱝ ᱠᱷᱚᱱᱮ ᱨᱟᱠᱟᱵ-ᱟ	सिञ चा़न्दो दो सामांग खोने राकाब-आ
+FLN_ENV_011	environment_realia	Grade 2	रात में चाँद चमकता है	ᱧᱤᱫᱟᱹ ᱨᱮ ᱧᱤᱫᱟᱹ ᱪᱟᱸᱫᱚᱭ ᱡᱩᱞᱩᱜ-ᱟ	ञिदा़ रे ञिदा़ चा़न्दोय जुलुग-आ
+FLN_ENV_012	environment_realia	Grade 2	आज बहुत तेज़ बारिश हो रही है	ᱛᱮᱦᱮᱧ ᱟᱹᱰᱤ ᱡᱩᱨ ᱫᱟᱜ ᱡᱟᱹᱲᱤ ᱮᱫᱟᱭ	तेहेञ अ़डी जुर दाग जा़ड़ी एदाय
+FLN_ENV_013	environment_realia	Grade 2	फूल पर तितली बैठी है	ᱵᱟᱦᱟ ᱨᱮ ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ	बाहा रे पिपिड़िया़ंग दुड़ुब आकाना
+FLN_ENV_014	environment_realia	Grade 2	सूखे पत्तों को इकट्ठा करो	ᱨᱚᱦᱚᱲ ᱥᱟᱠᱟᱢ ᱠᱚ ᱡᱟᱣᱨᱟᱭ ᱢᱮ	रोहोड़ साकाम को जावराय मे
+FLN_ENV_015	environment_realia	Grade 2	बैल खेत जोतता है	ᱰᱟᱝᱜᱽᱨᱟ ᱫᱚ ᱠᱷᱮᱛ-ᱮ ᱥᱤᱭᱟ	डांगरा दो खेत-ए सीया
+FLN_ENV_016	environment_realia	Grade 2	तालाब में मछलियाँ तैर रही हैं	ᱯᱩᱠᱷᱨᱤ ᱨᱮ ᱦᱟᱹᱠᱩ ᱠᱚ ᱯᱟᱹᱭᱨᱟᱹᱜ ᱠᱟᱱᱟ	पुखरी रे हा़कु को पा़यरा़ग काना
+FLN_ENV_017	environment_realia	Grade 3	आम का फल मीठा होता है	ᱩᱞ ᱡᱚ ᱫᱚ ᱦᱮᱲᱮᱢ ᱜᱮᱭᱟ	उल जो दो हेड़ेम गेया
+FLN_ENV_018	environment_realia	Grade 3	कौआ पेड़ की डाल पर बैठा है	ᱠᱟᱣᱟ ᱫᱚ ᱫᱟᱨᱮ ᱰᱟᱹᱨ ᱨᱮᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ	कावा दो दारे डा़र रेय दुड़ुब आकाना
+FLN_ENV_019	environment_realia	Grade 3	साँप ज़मीन के बिल में रहता है	ᱵᱤᱧ ᱫᱚ ᱦᱟᱥᱟ ᱵᱷᱩᱜᱟᱹᱜ ᱨᱮᱭ ᱛᱟᱦᱮᱸᱱᱟ	बिञ दो हासा भुगा़ग रेय ताहे़ना
+FLN_ENV_020	environment_realia	Grade 3	धान पकने पर पीला हो जाता है	ᱦᱳᱲᱳ ᱵᱤᱞᱤ ᱞᱮᱱᱠᱷᱟᱱ ᱥᱟᱥᱟᱝ ᱜᱮ ᱧᱮᱞᱚᱜ-ᱟ	होड़ो बीली लेनखान सासांग गे ञेल౉ग-ᱟ
+FLN_ENV_021	environment_realia	Grade 3	हवा चलने से पत्ते हिल रहे हैं	ᱦᱚᱭ ᱛᱮ ᱥᱟᱠᱟᱢ ᱠᱚ ᱦᱤᱞᱟᱹᱣᱜ ᱠᱟᱱᱟ	होय ते साकाम को हीलावग काना
+FLN_ENV_022	environment_realia	Grade 3	आग में सूखी लकड़ियाँ डालो	ᱥᱮᱸᱜᱮᱞ ᱨᱮ ᱨᱚᱦᱚᱲ ᱥᱟᱦᱟᱱ ᱠᱷᱟᱸᱡᱚᱭ ᱢᱮ	सेंगेल रे रोहोड़ साहान खा़न्जोय मे
+FLN_ENV_023	environment_realia	Grade 3	पहाड़ बहुत ऊँचा है	ᱵᱩᱨᱩ ᱫᱚ ᱟᱹᱰᱤ ᱩᱥᱩᱞ ᱜᱮᱭᱟ	बुरु दो अ़डी उसुल गेया
+FLN_ENV_024	environment_realia	Grade 3	पेड़ की छाया में बैठो	ᱫᱟᱨᱮ ᱩᱢᱩᱞ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ	दारे उमुल रे दुड़ुब मे
+FLN_ENV_025	environment_realia	Grade 3	चलो हम सब मिलकर एक नया पौधा लगाएँ	ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱤᱫᱴᱟᱝ ᱱᱟᱣᱟ ᱫᱟᱨᱮᱵᱚ ᱨᱚᱦᱚᱭᱟ	देलाबो सानाम को मेसा काते मिदटांग नावा दारेबो रोहोया
+FLN_KIN_001	kinship_community	Grade 1	मेरी माँ मुझे प्यार करती है	ᱤᱧ ᱟᱭᱳ ᱫᱚ ᱤᱧᱮ ᱫᱩᱞᱟᱹᱲᱟᱹᱧᱟ	इञ आयो दो इञे दुला़ड़ा़ञा
+FLN_KIN_002	kinship_community	Grade 1	पिताजी खेत में काम करते हैं	ᱵᱟᱵᱟ ᱫᱚ ᱠᱷᱮᱛ ᱨᱮᱭ ᱠᱟᱹᱢᱤᱭᱟ	बाबा दो खेत रेय का़मीया
+FLN_KIN_003	kinship_community	Grade 1	यह मेरा छोटा भाई है	ᱱᱩᱭ ᱫᱚ ᱤᱧᱤᱡ ᱵᱚᱠᱚᱧ ᱠᱚᱲᱟ ᱠᱟᱱᱟᱭ	नुय दो इञिज बोकोञ कोड़ा कानाय
+FLN_KIN_004	kinship_community	Grade 1	मेरी बड़ी बहन स्कूल जा रही है	ᱤᱧᱤᱡ ᱢᱟᱨᱟᱝ ᱫᱟᱹᱭ ᱟᱥᱲᱟ ᱛᱮᱭ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ	इञिज मारांग दा़य आसड़ा तेय चालाग काना
+FLN_KIN_005	kinship_community	Grade 1	शिक्षक हमें पढ़ा रहे हैं	ᱢᱟᱪᱮᱛ ᱫᱚ ᱟᱵᱚᱭ ᱯᱟᱲᱦᱟᱣᱮᱫ ᱵᱚᱱᱟ	माचेत दो आबोय पाड़हावेद बोना
+FLN_KIN_006	kinship_community	Grade 1	दादाजी हमें कहानी सुनाते हैं	ᱜᱚᱲᱚᱢ ᱦᱟᱲᱟᱢ ᱫᱚ ᱠᱟᱹᱦᱱᱤᱭ ᱞᱟᱹᱭᱟᱵᱚᱱᱟ	गोड़ोम हाड़ाम दो का़हनीय ला़याबोना
+FLN_KIN_007	kinship_community	Grade 1	दादी माँ बहुत प्यार से खाना खिलाती हैं	ᱜᱚᱲᱚᱢ ᱵᱩᱰᱷᱤ ᱫᱚ ᱟᱹᱰᱤ ᱫᱩᱞᱟᱹᱲ ᱛᱮ ᱡᱚᱢᱮ ᱮᱢᱟᱵᱚᱱᱟ	गोड़ोम बुढ़ी दो अ़डी दुला़ड़ ते जोमे एमाबोना
+FLN_KIN_008	kinship_community	Grade 1	वह मेरा सबसे अच्छा दोस्त है	ᱩᱱᱤ ᱫᱚ ᱤᱧᱤᱡ ᱡᱚᱛᱚ ᱠᱷᱚᱱ ᱵᱷᱟᱹᱜᱤ ᱜᱟᱛᱮ ᱠᱟᱱᱟᱭ	उनी दो इञिज जोतो खोन भागी गाते कानाय
+FLN_KIN_009	kinship_community	Grade 2	सभी बच्चे अपनी कक्षा में बैठो	ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱟᱯᱱᱟᱨ ᱪᱟᱱᱟᱪ ᱨᱮ ᱫᱩᱲᱩᱵ ᱯᱮ	सानाम गिदरा़ आपनार चानाच रे दुड़ुब पे
+FLN_KIN_010	kinship_community	Grade 2	गाँव के मुखिया का नाम क्या है?	ᱟᱹᱛᱩ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱧᱡᱷᱤ ᱦᱟᱲᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?	आ़तु रीनिज मा़ञ्झी हाड़ामाग ञुतुम दो चेद?
+FLN_KIN_011	kinship_community	Grade 2	डॉक्टर बीमार लोगों का इलाज करते हैं	ᱰᱟᱠᱛᱚᱨ ᱫᱚ ᱨᱩᱣᱟᱹ ᱦᱚᱲ ᱠᱚᱭ ᱨᱟᱱ ᱠᱚᱣᱟ	डाकतर दो रुवा़ होड़ कोय रान कोवा
+FLN_KIN_012	kinship_community	Grade 2	किसान हमारे लिए अनाज उगाता है	ᱪᱟᱥᱤ ᱦᱚᱲ ᱫᱚ ᱟᱵᱚ ᱞᱟᱹᱜᱤᱫ ᱡᱚᱢᱟᱜ-ᱮ ᱪᱟᱥᱟ	चासी होड़ दो आबो ला़गिद जोमाग-ए चासा
+FLN_KIN_013	kinship_community	Grade 2	लड़कियाँ मैदान में खेल रही हैं	ᱠᱩᱲᱤ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱴᱟᱺᱰᱤ ᱨᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ	कुड़ी गिदरा़ को टा़न्डी रेको एनेज काना
+FLN_KIN_014	kinship_community	Grade 2	लड़के गेंद से खेल रहे हैं	ᱠᱚᱲᱟ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱵᱚᱞ ᱛᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ	कोड़ा गिदरा़ को बोल तेको एनेज काना
+FLN_KIN_015	kinship_community	Grade 2	हम सब मिलकर अपने बड़ों का आदर करेंगे	ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱟᱨᱟᱝ ᱦᱚᱲ ᱠᱚᱵᱚ ᱢᱟᱱᱟᱣ ᱠᱚᱣᱟ	आबो सानाम को मेसा काते मारांग होड़ कोबो मानाव कोवा
+FLN_KIN_016	kinship_community	Grade 3	चाचा बाज़ार से नई किताबें लाए हैं	ᱠᱟᱠᱟ ᱫᱚ ᱵᱟᱡᱟᱨ ᱠᱷᱚᱱ ᱱᱟᱣᱟ ᱯᱩᱛᱷᱤ ᱠᱚᱭ ᱟᱹᱜᱩ ᱟᱠᱟᱫᱟ	काका दो बाजार खोन नावा पुथि कोय आ़गु आकादा
+FLN_KIN_017	kinship_community	Grade 3	मेरी चाची बहुत स्वादिष्ट खाना बनाती हैं	ᱤᱧ ᱠᱟᱹᱠᱤ ᱫᱚ ᱟᱹᱰᱤ ᱥᱤᱵᱤᱞ ᱡᱚᱢᱟᱜ-ᱮ ᱛᱮᱭᱟᱨᱟ	इञ का़की दो अ़डी सिबिल जोमाग-ए तेयारा
+FLN_KIN_018	kinship_community	Grade 3	हम सब अपने गाँव को साफ़ रखेंगे	ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱵᱚᱣᱟᱜ ᱟᱹᱛᱩ ᱥᱟᱯᱷᱟᱵᱚ ᱫᱚᱦᱚᱭᱟ	आबो सानाम को आबोवाग आ़तु साफाबो दोहोया
+FLN_KIN_019	kinship_community	Grade 3	अतिथि को पानी पिलाओ	ᱯᱮᱲᱟ ᱦᱚᱲ ᱫᱟᱜ ᱮᱢᱟᱭ ᱢᱮ	पेड़ा होड़ दाग एमाय मे
+FLN_KIN_020	kinship_community	Grade 3	कक्षा का मॉनिटर कौन है?	ᱪᱟᱱᱟᱪ ᱨᱤᱱᱤᱡ ᱢᱩᱠᱷᱤᱭᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?	चानाच रीनिज मुखिया़ दो ओकोय कानाय?
+FLN_KIN_021	kinship_community	Grade 3	सब मिलकर प्रार्थना गाओ	ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧ ᱯᱮ	सानाम को मेसा काते बिनती सेरेञ पे
+FLN_KIN_022	kinship_community	Grade 3	अपने सहपाठी के साथ मिलकर पढ़ो	ᱟᱢᱨᱮᱱ ᱯᱟᱹᱴᱷᱩᱣᱟᱹ ᱜᱟᱛᱮ ᱥᱟᱶ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ	आमरेन पा़ठुवा़ गाते साव मेसा काते पाड़हाव मे
+FLN_KIN_023	kinship_community	Grade 3	बगीचे के माली पौधे सींच रहे हैं	ᱵᱟᱜᱟᱱ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱞᱤ ᱫᱚ ᱫᱟᱨᱮ ᱨᱮ ᱫᱟᱜ-ᱮ ᱫᱩᱞᱮᱫᱟ	बागान रीनिज मा़ली दो दारे रे दाग-ए दुलेदा
+FLN_KIN_024	kinship_community	Grade 3	सफाईकर्मी विद्यालय को स्वच्छ रखते हैं	ᱥᱟᱯᱷᱟᱭ ᱦᱚᱲ ᱫᱚ ᱟᱥᱲᱟ ᱥᱟᱯᱷᱟᱭ ᱫᱚᱦᱚᱭᱟ	साफाय होड़ दो आसड़ा साफाय दोहोया
+FLN_KIN_025	kinship_community	Grade 3	हम सब मिलकर अपने समाज को आगे बढ़ाएँगे	ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱟᱵᱚᱣᱟᱜ ᱥᱟᱶᱛᱟᱵᱚ ᱞᱟᱦᱟᱭᱟ	आबो सानाम को मेसा काते आबोवाग सावंताबो लाहाया
+FLN_BOD_001	body_parts_health	Grade 1	अपने सिर को छुओ	ᱟᱢᱟᱜ ᱵᱚᱦᱚᱜ ᱡᱚᱴᱮᱫ ᱢᱮ	आमाग बोहोग जोतेद मे
+FLN_BOD_002	body_parts_health	Grade 1	अपनी आँखें बंद करो	ᱟᱢᱟᱜ ᱢᱮᱫ ᱞᱟᱦᱩᱴ ᱢᱮ	आमाग मेद लाहुट मे
+FLN_BOD_003	body_parts_health	Grade 1	कान से हम सुनते हैं	ᱞᱩᱛᱩᱨ ᱛᱮ ᱟᱵᱚᱵᱚ ᱟᱧᱡᱚᱢᱟ	लुतुर ते आबोबो आंजोमा
+FLN_BOD_004	body_parts_health	Grade 1	नाक से हम साँस लेते हैं	ᱢᱩᱸ ᱛᱮ ᱟᱵᱚᱵᱚ ᱥᱟᱦᱮᱫᱟ	मुँ ते आबोबो साहेदा
+FLN_BOD_005	body_parts_health	Grade 1	अपने दाँत साफ़ करो	ᱟᱢᱟᱜ ᱫᱟᱛᱟ ᱥᱟᱯᱷᱟᱭ ᱢᱮ	आमाग दाता साफाय मे
+FLN_BOD_006	body_parts_health	Grade 1	जीभ से स्वाद का पता चलता है	ᱟᱞᱟᱝ ᱛᱮ ᱥᱤᱵᱤᱞ ᱵᱟᱰᱟᱭᱚᱜ-ᱟ	आलांग ते सिबिल बाडाय౉ग-आ
+FLN_BOD_007	body_parts_health	Grade 1	हाथों से ताली बजाओ	ᱛᱤ ᱛᱮ ᱛᱷᱟᱹᱭᱟᱹᱲ ᱢᱮ	ती ते था़य़ा़ड़ मे
+FLN_BOD_008	body_parts_health	Grade 1	पैरों से कदम ताल करो	ᱡᱟᱸᱜᱟ ᱛᱮ ᱛᱟᱲᱟᱢ ᱢᱮ	जा़न्गा ते ताड़ाम मे
+FLN_BOD_009	body_parts_health	Grade 1	खाना खाने से पहले हाथ धोओ	ᱡᱚᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱟᱹᱨᱩᱵ ᱢᱮ	जोम माड़ांग रे ती आ़रुब मे
+FLN_BOD_010	body_parts_health	Grade 1	अपने बाल में कंघी करो	ᱟᱢᱟᱜ ᱩᱵ ᱱᱟᱹᱠᱤᱡ ᱢᱮ	आमाग उब ना़किज मे
+FLN_BOD_011	body_parts_health	Grade 2	नाखूनों को साफ़ और छोटा रखो	ᱨᱟᱢᱟ ᱠᱚ ᱥᱟᱯᱷᱟ ᱟᱨ ᱠᱷᱟᱴᱚ ᱫᱚᱦᱚᱭ ᱢᱮ	रामा को साफा आर खाटो दोहोय मे
+FLN_BOD_012	body_parts_health	Grade 2	साफ़ पानी ही पीना चाहिए	ᱥᱟᱯᱷᱟ ᱫᱟᱜ ᱜᱮ ᱧᱩ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ	साफा दाग गे ञु ला़कती काना
+FLN_BOD_013	body_parts_health	Grade 2	प्रतिदिन स्नान करना अच्छी आदत है	ᱫᱤᱱᱟᱹᱢ ᱦᱤᱞᱚᱜ ᱩᱢᱩᱜ ᱫᱚ ᱵᱷᱟᱹᱜᱤ ᱦᱮᱣᱟ ᱠᱟᱱᱟ	दीना़म हीलोग उमुग दो भागी हेवा काना
+FLN_BOD_014	body_parts_health	Grade 2	खाँसते समय मुँह पर हाथ रखो	ᱠᱷᱚᱜ ᱡᱚᱠᱷᱟᱜ ᱢᱚᱪᱟ ᱨᱮ ᱛᱤ ᱫᱚᱦᱚᱭ ᱢᱮ	खोग जोखाग मोचा रे ती दोहोय मे
+FLN_BOD_015	body_parts_health	Grade 2	धूल से अपनी आँखों को बचाओ	ᱫᱷᱩᱲᱤ ᱠᱷᱚᱱ ᱟᱢᱟᱜ ᱢᱮᱫ ᱵᱟᱧᱪᱟᱣ ᱢᱮ	धुड़ी खोन आमाग मेद बा़ञचाव मे
+FLN_BOD_016	body_parts_health	Grade 2	साफ़ कपड़े पहनकर स्कूल आओ	ᱥᱟᱯᱷᱟ ᱞᱩᱜᱽᱲᱤ ᱦᱚᱨᱚᱜ ᱠᱟᱛᱮ ᱟᱥᱲᱟ ᱦᱤᱡᱩᱜ ᱢᱮ	साफा लुगड़ी होरोग काते आसड़ा हीजुग मे
+FLN_BOD_017	body_parts_health	Grade 2	समय पर सोओ और सुबह जल्दी जागो	ᱚᱠᱛᱚ ᱨᱮ ᱜᱤᱛᱤᱡ ᱢᱮ ᱟᱨ ᱥᱮᱛᱟᱜ ᱨᱮ ᱵᱮᱨᱮᱫ ᱢᱮ	ओकतो रे गीतीज मे आर सेताग रे बेरेद मे
+FLN_BOD_018	body_parts_health	Grade 2	ताज़ा फल और हरी सब्ज़ियाँ खाओ	ᱵᱤᱞᱤ ᱡᱚ ᱟᱨ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱩᱛᱩ ᱡᱚᱢ ᱢᱮ	बीली जो आर हा़रिया़ड़ उतु जोम मे
+FLN_BOD_019	body_parts_health	Grade 3	व्यायाम करने से शरीर मज़बूत बनता है	ᱠᱟᱹᱥᱨᱟᱹᱛ ᱞᱮᱠᱷᱟᱱ ᱦᱚᱲᱢᱚ ᱠᱮᱴᱮᱡᱚᱜ-ᱟ	का़सरा़त लेखान होड़मो केटेज౉ग-आ
+FLN_BOD_020	body_parts_health	Grade 3	अगर तबियत खराब लगे तो शिक्षक को बताओ	ᱦᱚᱲᱢᱚ ᱵᱟᱹᱲᱤᱡ ᱵᱩᱡᱷᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱢᱟᱪᱮᱛ ᱞᱟᱹᱭᱟᱭ ᱢᱮ	होड़मो बा़ड़िज बुझा़व लेखान माचेत ला़याय मे
+FLN_BOD_021	body_parts_health	Grade 3	खुले में रखा खाना मत खाओ	ᱚᱴᱟᱝ ᱨᱮ ᱫᱚᱦᱚ ᱟᱠᱟᱱ ᱡᱚᱢᱟᱜ ᱟᱞᱚᱢ ᱡᱚᱢᱟ	ओटांग रे दोहो आकान जोमाग आलोम जोमा
+FLN_BOD_022	body_parts_health	Grade 3	गंदे हाथों से आँखों को मत मलो	ᱵᱟᱹᱲᱤᱡ ᱛᱤ ᱛᱮ ᱢᱮᱫ ᱟᱞᱚᱢ ᱜᱟᱹᱥᱤᱭᱟ	बा़ड़िज ती ते मेद आलोम गा़सीया
+FLN_BOD_023	body_parts_health	Grade 3	कक्षा में हमेशा सीधे बैठकर पढ़ो	ᱪᱟᱱᱟᱪ ᱨᱮ ᱡᱟᱣᱜᱮ ᱥᱚᱡᱷᱮ ᱫᱩᱲᱩᱵ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ	चानाच रे जावगे सोज्हे दुड़ुब काते पाड़हाव मे
+FLN_BOD_024	body_parts_health	Grade 3	खेलने के बाद हाथ-मुँह धोना चाहिए	ᱮᱱᱮᱡ ᱛᱟᱭᱚᱢ ᱛᱤ-ᱢᱚᱪᱟ ᱟᱹᱨᱩᱵ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ	एनेज तायोम ती-मोचा आ़रुब ला़कती काना
+FLN_BOD_025	body_parts_health	Grade 3	स्वस्थ शरीर में ही स्वस्थ मन रहता है	ᱱᱤᱨᱚᱜ ᱦᱚᱲᱢᱚ ᱨᱮᱜᱮ ᱱᱟᱯᱟᱭ ᱢᱚᱱᱮ ᱛᱟᱦᱮᱸᱱᱟ	नीरोग होड़मो रेगे नापाय मोने ताहे़ना
+FLN_INQ_001	inquiry_evaluation	Grade 1	यह क्या है?	ᱱᱚᱣᱟ ᱫᱚ ᱪᱮᱫ ᱠᱟᱱᱟ?	नोवा दो चेद काना?
+FLN_INQ_002	inquiry_evaluation	Grade 1	तुम्हारा नाम क्या है?	ᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?	आमाग ञुतुम दो चेद?
+FLN_INQ_003	inquiry_evaluation	Grade 1	तुम कहाँ रहते हो?	ᱟᱢ ᱫᱚ ᱚᱠᱟᱨᱮᱢ ᱛᱟᱦᱮᱸᱱᱟ?	आम दो ओकारेम ताहे़ना?
+FLN_INQ_004	inquiry_evaluation	Grade 1	यह चित्र किसका है?	ᱱᱚᱣᱟ ᱪᱤᱛᱟᱹᱨ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱠᱟᱱᱟ?	नोवा चीता़र दो ओकोयाग काना?
+FLN_INQ_005	inquiry_evaluation	Grade 1	यह कौन सा रंग है?	ᱱᱚᱣᱟ ᱫᱚ ᱚᱠᱟ ᱨᱚᱝ ᱠᱟᱱᱟ?	नोवा दो ओका रंग काना?
+FLN_INQ_006	inquiry_evaluation	Grade 1	यहाँ आओ और इसे देखो	ᱱᱚᱸᱰᱮ ᱦᱤᱡᱩᱜ ᱢᱮ ᱟᱨ ᱱᱚᱣᱟ ᱧᱮᱞ ᱢᱮ	नोंडे हीजुग मे आर नोवा ञेल मे
+FLN_INQ_007	inquiry_evaluation	Grade 1	क्या तुम्हें समझ आया?	ᱟᱢ ᱫᱚᱢ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱟ?	आम दोम बुझा़व केदा?
+FLN_INQ_008	inquiry_evaluation	Grade 1	फिर से कोशिश करो	ᱟᱨᱦᱚᱸ ᱢᱤᱫ ᱫᱷᱟᱣ ᱠᱩᱨᱩᱢᱩᱴᱩᱭ ᱢᱮ	आरहों मिद धाव कुरुमुटुय मे
+FLN_INQ_009	inquiry_evaluation	Grade 2	किसके पास पेंसिल नहीं है?	ᱚᱠᱚᱭ ᱴᱷᱮᱱ ᱯᱮᱱᱥᱤᱞ ᱵᱟᱹᱱᱩᱜ-ᱟ?	ओकोय ठेन पेन्सिल बा़नुग-आ?
+FLN_INQ_010	inquiry_evaluation	Grade 2	इस प्रश्न का उत्तर कौन जानता है?	ᱱᱚᱣᱟ ᱠᱩᱠᱞᱤ ᱨᱮᱱᱟᱜ ᱛᱮᱞᱟ ᱚᱠᱚᱭᱮ ᱵᱟᱰᱟᱭᱟ?	नोवा कुकली रेनाग तेला ओकोये बाडाया?
+FLN_INQ_011	inquiry_evaluation	Grade 2	ज़ोर से बोलो ताकि सब सुन सकें	ᱟᱲᱟᱝ ᱛᱮ ᱨᱚᱲ ᱢᱮ ᱡᱮᱢᱚᱱ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱧᱡᱚᱢ ᱫᱟᱲᱮᱭᱟᱜ	आड़ांग ते रोड़ मे जेमोन सानाम को आंजोम दाड़ेयाग
+FLN_INQ_012	inquiry_evaluation	Grade 2	क्या आपने अपना गृहकार्य पूरा किया?	ᱟᱢ ᱫᱚ ᱚᱲᱟᱜ ᱠᱟᱹᱢᱤᱢ ᱯᱩᱨᱟᱹᱣ ᱟᱠᱟᱫᱟ?	आम दो ओड़ाग का़मीम पुरा़व आकादा?
+FLN_INQ_013	inquiry_evaluation	Grade 2	इस शब्द का पहला अक्षर क्या है?	ᱱᱚᱣᱟ ᱟᱹᱲᱟᱹ ᱨᱮᱱᱟᱜ ᱯᱟᱹᱦᱤᱞ ᱟᱠᱷᱚᱨ ᱫᱚ ᱪᱮᱫ?	नोवा आ़ड़ा़ रेनाग पा़हिल आखोर दो चेद?
+FLN_INQ_014	inquiry_evaluation	Grade 2	कोई संदेह हो तो मुझसे पूछो	ᱡᱟᱦᱟᱸᱱᱟᱜ ᱠᱩᱠᱞᱤ ᱛᱟᱦᱮᱸᱱ ᱠᱷᱟᱱ ᱤᱧ ᱠᱩᱞᱤᱭᱤᱧ ᱢᱮ	जाहानाग कुकली ताहे़न खान इञ कुलीयीञ मे
+FLN_INQ_015	inquiry_evaluation	Grade 2	अब किसकी बारी है?	ᱱᱤᱛᱚᱜ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱯᱟᱞᱟ ᱠᱟᱱᱟ?	नीत౉ग दो ओकोयाग पाला काना?
+FLN_INQ_016	inquiry_evaluation	Grade 2	बोलने में संकोच मत करो	ᱨᱚᱲ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱚᱢ ᱞᱟᱡᱟᱣᱜ-ᱟ	रोड़ ला़गिद आलोम लाजावग-आ
+FLN_INQ_017	inquiry_evaluation	Grade 3	आज आपने क्या नया सीखा?	ᱛᱮᱦᱮᱧ ᱟᱢ ᱪᱮᱫ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟᱢ ᱪᱮᱫ ᱠᱮᱫᱟ?	तेहेञ आम चेद नावा काथाम चेद केदा?
+FLN_INQ_018	inquiry_evaluation	Grade 3	इस कहानी से हमें क्या सीख मिलती है?	ᱱᱚᱣᱟ ᱠᱟᱹᱦᱱᱤ ᱠᱷᱚᱱ ᱟᱵᱚ ᱪᱮᱫ ᱥᱤᱠᱷᱱᱟᱹᱛᱵᱚ ᱧᱟᱢᱮᱫᱟ?	नोवा का़हनी खोन आबो चेद सीखना़तबो ञामेदा?
+FLN_INQ_019	inquiry_evaluation	Grade 3	एक छोटी सी कहानी सुनाओ	ᱢᱤᱫᱴᱟᱝ ᱠᱟᱹᱴᱤᱡ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ	मिदटांग का़टीज का़हनी ला़य मे
+FLN_INQ_020	inquiry_evaluation	Grade 3	आज देर से आने का क्या कारण था?	ᱛᱮᱦᱮᱧ ᱵᱤᱞᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱨᱮᱱᱟᱜ ᱪᱮᱫ ᱠᱟᱨᱚᱱ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ?	तेहेञ बीलोम ते हीजुग रेनाग चेद कारोन ताहे़ काना?
+FLN_INQ_021	inquiry_evaluation	Grade 3	उत्तर देने से पहले हाथ उठाओ	ᱛᱮᱞᱟ ᱮᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱛᱩᱞ ᱢᱮ	तेला एम माड़ांग रे ती तुल मे
+FLN_INQ_022	inquiry_evaluation	Grade 3	सवाल को ध्यान से सुनो	ᱠᱩᱠᱞᱤ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱢᱮ	कुकली धेयान ते आंजोम मे
+FLN_INQ_023	inquiry_evaluation	Grade 3	स्लेट पर अपनी पसंद का चित्र बनाओ	ᱥᱞᱮᱴ ᱨᱮ ᱟᱯᱱᱟᱨ ᱠᱩᱥᱤ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ	स्लेट रे आपनार कुसी चीता़र बेनाव मे
+FLN_INQ_024	inquiry_evaluation	Grade 3	क्या आप इस वाक्य को पढ़ सकते हैं?	ᱟᱢ ᱱᱚᱣᱟ ᱟᱹᱭᱟᱹᱛ ᱯᱟᱲᱦᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ?	आम नोवा आ़य़ात पाड़हाव दाड़ेयाग-आ?
+FLN_INQ_025	inquiry_evaluation	Grade 3	आगे आकर सबको पढ़कर सुनाओ	ᱥᱟᱢᱟᱝ ᱛᱮ ᱦᱮᱡ ᱠᱟᱛᱮ ᱥᱟᱱᱟᱢ ᱠᱚ ᱯᱟᱲᱦᱟᱣ ᱟᱧᱡᱚᱢ ᱟᱠᱚ ᱢᱮ	सामांग ते हेज काते सानाम को पाड़हाव आंजोम आको मे
+FLN_SOC_001	socio_emotional_praise	Grade 1	नमस्ते / जोहार	ᱡᱚᱦᱟᱨ	जोहार
+FLN_SOC_002	socio_emotional_praise	Grade 1	शुभ प्रभात	ᱥᱟᱹᱜᱩᱱ ᱥᱮᱛᱟᱜ	सा़गुन सेताग
+FLN_SOC_003	socio_emotional_praise	Grade 1	शुभ दोपहर	ᱥᱟᱹᱜᱩᱱ ᱛᱤᱠᱤᱱ	सा़गुन तीकीन
+FLN_SOC_004	socio_emotional_praise	Grade 1	शुभ संध्या	ᱥᱟᱹᱜᱩᱱ ᱛᱟᱹᱨᱟᱹᱥᱤᱧ	सा़गुन ता़रा़सीञ
+FLN_SOC_005	socio_emotional_praise	Grade 1	स्वागत है	ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ	सा़गुन दाराम
+FLN_SOC_006	socio_emotional_praise	Grade 1	बहुत अच्छा प्रयास किया	ᱟᱹᱰᱤ ᱢᱚᱡᱽ ᱠᱩᱨᱩᱢᱩᱴᱩ	अ़डी मोज कुरुमुटु
+FLN_SOC_007	socio_emotional_praise	Grade 1	शाबाश, बहुत बढ़िया!	ᱟᱹᱰᱤ ᱵᱷᱟᱹᱜᱤ!	अ़डी भागी!
+FLN_SOC_008	socio_emotional_praise	Grade 1	धन्यवाद	ᱥᱟᱨᱦᱟᱣ	सारहाव
+FLN_SOC_009	socio_emotional_praise	Grade 2	हमेशा सच बोलो	ᱡᱟᱣᱜᱮ ᱥᱟᱹᱨᱤ ᱠᱟᱛᱷᱟ ᱨᱚᱲ ᱢᱮ	जावगे सा़री काथा रोड़ मे
+FLN_SOC_010	socio_emotional_praise	Grade 2	सबके साथ मिलकर रहो	ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱟᱶ ᱱᱟᱯᱟᱭ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱯᱮ	सानाम को साव नापाय ते ताहे़न पे
+FLN_SOC_011	socio_emotional_praise	Grade 2	आपस में झगड़ा मत करो	ᱟᱯᱱᱟᱨ ᱛᱟᱞᱟ ᱨᱮ ᱟᱞᱚᱯᱮ ᱛᱚᱯᱚᱲᱟ	आपनार ताला रे आलोपे तोपोड़ा
+FLN_SOC_012	socio_emotional_praise	Grade 2	अपनी चीज़ें बाँटकर खेलो	ᱟᱯᱱᱟᱨ ᱡᱤᱱᱤᱥ ᱦᱟᱹᱴᱤᱧ ᱠᱟᱛᱮ ᱮᱱᱮᱡ ᱯᱮ	आपनार जीनिस हा़टीञ काते एनेज पे
+FLN_SOC_013	socio_emotional_praise	Grade 2	गलती होने पर क्षमा माँगो	ᱵᱷᱩᱞ ᱞᱮᱠᱷᱟᱱ ᱤᱠᱟᱹ ᱠᱷᱚᱡᱽ ᱢᱮ	भूल लेखान ईका़ खोज मे
+FLN_SOC_014	socio_emotional_praise	Grade 2	दूसरों को क्षमा करना सीखो	ᱮᱴᱟᱜ ᱦᱚᱲ ᱤᱠᱟᱹ ᱠᱟᱠᱚ ᱪᱮᱫ ᱢᱮ	एटाग होड़ ईका़ काको चेद मे
+FLN_SOC_015	socio_emotional_praise	Grade 2	जीव-जंतुओं पर दया करो	ᱡᱤᱵᱽ-ᱡᱤᱭᱟᱹᱞᱤ ᱠᱚ ᱫᱟᱭᱟ ᱠᱚ ᱢᱮ	जीब-जीया़ली को दया को मे
+FLN_SOC_016	socio_emotional_praise	Grade 2	हमेशा हँसते और मुस्कुराते रहो	ᱡᱟᱣᱜᱮ ᱞᱟᱸᱫᱟᱭ ᱢᱮ ᱟᱨ ᱨᱟᱹᱥᱠᱟᱹ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ	जावगे ला़न्दाय मे आर रा़सका़ ते ताहे़न मे
+FLN_SOC_017	socio_emotional_praise	Grade 3	मुश्किल समय में हिम्मत मत हारो	ᱢᱩᱦᱤᱢ ᱚᱠᱛᱚ ᱨᱮ ᱢᱚᱱᱮ ᱟᱞᱚᱢ ᱠᱷᱟᱴᱚᱭᱟ	मुहीम ओकतो रे मोने आलोम खाटोया
+FLN_SOC_018	socio_emotional_praise	Grade 3	आप यह काम ज़रूर कर सकते हैं	ᱟᱢ ᱱᱚᱣᱟ ᱠᱟᱹᱢᱤ ᱱᱤᱦᱟᱹᱛᱤᱢ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ	आम नोवा का़मी नीहा़तीम दाड़ेयाग-आ
+FLN_SOC_019	socio_emotional_praise	Grade 3	हम सब मिलकर एक समान हैं	ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱚᱢᱟᱱ ᱜᱮᱭᱟᱵᱚ	आबो सानाम को सोमान गेयाबो
+FLN_SOC_020	socio_emotional_praise	Grade 3	अपने विद्यालय से प्रेम करो	ᱟᱯᱱᱟᱨ ᱟᱥᱲᱟ ᱫᱩᱞᱟᱹᱲ ᱢᱮ	आपनार आसड़ा दुला़ड़ मे
+FLN_SOC_021	socio_emotional_praise	Grade 3	हमेशा नई बातें सीखते रहो	ᱡᱟᱣᱜᱮ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟ ᱪᱮᱫᱚᱜ ᱛᱮᱜᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ	जावगे नावा काथा चेद౉ग तेगे ताहे़न मे
+FLN_SOC_022	socio_emotional_praise	Grade 3	कल हम सब फिर मिलेंगे	ᱜᱟᱯᱟ ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚᱵᱚ ᱧᱟᱯᱟᱢᱟ	गापा आबो सानाम कोबो ञापामा
+FLN_SOC_023	socio_emotional_praise	Grade 3	सदा खुश और प्रसन्न रहो	ᱡᱟᱣᱜᱮ ᱨᱟᱹᱥᱠᱟᱹ ᱟᱨ ᱥᱩᱞᱩᱠ ᱨᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ	जावगे रा़सका़ आर सुलुक रे ताहे़न मे
+FLN_SOC_024	socio_emotional_praise	Grade 3	आपने बहुत सुंदर चित्र बनाया है	ᱟᱢ ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱪᱤᱛᱟᱹᱨᱮᱢ ᱵᱮᱱᱟᱣ ᱟᱠᱟᱫᱟ	आम अ़डी नापाय चीता़रेम बेनाव आकादा
+FLN_SOC_025	socio_emotional_praise	Grade 3	आपकी लिखावट बहुत साफ़ है	ᱟᱢᱟᱜ ᱚᱞ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱯᱷᱟ ᱜᱮᱭᱟ	आमाग ओल दो अ़डी साफा गेया
+FLN_NUM_026	numeracy	Grade 1	छह से दस तक गिनो	ᱛᱩᱨᱩᱭ ᱠᱷᱚᱱ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ	तुरुय खोन गेल ध़ाबिज लेखाय मे
+FLN_NUM_027	numeracy	Grade 1	संख्या छह	ᱛᱩᱨᱩᱭ	तुरुय
+FLN_NUM_028	numeracy	Grade 1	संख्या सात	ᱮᱭᱟᱭ	एयाय
+FLN_NUM_029	numeracy	Grade 1	संख्या आठ	ᱤᱨᱟᱹᱞ	इरा़ल
+FLN_NUM_030	numeracy	Grade 1	संख्या नौ	ᱟᱨᱮ	आरे
+FLN_NUM_031	numeracy	Grade 1	संख्या दस	ᱜᱮᱞ	गेल
+FLN_NUM_032	numeracy	Grade 2	संख्या बीस	ᱤᱥᱤ	इसी
+FLN_NUM_033	numeracy	Grade 2	संख्या पचास	ᱵᱟᱨ ᱤᱥᱤ ᱜᱮᱞ	बार इसी गेल
+FLN_NUM_034	numeracy	Grade 2	संख्या सौ	ᱥᱟᱭ	साय
+FLN_NUM_035	numeracy	Grade 2	यह कितने रुपये हैं?	ᱱᱚᱣᱟ ᱫᱚ ᱛᱤᱱᱟᱹᱜ ᱴᱟᱠᱟ ᱠᱟᱱᱟ?	नोवा दो तीना़ग टाका काना?
+FLN_NUM_036	numeracy	Grade 2	दस रुपये का सिक्का	ᱜᱮᱞ ᱴᱟᱠᱟ ᱨᱮᱱᱟᱜ ᱠᱩᱭᱤᱱ	गेल टाका रेनाग कुयीन
+FLN_NUM_037	numeracy	Grade 2	आज सोमवार है	ᱛᱮᱦᱮᱧ ᱫᱚ ᱚᱛᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ	तेहेञ दो ओते माहाँ काना
+FLN_NUM_038	numeracy	Grade 2	कल मंगलवार है	ᱜᱟᱯᱟ ᱫᱚ ᱵᱟᱞᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ	गापा दो बाले माहाँ काना
+FLN_NUM_039	numeracy	Grade 2	रविवार को छुट्टी होती है	ᱥᱤᱸᱜᱮ ᱢᱟᱦᱟᱸ ᱫᱚ ᱪᱷᱩᱴᱤ ᱛᱟᱦᱮᱸᱱᱟ	सिंगे माहाँ दो छुटी ताहे़ना
+FLN_NUM_040	numeracy	Grade 2	सुबह का समय	ᱥᱮᱛᱟᱜ ᱚᱠᱛᱚ	सेताग ओकतो
+FLN_NUM_041	numeracy	Grade 2	दोपहर का समय	ᱛᱤᱠᱤᱱ ᱚᱠᱛᱚ	तीकीन ओकतो
+FLN_NUM_042	numeracy	Grade 2	शाम का समय	ᱛᱟᱹᱨᱟᱹᱥᱤᱧ ᱚᱠᱛᱚ	ता़रा़सीञ ओकतो
+FLN_NUM_043	numeracy	Grade 3	इनमें से कौन अधिक लंबा है?	ᱱᱩᱠᱤᱱ ᱢᱩᱫᱽ ᱨᱮ ᱚᱠᱚᱭ ᱡᱤᱞᱤᱧ ᱜᱮᱭᱟᱭ?	नुकीन मुद रे ओकोय जीलीञ गेयाय?
+FLN_NUM_044	numeracy	Grade 3	शिक्षक के पास कौन बैठा है?	ᱢᱟᱪᱮᱛ ᱥᱩᱨ ᱨᱮ ᱚᱠᱚᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ?	माचेत सुर रे ओकोय दुड़ुब आकानाय?
+FLN_NUM_045	numeracy	Grade 3	वह पेड़ बहुत दूर है	ᱦᱟᱱᱟ ᱫᱟᱨᱮ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱺᱜᱤᱧ ᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ	हाना दारे दो अ़डी सा़न्गीञ रे मेनाग-आ
+FLN_NUM_046	numeracy	Grade 3	दो कदम आगे चलो	ᱵᱟᱨ ᱛᱟᱲᱟᱢ ᱞᱟᱦᱟ ᱛᱮ ᱥᱮᱱᱚᱜ ᱢᱮ	बार ताड़ाम लाहा ते सेन౉ग मे
+FLN_NUM_047	numeracy	Grade 3	एक कदम पीछे हटो	ᱢᱤᱫ ᱛᱟᱲᱟᱢ ᱛᱟᱭᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ	मिद ताड़ाम तायोम ते हीजुग मे
+FLN_NUM_048	numeracy	Grade 3	यह रेखा मोटी है	ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱢᱚᱴᱟ ᱜᱮᱭᱟ	नोवा गार दो मोटा गेया
+FLN_NUM_049	numeracy	Grade 3	यह रेखा पतली है	ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱯᱟᱛᱞᱟ ᱜᱮᱭᱟ	नोवा गार दो पातला गेया
+FLN_NUM_050	numeracy	Grade 3	हमने गणित का खेल पूरा कर लिया	ᱟᱵᱚ ᱞᱮᱠᱷᱟ ᱮᱱᱮᱡᱵᱚ ᱯᱩᱨᱟᱹᱣ ᱠᱮᱫᱟ	आबो लेखा एनेजबो पुरा़व केदा

@@ -5,12 +5,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "एक से पाँच तक गिनो",
     "target_olchiki_santhali": "ᱢᱤᱫ ᱠᱷᱚᱱ ᱢᱚᱬᱮ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "मिद खोन मोणे ध़ाबिज लेखाय मे",
-    "target_warang_chiti_ho": "𑣖𑣂𑣓𑣁𑣉 𑣈𑣕𑣈 𑣖𑣉𑣑𑣈 𑣌𑣁𑣌𑣂 𑣚𑣈𑣌𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "मियाद एते मोड़े जाकि लेखाए मे",
-    "target_mundari_deva": "मियाद एते मोड़े जाकि लेखाए मे",
-    "phonetic_deva_mundari": "मियाद एते मोड़े जाकि लेखाए मे",
-    "linguistic_validation_notes": "Cardinal numerals 1 to 5: Santhali root 'mit'' (ᱢᱤᱫ) to 'mõṛẽ' (ᱢᱚᱬᱮ); Mundari and Ho preserve ancestral 'miyad' to 'moṛe'. Ablative marker differs: Santhali postposition '-khon' (ᱠᱷᱚᱱ) vs. North Munda sister postposition 'ete' (𑣈𑣕𑣈 / एते). Terminative focus marked by 'dhạbij' (ᱫᱷᱟᱹᱵᱤᱡ) in Santhali and 'jaki' in Mundari/Ho. Bound singular familiar imperative clitic '-me' applies across all three branches."
+    "phonetic_deva_santhali": "मिद खोन मोणे ध़ाबिज लेखाय मे"
   },
   {
     "id": "FLN_NUM_002",
@@ -18,12 +13,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "चलो हम सब मिलकर दस तक गिनती करें",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गेल ध़ाबिज लेखाय बो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣈𑣚 𑣌𑣁𑣌𑣂 𑣚𑣈𑣌𑣁𑣂𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन मिसा केते गेल जाकि लेखाएबु",
-    "target_mundari_deva": "देलाबु सोबेनते गेल जाकि लेखाएबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते गेल जाकि लेखाएबु",
-    "linguistic_validation_notes": "Enforces foundational inclusive cohortative morphology: Santhali initial cohortative 'delabo' (ᱫᱮᱞᱟᱵᱚ) coordinated with verb-final inclusive plural clitic '-bo' (ᱞᱮᱠᱷᱟᱭ ᱵᱚ); Mundari and Ho utilize 'delabu' (देलाबु / 𑣖𑣈𑣚𑣁𑣎𑣂) harmonized with verbal clitic '-bu' (𑣎𑣂 / -बु). The base-10 numeral 'gel' (ᱜᱮᱞ / 𑣋𑣈𑣚 / गेल) is perfectly cognate and invariant."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गेल ध़ाबिज लेखाय बो"
   },
   {
     "id": "FLN_NUM_003",
@@ -31,12 +21,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "यह बड़ा पत्थर है और वह छोटा कंकड़ है",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱨᱟᱝ ᱫᱷᱤᱨᱤ ᱠᱟᱱᱟ ᱟᱨ ᱦᱟᱱᱟ ᱫᱚ ᱦᱩᱰᱤᱧ ᱜᱤᱴᱤᱞ ᱠᱟᱱᱟ",
-    "phonetic_deva_santhali": "नोवा दो मारांग धीरी काना आर हाना दो हुडिञ गिटील काना",
-    "target_warang_chiti_ho": "𑣑𑣈𑣁 𑣖𑣁𑣑𑣁𑣀 𑣑𑣂𑣑𑣂 𑣕𑣁𑣓𑣁 𑣁𑣑 𑣕𑣈𑣁 𑣟𑣃𑣑𑣂𑣑 𑣞𑣈𑣑𑣉 𑣕𑣁𑣓𑣁",
-    "phonetic_deva_ho": "नेआ मरांग दिरी तना आर तेआ हुड़िंग सेड़ो तना",
-    "target_mundari_deva": "नेआ मरांग दिरी तना अन्दो तेआ हुड़िंग रोड़ा तना",
-    "phonetic_deva_mundari": "नेआ मरांग दिरी तना अन्दो तेआ हुड़िंग रोड़ा तना",
-    "linguistic_validation_notes": "Early spatial and dimensional comparison (big vs. small). Proximal vs. distal demonstrative contrast: Santhali 'nowa' / 'hana' (ᱱᱚᱣᱟ / ᱦᱟᱱᱟ) vs. Mundari/Ho 'nea' / 'tea' (नेआ / तेआ). Dimension statives: 'marang' (ᱢᱟᱨᱟᱝ / big) and 'huḍiñ' / 'huṛing' (ᱦᱩᱰᱤᱧ / small). Lithic terms: Proto-Munda 'dhiri'/'diri' (stone) alongside local realia terms 'giṭil' (grit/gravel), 'seṛo' (pebble), and 'roṛa' (broken ballast)."
+    "phonetic_deva_santhali": "नोवा दो मारांग धीरी काना आर हाना दो हुडिञ गिटील काना"
   },
   {
     "id": "FLN_NUM_004",
@@ -44,12 +29,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "इसमें एक और जोड़ो",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱨᱮ ᱟᱨ ᱢᱤᱫᱴᱟᱝ ᱡᱩᱲᱟᱹᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "नोवा रे आर मिदटांग जुड़ा़व मे",
-    "target_warang_chiti_ho": "𑣑𑣈𑣁 𑣜𑣈 𑣉𑣑𑣉𑣀 𑣖𑣂𑣓𑣁𑣉 𑣖𑣈𑣞𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "नेआ रे ओड़ोअ मियाद मेसाइ मे",
-    "target_mundari_deva": "नेआ रे अन्दो मियाद मेसाए मे",
-    "phonetic_deva_mundari": "नेआ रे अन्दो मियाद मेसाए मे",
-    "linguistic_validation_notes": "Concrete conceptualization of addition (increment of 1). Santhali utilizes the inanimate numeral classifier '-ṭang' in 'mit'-ṭang' (ᱢᱤᱫᱴᱟᱝ), whereas Mundari and Ho retain the bare cardinal 'miyad'. Ingress/additive operators: Santhali 'juṛạw' (ᱡᱩᱲᱟᱹᱣ) from IA contact vs. native Austroasiatic integration root 'mesa' (to blend/combine) with imperative '-me'."
+    "phonetic_deva_santhali": "नोवा रे आर मिदटांग जुड़ा़व मे"
   },
   {
     "id": "FLN_NUM_005",
@@ -57,12 +37,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "दो में से एक निकाल लो",
     "target_olchiki_santhali": "ᱵᱟᱨᱭᱟ ᱠᱷᱚᱱ ᱢᱤᱫᱴᱟᱝ ᱚᱰᱚᱠ ᱢᱮ",
-    "phonetic_deva_santhali": "बारया खोन मिदटांग ओडोक मे",
-    "target_warang_chiti_ho": "𑣎𑣁𑣑𑣂𑣁 𑣈𑣕𑣈 𑣖𑣂𑣓𑣁𑣉 𑣉𑣑𑣉𑣀 𑣖𑣈",
-    "phonetic_deva_ho": "बारिया एते मियाद ओड़ोअ मे",
-    "target_mundari_deva": "बारिया एते मियाद उडुक़ मे",
-    "phonetic_deva_mundari": "बारिया एते मियाद उडुक़ मे",
-    "linguistic_validation_notes": "Concrete subtraction through physical removal from a set. Inanimate form of 'two' carries the dual/inanimate marker '-ya': Santhali 'barya' (ᱵᱟᱨᱭᱟ) vs. Mundari/Ho 'baria' (बारिया). Separation is governed by ablative clitics '-khon' (Santhali) and '-ete' (Ho/Mundari) followed by the checked-stop egress verb 'oḍok'' / 'oṛoʔ' / 'uḍuk़'."
+    "phonetic_deva_santhali": "बारया खोन मिदटांग ओडोक मे"
   },
   {
     "id": "FLN_NUM_006",
@@ -70,12 +45,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "गोल घेरे को पहचानो",
     "target_olchiki_santhali": "ᱜᱩᱞᱟᱹᱭ ᱠᱷᱚᱸᱫᱽ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "गुला़य खोंद चीन्हा़व मे",
-    "target_warang_chiti_ho": "𑣋𑣂𑣑𑣁 𑣌𑣉𑣑𑣉 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "गुड़ा खोंद चीनाइ मे",
-    "target_mundari_deva": "गोल घेरा के चिनहाव मे",
-    "phonetic_deva_mundari": "गोल घेरा के चिनहाव मे",
-    "linguistic_validation_notes": "FLN foundational 2D geometry. Santhali forms nominal geometric compounds using 'gulạy' (ᱜᱩᱞᱟᱹᱭ / round) and 'khond' (ᱠᱷᱚᱸᱫᱽ / boxed demarcated space). Ho parallels this with 'guṛa khond'. Mundari primary classrooms in Ranchi/Khunti adopt 'gol ghera' inflected with accusative marker 'ke'. Recognition imperative is marked by 'cinhạw-me' / 'cinai-me'."
+    "phonetic_deva_santhali": "गुला़य खोंद चीन्हा़व मे"
   },
   {
     "id": "FLN_NUM_007",
@@ -83,12 +53,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "कौन सी रस्सी लंबी है और कौन सी छोटी?",
     "target_olchiki_santhali": "ᱚᱠᱟᱴᱟᱜ ᱫᱚᱣᱨᱤ ᱡᱤᱞᱤᱧᱟ ᱟᱨ ᱚᱠᱟᱴᱟᱜ ᱠᱷᱟᱴᱚᱣᱟ?",
-    "phonetic_deva_santhali": "ओकाटाग दोवरी जीलिञा आर ओकाटाग खाटोवा?",
-    "target_warang_chiti_ho": "𑣉𑣌𑣉𑣁 𑣎𑣁𑣂𑣑 𑣎𑣂𑣚𑣂𑣑 𑣕𑣁𑣓𑣁 𑣁𑣑 𑣉𑣌𑣉𑣁 𑣌𑣁𑣕𑣉 𑣕𑣁𑣓𑣁?",
-    "phonetic_deva_ho": "ओकोआ बइर जिलिंग तना आर ओकोआ खाटो तना?",
-    "target_mundari_deva": "ओकोटाः बइर जिलिंग तना अन्दो ओकोटाः खाटो तना?",
-    "phonetic_deva_mundari": "ओकोटाः बइर जिलिंग तना अन्दो ओकोटाः खाटो तना?",
-    "linguistic_validation_notes": "Non-standard measurement comparative inquiry. Inanimate selective interrogative: Santhali 'oka-ṭag' (ᱚᱠᱟᱴᱟᱜ) with inherent unreleased velar stop; Mundari 'oko-ṭaḥ' (checked with glottal closure); Ho 'okoa'. Dimension predicates: Proto-Munda 'jiling' (long) paired with 'khaṭo' (short)."
+    "phonetic_deva_santhali": "ओकाटाग दोवरी जीलिञा आर ओकाटाग खाटोवा?"
   },
   {
     "id": "FLN_NUM_008",
@@ -96,12 +61,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "इन कंकड़ों को गिनकर बताओ",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱤᱴᱤᱞ ᱠᱚ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "नोवा गिटील को लेखा काते ला़य मे",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣞𑣈𑣑𑣉 𑣌𑣉 𑣚𑣈𑣌𑣁 𑣌𑣈𑣕𑣈 𑣌𑣁𑣌𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "ने सेड़ो को लेखा केते काजी मे",
-    "target_mundari_deva": "ने रोड़ा को लेखा केते काजी मे",
-    "phonetic_deva_mundari": "ने रोड़ा को लेखा केते काजी मे",
-    "linguistic_validation_notes": "Manipulative-based enumeration. Plural marker '-ko' pluralizes inanimate realia when counted as discrete tokens. Participle chaining uses '-kate' (Santhali ᱠᱟᱛᱮ) and '-kete' (Ho/Mundari केते). Communicative request takes singular imperative: Santhali 'lạy-me' (ᱞᱟᱹᱭ ᱢᱮ) vs. Mundari/Ho 'kaji-me' (काजी मे)."
+    "phonetic_deva_santhali": "नोवा गिटील को लेखा काते ला़य मे"
   },
   {
     "id": "FLN_NUM_009",
@@ -109,12 +69,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "तीन चिड़ियाँ पेड़ पर बैठी हैं",
     "target_olchiki_santhali": "ᱯᱮᱭᱟ ᱪᱮᱬᱮ ᱫᱟᱨᱮ ᱨᱮᱠᱚ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
-    "phonetic_deva_santhali": "पेया चेणे़ दारे रेको दुड़ुब आकाना",
-    "target_warang_chiti_ho": "𑣁𑣑𑣈𑣂𑣁 𑣏𑣈𑣑𑣈 𑣑𑣁𑣑𑣃 𑣜𑣈𑣌𑣉 𑣉𑣂𑣎 𑣁𑣌𑣁𑣓𑣁",
-    "phonetic_deva_ho": "अपिया चेड़े दारु रेको दुब अकाना",
-    "target_mundari_deva": "अपिया चेंड़े दारु रेको दुब़ अकना",
-    "phonetic_deva_mundari": "अपिया चेंड़े दारु रेको दुब़ अकना",
-    "linguistic_validation_notes": "Cardinal agreement with animate count nouns. Number 'three': Santhali 'peya' (ᱯᱮᱭᱟ) vs. Ho/Mundari 'apiya' (𑣁𑣑𑣈𑣂𑣁 / अपिया). Because the subject contains three animate entities, the verb obligatorily indexes the 3rd person plural animate subject marker '-ko' inside the predicate clitic chain ('re-ko duṛup' akana')."
+    "phonetic_deva_santhali": "पेया चेणे़ दारे रेको दुड़ुब आकाना"
   },
   {
     "id": "FLN_NUM_010",
@@ -122,12 +77,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "चार और दो मिलकर कितने होते हैं?",
     "target_olchiki_santhali": "ᱯᱩᱱᱭᱟᱹ ᱟᱨ ᱵᱟᱨᱭᱟ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱤᱱᱟᱹᱜ ᱦᱩᱭᱩᱜ-ᱟ?",
-    "phonetic_deva_santhali": "पुन्या़ आर बारया मेसा काते तीना़ग हुयुग-आ?",
-    "target_warang_chiti_ho": "𑣂𑣑𑣃𑣑𑣂𑣁 𑣁𑣑 𑣎𑣁𑣑𑣂𑣁 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣏𑣂𑣖𑣂𑣓 𑣟𑣉𑣎𑣉𑣁?",
-    "phonetic_deva_ho": "उपुनिया आर बारिया मिसा केते चिमिन होबाओआ?",
-    "target_mundari_deva": "उपुनिया अन्दो बारिया मेसा केते चिमिन हुयुःआ?",
-    "phonetic_deva_mundari": "उपुनिया अन्दो बारिया मेसा केते चिमिन हुयुःआ?",
-    "linguistic_validation_notes": "Mathematical word formulation for addition. Numerals 4 and 2: Santhali 'punyạ' (ᱯᱩᱱᱭᱟᱹ) and 'barya' (ᱵᱟᱨᱭᱟ) vs. Ho/Mundari 'upuniya' and 'baria'. Interrogative quantifiers: Santhali 'tinạk'' (ᱛᱤᱱᱟᱹᱜ) ending in glottal stop vs. Mundari/Ho 'cimin' (𑣏𑣂𑣖𑣂𑣓 / चिमिन). Future-habitual copular result: 'huyuk'-a' / 'hobao-a'."
+    "phonetic_deva_santhali": "पुन्या़ आर बारया मेसा काते तीना़ग हुयुग-आ?"
   },
   {
     "id": "FLN_NUM_011",
@@ -135,12 +85,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "यह चौकोर आकृति बनाओ",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱯᱩᱱᱠᱚᱬ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "नोवा पुनकोण चीता़र बेनाव मे",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣂𑣑𑣃𑣑 𑣌𑣉𑣓𑣁 𑣏𑣂𑣕𑣁𑣑 𑣎𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "ने उपुन कोना चितार बाइ मे",
-    "target_mundari_deva": "ने उपुन कोना मूरत बाइ मे",
-    "phonetic_deva_mundari": "ने उपुन कोना मूरत बाइ मे",
-    "linguistic_validation_notes": "2D Geometric shape production (quadrilateral/square). Santhali forms the descriptive compound 'pun-koṇ' (ᱯᱩᱱ + ᱠᱚᱬ / four-cornered); Mundari and Ho preserve prefixal cardinal form 'upun' in 'upun kona'. Verb 'benaw' (ᱵᱮᱱᱟᱣ) in Santhali contrasts with root 'bai' (बाइ / 𑣎𑣁𑣂 / to make/construct) in Mundari and Ho."
+    "phonetic_deva_santhali": "नोवा पुनकोण चीता़र बेनाव मे"
   },
   {
     "id": "FLN_NUM_012",
@@ -148,12 +93,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "कम और ज़्यादा की पहचान करो",
     "target_olchiki_santhali": "ᱠᱚᱢ ᱟᱨ ᱵᱟᱹᱲᱛᱤ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "कोम आर बा़ड़ती चीन्हा़व मे",
-    "target_warang_chiti_ho": "𑣌𑣉𑣖 𑣁𑣑 𑣑𑣂𑣑𑣋𑣁𑣚 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "कोम आर पुरगाल चीनाइ मे",
-    "target_mundari_deva": "कम अन्दो पुराः के चिनहाव मे",
-    "phonetic_deva_mundari": "कम अन्दो पुराः के चिनहाव मे",
-    "linguistic_validation_notes": "Relational quantity evaluation. Santhali contrasts loan 'kom' with native adjectival 'bạṛti' (ᱵᱟᱹᱲᱛᱤ). Ho utilizes 'purgal' (abundant/more), while Mundari employs 'puraḥ' (पुराः / checked stop). Transitive identification takes singular imperative '-me' across all three languages."
+    "phonetic_deva_santhali": "कोम आर बा़ड़ती चीन्हा़व मे"
   },
   {
     "id": "FLN_NUM_013",
@@ -161,12 +101,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "पाँच में तीन जोड़ने पर आठ बनता है",
     "target_olchiki_santhali": "ᱢᱚᱬᱮ ᱨᱮ ᱯᱮ ᱡᱩᱲᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱤᱨᱟᱹᱞ ᱦᱩᱭᱩᱜ-ᱟ",
-    "phonetic_deva_santhali": "मोणे़ रे पे जुड़ा़व लेखान इरा़ल हुयुग-आ",
-    "target_warang_chiti_ho": "𑣖𑣉𑣑𑣈 𑣜𑣈 𑣁𑣑𑣈 𑣖𑣂𑣞𑣁 𑣚𑣈𑣜𑣈 𑣂𑣑𑣂𑣚 𑣟𑣉𑣎𑣉𑣁",
-    "phonetic_deva_ho": "मोड़े रे ape मिसा लेरे इरिल होबाओआ",
-    "target_mundari_deva": "मोड़े रे अपिया मेसा लेरे इरिल हुयुःआ",
-    "phonetic_deva_mundari": "मोड़े रे अपिया मेसा लेरे इरिल हुयुःआ",
-    "linguistic_validation_notes": "Conditional arithmetic formulation. Conditional clause marked by '-lekhan' (ᱞᱮᱠᱷᱟᱱ) in Santhali and '-lere' (𑣚𑣈𑣜𑣈 / लेरे) in Ho and Mundari. Numeral 8 is phonologically aligned: Santhali 'irạl' (ᱤᱨᱟᱹᱞ) with Ahd vowel modification vs. Mundari/Ho 'iril' (𑣂𑣑𑣂𑣚 / इरिल)."
+    "phonetic_deva_santhali": "मोणे़ रे पे जुड़ा़व लेखान इरा़ल हुयुग-आ"
   },
   {
     "id": "FLN_NUM_014",
@@ -174,12 +109,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "इस पंक्ति में पहला बच्चा कौन है?",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱛᱷᱟᱨ ᱨᱮ ᱯᱟᱹᱦᱤᱞ ᱜᱤᱫᱽᱨᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?",
-    "phonetic_deva_santhali": "नोवा थार रे पा़हिल गिदरा़ दो ओकोय कानाय?",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣕𑣁𑣑 𑣜𑣈 𑣑𑣁𑣟𑣂𑣚 𑣟𑣉𑣓 𑣉𑣌𑣉𑣂 𑣕𑣁𑣓𑣂?",
-    "phonetic_deva_ho": "ने थाड़ रे पहिल होन ओकोई तनी?",
-    "target_mundari_deva": "ने थाड़ रे सिदा होन ओकोए तनी?",
-    "phonetic_deva_mundari": "ने थाड़ रे सिदा होन ओकोए तनी?",
-    "linguistic_validation_notes": "Ordinal position competency. Santhali and Ho use the assimilated ordinal 'pạhil' / 'pahil', while Hasada Mundari enforces native 'sida' (initial/foremost). Third-person singular animate pronominal clitic '-y' / '-i' obligatorily attaches to copular predicates: 'kana-y' (Santhali) / 'tan-i' (Ho/Mundari)."
+    "phonetic_deva_santhali": "नोवा थार रे पा़हिल गिदरा़ दो ओकोय कानाय?"
   },
   {
     "id": "FLN_NUM_015",
@@ -187,12 +117,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "चलो हम सब मिलकर बीस तक उल्टी गिनती करें",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱠᱷᱚᱱ ᱩᱞᱴᱟᱹᱣ ᱞᱮᱠᱷᱟᱭ ᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते इसी खोन उलटा़व लेखाय बो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂 𑣟𑣂𑣞𑣂 𑣈𑣕𑣈 𑣂𑣚𑣁𑣔𑣁 𑣚𑣈𑣌𑣁𑣂𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन मि इसी एते उलटा लेखाएबु",
-    "target_mundari_deva": "देलाबु सोबेनते बीस एते उलटा लेखाएबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते बीस एते उलटा लेखाएबु",
-    "linguistic_validation_notes": "Higher-order backward counting (reverse sequencing from 20). Base-20 (vigesimal) structure: Santhali 'isi' (ᱤᱥᱤ) and Ho 'mi hisi' (one score) reflect indigenous counting traditions. Inclusive plural imperative frame ('delabo...-bo' / 'delabu...-bu') establishes democratic, teacher-participatory pedagogical register."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते इसी खोन उलटा़व लेखाय बो"
   },
   {
     "id": "FLN_NUM_016",
@@ -200,12 +125,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "आठ में से चार घटाने पर कितना बचेगा?",
     "target_olchiki_santhali": "ᱤᱨᱟᱹᱞ ᱠᱷᱚᱱ ᱯᱩᱱ ᱜᱷᱟᱴᱟᱣ ᱞᱮᱠᱷᱟᱱ ᱛᱤᱱᱟᱹᱜ ᱥᱟᱨᱮᱲᱚᱜ-ᱟ?",
-    "phonetic_deva_santhali": "इरा़ल खोन पुन घाटाव लेखान तीना़ग सारेड़౉ग-आ?",
-    "target_warang_chiti_ho": "𑣂𑣑𑣂𑣚 𑣈𑣕𑣈 𑣂𑣑𑣃𑣑 𑣋𑣁𑣔𑣁𑣉 𑣚𑣈𑣜𑣈 𑣏𑣂𑣖𑣂𑣓 𑣞𑣁𑣑𑣈𑣀𑣁?",
-    "phonetic_deva_ho": "इरिल एते उपुन घटाव लेरे चिमिन सारेअआ?",
-    "target_mundari_deva": "इरिल एते उपुन घटाव लेरे चिमिन सारेःआ?",
-    "phonetic_deva_mundari": "इरिल एते उपुन घटाव लेरे चिमिन सारेःआ?",
-    "linguistic_validation_notes": "Mathematical subtraction remainder inquiry. Demonstrates the North Munda root for remainder/leftover: Santhali 'sarec'' (ᱥᱟᱨᱮᱲ) with middle voice marker '-oɡ-a'; Mundari 'sareḥ-a' (सारेःआ) containing final debuccalized glottal checked stop; Ho 'sareʔ-a'."
+    "phonetic_deva_santhali": "इरा़ल खोन पुन घाटाव लेखान तीना़ग सारेड़౉ग-आ?"
   },
   {
     "id": "FLN_NUM_017",
@@ -213,12 +133,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "इन डंडियों को बराबर-बराबर बाँटो",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱴᱷᱮᱝᱜᱟ ᱠᱚ ᱥᱚᱢᱟᱱ-ᱥᱚᱢᱟᱱ ᱦᱟᱹᱴᱤᱧ ᱯᱮ",
-    "phonetic_deva_santhali": "नोवा ठेंगा को सोमान-सोमान हा़टिञ पे",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣑𑣁𑣓𑣑𑣂 𑣌𑣉 𑣎𑣁𑣑𑣁𑣎𑣁𑣑 𑣟𑣁𑣕𑣂𑣑 𑣕𑣈",
-    "phonetic_deva_ho": "ने डण्डी को बराबर हाटिंग पे",
-    "target_mundari_deva": "ने डण्डा को बराबर-बराबर हाटिंग पे",
-    "phonetic_deva_mundari": "ने डण्डा को बराबर-बराबर हाटिंग पे",
-    "linguistic_validation_notes": "Foundational equal distribution and division concept. The North Munda root for equitable partitioning is invariant: Santhali 'haṭiñ' (ᱦᱟᱹᱴᱤᱧ) and Mundari/Ho 'hating' (𑣟𑣁𑣕𑣂𑣑 / हाटिंग). Plural child addressee imperative marker '-pe' is strictly enforced."
+    "phonetic_deva_santhali": "नोवा ठेंगा को सोमान-सोमान हा़टिञ पे"
   },
   {
     "id": "FLN_NUM_018",
@@ -226,12 +141,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "किस टोकरी में ज़्यादा आम हैं?",
     "target_olchiki_santhali": "ᱚᱠᱟ ᱴᱩᱠᱨᱤ ᱨᱮ ᱵᱟᱹᱲᱛᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ?",
-    "phonetic_deva_santhali": "ओका टुकरी रे बा़ड़ती उल मेनाग-आ?",
-    "target_warang_chiti_ho": "𑣉𑣌𑣉𑣁 𑣔𑣃𑣌𑣂𑣑𑣂 𑣜𑣈 𑣑𑣂𑣑𑣋𑣁𑣚 𑣂𑣚𑣂 𑣖𑣈𑣑𑣁𑣀?",
-    "phonetic_deva_ho": "ओकोआ टुकिरी रे पुरगाल उली मेनाअ?",
-    "target_mundari_deva": "ओको टुकिरी रे पुराः उली मेनाः?",
-    "phonetic_deva_mundari": "ओको टुकिरी रे पुराः उली मेनाः?",
-    "linguistic_validation_notes": "Comparative capacity evaluation with local fauna/flora. Austroasiatic botanical cognate 'ul' (ᱩᱞ / Santhali) and 'uli' (𑣂𑣚𑣂 / Mundari/Ho / mango). Inanimate existential verb is explicitly marked: Santhali 'menak'-a' (ᱢᱮᱱᱟᱜ-ᱟ) vs. Mundari 'menaḥ' (मेनाः) vs. Ho 'menaʔ' (𑣖𑣈𑣑𑣁𑣀)."
+    "phonetic_deva_santhali": "ओका टुकरी रे बा़ड़ती उल मेनाग-आ?"
   },
   {
     "id": "FLN_NUM_019",
@@ -239,12 +149,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "दस और पाँच मिलकर पंद्रह होते हैं",
     "target_olchiki_santhali": "ᱜᱮᱞ ᱟᱨ ᱢᱚᱬᱮ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱢᱚᱬᱮ ᱦᱩᱭᱩᱜ-ᱟ",
-    "phonetic_deva_santhali": "गेल आर मोणे़ मेसा काते गेल मोणे़ हुयुग-आ",
-    "target_warang_chiti_ho": "𑣋𑣈𑣚 𑣁𑣑 𑣖𑣉𑣑𑣈 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣈𑣚 𑣖𑣉𑣑𑣈 𑣟𑣉𑣎𑣉𑣁",
-    "phonetic_deva_ho": "गेल आर मोड़े मिसा केते गेल मोड़े होबाओआ",
-    "target_mundari_deva": "गेल अन्दो मोड़े मेसा केते गेल मोड़े हुयुःआ",
-    "phonetic_deva_mundari": "गेल अन्दो मोड़े मेसा केते गेल मोड़े हुयुःआ",
-    "linguistic_validation_notes": "Base-10 compound additive morphology for teens (11–19). 15 is systematically formed by juxtaposition of decade base 10 ('gel') + digit 5 ('mõṛẽ' / 'moṛe') across all three languages: Santhali 'gel mõṛẽ', Ho 'gel moṛe', Mundari 'gel moड़े'."
+    "phonetic_deva_santhali": "गेल आर मोणे़ मेसा काते गेल मोणे़ हुयुग-आ"
   },
   {
     "id": "FLN_NUM_020",
@@ -252,12 +157,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "भारी वस्तु को उठाओ और हल्की को पहचानो",
     "target_olchiki_santhali": "ᱦᱟᱢᱟᱞ ᱡᱤᱱᱤᱥ ᱛᱩᱞ ᱢᱮ ᱟᱨ ᱨᱟᱣᱟᱞᱟᱜ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "हामाल जीनिस तुल मे आर रावालाग चीन्हा़व मे",
-    "target_warang_chiti_ho": "𑣟𑣁𑣖𑣎𑣚 𑣏𑣂𑣎 𑣕𑣃𑣚 𑣖𑣈 𑣁𑣑 𑣑𑣈𑣉𑣁𑣚 𑣏𑣂𑣓𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "हांबाल चीज तुल मे आर रेवाल चीनाइ मे",
-    "target_mundari_deva": "हाम्बल जिनिस तुल मे अन्दो रेवाल तेआः चिनहाव मे",
-    "phonetic_deva_mundari": "हाम्बल जिनिस तुल मे अन्दो रेवाल तेआः चिनहाव मे",
-    "linguistic_validation_notes": "Weight discrimination competency. Demonstrates Proto-Munda adjectival antonym pair for weight: 'hamal'/'hambal' (ᱦᱟᱢᱟᱞ / heavy) and 'rawal'/'rewal' (lightweight). Nominalization of property: Santhali inanimate genitive marker '-ak'' in 'rawal-ak'' vs. Mundari nominalizer '-teaḥ' in 'rewal teaḥ'."
+    "phonetic_deva_santhali": "हामाल जीनिस तुल मे आर रावालाग चीन्हा़व मे"
   },
   {
     "id": "FLN_NUM_021",
@@ -265,12 +165,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "इस पैटर्न को आगे बढ़ाओ",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱛᱷᱟᱨ-ᱛᱚᱦᱚᱨ ᱞᱟᱦᱟ ᱛᱮ ᱤᱫᱤ ᱢᱮ",
-    "phonetic_deva_santhali": "नोवा थार-तोहोर लाहा ते इदी मे",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣑𑣈𑣔𑣁𑣑𑣓 𑣖𑣁𑣑𑣁𑣀 𑣕𑣈 𑣂𑣑𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "ने पैटर्न मारांग ते इदी मे",
-    "target_mundari_deva": "ने ढाँचा के मारांग ते इदी मे",
-    "phonetic_deva_mundari": "ने ढाँचा के मारांग ते इदी मे",
-    "linguistic_validation_notes": "Abstract geometric and numerical patterning. JCERT Santhali academic curriculum renders 'pattern' as the rhyming compound 'thar-tohor' (ordering sequence). Mundari accepts 'dhãca'. Transitive directional motion verb 'idi' (to take forward) is marked with instrumental-directional postposition 'te'."
+    "phonetic_deva_santhali": "नोवा थार-तोहोर लाहा ते इदी मे"
   },
   {
     "id": "FLN_NUM_022",
@@ -278,12 +173,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "तीन का पहाड़ा सब मिलकर बोलो",
     "target_olchiki_santhali": "ᱯᱮ ᱨᱮᱱᱟᱜ ᱯᱟᱦᱟᱲᱟ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱯᱮ",
-    "phonetic_deva_santhali": "पे रेनाग पाहाड़ा सानाम को मेसा काते ला़य पे",
-    "target_warang_chiti_ho": "𑣁𑣑𑣈𑣂𑣁 𑣜𑣈𑣁𑣀 𑣑𑣁𑣟𑣁𑣑𑣁 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣌𑣁𑣌𑣂 𑣕𑣈",
-    "phonetic_deva_ho": "अपिया रेआः पाहाड़ा सबिन मिसा केते काजी पे",
-    "target_mundari_deva": "अपिया रेआः पाहाड़ा सोबेनको मेसा केते काजी पे",
-    "phonetic_deva_mundari": "अपिया रेआः पाहाड़ा सोबेनको मेसा केते काजी पे",
-    "linguistic_validation_notes": "Multiplication table drill. Inanimate genitive clitic attached to the numeral: Santhali '-renak'' (ᱨᱮᱱᱟᱜ) vs. Mundari/Ho '-reaḥ' (𑣜𑣈𑣁𑣀 / रेआः). Plural imperative marker '-pe' coordinates class-wide choral recitation."
+    "phonetic_deva_santhali": "पे रेनाग पाहाड़ा सानाम को मेसा काते ला़य पे"
   },
   {
     "id": "FLN_NUM_023",
@@ -291,12 +181,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "दस के दो बंडल मिलकर बीस बनते हैं",
     "target_olchiki_santhali": "ᱜᱮᱞ-ᱜᱮᱞ ᱨᱮᱱᱟᱜ ᱵᱟᱨᱭᱟ ᱯᱚᱴᱚᱢ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱦᱩᱭᱩᱜ-ᱟ",
-    "phonetic_deva_santhali": "गेल-गेल रेनाग बारया पोटोम मेसा काते इसी हुयुग-आ",
-    "target_warang_chiti_ho": "𑣋𑣈𑣚-𑣋𑣈𑣚 𑣜𑣈𑣁𑣀 𑣎𑣁𑣑𑣂𑣁 𑣎𑣁𑣓𑣑𑣂𑣚 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣖𑣂 𑣟𑣂𑣞𑣂 𑣟𑣉𑣎𑣉𑣁",
-    "phonetic_deva_ho": "गेल-गेल रेआः बारिया बण्डल मिसा केते मि इसी होबाओआ",
-    "target_mundari_deva": "गेल-गेल रेआः बारिया बण्डल मेसा केते बीस हुयुःआ",
-    "phonetic_deva_mundari": "गेल-गेल रेआः बारिया बण्डल मेसा केते बीस हुयुःआ",
-    "linguistic_validation_notes": "Place-value foundational bundling (ten-bundles forming decades). Distributive reduplicated numeral 'gel-gel' (tens-groups). Santhali preserves indigenous concrete packaging classifier 'potom' (ᱯᱚᱴᱚᱢ), while Ho/Mundari adapt 'banḍal'. Product yields indigenous score 'isi' / 'mi hisi'."
+    "phonetic_deva_santhali": "गेल-गेल रेनाग बारया पोटोम मेसा काते इसी हुयुग-आ"
   },
   {
     "id": "FLN_NUM_024",
@@ -304,12 +189,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "मापक छड़ी से मेज़ की लंबाई नापो",
     "target_olchiki_santhali": "ᱡᱚᱠᱷᱟ ᱴᱷᱮᱝᱜᱟ ᱛᱮ ᱴᱮᱵᱩᱞ ᱨᱮᱱᱟᱜ ᱡᱤᱞᱤᱧ ᱡᱚᱠᱷᱟᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "जोखा ठेंगा ते डेबुल रेनाग जीलिञ जोखाय मे",
-    "target_warang_chiti_ho": "𑣌𑣉𑣌𑣁 𑣑𑣁𑣓𑣑𑣂 𑣕𑣈 𑣔𑣈𑣎𑣃𑣚 𑣜𑣈𑣁𑣀 𑣎𑣂𑣚𑣂𑣑 𑣌𑣉𑣌𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "जोखा डण्डी ते डेबुल रेआः जिलिंग जोकाइ मे",
-    "target_mundari_deva": "जोखा डण्डा ते मेज रेआः जिलिंग जोखाए मे",
-    "phonetic_deva_mundari": "जोखा डण्डा ते मेज रेआः जिलिंग जोखाए मे",
-    "linguistic_validation_notes": "Informal and non-standard measurement units. Root 'jokha' (measurement) functions both as modifier ('jokha ṭhenga' / measuring rod) and verbal head ('jokhạy-me' / 'jokhae-me'). Instrumental case marker '-te' indicates the tool of measurement."
+    "phonetic_deva_santhali": "जोखा ठेंगा ते डेबुल रेनाग जीलिञ जोखाय मे"
   },
   {
     "id": "FLN_NUM_025",
@@ -317,12 +197,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "चलो हम सब मिलकर गणित का खेल खेलें",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱮᱠᱷᱟ ᱨᱮᱱᱟᱜ ᱮᱱᱮᱡ ᱮᱱᱮᱡᱟᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते लेखा रेनाग एनेज एनेजाबो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣚𑣈𑣌𑣁 𑣜𑣈𑣁𑣀 𑣂𑣓𑣃𑣑 𑣂𑣓𑣃𑣑𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन लेखा रेआः इनुं इनुंबु",
-    "target_mundari_deva": "देलाबु सोबेनते लेखा रेआः इनुं इनुंबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते लेखा रेआः इनुं इनुंबु",
-    "linguistic_validation_notes": "Pedagogical play-based numeracy integration. Play cognates diverge systematically between Kherwarian branches: Santhali root 'enej' (ᱮᱱᱮᱡ) vs. Ho/Mundari cognate 'inuñ'/'inuṅ' (𑣂𑣓𑣃𑣑 / इनुं). Inclusive first-person plural marking ('delabo...-bo' / 'delabu...-bu') completes the collaborative cycle."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते लेखा रेनाग एनेज एनेजाबो"
   },
   {
     "id": "FLN_CMD_001",
@@ -330,12 +205,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "अपनी जगह पर बैठो",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱡᱟᱜᱟ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग जागा रे दुड़ुब मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣁𑣀 𑣕𑣁𑣓𑣈𑣉 𑣜𑣈 𑣉𑣂𑣎 𑣖𑣈",
-    "phonetic_deva_ho": "आमाः ताएद रे दुब मे",
-    "target_mundari_deva": "अमाः तायद रे दुब़ मे",
-    "phonetic_deva_mundari": "आमाः तायद रे दुब़ मे",
-    "linguistic_validation_notes": "Santhali uses the 2nd person singular genitive 'amag' (ᱟᱢᱟᱜ), locative postposition '-re' (ᱨᱮ), and root verb 'duṛup'' with singular familiar imperative suffix '-me' (ᱢᱮ). Mundari and Ho preserve checked bilabial stop [b'] in 'dub़' with identical familiar imperative clitic '-me'."
+    "phonetic_deva_santhali": "आमाग जागा रे दुड़ुब मे"
   },
   {
     "id": "FLN_CMD_002",
@@ -343,12 +213,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "सब बच्चे सीधे खड़े हो जाओ",
     "target_olchiki_santhali": "ᱡᱚᱛᱚ ᱜᱤᱫᱽᱨᱟᱹ ᱥᱚᱡᱷᱮ ᱛᱤᱸᱜᱩᱱ ᱯᱮ",
-    "phonetic_deva_santhali": "जोतो गिदरा़ सोज्हे ति़ंगुन पे",
-    "target_warang_chiti_ho": "𑣞𑣉𑣎𑣈𑣑 𑣟𑣉𑣑𑣌𑣉 𑣞𑣉𑣌𑣈 𑣕𑣈 𑣕𑣂𑣑𑣋𑣂 𑣕𑣈",
-    "phonetic_deva_ho": "सोबेन होनको सोजे ते तिङ्गु पे",
-    "target_mundari_deva": "सोबेन होनको सोजे ते तिङ्गु पे",
-    "phonetic_deva_mundari": "सोबेन होनको सोजे ते तिङ्गु पे",
-    "linguistic_validation_notes": "Addresses the whole class using the 2nd person plural imperative marker: Santhali '-pe' (ᱯᱮ), Mundari and Ho '-pe' (पे). The quantifier 'soben' (Mundari/Ho) and 'joto' (Santhali) denote totality. Mundari/Ho use the plural animate marker '-ko'."
+    "phonetic_deva_santhali": "जोतो गिदरा़ सोज्हे ति़ंगुन पे"
   },
   {
     "id": "FLN_CMD_003",
@@ -356,12 +221,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "अपनी किताब खोलो",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग पुथि झिज मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣁𑣀 𑣑𑣉𑣔𑣉𑣎 𑣉𑣚𑣉 𑣖𑣈",
-    "phonetic_deva_ho": "आमाः पोतोब ओलो मे",
-    "target_mundari_deva": "अमाः पुथी उतास मे",
-    "phonetic_deva_mundari": "आमाः पुथी उतास मे",
-    "linguistic_validation_notes": "Singular familiar imperative directed to an individual learner. Santhali verb 'jhij' carries the checked consonant modifier Ahd (ᱽ). Mundari employs 'utas' (to open/spread out sheets), while Ho colloquially uses 'olo' or 'jhij'."
+    "phonetic_deva_santhali": "आमाग पुथि झिज मे"
   },
   {
     "id": "FLN_CMD_004",
@@ -369,12 +229,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "किताब बंद करो",
     "target_olchiki_santhali": "ᱯᱩᱛᱷᱤ ᱯᱚᱴᱚᱢ ᱢᱮ",
-    "phonetic_deva_santhali": "पुथि पोटोम मे",
-    "target_warang_chiti_ho": "𑣑𑣉𑣔𑣉𑣎 𑣑𑣉𑣔𑣉𑣆 𑣖𑣈",
-    "phonetic_deva_ho": "पोतोब पोतोम मे",
-    "target_mundari_deva": "पुथी पोतोम मे",
-    "phonetic_deva_mundari": "पुथी पोतोम मे",
-    "linguistic_validation_notes": "The verbal root 'poṭom' (ᱯᱚᱴᱚᱢ) across all three North Munda languages fundamentally signifies wrapping or folding together, conventionally standardized in primary pedagogic registers for closing a codex/book."
+    "phonetic_deva_santhali": "पुथि पोटोम मे"
   },
   {
     "id": "FLN_CMD_005",
@@ -382,12 +237,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "सब शांत रहो और ध्यान से सुनो",
     "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱛᱷᱤᱨᱩᱜ ᱯᱮ ᱟᱨ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱯᱮ",
-    "phonetic_deva_santhali": "सानाम को थिरुग पे आर धेयान ते आंजोम पे",
-    "target_warang_chiti_ho": "𑣞𑣁𑣎𑣂𑣑 𑣌𑣉 𑣕𑣕𑣂𑣑 𑣑𑣈 𑣁𑣑 𑣖𑣓𑣁𑣑 𑣕𑣈 𑣁𑣓𑣂𑣆 𑣕𑣈",
-    "phonetic_deva_ho": "सबिन को थिर पे आर ध्यान ते आयूम पे",
-    "target_mundari_deva": "सोबेनको थिर कोअः पे अन्दो मन लगाके आयुम पे",
-    "phonetic_deva_mundari": "सोबेनको थिर कोअः पे अन्दो मन लगाके आयुम पे",
-    "linguistic_validation_notes": "Plural imperative '-pe' applied symmetrically to both coordinated clauses. 'Thir' (stasis/silence) followed by middle/intransitive markers. 'Ajom' (Santhali) and 'Ayum' (Ho/Mundari) represent the common proto-Munda auditory root."
+    "phonetic_deva_santhali": "सानाम को थिरुग पे आर धेयान ते आंजोम पे"
   },
   {
     "id": "FLN_CMD_006",
@@ -395,12 +245,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "अपनी स्लेट दिखाओ",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱥᱞᱮᱴ ᱩᱫᱩᱜ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग स्लेट उदुक मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣁𑣀 𑣞𑣚𑣈𑣔 𑣂𑣉𑣂𑣀 𑣖𑣈",
-    "phonetic_deva_ho": "आमाः स्लेट उदुअ मे",
-    "target_mundari_deva": "अमाः स्लेट उदुः मे",
-    "phonetic_deva_mundari": "आमाः स्लेट उदुः मे",
-    "linguistic_validation_notes": "Direct transitive command targeting the individual child. The verb 'uduk'' features an unreleased velar stop [k'] in Santhali, realized with debuccalization to a glottal stop /u-duʔ/ in Mundari (written उदुः with visarga) and Ho."
+    "phonetic_deva_santhali": "आमाग स्लेट उदुक मे"
   },
   {
     "id": "FLN_CMD_007",
@@ -408,12 +253,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "हाथ धोकर आओ",
     "target_olchiki_santhali": "ᱛᱤ ᱟᱹᱨᱩᱵ ᱠᱟᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ",
-    "phonetic_deva_santhali": "ती आ़रुब काते हिजुग मे",
-    "target_warang_chiti_ho": "𑣕𑣂 𑣁𑣎𑣂𑣙 𑣌𑣈𑣕𑣈 𑣟𑣂𑣌𑣂𑣀 𑣖𑣈",
-    "phonetic_deva_ho": "ती अबुं केते हिजुअ मे",
-    "target_mundari_deva": "ती अबुब़ केते हिजुः मे",
-    "phonetic_deva_mundari": "ती अबुब़ केते हिजुः मे",
-    "linguistic_validation_notes": "Conjunctive sequential participle structure: verbal root + '-kate' (Santhali) / '-kete' (Ho/Mundari). Lexical cognates: 'ti' (hand) across all three, with specific washing verb 'aṛup'' (Santhali) vs 'abub'' (Mundari/Ho specifically for limbs)."
+    "phonetic_deva_santhali": "ती आ़रुब काते हिजुग मे"
   },
   {
     "id": "FLN_CMD_008",
@@ -421,12 +261,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "एक सीधी कतार बनाओ",
     "target_olchiki_santhali": "ᱢᱤᱫᱴᱟᱝ ᱥᱚᱡᱷᱮ ᱛᱷᱟᱨ ᱵᱮᱱᱟᱣ ᱯᱮ",
-    "phonetic_deva_santhali": "मिदटांग सोज्हे थार बेनाव पे",
-    "target_warang_chiti_ho": "𑣖𑣂𑣓𑣁𑣉 𑣞𑣉𑣌𑣈 𑣕𑣁𑣑 𑣎𑣁𑣂 𑣕𑣈",
-    "phonetic_deva_ho": "मियाद सोजे थाड़ बाइ पे",
-    "target_mundari_deva": "मियाद सोजे थाड़ बाइ पे",
-    "phonetic_deva_mundari": "मियाद सोजे थाड़ बाइ पे",
-    "linguistic_validation_notes": "Numeral 'one' shows the classifier '-ṭang' in Santhali ('mit'-ṭang'), contrasting with the standalone cardinal form 'miyad' in Mundari and Ho. Plural imperative '-pe' addresses the student group."
+    "phonetic_deva_santhali": "मिदटांग सोज्हे थार बेनाव पे"
   },
   {
     "id": "FLN_CMD_009",
@@ -434,12 +269,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "श्यामपट्ट की ओर देखो",
     "target_olchiki_santhali": "ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ ᱥᱮᱫ ᱠᱚᱭᱚᱜ ᱢᱮ",
-    "phonetic_deva_santhali": "हेंदे पाटा सेद कोयोक मे",
-    "target_warang_chiti_ho": "𑣟𑣈𑣑𑣉𑣈 𑣎𑣉𑣑𑣉 𑣑𑣁𑣀 𑣑𑣈𑣚 𑣖𑣈",
-    "phonetic_deva_ho": "हेन्दे बोर्ड पाः नेल मे",
-    "target_mundari_deva": "हेन्दे पाटा पाः नेल मे",
-    "phonetic_deva_mundari": "हेन्दे पाटा पाः नेल मे",
-    "linguistic_validation_notes": "'Blackboard' is natively expressed via descriptive compound 'hende paṭa' (black board) in Santhali and Mundari. Directional postpositions: Santhali 'sed' (towards) vs Mundari/Ho 'paḥ' (side/direction). Verbs differentiate: Santhali 'koyok'' (look up towards) vs Mundari 'nel' (see/look)."
+    "phonetic_deva_santhali": "हेंदे पाटा सेद कोयोक मे"
   },
   {
     "id": "FLN_CMD_010",
@@ -447,12 +277,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "पेंसिल और कॉपी निकालो",
     "target_olchiki_santhali": "ᱯᱮᱱᱥᱤᱞ ᱟᱨ ᱠᱷᱟᱛᱟ ᱚᱰᱚᱠ ᱢᱮ",
-    "phonetic_deva_santhali": "पेन्सिल आर खाता ओडोक मे",
-    "target_warang_chiti_ho": "𑣑𑣈𑣑𑣞𑣂𑣚 𑣁𑣑 𑣌𑣁𑣕𑣁 𑣉𑣑𑣉𑣀 𑣖𑣈",
-    "phonetic_deva_ho": "पेन्सिल आर खाता ओड़ोअ मे",
-    "target_mundari_deva": "पेन्सिल अन्दो खाता उडुक़ मे",
-    "phonetic_deva_mundari": "पेन्सिल अन्दो खाता उडुक़ मे",
-    "linguistic_validation_notes": "Loan realia 'pensil' and 'khata' integrated with native Munda syntax. Egress verb: Santhali 'oḍok'' (ᱚᱰᱚᱠ), Ho 'oṛoʔ', and Mundari 'uḍuk़' (उडुक़). Conjunction: Santhali/Ho 'ar' vs Mundari 'ando'."
+    "phonetic_deva_santhali": "पेन्सिल आर खाता ओडोक मे"
   },
   {
     "id": "FLN_CMD_011",
@@ -460,12 +285,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "अपने साथी की मदद करो",
     "target_olchiki_santhali": "ᱟᱢᱨᱮᱱ ᱜᱟᱛᱮ ᱜᱚᱲᱚ ᱟᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "आमरेन गाते गोड़ो आय मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣑𑣈𑣑 𑣋𑣁𑣕𑣈 𑣉𑣈𑣙𑣋𑣁𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "अमरेन गाते देंगा-इ मे",
-    "target_mundari_deva": "अमरेन गाते के गोड़ो आइ मे",
-    "phonetic_deva_mundari": "अमरेन गाते के गोड़ो आइ मे",
-    "linguistic_validation_notes": "Demonstrates the essential animate genitive marker '-ren' (ᱟᱢᱨᱮᱱ / अमरेन) distinguishing animate relations from inanimate '-ak''. Direct pronominal object incorporation '-ay' / '-i' marks the 3rd person singular beneficiary before the imperative marker '-me'."
+    "phonetic_deva_santhali": "आमरेन गाते गोड़ो आय मे"
   },
   {
     "id": "FLN_CMD_012",
@@ -473,12 +293,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "यह पाठ ज़ोर से पढ़ो",
     "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱯᱟᱲᱦᱟᱣ ᱟᱲᱟᱝ ᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
-    "phonetic_deva_santhali": "नोवा पाड़हाव आड़ांग ते पाड़हाव मे",
-    "target_warang_chiti_ho": "𑣑𑣈 𑣑𑣁𑣕 𑣌𑣁𑣏𑣈𑣉 𑣕𑣈 𑣑𑣁𑣑𑣟𑣁𑣉 𑣖𑣈",
-    "phonetic_deva_ho": "ने पाठ कचेद ते पढाव मे",
-    "target_mundari_deva": "ने पाठ कचेद साड़े ते पढाव मे",
-    "phonetic_deva_mundari": "ने पाठ कचेद साड़े ते पढाव मे",
-    "linguistic_validation_notes": "Proximal demonstrative base differs: Santhali 'nowa' (ᱱᱚᱣᱟ) vs Ho/Mundari 'ne' (ने). 'Loudly' is expressed idiomatically using instrumental '-te' with acoustic nouns: Santhali 'aṛang te' (by voice), Mundari 'kaced saṛe te' (with sharp/clear sound)."
+    "phonetic_deva_santhali": "नोवा पाड़हाव आड़ांग ते पाड़हाव मे"
   },
   {
     "id": "FLN_CMD_013",
@@ -486,12 +301,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "साफ़-साफ़ अक्षरों में लिखो",
     "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ-ᱥᱟᱯᱷᱟ ᱟᱠᱷᱚᱨ ᱛᱮ ᱚᱞ ᱢᱮ",
-    "phonetic_deva_santhali": "साफा-साफा आखोर ते ओल मे",
-    "target_warang_chiti_ho": "𑣞𑣁𑣑𑣁 𑣁𑣌𑣉𑣑 𑣕𑣈 𑣉𑣚 𑣖𑣈",
-    "phonetic_deva_ho": "सफा अखोर ते ओल मे",
-    "target_mundari_deva": "सफा-सफा ओओल ते ओल मे",
-    "phonetic_deva_mundari": "सफा-सफा ओओल ते ओल मे",
-    "linguistic_validation_notes": "The North Munda ancestral literacy verb 'ol' (ᱚᱞ / ओल) governs the predicate. Santhali and Ho use loan root 'akhor', while Mundari accepts 'o-ol' (nominalized reduplicated stem of 'ol') marked by the instrumental postposition '-te'."
+    "phonetic_deva_santhali": "साफा-साफा आखोर ते ओल मे"
   },
   {
     "id": "FLN_CMD_014",
@@ -499,12 +309,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "हाथ ऊपर उठाओ",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱛᱤ ᱪᱮᱛᱟᱱ ᱛᱩᱞ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग ती चेतान तुल मे",
-    "target_warang_chiti_ho": "𑣕𑣂 𑣏𑣈𑣕𑣁𑣑 𑣕𑣂𑣚 𑣖𑣈",
-    "phonetic_deva_ho": "ती चेतान तुल मे",
-    "target_mundari_deva": "ती चेतान तुल मे",
-    "phonetic_deva_mundari": "ती चेतान तुल मे",
-    "linguistic_validation_notes": "Complete three-way North Munda lexical unity: 'ti' (hand), 'cetan' (above/upward), and 'tul' (raise/elevate), closed by the singular imperative clitic '-me'."
+    "phonetic_deva_santhali": "आमाग ती चेतान तुल मे"
   },
   {
     "id": "FLN_CMD_015",
@@ -512,12 +317,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "चलो, हम सब मिलकर गोल घेरा बनाएँ",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱩᱞᱟᱹᱭ ᱵᱮᱱᱟᱣᱟᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गुला़य बेनावाबो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣋𑣂𑣑𑣁 𑣎𑣁𑣂𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन मिसा केते गुड़ा बाइबु",
-    "target_mundari_deva": "देलाबु सोबेनते गोल घेरा बाइबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते गोल घेरा बाइबु",
-    "linguistic_validation_notes": "Strict pedagogical enforcement of the First-Person Inclusive Plural: Santhali clitic '-bo' (ᱫᱮᱞᱟᱵᱚ / ᱵᱮᱱᱟᱣᱟᱵᱚ), Mundari/Ho '-bu' (देलाबु / बाइबु). This grammatical form mandatorily binds the teacher and all pupils together, strictly precluding exclusive 'ale'."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गुला़य बेनावाबो"
   },
   {
     "id": "FLN_CMD_016",
@@ -525,12 +325,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "कचरा कूड़ेदान में डालो",
     "target_olchiki_santhali": "ᱡᱟᱵᱽᱨᱟ ᱠᱩᱲᱟᱹᱫᱟᱱ ᱨᱮ ᱜᱤᱰᱤ ᱢᱮ",
-    "phonetic_deva_santhali": "जाबरा कुड़ा़दान रे गिडी मे",
-    "target_warang_chiti_ho": "𑣉𑣂𑣑𑣁 𑣌𑣂𑣉𑣁𑣉𑣁𑣑 𑣜𑣈 𑣋𑣂𑣉𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "धुरा कूड़ादान रे गिड़ी मे",
-    "target_mundari_deva": "मैला जाबरा कूड़ादान रे सामा मे",
-    "phonetic_deva_mundari": "मैला जाबरा कूड़ादान रे सामा मे",
-    "linguistic_validation_notes": "Santhali/Ho use 'giḍi' (discard/drop), whereas Mundari standardizes 'sama' (insert/deposit into a receptacle). All three employ locative postposition '-re' on the borrowed compound 'kuṛadan'."
+    "phonetic_deva_santhali": "जाबरा कुड़ा़दान रे गिडी मे"
   },
   {
     "id": "FLN_CMD_017",
@@ -538,12 +333,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "अपने बस्ते को व्यवस्थित रखो",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱡᱷᱳᱞᱟ ᱥᱟᱡᱟᱣ ᱠᱟᱛᱮ ᱫᱚᱦᱚᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग झोला साजाव काते दोहोय मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣁𑣀 𑣌𑣉𑣚𑣁 𑣎𑣈𑣞 𑣕𑣈 𑣉𑣉𑣟𑣉𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "आमाः झोला बेस ते दोहोइ मे",
-    "target_mundari_deva": "अमाः झोला बेस लेका दोहोइ मे",
-    "phonetic_deva_mundari": "आमाः झोला बेस लेका दोहोइ मे",
-    "linguistic_validation_notes": "Root 'doho' (ᱫᱚᱦᱚ / दोहो - to keep/place) is shared across all three languages. Santhali takes participial compound 'sajaw kate' (arranging), while Mundari/Ho prefer adverbial compounds 'bes leka' / 'bes te' (properly)."
+    "phonetic_deva_santhali": "आमाग झोला साजाव काते दोहोय मे"
   },
   {
     "id": "FLN_CMD_018",
@@ -551,12 +341,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "अपनी-अपनी जगह पर वापस जाओ",
     "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ-ᱟᱯᱱᱟᱨ ᱡᱟᱜᱟ ᱛᱮ ᱨᱩᱣᱟᱹᱲ ᱯᱮ",
-    "phonetic_deva_santhali": "आपनार-आपनार जागा ते रुवा़ड़ पे",
-    "target_warang_chiti_ho": "𑢢𑣑𑣑𑣁𑣑 𑣕𑣁𑣓𑣈𑣉 𑣕𑣈 𑣜𑣂𑣒𑣁𑣑 𑣕𑣈",
-    "phonetic_deva_ho": "अप्पन ताएद ते रुवाड़ पे",
-    "target_mundari_deva": "अप्पन-अप्पन तायद ते रुवाड़ पे",
-    "phonetic_deva_mundari": "अप्पन-अप्पन तायद ते रुवाड़ पे",
-    "linguistic_validation_notes": "Distributive possession expressed through reduplicated reflexive 'apnar-apnar' (Santhali) / 'appan-appan' (Mundari). Intransitive return motion verb 'ruwaṛ' takes the 2nd person plural imperative marker '-pe' addressing children collectively."
+    "phonetic_deva_santhali": "आपनार-आपनार जागा ते रुवा़ड़ पे"
   },
   {
     "id": "FLN_CMD_019",
@@ -564,12 +349,7 @@
     "nipun_target_grade": "Grade 2",
     "source_hindi_normalized": "चलो, हम सब मिलकर प्रार्थना गाएँ",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧᱟᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते बिन्ति सेरेञाबो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣎𑣂𑣑𑣕𑣂 𑣉𑣂𑣑𑣁𑣙𑣈𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन बिनती दुरङ्गेबु",
-    "target_mundari_deva": "देलाबु सोबेनते बिनती दुरङेबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते बिनती दुरङेबु",
-    "linguistic_validation_notes": "Rigid inclusive cohortative: Mundari/Ho combine 'durang' (song/sing) + '-e-' (transitive) + '-bu' (1st person inclusive plural). Santhali uses 'sereñ' (ᱥᱮᱨᱮᱧ) + indicative 'a' + inclusive suffix '-bo' (ᱵᱚ)."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते बिन्ति सेरेञाबो"
   },
   {
     "id": "FLN_CMD_020",
@@ -577,12 +357,7 @@
     "nipun_target_grade": "Grade 1",
     "source_hindi_normalized": "सब मिलकर ताली बजाओ",
     "target_olchiki_santhali": "ᱡᱚᱛᱚ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱟᱹᱞᱤ ᱛᱷᱟᱯᱟᱭ ᱯᱮ",
-    "phonetic_deva_santhali": "जोतो को मेसा काते ता़ली थापाय पे",
-    "target_warang_chiti_ho": "𑣞𑣁𑣎𑣂𑣑 𑣖𑣂𑣞𑣁 𑣌𑣈𑣕𑣈 𑣕𑣁𑣚𑣂 𑣕𑣁𑣑𑣁𑣈 𑣕𑣈",
-    "phonetic_deva_ho": "सबिन मिसा केते ताली थपाए पे",
-    "target_mundari_deva": "सोबेनको मेसा केते ताली थपाए पे",
-    "phonetic_deva_mundari": "सोबेनको मेसा केते ताली थपाए पे",
-    "linguistic_validation_notes": "Compound action: 'tạli' (clap) + 'thapay'/'thapae' (slap/strike rhythmically). Collective participial linker: 'mesa kate' (Santhali) / 'mesa kete' (Mundari/Ho). Plural addressee marked by '-pe'."
+    "phonetic_deva_santhali": "जोतो को मेसा काते ता़ली थापाय पे"
   },
   {
     "id": "FLN_CMD_021",
@@ -590,12 +365,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "जो पूछना है, बारी-बारी से पूछो",
     "target_olchiki_santhali": "ᱡᱟᱦᱟᱸ ᱠᱩᱠᱞᱤ ᱢᱮᱱᱟᱜ-ᱟ, ᱵᱟᱨᱤ-ᱵᱟᱨᱤ ᱛᱮ ᱠᱩᱞᱤᱭ ᱯᱮ",
-    "phonetic_deva_santhali": "जाहां कुकली मेनाग-आ, बारी-बारी ते कुलिय पे",
-    "target_warang_chiti_ho": "𑣌𑣁𑣟𑣁𑣑 𑣌𑣂𑣚𑣂 𑣖𑣈𑣑𑣁𑣀, 𑣎𑣁𑣑𑣂 𑣕𑣈 𑣌𑣂𑣚𑣂 𑣕𑣈",
-    "phonetic_deva_ho": "जहां कुली मेनाअ, बारी ते कुली पे",
-    "target_mundari_deva": "जहां कुली मेनाः, बारी-बारी ते कुली पे",
-    "phonetic_deva_mundari": "जहां कुली मेनाः, बारी-बारी ते कुली पे",
-    "linguistic_validation_notes": "Relative clause syntax: indefinite relative pronoun 'jahã' (ᱡᱟᱦᱟᱸ / जहां), nominalized question stem 'kukli' / 'kuli', existential verb 'menak'-a' (ᱢᱮᱱᱟᱜ-ᱟ) / 'menaḥ'. Iterative adverb marked by instrumental '-te', governing plural imperative 'kuli-pe'."
+    "phonetic_deva_santhali": "जाहां कुकली मेनाग-आ, बारी-बारी ते कुलिय पे"
   },
   {
     "id": "FLN_CMD_022",
@@ -603,12 +373,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "चित्र देखकर कहानी बताओ",
     "target_olchiki_santhali": "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ",
-    "phonetic_deva_santhali": "चीता़र ञेल काते का़ह्नी ला़य मे",
-    "target_warang_chiti_ho": "𑣏𑣂𑣕𑣁𑣑 𑣑𑣈𑣚 𑣌𑣈𑣕𑣈 𑣌𑣁𑣟𑣁𑣑𑣂 𑣌𑣁𑣌𑣂 𑣖𑣈",
-    "phonetic_deva_ho": "चितार नेल केते कहनी काजी मे",
-    "target_mundari_deva": "मूरत नेल केते कहनी काजी मे",
-    "phonetic_deva_mundari": "मूरत नेल केते कहनी काजी मे",
-    "linguistic_validation_notes": "Sequential verbal action: visual perception 'ñel' (ᱧᱮᱞ / नेल) + conjunctive coordinator '-kate'/'-kete', followed by speech act verb: Santhali 'lạy' (ᱞᱟᱹᱭ - narrate/tell) vs Mundari/Ho 'kaji' (speak/state), with singular imperative '-me'."
+    "phonetic_deva_santhali": "चीता़र ञेल काते का़ह्नी ला़य मे"
   },
   {
     "id": "FLN_CMD_023",
@@ -616,12 +381,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "अपना काम पूरा करके दिखाओ",
     "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱠᱟᱹᱢᱤ ᱯᱩᱨᱟᱹᱣ ᱠᱟᱛᱮ ᱩᱫᱩᱜ ᱢᱮ",
-    "phonetic_deva_santhali": "आमाग का़मी पुरा़व काते उदुक मे",
-    "target_warang_chiti_ho": "𑢢𑣆𑣁𑣀 𑣌𑣁𑣖𑣂 𑣏𑣁𑣎𑣁 𑣌𑣈𑣕𑣈 𑣂𑣉𑣂𑣀 𑣖𑣈",
-    "phonetic_deva_ho": "आमाः कामी चबा केते उदुअ मे",
-    "target_mundari_deva": "अमाः कामी चबा केते उदुः मे",
-    "phonetic_deva_mundari": "आमाः कामी चबा केते उदुः मे",
-    "linguistic_validation_notes": "Santhali employs loan completion root 'purạw' (ᱯᱩᱨᱟᱹᱣ), whereas Mundari and Ho utilize the native Austroasiatic completive aspect verb 'caba' (चबा - to exhaust/finish entirely). Displays checked velar stops in both 'uduk'' and 'uduḥ'."
+    "phonetic_deva_santhali": "आमाग का़मी पुरा़व काते उदुक मे"
   },
   {
     "id": "FLN_CMD_024",
@@ -629,12 +389,7 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "कक्षा में दौड़ो मत, आराम से चलो",
     "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱮ ᱟᱞᱚᱯᱮ ᱫᱟᱹᱲᱟ, ᱵᱷᱟᱹᱜᱤ ᱛᱮ ᱛᱟᱲᱟᱢ ᱯᱮ",
-    "phonetic_deva_santhali": "चानाच रे आलोपे दा़ड़ा, भागी ते ताड़ाम पे",
-    "target_warang_chiti_ho": "𑣌𑣚𑣁𑣞 𑣜𑣈 𑣁𑣚𑣉𑣑𑣈 𑣑𑣂𑣑𑣁, 𑣎𑣈𑣞 𑣕𑣈 𑣞𑣈𑣑 𑣕𑣈",
-    "phonetic_deva_ho": "क्लास रे आलोपे नीरा, बेस ते सेन पे",
-    "target_mundari_deva": "कछा रे आलोपे निर-बाड़ाए, बिश्राम ते सेन पे",
-    "phonetic_deva_mundari": "कछा रे आलोपे निर-बाड़ाए, बिश्राम ते सेन पे",
-    "linguistic_validation_notes": "Prohibitive negative particle incorporating the 2nd person plural marker: 'alo-pe' (ᱟᱞᱚᱯᱮ / आलोपे - do not!). Velocity contrasts: Santhali 'dạṛ' (run) / 'taṛam' (walk step-by-step) vs Mundari/Ho 'nir' (run) / 'sen' (walk/go)."
+    "phonetic_deva_santhali": "चानाच रे आलोपे दा़ड़ा, भागी ते ताड़ाम पे"
   },
   {
     "id": "FLN_CMD_025",
@@ -642,11 +397,1206 @@
     "nipun_target_grade": "Grade 3",
     "source_hindi_normalized": "चलो, हम सब मिलकर गतिविधि शुरू करें",
     "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱠᱟᱹᱢᱤᱦᱚᱨᱟ ᱮᱦᱚᱵᱟᱵᱚ",
-    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते का़मीहोरा एह౉बाबो",
-    "target_warang_chiti_ho": "𑣖𑣈𑣚𑣁𑣎𑣂 𑣞𑣁𑣎𑣂𑣑 𑣌𑣁𑣖𑣂𑣟𑣉𑣑𑣁 𑣈𑣕𑣉𑣟𑣉𑣎𑣈𑣎𑣂",
-    "phonetic_deva_ho": "देलाबु सबिन कामीहोरा एतोहॊबेबु",
-    "target_mundari_deva": "देलाबु सोबेनते कामीहोरा एतोहब़ेबु",
-    "phonetic_deva_mundari": "देलाबु सोबेनते कामीहोरा एतोहब़ेबु",
-    "linguistic_validation_notes": "'Activity' is rendered by the standardized JCERT academic neologism 'kạmihora' (ᱠᱟᱹᱢᱤᱦᱚᱨᱟ / कामीहोरा - work-way). Strict adherence to inclusive cohortative morpheme: Santhali '-bo' (ᱮᱦᱚᱵᱟᱵᱚ) and Mundari/Ho '-bu' (एतोहब़ेबु), uniting the instructor and learners in the learning task."
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते का़मीहोरा एह౉बाबो"
+  },
+  {
+    "id": "FLN_ENV_001",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह महुआ का पेड़ है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱛᱠᱚᱢ ᱫᱟᱨᱮ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "नोवा दो मातकोम दारे काना"
+  },
+  {
+    "id": "FLN_ENV_002",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "साल का पत्ता हरा होता है",
+    "target_olchiki_santhali": "ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "सारजोम साकाम हा़रिया़ड़ गेया"
+  },
+  {
+    "id": "FLN_ENV_003",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मिट्टी के बर्तन में पानी रखो",
+    "target_olchiki_santhali": "ᱦᱟᱥᱟ ᱴᱩᱠᱩᱡ ᱨᱮ ᱫᱟᱜ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "हासा टुकुज रे दाग दोहोय मे"
+  },
+  {
+    "id": "FLN_ENV_004",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "गाय हमें दूध देती है",
+    "target_olchiki_santhali": "ᱜᱟᱹᱭ ᱫᱚ ᱛᱚᱣᱟᱭ ᱮᱢᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गा़य दो तोवाय एमाबोना"
+  },
+  {
+    "id": "FLN_ENV_005",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कुत्ता घर की रखवाली करता है",
+    "target_olchiki_santhali": "ᱥᱮᱛᱟ ᱫᱚ ᱚᱲᱟᱜ-ᱮ ᱨᱩᱠᱷᱤᱭᱟᱹᱭᱟ",
+    "phonetic_deva_santhali": "सेता दो ओड़ाग-ए रुखिया़या"
+  },
+  {
+    "id": "FLN_ENV_006",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बिल्ली दूध पीती है",
+    "target_olchiki_santhali": "ᱯᱩᱥᱤ ᱫᱚ ᱛᱚᱣᱟᱭ ᱧᱩᱭᱟ",
+    "phonetic_deva_santhali": "पुसी दो तोवाय ञुआ"
+  },
+  {
+    "id": "FLN_ENV_007",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चिड़िया आकाश में उड़ती है",
+    "target_olchiki_santhali": "ᱪᱮᱬᱮ ᱫᱚ ᱥᱮᱨᱢᱟ ᱨᱮᱭ ᱩᱰᱟᱹᱣᱜ-ᱟ",
+    "phonetic_deva_santhali": "चेणे़ दो सेरमा रेय उडा़वग-आ"
+  },
+  {
+    "id": "FLN_ENV_008",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नदी में बहुत पानी बह रहा है",
+    "target_olchiki_santhali": "ᱜᱟᱰᱟ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱜ ᱞᱤᱸᱜᱤᱱ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "गाडा रे अ़डी आयमा दाग लिंगीन काना"
+  },
+  {
+    "id": "FLN_ENV_009",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "जंगल में बहुत सारे पेड़ हैं",
+    "target_olchiki_santhali": "ᱵᱤᱨ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "बीर रे अ़डी आयमा दारे मेनाग-आ"
+  },
+  {
+    "id": "FLN_ENV_010",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सूरज पूरब से निकलता है",
+    "target_olchiki_santhali": "ᱥᱤᱧ ᱪᱟᱸᱫᱚ ᱫᱚ ᱥᱟᱢᱟᱝ ᱠᱷᱚᱱᱮ ᱨᱟᱠᱟᱵ-ᱟ",
+    "phonetic_deva_santhali": "सिञ चा़न्दो दो सामांग खोने राकाब-आ"
+  },
+  {
+    "id": "FLN_ENV_011",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "रात में चाँद चमकता है",
+    "target_olchiki_santhali": "ᱧᱤᱫᱟᱹ ᱨᱮ ᱧᱤᱫᱟᱹ ᱪᱟᱸᱫᱚᱭ ᱡᱩᱞᱩᱜ-ᱟ",
+    "phonetic_deva_santhali": "ञिदा़ रे ञिदा़ चा़न्दोय जुलुग-आ"
+  },
+  {
+    "id": "FLN_ENV_012",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आज बहुत तेज़ बारिश हो रही है",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱟᱹᱰᱤ ᱡᱩᱨ ᱫᱟᱜ ᱡᱟᱹᱲᱤ ᱮᱫᱟᱭ",
+    "phonetic_deva_santhali": "तेहेञ अ़डी जुर दाग जा़ड़ी एदाय"
+  },
+  {
+    "id": "FLN_ENV_013",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "फूल पर तितली बैठी है",
+    "target_olchiki_santhali": "ᱵᱟᱦᱟ ᱨᱮ ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "बाहा रे पिपिड़िया़ंग दुड़ुब आकाना"
+  },
+  {
+    "id": "FLN_ENV_014",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सूखे पत्तों को इकट्ठा करो",
+    "target_olchiki_santhali": "ᱨᱚᱦᱚᱲ ᱥᱟᱠᱟᱢ ᱠᱚ ᱡᱟᱣᱨᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "रोहोड़ साकाम को जावराय मे"
+  },
+  {
+    "id": "FLN_ENV_015",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बैल खेत जोतता है",
+    "target_olchiki_santhali": "ᱰᱟᱝᱜᱽᱨᱟ ᱫᱚ ᱠᱷᱮᱛ-ᱮ ᱥᱤᱭᱟ",
+    "phonetic_deva_santhali": "डांगरा दो खेत-ए सीया"
+  },
+  {
+    "id": "FLN_ENV_016",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "तालाब में मछलियाँ तैर रही हैं",
+    "target_olchiki_santhali": "ᱯᱩᱠᱷᱨᱤ ᱨᱮ ᱦᱟᱹᱠᱩ ᱠᱚ ᱯᱟᱹᱭᱨᱟᱹᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "पुखरी रे हा़कु को पा़यरा़ग काना"
+  },
+  {
+    "id": "FLN_ENV_017",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आम का फल मीठा होता है",
+    "target_olchiki_santhali": "ᱩᱞ ᱡᱚ ᱫᱚ ᱦᱮᱲᱮᱢ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "उल जो दो हेड़ेम गेया"
+  },
+  {
+    "id": "FLN_ENV_018",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कौआ पेड़ की डाल पर बैठा है",
+    "target_olchiki_santhali": "ᱠᱟᱣᱟ ᱫᱚ ᱫᱟᱨᱮ ᱰᱟᱹᱨ ᱨᱮᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कावा दो दारे डा़र रेय दुड़ुब आकाना"
+  },
+  {
+    "id": "FLN_ENV_019",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "साँप ज़मीन के बिल में रहता है",
+    "target_olchiki_santhali": "ᱵᱤᱧ ᱫᱚ ᱦᱟᱥᱟ ᱵᱷᱩᱜᱟᱹᱜ ᱨᱮᱭ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "बिञ दो हासा भुगा़ग रेय ताहे़ना"
+  },
+  {
+    "id": "FLN_ENV_020",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "धान पकने पर पीला हो जाता है",
+    "target_olchiki_santhali": "ᱦᱳᱲᱳ ᱵᱤᱞᱤ ᱞᱮᱱᱠᱷᱟᱱ ᱥᱟᱥᱟᱝ ᱜᱮ ᱧᱮᱞᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "होड़ो बीली लेनखान सासांग गे ञेल౉ग-ᱟ"
+  },
+  {
+    "id": "FLN_ENV_021",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हवा चलने से पत्ते हिल रहे हैं",
+    "target_olchiki_santhali": "ᱦᱚᱭ ᱛᱮ ᱥᱟᱠᱟᱢ ᱠᱚ ᱦᱤᱞᱟᱹᱣᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "होय ते साकाम को हीलावग काना"
+  },
+  {
+    "id": "FLN_ENV_022",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आग में सूखी लकड़ियाँ डालो",
+    "target_olchiki_santhali": "ᱥᱮᱸᱜᱮᱞ ᱨᱮ ᱨᱚᱦᱚᱲ ᱥᱟᱦᱟᱱ ᱠᱷᱟᱸᱡᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "सेंगेल रे रोहोड़ साहान खा़न्जोय मे"
+  },
+  {
+    "id": "FLN_ENV_023",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "पहाड़ बहुत ऊँचा है",
+    "target_olchiki_santhali": "ᱵᱩᱨᱩ ᱫᱚ ᱟᱹᱰᱤ ᱩᱥᱩᱞ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "बुरु दो अ़डी उसुल गेया"
+  },
+  {
+    "id": "FLN_ENV_024",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "पेड़ की छाया में बैठो",
+    "target_olchiki_santhali": "ᱫᱟᱨᱮ ᱩᱢᱩᱞ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "दारे उमुल रे दुड़ुब मे"
+  },
+  {
+    "id": "FLN_ENV_025",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चलो हम सब मिलकर एक नया पौधा लगाएँ",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱤᱫᱴᱟᱝ ᱱᱟᱣᱟ ᱫᱟᱨᱮᱵᱚ ᱨᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते मिदटांग नावा दारेबो रोहोया"
+  },
+  {
+    "id": "FLN_KIN_001",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेरी माँ मुझे प्यार करती है",
+    "target_olchiki_santhali": "ᱤᱧ ᱟᱭᱳ ᱫᱚ ᱤᱧᱮ ᱫᱩᱞᱟᱹᱲᱟᱹᱧᱟ",
+    "phonetic_deva_santhali": "इञ आयो दो इञे दुला़ड़ा़ञा"
+  },
+  {
+    "id": "FLN_KIN_002",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पिताजी खेत में काम करते हैं",
+    "target_olchiki_santhali": "ᱵᱟᱵᱟ ᱫᱚ ᱠᱷᱮᱛ ᱨᱮᱭ ᱠᱟᱹᱢᱤᱭᱟ",
+    "phonetic_deva_santhali": "बाबा दो खेत रेय का़मीया"
+  },
+  {
+    "id": "FLN_KIN_003",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह मेरा छोटा भाई है",
+    "target_olchiki_santhali": "ᱱᱩᱭ ᱫᱚ ᱤᱧᱤᱡ ᱵᱚᱠᱚᱧ ᱠᱚᱲᱟ ᱠᱟᱱᱟᱭ",
+    "phonetic_deva_santhali": "नुय दो इञिज बोकोञ कोड़ा कानाय"
+  },
+  {
+    "id": "FLN_KIN_004",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेरी बड़ी बहन स्कूल जा रही है",
+    "target_olchiki_santhali": "ᱤᱧᱤᱡ ᱢᱟᱨᱟᱝ ᱫᱟᱹᱭ ᱟᱥᱲᱟ ᱛᱮᱭ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "इञिज मारांग दा़य आसड़ा तेय चालाग काना"
+  },
+  {
+    "id": "FLN_KIN_005",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शिक्षक हमें पढ़ा रहे हैं",
+    "target_olchiki_santhali": "ᱢᱟᱪᱮᱛ ᱫᱚ ᱟᱵᱚᱭ ᱯᱟᱲᱦᱟᱣᱮᱫ ᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "माचेत दो आबोय पाड़हावेद बोना"
+  },
+  {
+    "id": "FLN_KIN_006",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दादाजी हमें कहानी सुनाते हैं",
+    "target_olchiki_santhali": "ᱜᱚᱲᱚᱢ ᱦᱟᱲᱟᱢ ᱫᱚ ᱠᱟᱹᱦᱱᱤᱭ ᱞᱟᱹᱭᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गोड़ोम हाड़ाम दो का़हनीय ला़याबोना"
+  },
+  {
+    "id": "FLN_KIN_007",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दादी माँ बहुत प्यार से खाना खिलाती हैं",
+    "target_olchiki_santhali": "ᱜᱚᱲᱚᱢ ᱵᱩᱰᱷᱤ ᱫᱚ ᱟᱹᱰᱤ ᱫᱩᱞᱟᱹᱲ ᱛᱮ ᱡᱚᱢᱮ ᱮᱢᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गोड़ोम बुढ़ी दो अ़डी दुला़ड़ ते जोमे एमाबोना"
+  },
+  {
+    "id": "FLN_KIN_008",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "वह मेरा सबसे अच्छा दोस्त है",
+    "target_olchiki_santhali": "ᱩᱱᱤ ᱫᱚ ᱤᱧᱤᱡ ᱡᱚᱛᱚ ᱠᱷᱚᱱ ᱵᱷᱟᱹᱜᱤ ᱜᱟᱛᱮ ᱠᱟᱱᱟᱭ",
+    "phonetic_deva_santhali": "उनी दो इञिज जोतो खोन भागी गाते कानाय"
+  },
+  {
+    "id": "FLN_KIN_009",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सभी बच्चे अपनी कक्षा में बैठो",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱟᱯᱱᱟᱨ ᱪᱟᱱᱟᱪ ᱨᱮ ᱫᱩᱲᱩᱵ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम गिदरा़ आपनार चानाच रे दुड़ुब पे"
+  },
+  {
+    "id": "FLN_KIN_010",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गाँव के मुखिया का नाम क्या है?",
+    "target_olchiki_santhali": "ᱟᱹᱛᱩ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱧᱡᱷᱤ ᱦᱟᱲᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "आ़तु रीनिज मा़ञ्झी हाड़ामाग ञुतुम दो चेद?"
+  },
+  {
+    "id": "FLN_KIN_011",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "डॉक्टर बीमार लोगों का इलाज करते हैं",
+    "target_olchiki_santhali": "ᱰᱟᱠᱛᱚᱨ ᱫᱚ ᱨᱩᱣᱟᱹ ᱦᱚᱲ ᱠᱚᱭ ᱨᱟᱱ ᱠᱚᱣᱟ",
+    "phonetic_deva_santhali": "डाकतर दो रुवा़ होड़ कोय रान कोवा"
+  },
+  {
+    "id": "FLN_KIN_012",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "किसान हमारे लिए अनाज उगाता है",
+    "target_olchiki_santhali": "ᱪᱟᱥᱤ ᱦᱚᱲ ᱫᱚ ᱟᱵᱚ ᱞᱟᱹᱜᱤᱫ ᱡᱚᱢᱟᱜ-ᱮ ᱪᱟᱥᱟ",
+    "phonetic_deva_santhali": "चासी होड़ दो आबो ला़गिद जोमाग-ए चासा"
+  },
+  {
+    "id": "FLN_KIN_013",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "लड़कियाँ मैदान में खेल रही हैं",
+    "target_olchiki_santhali": "ᱠᱩᱲᱤ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱴᱟᱺᱰᱤ ᱨᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कुड़ी गिदरा़ को टा़न्डी रेको एनेज काना"
+  },
+  {
+    "id": "FLN_KIN_014",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "लड़के गेंद से खेल रहे हैं",
+    "target_olchiki_santhali": "ᱠᱚᱲᱟ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱵᱚᱞ ᱛᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कोड़ा गिदरा़ को बोल तेको एनेज काना"
+  },
+  {
+    "id": "FLN_KIN_015",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हम सब मिलकर अपने बड़ों का आदर करेंगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱟᱨᱟᱝ ᱦᱚᱲ ᱠᱚᱵᱚ ᱢᱟᱱᱟᱣ ᱠᱚᱣᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को मेसा काते मारांग होड़ कोबो मानाव कोवा"
+  },
+  {
+    "id": "FLN_KIN_016",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चाचा बाज़ार से नई किताबें लाए हैं",
+    "target_olchiki_santhali": "ᱠᱟᱠᱟ ᱫᱚ ᱵᱟᱡᱟᱨ ᱠᱷᱚᱱ ᱱᱟᱣᱟ ᱯᱩᱛᱷᱤ ᱠᱚᱭ ᱟᱹᱜᱩ ᱟᱠᱟᱫᱟ",
+    "phonetic_deva_santhali": "काका दो बाजार खोन नावा पुथि कोय आ़गु आकादा"
+  },
+  {
+    "id": "FLN_KIN_017",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मेरी चाची बहुत स्वादिष्ट खाना बनाती हैं",
+    "target_olchiki_santhali": "ᱤᱧ ᱠᱟᱹᱠᱤ ᱫᱚ ᱟᱹᱰᱤ ᱥᱤᱵᱤᱞ ᱡᱚᱢᱟᱜ-ᱮ ᱛᱮᱭᱟᱨᱟ",
+    "phonetic_deva_santhali": "इञ का़की दो अ़डी सिबिल जोमाग-ए तेयारा"
+  },
+  {
+    "id": "FLN_KIN_018",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब अपने गाँव को साफ़ रखेंगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱵᱚᱣᱟᱜ ᱟᱹᱛᱩ ᱥᱟᱯᱷᱟᱵᱚ ᱫᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को आबोवाग आ़तु साफाबो दोहोया"
+  },
+  {
+    "id": "FLN_KIN_019",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अतिथि को पानी पिलाओ",
+    "target_olchiki_santhali": "ᱯᱮᱲᱟ ᱦᱚᱲ ᱫᱟᱜ ᱮᱢᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "पेड़ा होड़ दाग एमाय मे"
+  },
+  {
+    "id": "FLN_KIN_020",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कक्षा का मॉनिटर कौन है?",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱤᱱᱤᱡ ᱢᱩᱠᱷᱤᱭᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?",
+    "phonetic_deva_santhali": "चानाच रीनिज मुखिया़ दो ओकोय कानाय?"
+  },
+  {
+    "id": "FLN_KIN_021",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सब मिलकर प्रार्थना गाओ",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम को मेसा काते बिनती सेरेञ पे"
+  },
+  {
+    "id": "FLN_KIN_022",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अपने सहपाठी के साथ मिलकर पढ़ो",
+    "target_olchiki_santhali": "ᱟᱢᱨᱮᱱ ᱯᱟᱹᱴᱷᱩᱣᱟᱹ ᱜᱟᱛᱮ ᱥᱟᱶ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "आमरेन पा़ठुवा़ गाते साव मेसा काते पाड़हाव मे"
+  },
+  {
+    "id": "FLN_KIN_023",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "बगीचे के माली पौधे सींच रहे हैं",
+    "target_olchiki_santhali": "ᱵᱟᱜᱟᱱ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱞᱤ ᱫᱚ ᱫᱟᱨᱮ ᱨᱮ ᱫᱟᱜ-ᱮ ᱫᱩᱞᱮᱫᱟ",
+    "phonetic_deva_santhali": "बागान रीनिज मा़ली दो दारे रे दाग-ए दुलेदा"
+  },
+  {
+    "id": "FLN_KIN_024",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सफाईकर्मी विद्यालय को स्वच्छ रखते हैं",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟᱭ ᱦᱚᱲ ᱫᱚ ᱟᱥᱲᱟ ᱥᱟᱯᱷᱟᱭ ᱫᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "साफाय होड़ दो आसड़ा साफाय दोहोया"
+  },
+  {
+    "id": "FLN_KIN_025",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब मिलकर अपने समाज को आगे बढ़ाएँगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱟᱵᱚᱣᱟᱜ ᱥᱟᱶᱛᱟᱵᱚ ᱞᱟᱦᱟᱭᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को मेसा काते आबोवाग सावंताबो लाहाया"
+  },
+  {
+    "id": "FLN_BOD_001",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने सिर को छुओ",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱵᱚᱦᱚᱜ ᱡᱚᱴᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग बोहोग जोतेद मे"
+  },
+  {
+    "id": "FLN_BOD_002",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपनी आँखें बंद करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱢᱮᱫ ᱞᱟᱦᱩᱴ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग मेद लाहुट मे"
+  },
+  {
+    "id": "FLN_BOD_003",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कान से हम सुनते हैं",
+    "target_olchiki_santhali": "ᱞᱩᱛᱩᱨ ᱛᱮ ᱟᱵᱚᱵᱚ ᱟᱧᱡᱚᱢᱟ",
+    "phonetic_deva_santhali": "लुतुर ते आबोबो आंजोमा"
+  },
+  {
+    "id": "FLN_BOD_004",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नाक से हम साँस लेते हैं",
+    "target_olchiki_santhali": "ᱢᱩᱸ ᱛᱮ ᱟᱵᱚᱵᱚ ᱥᱟᱦᱮᱫᱟ",
+    "phonetic_deva_santhali": "मुँ ते आबोबो साहेदा"
+  },
+  {
+    "id": "FLN_BOD_005",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने दाँत साफ़ करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱫᱟᱛᱟ ᱥᱟᱯᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग दाता साफाय मे"
+  },
+  {
+    "id": "FLN_BOD_006",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जीभ से स्वाद का पता चलता है",
+    "target_olchiki_santhali": "ᱟᱞᱟᱝ ᱛᱮ ᱥᱤᱵᱤᱞ ᱵᱟᱰᱟᱭᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "आलांग ते सिबिल बाडाय౉ग-आ"
+  },
+  {
+    "id": "FLN_BOD_007",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हाथों से ताली बजाओ",
+    "target_olchiki_santhali": "ᱛᱤ ᱛᱮ ᱛᱷᱟᱹᱭᱟᱹᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "ती ते था़य़ा़ड़ मे"
+  },
+  {
+    "id": "FLN_BOD_008",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पैरों से कदम ताल करो",
+    "target_olchiki_santhali": "ᱡᱟᱸᱜᱟ ᱛᱮ ᱛᱟᱲᱟᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "जा़न्गा ते ताड़ाम मे"
+  },
+  {
+    "id": "FLN_BOD_009",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खाना खाने से पहले हाथ धोओ",
+    "target_olchiki_santhali": "ᱡᱚᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱟᱹᱨᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "जोम माड़ांग रे ती आ़रुब मे"
+  },
+  {
+    "id": "FLN_BOD_010",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने बाल में कंघी करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱩᱵ ᱱᱟᱹᱠᱤᱡ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग उब ना़किज मे"
+  },
+  {
+    "id": "FLN_BOD_011",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "नाखूनों को साफ़ और छोटा रखो",
+    "target_olchiki_santhali": "ᱨᱟᱢᱟ ᱠᱚ ᱥᱟᱯᱷᱟ ᱟᱨ ᱠᱷᱟᱴᱚ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "रामा को साफा आर खाटो दोहोय मे"
+  },
+  {
+    "id": "FLN_BOD_012",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "साफ़ पानी ही पीना चाहिए",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ ᱫᱟᱜ ᱜᱮ ᱧᱩ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "साफा दाग गे ञु ला़कती काना"
+  },
+  {
+    "id": "FLN_BOD_013",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "प्रतिदिन स्नान करना अच्छी आदत है",
+    "target_olchiki_santhali": "ᱫᱤᱱᱟᱹᱢ ᱦᱤᱞᱚᱜ ᱩᱢᱩᱜ ᱫᱚ ᱵᱷᱟᱹᱜᱤ ᱦᱮᱣᱟ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "दीना़म हीलोग उमुग दो भागी हेवा काना"
+  },
+  {
+    "id": "FLN_BOD_014",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "खाँसते समय मुँह पर हाथ रखो",
+    "target_olchiki_santhali": "ᱠᱷᱚᱜ ᱡᱚᱠᱷᱟᱜ ᱢᱚᱪᱟ ᱨᱮ ᱛᱤ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "खोग जोखाग मोचा रे ती दोहोय मे"
+  },
+  {
+    "id": "FLN_BOD_015",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "धूल से अपनी आँखों को बचाओ",
+    "target_olchiki_santhali": "ᱫᱷᱩᱲᱤ ᱠᱷᱚᱱ ᱟᱢᱟᱜ ᱢᱮᱫ ᱵᱟᱧᱪᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "धुड़ी खोन आमाग मेद बा़ञचाव मे"
+  },
+  {
+    "id": "FLN_BOD_016",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "साफ़ कपड़े पहनकर स्कूल आओ",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ ᱞᱩᱜᱽᱲᱤ ᱦᱚᱨᱚᱜ ᱠᱟᱛᱮ ᱟᱥᱲᱟ ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "साफा लुगड़ी होरोग काते आसड़ा हीजुग मे"
+  },
+  {
+    "id": "FLN_BOD_017",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "समय पर सोओ और सुबह जल्दी जागो",
+    "target_olchiki_santhali": "ᱚᱠᱛᱚ ᱨᱮ ᱜᱤᱛᱤᱡ ᱢᱮ ᱟᱨ ᱥᱮᱛᱟᱜ ᱨᱮ ᱵᱮᱨᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "ओकतो रे गीतीज मे आर सेताग रे बेरेद मे"
+  },
+  {
+    "id": "FLN_BOD_018",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "ताज़ा फल और हरी सब्ज़ियाँ खाओ",
+    "target_olchiki_santhali": "ᱵᱤᱞᱤ ᱡᱚ ᱟᱨ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱩᱛᱩ ᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "बीली जो आर हा़रिया़ड़ उतु जोम मे"
+  },
+  {
+    "id": "FLN_BOD_019",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "व्यायाम करने से शरीर मज़बूत बनता है",
+    "target_olchiki_santhali": "ᱠᱟᱹᱥᱨᱟᱹᱛ ᱞᱮᱠᱷᱟᱱ ᱦᱚᱲᱢᱚ ᱠᱮᱴᱮᱡᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "का़सरा़त लेखान होड़मो केटेज౉ग-आ"
+  },
+  {
+    "id": "FLN_BOD_020",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अगर तबियत खराब लगे तो शिक्षक को बताओ",
+    "target_olchiki_santhali": "ᱦᱚᱲᱢᱚ ᱵᱟᱹᱲᱤᱡ ᱵᱩᱡᱷᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱢᱟᱪᱮᱛ ᱞᱟᱹᱭᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "होड़मो बा़ड़िज बुझा़व लेखान माचेत ला़याय मे"
+  },
+  {
+    "id": "FLN_BOD_021",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "खुले में रखा खाना मत खाओ",
+    "target_olchiki_santhali": "ᱚᱴᱟᱝ ᱨᱮ ᱫᱚᱦᱚ ᱟᱠᱟᱱ ᱡᱚᱢᱟᱜ ᱟᱞᱚᱢ ᱡᱚᱢᱟ",
+    "phonetic_deva_santhali": "ओटांग रे दोहो आकान जोमाग आलोम जोमा"
+  },
+  {
+    "id": "FLN_BOD_022",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "गंदे हाथों से आँखों को मत मलो",
+    "target_olchiki_santhali": "ᱵᱟᱹᱲᱤᱡ ᱛᱤ ᱛᱮ ᱢᱮᱫ ᱟᱞᱚᱢ ᱜᱟᱹᱥᱤᱭᱟ",
+    "phonetic_deva_santhali": "बा़ड़िज ती ते मेद आलोम गा़सीया"
+  },
+  {
+    "id": "FLN_BOD_023",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कक्षा में हमेशा सीधे बैठकर पढ़ो",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱮ ᱡᱟᱣᱜᱮ ᱥᱚᱡᱷᱮ ᱫᱩᱲᱩᱵ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "चानाच रे जावगे सोज्हे दुड़ुब काते पाड़हाव मे"
+  },
+  {
+    "id": "FLN_BOD_024",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "खेलने के बाद हाथ-मुँह धोना चाहिए",
+    "target_olchiki_santhali": "ᱮᱱᱮᱡ ᱛᱟᱭᱚᱢ ᱛᱤ-ᱢᱚᱪᱟ ᱟᱹᱨᱩᱵ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "एनेज तायोम ती-मोचा आ़रुब ला़कती काना"
+  },
+  {
+    "id": "FLN_BOD_025",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "स्वस्थ शरीर में ही स्वस्थ मन रहता है",
+    "target_olchiki_santhali": "ᱱᱤᱨᱚᱜ ᱦᱚᱲᱢᱚ ᱨᱮᱜᱮ ᱱᱟᱯᱟᱭ ᱢᱚᱱᱮ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "नीरोग होड़मो रेगे नापाय मोने ताहे़ना"
+  },
+  {
+    "id": "FLN_INQ_001",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह क्या है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱪᱮᱫ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो चेद काना?"
+  },
+  {
+    "id": "FLN_INQ_002",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तुम्हारा नाम क्या है?",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "आमाग ञुतुम दो चेद?"
+  },
+  {
+    "id": "FLN_INQ_003",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तुम कहाँ रहते हो?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚ ᱚᱠᱟᱨᱮᱢ ᱛᱟᱦᱮᱸᱱᱟ?",
+    "phonetic_deva_santhali": "आम दो ओकारेम ताहे़ना?"
+  },
+  {
+    "id": "FLN_INQ_004",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह चित्र किसका है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱪᱤᱛᱟᱹᱨ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा चीता़र दो ओकोयाग काना?"
+  },
+  {
+    "id": "FLN_INQ_005",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह कौन सा रंग है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱚᱠᱟ ᱨᱚᱝ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो ओका रंग काना?"
+  },
+  {
+    "id": "FLN_INQ_006",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यहाँ आओ और इसे देखो",
+    "target_olchiki_santhali": "ᱱᱚᱸᱰᱮ ᱦᱤᱡᱩᱜ ᱢᱮ ᱟᱨ ᱱᱚᱣᱟ ᱧᱮᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "नोंडे हीजुग मे आर नोवा ञेल मे"
+  },
+  {
+    "id": "FLN_INQ_007",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "क्या तुम्हें समझ आया?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚᱢ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱟ?",
+    "phonetic_deva_santhali": "आम दोम बुझा़व केदा?"
+  },
+  {
+    "id": "FLN_INQ_008",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "फिर से कोशिश करो",
+    "target_olchiki_santhali": "ᱟᱨᱦᱚᱸ ᱢᱤᱫ ᱫᱷᱟᱣ ᱠᱩᱨᱩᱢᱩᱴᱩᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आरहों मिद धाव कुरुमुटुय मे"
+  },
+  {
+    "id": "FLN_INQ_009",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "किसके पास पेंसिल नहीं है?",
+    "target_olchiki_santhali": "ᱚᱠᱚᱭ ᱴᱷᱮᱱ ᱯᱮᱱᱥᱤᱞ ᱵᱟᱹᱱᱩᱜ-ᱟ?",
+    "phonetic_deva_santhali": "ओकोय ठेन पेन्सिल बा़नुग-आ?"
+  },
+  {
+    "id": "FLN_INQ_010",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इस प्रश्न का उत्तर कौन जानता है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱠᱩᱠᱞᱤ ᱨᱮᱱᱟᱜ ᱛᱮᱞᱟ ᱚᱠᱚᱭᱮ ᱵᱟᱰᱟᱭᱟ?",
+    "phonetic_deva_santhali": "नोवा कुकली रेनाग तेला ओकोये बाडाया?"
+  },
+  {
+    "id": "FLN_INQ_011",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "ज़ोर से बोलो ताकि सब सुन सकें",
+    "target_olchiki_santhali": "ᱟᱲᱟᱝ ᱛᱮ ᱨᱚᱲ ᱢᱮ ᱡᱮᱢᱚᱱ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱧᱡᱚᱢ ᱫᱟᱲᱮᱭᱟᱜ",
+    "phonetic_deva_santhali": "आड़ांग ते रोड़ मे जेमोन सानाम को आंजोम दाड़ेयाग"
+  },
+  {
+    "id": "FLN_INQ_012",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "क्या आपने अपना गृहकार्य पूरा किया?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚ ᱚᱲᱟᱜ ᱠᱟᱹᱢᱤᱢ ᱯᱩᱨᱟᱹᱣ ᱟᱠᱟᱫᱟ?",
+    "phonetic_deva_santhali": "आम दो ओड़ाग का़मीम पुरा़व आकादा?"
+  },
+  {
+    "id": "FLN_INQ_013",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इस शब्द का पहला अक्षर क्या है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱟᱹᱲᱟᱹ ᱨᱮᱱᱟᱜ ᱯᱟᱹᱦᱤᱞ ᱟᱠᱷᱚᱨ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "नोवा आ़ड़ा़ रेनाग पा़हिल आखोर दो चेद?"
+  },
+  {
+    "id": "FLN_INQ_014",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कोई संदेह हो तो मुझसे पूछो",
+    "target_olchiki_santhali": "ᱡᱟᱦᱟᱸᱱᱟᱜ ᱠᱩᱠᱞᱤ ᱛᱟᱦᱮᱸᱱ ᱠᱷᱟᱱ ᱤᱧ ᱠᱩᱞᱤᱭᱤᱧ ᱢᱮ",
+    "phonetic_deva_santhali": "जाहानाग कुकली ताहे़न खान इञ कुलीयीञ मे"
+  },
+  {
+    "id": "FLN_INQ_015",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अब किसकी बारी है?",
+    "target_olchiki_santhali": "ᱱᱤᱛᱚᱜ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱯᱟᱞᱟ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नीत౉ग दो ओकोयाग पाला काना?"
+  },
+  {
+    "id": "FLN_INQ_016",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बोलने में संकोच मत करो",
+    "target_olchiki_santhali": "ᱨᱚᱲ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱚᱢ ᱞᱟᱡᱟᱣᱜ-ᱟ",
+    "phonetic_deva_santhali": "रोड़ ला़गिद आलोम लाजावग-आ"
+  },
+  {
+    "id": "FLN_INQ_017",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आज आपने क्या नया सीखा?",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱟᱢ ᱪᱮᱫ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟᱢ ᱪᱮᱫ ᱠᱮᱫᱟ?",
+    "phonetic_deva_santhali": "तेहेञ आम चेद नावा काथाम चेद केदा?"
+  },
+  {
+    "id": "FLN_INQ_018",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "इस कहानी से हमें क्या सीख मिलती है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱠᱟᱹᱦᱱᱤ ᱠᱷᱚᱱ ᱟᱵᱚ ᱪᱮᱫ ᱥᱤᱠᱷᱱᱟᱹᱛᱵᱚ ᱧᱟᱢᱮᱫᱟ?",
+    "phonetic_deva_santhali": "नोवा का़हनी खोन आबो चेद सीखना़तबो ञामेदा?"
+  },
+  {
+    "id": "FLN_INQ_019",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "एक छोटी सी कहानी सुनाओ",
+    "target_olchiki_santhali": "ᱢᱤᱫᱴᱟᱝ ᱠᱟᱹᱴᱤᱡ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "मिदटांग का़टीज का़हनी ला़य मे"
+  },
+  {
+    "id": "FLN_INQ_020",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आज देर से आने का क्या कारण था?",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱵᱤᱞᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱨᱮᱱᱟᱜ ᱪᱮᱫ ᱠᱟᱨᱚᱱ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "तेहेञ बीलोम ते हीजुग रेनाग चेद कारोन ताहे़ काना?"
+  },
+  {
+    "id": "FLN_INQ_021",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "उत्तर देने से पहले हाथ उठाओ",
+    "target_olchiki_santhali": "ᱛᱮᱞᱟ ᱮᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱛᱩᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "तेला एम माड़ांग रे ती तुल मे"
+  },
+  {
+    "id": "FLN_INQ_022",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सवाल को ध्यान से सुनो",
+    "target_olchiki_santhali": "ᱠᱩᱠᱞᱤ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "कुकली धेयान ते आंजोम मे"
+  },
+  {
+    "id": "FLN_INQ_023",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "स्लेट पर अपनी पसंद का चित्र बनाओ",
+    "target_olchiki_santhali": "ᱥᱞᱮᱴ ᱨᱮ ᱟᱯᱱᱟᱨ ᱠᱩᱥᱤ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "स्लेट रे आपनार कुसी चीता़र बेनाव मे"
+  },
+  {
+    "id": "FLN_INQ_024",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "क्या आप इस वाक्य को पढ़ सकते हैं?",
+    "target_olchiki_santhali": "ᱟᱢ ᱱᱚᱣᱟ ᱟᱹᱭᱟᱹᱛ ᱯᱟᱲᱦᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ?",
+    "phonetic_deva_santhali": "आम नोवा आ़य़ात पाड़हाव दाड़ेयाग-आ?"
+  },
+  {
+    "id": "FLN_INQ_025",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आगे आकर सबको पढ़कर सुनाओ",
+    "target_olchiki_santhali": "ᱥᱟᱢᱟᱝ ᱛᱮ ᱦᱮᱡ ᱠᱟᱛᱮ ᱥᱟᱱᱟᱢ ᱠᱚ ᱯᱟᱲᱦᱟᱣ ᱟᱧᱡᱚᱢ ᱟᱠᱚ ᱢᱮ",
+    "phonetic_deva_santhali": "सामांग ते हेज काते सानाम को पाड़हाव आंजोम आको मे"
+  },
+  {
+    "id": "FLN_SOC_001",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नमस्ते / जोहार",
+    "target_olchiki_santhali": "ᱡᱚᱦᱟᱨ",
+    "phonetic_deva_santhali": "जोहार"
+  },
+  {
+    "id": "FLN_SOC_002",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ प्रभात",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱥᱮᱛᱟᱜ",
+    "phonetic_deva_santhali": "सा़गुन सेताग"
+  },
+  {
+    "id": "FLN_SOC_003",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ दोपहर",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱛᱤᱠᱤᱱ",
+    "phonetic_deva_santhali": "सा़गुन तीकीन"
+  },
+  {
+    "id": "FLN_SOC_004",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ संध्या",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱛᱟᱹᱨᱟᱹᱥᱤᱧ",
+    "phonetic_deva_santhali": "सा़गुन ता़रा़सीञ"
+  },
+  {
+    "id": "FLN_SOC_005",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "स्वागत है",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ",
+    "phonetic_deva_santhali": "सा़गुन दाराम"
+  },
+  {
+    "id": "FLN_SOC_006",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बहुत अच्छा प्रयास किया",
+    "target_olchiki_santhali": "ᱟᱹᱰᱤ ᱢᱚᱡᱽ ᱠᱩᱨᱩᱢᱩᱴᱩ",
+    "phonetic_deva_santhali": "अ़डी मोज कुरुमुटु"
+  },
+  {
+    "id": "FLN_SOC_007",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शाबाश, बहुत बढ़िया!",
+    "target_olchiki_santhali": "ᱟᱹᱰᱤ ᱵᱷᱟᱹᱜᱤ!",
+    "phonetic_deva_santhali": "अ़डी भागी!"
+  },
+  {
+    "id": "FLN_SOC_008",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "धन्यवाद",
+    "target_olchiki_santhali": "ᱥᱟᱨᱦᱟᱣ",
+    "phonetic_deva_santhali": "सारहाव"
+  },
+  {
+    "id": "FLN_SOC_009",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हमेशा सच बोलो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱥᱟᱹᱨᱤ ᱠᱟᱛᱷᱟ ᱨᱚᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे सा़री काथा रोड़ मे"
+  },
+  {
+    "id": "FLN_SOC_010",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सबके साथ मिलकर रहो",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱟᱶ ᱱᱟᱯᱟᱭ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम को साव नापाय ते ताहे़न पे"
+  },
+  {
+    "id": "FLN_SOC_011",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आपस में झगड़ा मत करो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱛᱟᱞᱟ ᱨᱮ ᱟᱞᱚᱯᱮ ᱛᱚᱯᱚᱲᱟ",
+    "phonetic_deva_santhali": "आपनार ताला रे आलोपे तोपोड़ा"
+  },
+  {
+    "id": "FLN_SOC_012",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अपनी चीज़ें बाँटकर खेलो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱡᱤᱱᱤᱥ ᱦᱟᱹᱴᱤᱧ ᱠᱟᱛᱮ ᱮᱱᱮᱡ ᱯᱮ",
+    "phonetic_deva_santhali": "आपनार जीनिस हा़टीञ काते एनेज पे"
+  },
+  {
+    "id": "FLN_SOC_013",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गलती होने पर क्षमा माँगो",
+    "target_olchiki_santhali": "ᱵᱷᱩᱞ ᱞᱮᱠᱷᱟᱱ ᱤᱠᱟᱹ ᱠᱷᱚᱡᱽ ᱢᱮ",
+    "phonetic_deva_santhali": "भूल लेखान ईका़ खोज मे"
+  },
+  {
+    "id": "FLN_SOC_014",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दूसरों को क्षमा करना सीखो",
+    "target_olchiki_santhali": "ᱮᱴᱟᱜ ᱦᱚᱲ ᱤᱠᱟᱹ ᱠᱟᱠᱚ ᱪᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "एटाग होड़ ईका़ काको चेद मे"
+  },
+  {
+    "id": "FLN_SOC_015",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "जीव-जंतुओं पर दया करो",
+    "target_olchiki_santhali": "ᱡᱤᱵᱽ-ᱡᱤᱭᱟᱹᱞᱤ ᱠᱚ ᱫᱟᱭᱟ ᱠᱚ ᱢᱮ",
+    "phonetic_deva_santhali": "जीब-जीया़ली को दया को मे"
+  },
+  {
+    "id": "FLN_SOC_016",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हमेशा हँसते और मुस्कुराते रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱞᱟᱸᱫᱟᱭ ᱢᱮ ᱟᱨ ᱨᱟᱹᱥᱠᱟᱹ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे ला़न्दाय मे आर रा़सका़ ते ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_017",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मुश्किल समय में हिम्मत मत हारो",
+    "target_olchiki_santhali": "ᱢᱩᱦᱤᱢ ᱚᱠᱛᱚ ᱨᱮ ᱢᱚᱱᱮ ᱟᱞᱚᱢ ᱠᱷᱟᱴᱚᱭᱟ",
+    "phonetic_deva_santhali": "मुहीम ओकतो रे मोने आलोम खाटोया"
+  },
+  {
+    "id": "FLN_SOC_018",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आप यह काम ज़रूर कर सकते हैं",
+    "target_olchiki_santhali": "ᱟᱢ ᱱᱚᱣᱟ ᱠᱟᱹᱢᱤ ᱱᱤᱦᱟᱹᱛᱤᱢ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "आम नोवा का़मी नीहा़तीम दाड़ेयाग-आ"
+  },
+  {
+    "id": "FLN_SOC_019",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब मिलकर एक समान हैं",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱚᱢᱟᱱ ᱜᱮᱭᱟᱵᱚ",
+    "phonetic_deva_santhali": "आबो सानाम को सोमान गेयाबो"
+  },
+  {
+    "id": "FLN_SOC_020",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अपने विद्यालय से प्रेम करो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱟᱥᱲᱟ ᱫᱩᱞᱟᱹᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "आपनार आसड़ा दुला़ड़ मे"
+  },
+  {
+    "id": "FLN_SOC_021",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हमेशा नई बातें सीखते रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟ ᱪᱮᱫᱚᱜ ᱛᱮᱜᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे नावा काथा चेद౉ग तेगे ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_022",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कल हम सब फिर मिलेंगे",
+    "target_olchiki_santhali": "ᱜᱟᱯᱟ ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚᱵᱚ ᱧᱟᱯᱟᱢᱟ",
+    "phonetic_deva_santhali": "गापा आबो सानाम कोबो ञापामा"
+  },
+  {
+    "id": "FLN_SOC_023",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सदा खुश और प्रसन्न रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱨᱟᱹᱥᱠᱟᱹ ᱟᱨ ᱥᱩᱞᱩᱠ ᱨᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे रा़सका़ आर सुलुक रे ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_024",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आपने बहुत सुंदर चित्र बनाया है",
+    "target_olchiki_santhali": "ᱟᱢ ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱪᱤᱛᱟᱹᱨᱮᱢ ᱵᱮᱱᱟᱣ ᱟᱠᱟᱫᱟ",
+    "phonetic_deva_santhali": "आम अ़डी नापाय चीता़रेम बेनाव आकादा"
+  },
+  {
+    "id": "FLN_SOC_025",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आपकी लिखावट बहुत साफ़ है",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱚᱞ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱯᱷᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "आमाग ओल दो अ़डी साफा गेया"
+  },
+  {
+    "id": "FLN_NUM_026",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "छह से दस तक गिनो",
+    "target_olchiki_santhali": "ᱛᱩᱨᱩᱭ ᱠᱷᱚᱱ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "तुरुय खोन गेल ध़ाबिज लेखाय मे"
+  },
+  {
+    "id": "FLN_NUM_027",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या छह",
+    "target_olchiki_santhali": "ᱛᱩᱨᱩᱭ",
+    "phonetic_deva_santhali": "तुरुय"
+  },
+  {
+    "id": "FLN_NUM_028",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या सात",
+    "target_olchiki_santhali": "ᱮᱭᱟᱭ",
+    "phonetic_deva_santhali": "एयाय"
+  },
+  {
+    "id": "FLN_NUM_029",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या आठ",
+    "target_olchiki_santhali": "ᱤᱨᱟᱹᱞ",
+    "phonetic_deva_santhali": "इरा़ल"
+  },
+  {
+    "id": "FLN_NUM_030",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या नौ",
+    "target_olchiki_santhali": "ᱟᱨᱮ",
+    "phonetic_deva_santhali": "आरे"
+  },
+  {
+    "id": "FLN_NUM_031",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या दस",
+    "target_olchiki_santhali": "ᱜᱮᱞ",
+    "phonetic_deva_santhali": "गेल"
+  },
+  {
+    "id": "FLN_NUM_032",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या बीस",
+    "target_olchiki_santhali": "ᱤᱥᱤ",
+    "phonetic_deva_santhali": "इसी"
+  },
+  {
+    "id": "FLN_NUM_033",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या पचास",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "बार इसी गेल"
+  },
+  {
+    "id": "FLN_NUM_034",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या सौ",
+    "target_olchiki_santhali": "ᱥᱟᱭ",
+    "phonetic_deva_santhali": "साय"
+  },
+  {
+    "id": "FLN_NUM_035",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "यह कितने रुपये हैं?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱛᱤᱱᱟᱹᱜ ᱴᱟᱠᱟ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो तीना़ग टाका काना?"
+  },
+  {
+    "id": "FLN_NUM_036",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दस रुपये का सिक्का",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱴᱟᱠᱟ ᱨᱮᱱᱟᱜ ᱠᱩᱭᱤᱱ",
+    "phonetic_deva_santhali": "गेल टाका रेनाग कुयीन"
+  },
+  {
+    "id": "FLN_NUM_037",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आज सोमवार है",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱫᱚ ᱚᱛᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "तेहेञ दो ओते माहाँ काना"
+  },
+  {
+    "id": "FLN_NUM_038",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कल मंगलवार है",
+    "target_olchiki_santhali": "ᱜᱟᱯᱟ ᱫᱚ ᱵᱟᱞᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "गापा दो बाले माहाँ काना"
+  },
+  {
+    "id": "FLN_NUM_039",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "रविवार को छुट्टी होती है",
+    "target_olchiki_santhali": "ᱥᱤᱸᱜᱮ ᱢᱟᱦᱟᱸ ᱫᱚ ᱪᱷᱩᱴᱤ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "सिंगे माहाँ दो छुटी ताहे़ना"
+  },
+  {
+    "id": "FLN_NUM_040",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सुबह का समय",
+    "target_olchiki_santhali": "ᱥᱮᱛᱟᱜ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "सेताग ओकतो"
+  },
+  {
+    "id": "FLN_NUM_041",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दोपहर का समय",
+    "target_olchiki_santhali": "ᱛᱤᱠᱤᱱ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "तीकीन ओकतो"
+  },
+  {
+    "id": "FLN_NUM_042",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "शाम का समय",
+    "target_olchiki_santhali": "ᱛᱟᱹᱨᱟᱹᱥᱤᱧ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "ता़रा़सीञ ओकतो"
+  },
+  {
+    "id": "FLN_NUM_043",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "इनमें से कौन अधिक लंबा है?",
+    "target_olchiki_santhali": "ᱱᱩᱠᱤᱱ ᱢᱩᱫᱽ ᱨᱮ ᱚᱠᱚᱭ ᱡᱤᱞᱤᱧ ᱜᱮᱭᱟᱭ?",
+    "phonetic_deva_santhali": "नुकीन मुद रे ओकोय जीलीञ गेयाय?"
+  },
+  {
+    "id": "FLN_NUM_044",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "शिक्षक के पास कौन बैठा है?",
+    "target_olchiki_santhali": "ᱢᱟᱪᱮᱛ ᱥᱩᱨ ᱨᱮ ᱚᱠᱚᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ?",
+    "phonetic_deva_santhali": "माचेत सुर रे ओकोय दुड़ुब आकानाय?"
+  },
+  {
+    "id": "FLN_NUM_045",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "वह पेड़ बहुत दूर है",
+    "target_olchiki_santhali": "ᱦᱟᱱᱟ ᱫᱟᱨᱮ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱺᱜᱤᱧ ᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "हाना दारे दो अ़डी सा़न्गीञ रे मेनाग-आ"
+  },
+  {
+    "id": "FLN_NUM_046",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "दो कदम आगे चलो",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱛᱟᱲᱟᱢ ᱞᱟᱦᱟ ᱛᱮ ᱥᱮᱱᱚᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "बार ताड़ाम लाहा ते सेन౉ग मे"
+  },
+  {
+    "id": "FLN_NUM_047",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "एक कदम पीछे हटो",
+    "target_olchiki_santhali": "ᱢᱤᱫ ᱛᱟᱲᱟᱢ ᱛᱟᱭᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "मिद ताड़ाम तायोम ते हीजुग मे"
+  },
+  {
+    "id": "FLN_NUM_048",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "यह रेखा मोटी है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱢᱚᱴᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "नोवा गार दो मोटा गेया"
+  },
+  {
+    "id": "FLN_NUM_049",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "यह रेखा पतली है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱯᱟᱛᱞᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "नोवा गार दो पातला गेया"
+  },
+  {
+    "id": "FLN_NUM_050",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हमने गणित का खेल पूरा कर लिया",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱞᱮᱠᱷᱟ ᱮᱱᱮᱡᱵᱚ ᱯᱩᱨᱟᱹᱣ ᱠᱮᱫᱟ",
+    "phonetic_deva_santhali": "आबो लेखा एनेजबो पुरा़व केदा"
   }
 ]
