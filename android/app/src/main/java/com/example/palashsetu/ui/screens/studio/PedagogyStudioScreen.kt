@@ -250,22 +250,35 @@ fun PedagogyStudioScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = if (isHindi) "निपुण भारत दक्षता स्तर (Competency Outcome):" else "NIPUN Bharat Competency Outcome:",
+                        text = if (isHindi) "निपुण भारत दक्षता स्तर:" else "NIPUN Bharat Competency:",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF334155)
+                        color = Color(0xFF334155),
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false)
                     )
-                    Text(
-                        text = if (isHindi) "${allCompetencies.size} लक्ष्य उपलब्ध" else "${allCompetencies.size} Outcomes Available",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF64748B),
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Box(
                         modifier = Modifier
+                            .height(20.dp)
                             .clip(controlCornerShape)
                             .background(SurfaceContainerLow)
-                            .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                            .padding(horizontal = 6.dp, vertical = 2.dp)
-                    )
+                            .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
+                            .padding(horizontal = 6.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = if (isHindi) "24 लक्ष्य उपलब्ध" else "24 Goals Available",
+                            fontSize = 10.sp,
+                            lineHeight = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF64748B),
+                            maxLines = 1,
+                            softWrap = false
+                        )
+                    }
                 }
 
                 // Dropdown Trigger Container (Sharp 4dp, 52dp height, bilingual layout)
@@ -293,9 +306,10 @@ fun PedagogyStudioScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            // Domain Code Badge
+                            // Domain Code Badge (strict 20dp height, 4dp sharp corners)
                             Box(
                                 modifier = Modifier
+                                    .height(20.dp)
                                     .clip(controlCornerShape)
                                     .background(if (selectedCompetency.isNumeracy) Color(0xFFECFDF5) else Color(0xFFEFF6FF))
                                     .border(
@@ -303,11 +317,13 @@ fun PedagogyStudioScreen(
                                         if (selectedCompetency.isNumeracy) Color(0xFFA7F3D0) else Color(0xFFBFDBFE),
                                         controlCornerShape
                                     )
-                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                                    .padding(horizontal = 6.dp),
+                                contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     text = selectedCompetency.code,
-                                    fontSize = 11.sp,
+                                    fontSize = 10.sp,
+                                    lineHeight = 10.sp,
                                     fontWeight = FontWeight.ExtraBold,
                                     color = if (selectedCompetency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8),
                                     maxLines = 1,
@@ -315,17 +331,20 @@ fun PedagogyStudioScreen(
                                 )
                             }
 
-                            // Grade Badge
+                            // Grade Badge (strict 20dp height, 4dp sharp corners)
                             Box(
                                 modifier = Modifier
+                                    .height(20.dp)
                                     .clip(controlCornerShape)
                                     .background(Color(0xFFF1F5F9))
                                     .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                                    .padding(horizontal = 5.dp, vertical = 2.dp)
+                                    .padding(horizontal = 6.dp),
+                                contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     text = selectedCompetency.getGradeLabel(isHindi),
                                     fontSize = 10.sp,
+                                    lineHeight = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF475569),
                                     maxLines = 1,
@@ -358,20 +377,23 @@ fun PedagogyStudioScreen(
                             }
                         }
 
-                        // Trailing Action Pill
+                        // Trailing Action Pill (strict 26dp height, 4dp sharp corners)
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(4.dp),
                             modifier = Modifier
+                                .height(26.dp)
                                 .clip(controlCornerShape)
                                 .background(Primary.copy(alpha = 0.08f))
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                                .padding(horizontal = 8.dp)
                         ) {
                             Text(
                                 text = if (isHindi) "बदलें" else "Change",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Primary
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
                             )
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_expand_more),
@@ -397,22 +419,29 @@ fun PedagogyStudioScreen(
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(24.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.weight(1f, fill = false)
                         ) {
                             Text(
                                 text = if (isHindi) "अभ्यास पत्रक (कक्षा $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Primary
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
                             )
+                            // Code badge: strict 20dp height, 4dp sharp corners, single line
                             Box(
                                 modifier = Modifier
+                                    .height(20.dp)
                                     .clip(controlCornerShape)
                                     .background(if (selectedCompetency.isNumeracy) Color(0xFFECFDF5) else Color(0xFFEFF6FF))
                                     .border(
@@ -420,27 +449,43 @@ fun PedagogyStudioScreen(
                                         if (selectedCompetency.isNumeracy) Color(0xFFA7F3D0) else Color(0xFFBFDBFE),
                                         controlCornerShape
                                     )
-                                    .padding(horizontal = 5.dp, vertical = 1.dp)
+                                    .padding(horizontal = 6.dp),
+                                contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     text = selectedCompetency.code,
                                     fontSize = 10.sp,
+                                    lineHeight = 10.sp,
                                     fontWeight = FontWeight.ExtraBold,
-                                    color = if (selectedCompetency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8)
+                                    color = if (selectedCompetency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8),
+                                    maxLines = 1,
+                                    softWrap = false
                                 )
                             }
                         }
-                        Text(
-                            text = if (isHindi) "A4 प्रिंट हेतु तैयार" else "A4 B&W Ready",
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Secondary,
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        // A4 B&W Ready Badge: strict 20dp height, 4dp sharp corners, single line
+                        Box(
                             modifier = Modifier
+                                .height(20.dp)
                                 .clip(controlCornerShape)
                                 .background(SurfaceContainerLow)
                                 .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
+                                .padding(horizontal = 6.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = if (isHindi) "A4 प्रिंट रेडी" else "A4 B&W Ready",
+                                fontSize = 10.sp,
+                                lineHeight = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Secondary,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
                     }
 
                     // Date & Student Name Header (Bilingual)
@@ -1100,16 +1145,21 @@ fun PedagogyStudioScreen(
                                         ) {
                                             Box(
                                                 modifier = Modifier
+                                                    .height(20.dp)
                                                     .clip(controlCornerShape)
                                                     .background(domainBg)
                                                     .border(1.dp, domainBorder, controlCornerShape)
-                                                    .padding(horizontal = 7.dp, vertical = 2.dp)
+                                                    .padding(horizontal = 6.dp),
+                                                contentAlignment = Alignment.Center
                                             ) {
                                                 Text(
                                                     text = comp.code,
-                                                    fontSize = 12.sp,
+                                                    fontSize = 10.sp,
+                                                    lineHeight = 10.sp,
                                                     fontWeight = FontWeight.ExtraBold,
-                                                    color = domainColor
+                                                    color = domainColor,
+                                                    maxLines = 1,
+                                                    softWrap = false
                                                 )
                                             }
                                             Text(
