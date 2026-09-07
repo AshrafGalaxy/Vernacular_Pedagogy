@@ -53,7 +53,7 @@ def sanitize_token(token):
 
 
 def run_wsl(command, desc=None, timeout=None):
-    """Execute a command via WSL Ubuntu shell with streaming output."""
+    """Execute a command via WSL Ubuntu shell with streaming output and hard timeout."""
     if desc:
         print(f"\n[ORCHESTRATOR] {desc}", flush=True)
     print(f"Command: {command}", flush=True)
@@ -67,11 +67,20 @@ def run_wsl(command, desc=None, timeout=None):
             errors="replace",
             bufsize=1
         )
-        if process.stdout:
-            for line in iter(process.stdout.readline, ""):
+        t0 = time.time()
+        while True:
+            line = process.stdout.readline()
+            if line:
                 print(line, end="", flush=True)
-            process.stdout.close()
-        return process.wait(timeout=timeout)
+            elif process.poll() is not None:
+                break
+            if timeout and (time.time() - t0) > timeout:
+                print(f"\n[ERROR] Command timed out after {timeout}s. Killing process...", flush=True)
+                process.kill()
+                process.wait()
+                return -1
+            time.sleep(0.02)
+        return process.poll()
     except subprocess.TimeoutExpired:
         print(f"\n[ERROR] Command timed out after {timeout}s. Killing process...", flush=True)
         process.kill()

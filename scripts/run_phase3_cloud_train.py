@@ -24,40 +24,63 @@ import shutil
 
 
 def run_cmd(cmd, cwd=None, description="", capture=False):
-    """Run a shell command, print output, return exit code (non-fatal)."""
+    """Run a shell command with live streaming output, return exit code (non-fatal)."""
     if description:
         print(f"\n[EXEC] {description}: {cmd}", flush=True)
     else:
         print(f"\n[EXEC] {cmd}", flush=True)
-    if capture:
-        res = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True)
-        if res.stdout:
-            print(res.stdout[-2000:], flush=True)
-        if res.stderr:
-            print(res.stderr[-2000:], flush=True)
-    else:
-        res = subprocess.run(cmd, shell=True, cwd=cwd)
-    if res.returncode != 0:
-        print(f"[WARN] Command exited with code {res.returncode}", flush=True)
-    return res.returncode
+    try:
+        p = subprocess.Popen(
+            cmd,
+            shell=True,
+            cwd=cwd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            bufsize=1
+        )
+        if p.stdout:
+            for line in iter(p.stdout.readline, ""):
+                print(line, end="", flush=True)
+            p.stdout.close()
+        ret = p.wait()
+        if ret != 0:
+            print(f"[WARN] Command exited with code {ret}", flush=True)
+        return ret
+    except Exception as e:
+        print(f"[ERROR] Subprocess error: {e}", flush=True)
+        return -1
 
 
 def run_cmd_strict(cmd, cwd=None, description="", capture=False):
-    """Run a shell command and abort the pipeline on failure."""
-    print(f"\n[EXEC] {cmd}", flush=True)
-    if capture:
-        res = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True)
-        if res.stdout:
-            print(res.stdout[-2000:], flush=True)
-        if res.stderr:
-            print(res.stderr[-2000:], flush=True)
+    """Run a shell command with live streaming output and abort on failure."""
+    if description:
+        print(f"\n[EXEC] {description}: {cmd}", flush=True)
     else:
-        res = subprocess.run(cmd, shell=True, cwd=cwd)
-    if res.returncode != 0:
-        msg = f"[FATAL] {description or 'Command'} failed with exit code {res.returncode}: {cmd}"
+        print(f"\n[EXEC] {cmd}", flush=True)
+    p = subprocess.Popen(
+        cmd,
+        shell=True,
+        cwd=cwd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        bufsize=1
+    )
+    if p.stdout:
+        for line in iter(p.stdout.readline, ""):
+            print(line, end="", flush=True)
+        p.stdout.close()
+    ret = p.wait()
+    if ret != 0:
+        msg = f"[FATAL] {description or 'Command'} failed with exit code {ret}: {cmd}"
         print(msg, flush=True)
         raise RuntimeError(msg)
-    return res.returncode
+    return ret
 
 
 def install_dependencies():
