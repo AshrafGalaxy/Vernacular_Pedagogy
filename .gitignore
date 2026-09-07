@@ -20,6 +20,7 @@ ENV/
 *.zip
 models/tts/samples/
 models/mt/indictrans2_sat_int8_ct2/
+models/asr/vosk-model-small-hi-0.22/
 Get_started_managed_agents.ipynb
 
 # Audio raw dumps (keep cache seeds, ignore large scrapes)
