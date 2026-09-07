@@ -139,7 +139,7 @@ fun TeacherLoginScreen(
                     .padding(2.dp)
             ) {
                 Row {
-                    listOf("hi" to "🇮🇳 हिन्दी", "en" to "English").forEach { (code, label) ->
+                    listOf("hi" to "हिन्दी", "en" to "English").forEach { (code, label) ->
                         val isSelected = currentLanguage == code
                         val pillBg by animateColorAsState(
                             targetValue = if (isSelected) Primary else Color.Transparent,
@@ -450,14 +450,25 @@ fun TeacherLoginScreen(
             }
         }
 
-        // Bottom Guarantee Label
-        Text(
-            text = if (isHindi) "⚡ 100% स्थानीय गणना • इंटरनेट की आवश्यकता नहीं" else "⚡ 100% On-Device AI • No Internet Required",
-            fontSize = 10.sp,
-            color = Color(0xFF64748B),
-            textAlign = TextAlign.Center,
+        // Bottom Guarantee Label (Vector Bolt Icon)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
             modifier = Modifier.padding(top = 2.dp, bottom = 8.dp)
-        )
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_bolt),
+                contentDescription = "On-Device AI",
+                tint = Color(0xFF64748B),
+                modifier = Modifier.size(13.dp)
+            )
+            Text(
+                text = if (isHindi) "100% स्थानीय गणना • इंटरनेट की आवश्यकता नहीं" else "100% On-Device AI • No Internet Required",
+                fontSize = 10.sp,
+                color = Color(0xFF64748B),
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 

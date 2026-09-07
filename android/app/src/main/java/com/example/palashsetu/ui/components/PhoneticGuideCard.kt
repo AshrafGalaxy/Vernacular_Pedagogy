@@ -7,16 +7,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.palashsetu.R
 import com.example.palashsetu.theme.Secondary
 import com.example.palashsetu.theme.SecondaryFixed
 import com.example.palashsetu.theme.SurfaceContainerLowest
@@ -49,9 +53,14 @@ fun PhoneticGuideCard(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                Text(text = "🗣️", fontSize = 14.sp)
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_record_voice_over),
+                    contentDescription = "Voice Guide",
+                    tint = Secondary,
+                    modifier = Modifier.size(16.dp)
+                )
                 Text(
                     text = "उच्चारण मार्गदर्शिका (Teacher Phonetic Guide)",
                     fontSize = 12.sp,

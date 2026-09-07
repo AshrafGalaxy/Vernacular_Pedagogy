@@ -15,13 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,10 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.palashsetu.R
+import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.domain.engine.PedagogicalAudioEngine
 import com.example.palashsetu.theme.Background
 import com.example.palashsetu.theme.Primary
@@ -53,8 +57,10 @@ import kotlinx.coroutines.launch
 fun PedagogyStudioScreen(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+
     var selectedGrade by remember { mutableStateOf(2) }
-    var selectedLanguage by remember { mutableStateOf("Santhali") }
     var isFlashcardMode by remember { mutableStateOf(false) }
     var isCardFlipped by remember { mutableStateOf(false) }
     var showPdfDownloadedNotification by remember { mutableStateOf(false) }
@@ -62,23 +68,27 @@ fun PedagogyStudioScreen(
     val coroutineScope = rememberCoroutineScope()
     val audioEngine = remember { PedagogicalAudioEngine() }
 
+    val controlCornerShape = RoundedCornerShape(4.dp)
+    val cardCornerShape = RoundedCornerShape(8.dp)
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Background)
-            .verticalScroll(rememberScrollState())
-            .padding(bottom = 80.dp)
     ) {
         PalashTopBar()
 
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp)
+                .padding(bottom = 80.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            // Header Title
             Column {
                 Text(
-                    text = "शिक्षण व वर्कशीट स्टूडियो",
+                    text = if (isHindi) "शिक्षण व वर्कशीट स्टूडियो" else "Pedagogy & Worksheet Studio",
                     fontSize = 19.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = Primary
@@ -90,65 +100,84 @@ fun PedagogyStudioScreen(
                 )
             }
 
-            // Grade Selector
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                listOf(1 to "कक्षा 1", 2 to "कक्षा 2 ✓", 3 to "कक्षा 3").forEach { (grade, label) ->
+                listOf(1 to "कक्षा 1", 2 to "कक्षा 2", 3 to "कक्षा 3").forEach { (grade, label) ->
                     val isSelected = selectedGrade == grade
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(10.dp))
+                            .clip(controlCornerShape)
                             .background(if (isSelected) Primary else SurfaceContainerLowest)
-                            .border(1.dp, if (isSelected) Primary else Color(0xFFCBD5E1), RoundedCornerShape(10.dp))
+                            .border(1.dp, if (isSelected) Primary else Color(0xFFCBD5E1), controlCornerShape)
                             .clickable { selectedGrade = grade }
                             .padding(vertical = 10.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = label,
-                            fontSize = 12.sp,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                            color = if (isSelected) Color.White else Color(0xFF1E293B)
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = if (isHindi) label else "Grade $grade",
+                                fontSize = 12.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                color = if (isSelected) Color.White else Color(0xFF1E293B)
+                            )
+                            if (isSelected) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_check),
+                                    contentDescription = "Selected",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(13.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
 
-            // Language Selector
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                listOf("Santhali" to "संथाली (Ol Chiki)", "Ho" to "हो (Warang Chiti)", "Mundari" to "मुंडारी (Bani)").forEach { (lang, label) ->
-                    val isSelected = selectedLanguage == lang
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(if (isSelected) PrimaryContainer else SurfaceContainerLow)
-                            .clickable { selectedLanguage = lang }
-                            .padding(vertical = 8.dp, horizontal = 4.dp),
-                        contentAlignment = Alignment.Center
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(controlCornerShape)
+                        .background(PrimaryContainer)
+                        .border(1.dp, Primary, controlCornerShape)
+                        .padding(vertical = 8.dp, horizontal = 12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_check_circle),
+                            contentDescription = "Active Language",
+                            tint = Color.White,
+                            modifier = Modifier.size(14.dp)
+                        )
                         Text(
-                            text = label,
-                            fontSize = 11.sp,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                            color = if (isSelected) Color.White else Color(0xFF334155),
+                            text = "ᱥᱟᱱᱛᱟᱲᱤ • Santali (Ol Chiki)",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
                             textAlign = TextAlign.Center
                         )
                     }
                 }
             }
 
-            // Worksheet Canvas Preview Card
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp),
+                shape = cardCornerShape,
                 colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(
@@ -161,7 +190,7 @@ fun PedagogyStudioScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "अभ्यास पत्रक (Worksheet Canvas • Grade $selectedGrade)",
+                            text = if (isHindi) "अभ्यास पत्रक (Worksheet Canvas • Grade $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = Primary
@@ -172,16 +201,19 @@ fun PedagogyStudioScreen(
                             fontWeight = FontWeight.SemiBold,
                             color = Secondary,
                             modifier = Modifier
-                                .background(SurfaceContainerLow, RoundedCornerShape(6.dp))
+                                .clip(controlCornerShape)
+                                .background(SurfaceContainerLow)
+                                .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
                         )
                     }
 
-                    // Exercise Box
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(SurfaceContainerLow, RoundedCornerShape(10.dp))
+                            .clip(controlCornerShape)
+                            .background(SurfaceContainerLow)
+                            .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                             .padding(12.dp)
                     ) {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -205,82 +237,161 @@ fun PedagogyStudioScreen(
                         }
                     }
 
-                    // Visual Counting Simulation
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color.White, RoundedCornerShape(8.dp))
-                            .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(8.dp))
+                            .clip(controlCornerShape)
+                            .background(Color.White)
+                            .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                             .padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceAround,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "🍃 🍃 🍃", fontSize = 20.sp)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                repeat(3) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_eco),
+                                        contentDescription = "Sal Leaf",
+                                        tint = Color(0xFF2E7D32),
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
+                            }
                             Text(text = "ᱥᱟᱨᱡᱚᱢ (Sal)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ 3 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
                         }
                         Text(text = "+", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "🌰 🌰", fontSize = 20.sp)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                repeat(2) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_grain),
+                                        contentDescription = "Mahua Fruit",
+                                        tint = Color(0xFF8D6E63),
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
+                            }
                             Text(text = "ᱢᱟᱹᱦᱩᱣᱟᱹ (Mahua)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ 2 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
                         }
                         Text(text = "=", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "❓", fontSize = 20.sp)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_help_outline),
+                                contentDescription = "Question",
+                                tint = Primary,
+                                modifier = Modifier.size(20.dp)
+                            )
                             Text(text = "ᱢᱚᱬᱮ (Five)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ ? ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1B5E20))
                         }
                     }
 
-                    // Action Buttons
                     Button(
                         onClick = { showPdfDownloadedNotification = true },
-                        modifier = Modifier.fillMaxWidth().height(46.dp),
-                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.fillMaxWidth().height(44.dp),
+                        shape = controlCornerShape,
                         colors = ButtonDefaults.buttonColors(containerColor = Primary)
                     ) {
-                        Text(text = "🖨️ प्रिंट योग्य B&W PDF डाउनलोड (Offline Canvas)", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_print),
+                                contentDescription = "Print PDF",
+                                tint = Color.White,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Text(
+                                text = if (isHindi) "प्रिंट योग्य B&W PDF डाउनलोड" else "Download Printable B&W PDF",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
                     }
 
                     OutlinedButton(
                         onClick = { isFlashcardMode = !isFlashcardMode },
-                        modifier = Modifier.fillMaxWidth().height(46.dp),
-                        shape = RoundedCornerShape(10.dp)
+                        modifier = Modifier.fillMaxWidth().height(44.dp),
+                        shape = controlCornerShape
                     ) {
-                        Text(
-                            text = if (isFlashcardMode) "बंद करें (Close Flashcard)" else "🎴 इंटरएक्टिव डिजिटल फ्लैशकार्ड खोलें (Audio Cards)",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Primary
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_studio),
+                                contentDescription = "Flashcards",
+                                tint = Primary,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Text(
+                                text = if (isFlashcardMode) {
+                                    if (isHindi) "फ्लैशकार्ड बंद करें" else "Close Flashcard"
+                                } else {
+                                    if (isHindi) "इंटरएक्टिव ऑडियो फ्लैशकार्ड खोलें" else "Open Audio Flashcards"
+                                },
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
                     }
 
                     AnimatedVisibility(visible = showPdfDownloadedNotification) {
-                        Text(
-                            text = "✓ PDF सफलतापूर्वक स्थानीय मेमोरी में डाउनलोड हो गया (Ready for Offline Print)",
-                            fontSize = 11.sp,
-                            color = Color(0xFF1B5E20),
-                            fontWeight = FontWeight.Bold,
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
                             modifier = Modifier
-                                .background(Color(0xFFE8F5E9), RoundedCornerShape(6.dp))
+                                .clip(controlCornerShape)
+                                .background(Color(0xFFE8F5E9))
+                                .border(1.dp, Color(0xFFC8E6C9), controlCornerShape)
                                 .padding(8.dp)
-                        )
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_check_circle),
+                                contentDescription = "Success",
+                                tint = Color(0xFF1B5E20),
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Text(
+                                text = if (isHindi) "PDF सफलतापूर्वक स्थानीय मेमोरी में डाउनलोड हो गया (Ready for Offline Print)" else "PDF downloaded to local storage (Ready for Offline Print)",
+                                fontSize = 11.sp,
+                                color = Color(0xFF1B5E20),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
             }
 
-            // Interactive Flashcard Mode
             AnimatedVisibility(visible = isFlashcardMode) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(cardCornerShape)
                         .clickable { isCardFlipped = !isCardFlipped },
-                    shape = RoundedCornerShape(16.dp),
+                    shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerHigh),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Column(
                         modifier = Modifier.padding(24.dp),
@@ -288,13 +399,22 @@ fun PedagogyStudioScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Text(
-                            text = if (isCardFlipped) "कार्ड पृष्ठ (Back Side) - क्लिक करके पलटें" else "कार्ड सम्मुख (Front Side) - क्लिक करके पलटें",
+                            text = if (isCardFlipped) {
+                                if (isHindi) "कार्ड पृष्ठ (Back Side) - क्लिक करके पलटें" else "Card Back - Tap to flip"
+                            } else {
+                                if (isHindi) "कार्ड सम्मुख (Front Side) - क्लिक करके पलटें" else "Card Front - Tap to flip"
+                            },
                             fontSize = 11.sp,
                             color = Color(0xFF64748B)
                         )
 
                         if (!isCardFlipped) {
-                            Text(text = "🌳", fontSize = 48.sp)
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_park),
+                                contentDescription = "Sal Tree",
+                                tint = Color(0xFF2E7D32),
+                                modifier = Modifier.size(54.dp)
+                            )
                             Text(
                                 text = "ᱥᱟᱨᱡᱚᱢ ᱫᱟᱨᱮ",
                                 fontSize = 26.sp,
@@ -315,7 +435,7 @@ fun PedagogyStudioScreen(
                                 color = Color(0xFF64748B)
                             )
                             Text(
-                                text = "झारखंड का राज्य वृक्ष (State Tree of Jharkhand)",
+                                text = if (isHindi) "झारखंड का राज्य वृक्ष (State Tree of Jharkhand)" else "State Tree of Jharkhand",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Secondary
@@ -329,9 +449,25 @@ fun PedagogyStudioScreen(
                                 }
                             },
                             colors = ButtonDefaults.buttonColors(containerColor = Primary),
-                            shape = RoundedCornerShape(8.dp)
+                            shape = controlCornerShape,
+                            modifier = Modifier.height(44.dp)
                         ) {
-                            Text(text = "🔊 उच्चारण सुनें (Pronounce)", fontSize = 12.sp)
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_volume_up),
+                                    contentDescription = "Pronounce",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Text(
+                                    text = if (isHindi) "संथाली उच्चारण सुनें" else "Listen to Santali Audio",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White,
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
                         }
                     }
                 }

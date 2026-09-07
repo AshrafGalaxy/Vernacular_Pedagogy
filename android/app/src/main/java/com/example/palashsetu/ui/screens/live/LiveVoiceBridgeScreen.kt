@@ -25,9 +25,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import com.example.palashsetu.R
+import com.example.palashsetu.data.local.UserSessionManager
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.domain.engine.AsrEngine
@@ -67,6 +73,9 @@ fun LiveVoiceBridgeScreen(
     val nmtEngine = remember { NmtEngine() }
     val audioEngine = remember { PedagogicalAudioEngine() }
 
+    val context = LocalContext.current
+    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+
     var isMicActive by remember { mutableStateOf(false) }
     var teacherHindiText by remember {
         mutableStateOf("बच्चो, अपनी गणित की किताब निकालो और पृष्ठ संख्या बारह खोलो।")
@@ -77,7 +86,7 @@ fun LiveVoiceBridgeScreen(
     var phoneticGuide by remember {
         mutableStateOf("[गिदरा को, आपेयाग एलखा पुथी झीज पे आर गेल बार साहटा उडुक पे]")
     }
-    var latencyDisplay by remember { mutableStateOf("⏱ 420ms विलंबता") }
+    var latencyDisplay by remember { mutableStateOf("420ms") }
     var isAudioPlaying by remember { mutableStateOf(false) }
     var playProgress by remember { mutableStateOf(0f) }
     var currentSpeed by remember { mutableStateOf(0.9f) }
@@ -89,7 +98,7 @@ fun LiveVoiceBridgeScreen(
             val result = nmtEngine.translate(hindiSentence)
             santaliOlChikiText = result.targetOlChiki
             phoneticGuide = result.phoneticGuide
-            latencyDisplay = if (result.isTier1FastPath) "⏱ 21ms (Tier-1 Cache)" else "⏱ 420ms (INT8 CT2)"
+            latencyDisplay = if (result.isTier1FastPath) "21ms (Tier-1 Cache)" else "420ms (INT8 CT2)"
         }
     }
 
@@ -157,14 +166,19 @@ fun LiveVoiceBridgeScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                Text(text = "🏫", fontSize = 16.sp)
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_school),
+                                    contentDescription = "Teacher",
+                                    tint = Primary,
+                                    modifier = Modifier.size(18.dp)
+                                )
                                 Column {
                                     Text(text = "शिक्षक", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
                                     Text(text = "हिन्दी (Hindi)", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Primary)
                                 }
                             }
 
-                            // Sync icon (Sharp 4dp container)
+                            // Sync icon (Sharp 4dp container with vector icon)
                             Box(
                                 modifier = Modifier
                                     .padding(horizontal = 8.dp)
@@ -173,7 +187,12 @@ fun LiveVoiceBridgeScreen(
                                     .background(PrimaryContainer),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(text = "⇄", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_swap_horiz),
+                                    contentDescription = "Voice Bridge",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(18.dp)
+                                )
                             }
 
                             // Student side (Sharp 4dp container)
@@ -187,9 +206,14 @@ fun LiveVoiceBridgeScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                Text(text = "🎒", fontSize = 16.sp)
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_backpack),
+                                    contentDescription = "Student",
+                                    tint = Secondary,
+                                    modifier = Modifier.size(18.dp)
+                                )
                                 Column {
-                                    Text(text = "विद्यार्थी", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
+                                    Text(text = if (isHindi) "विद्यार्थी" else "Student", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
                                     Text(text = "ᱥᱟᱱᱛᱟᱲᱤ (Ol Chiki)", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Secondary)
                                 }
                             }
@@ -208,7 +232,7 @@ fun LiveVoiceBridgeScreen(
                     shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
                     border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 1.5.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -217,33 +241,45 @@ fun LiveVoiceBridgeScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(text = "🎙️", fontSize = 14.sp)
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_mic),
+                                    contentDescription = "Microphone",
+                                    tint = Primary,
+                                    modifier = Modifier.size(16.dp)
+                                )
                                 Text(
-                                    text = "शिक्षक का हिंदी वाक्य • Live ASR",
-                                    fontSize = 11.sp,
+                                    text = if (isHindi) "शिक्षक का हिंदी वाक्य • Live ASR" else "Teacher Speech • Live ASR",
+                                    fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF64748B)
+                                    color = Primary
                                 )
                             }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .clip(controlCornerShape)
-                                    .background(Color(0xFFE0F2FE))
-                                    .padding(horizontal = 8.dp, vertical = 2.dp)
-                            ) {
-                                Text(text = "• LIVE", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFF0369A1))
+                            if (isMicActive) {
+                                Text(
+                                    text = "• LIVE",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xFF0369A1),
+                                    modifier = Modifier
+                                        .clip(controlCornerShape)
+                                        .background(Color(0xFFE0F2FE))
+                                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                                )
                             }
                         }
 
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(controlCornerShape)
+                                .background(SurfaceContainerLow)
+                                .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
+                                .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "\"$teacherHindiText\"",
+                                text = teacherHindiText,
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.Medium,
                                 color = Color(0xFF0F172A),
@@ -259,10 +295,42 @@ fun LiveVoiceBridgeScreen(
                                 .background(SurfaceContainerLow)
                                 .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                 .padding(horizontal = 10.dp, vertical = 6.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = "⚡ स्थानीय Vosk ASR", fontSize = 11.sp, color = Color(0xFF64748B))
-                            Text(text = latencyDisplay, fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = Color(0xFF475569))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_bolt),
+                                    contentDescription = "Local ASR",
+                                    tint = Color(0xFF64748B),
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Text(
+                                    text = if (isHindi) "स्थानीय Vosk ASR" else "Local Vosk ASR",
+                                    fontSize = 11.sp,
+                                    color = Color(0xFF64748B)
+                                )
+                            }
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_timer),
+                                    contentDescription = "Latency",
+                                    tint = Color(0xFF475569),
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Text(
+                                    text = latencyDisplay,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Color(0xFF475569)
+                                )
+                            }
                         }
                     }
                 }
@@ -281,30 +349,56 @@ fun LiveVoiceBridgeScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                modifier = Modifier.weight(1f, fill = false).padding(end = 8.dp)
+                            ) {
                                 Text(
-                                    text = "कक्षा प्रसारण",
+                                    text = if (isHindi) "कक्षा प्रसारण" else "Broadcast",
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White,
+                                    maxLines = 1,
+                                    softWrap = false,
                                     modifier = Modifier
                                         .clip(controlCornerShape)
                                         .background(Primary)
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
-                                Text(text = "संथाली (Santali - Ol Chiki)", fontSize = 11.sp, color = Color(0xFF475569))
+                                Text(
+                                    text = "ᱥᱟᱱᱛᱟᱲᱤ (Santali - Ol Chiki)",
+                                    fontSize = 11.sp,
+                                    color = Color(0xFF475569),
+                                    maxLines = 1,
+                                    softWrap = false,
+                                    overflow = TextOverflow.Ellipsis
+                                )
                             }
-                            Text(
-                                text = "✓ JCERT अनुमोदित",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Secondary,
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp),
                                 modifier = Modifier
                                     .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
                                     .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                     .padding(horizontal = 8.dp, vertical = 3.dp)
-                            )
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_check_circle),
+                                    contentDescription = "Verified",
+                                    tint = Color(0xFF1B5E20),
+                                    modifier = Modifier.size(13.dp)
+                                )
+                                Text(
+                                    text = if (isHindi) "JCERT अनुमोदित" else "JCERT Verified",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xFF1B5E20),
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
                         }
 
                         // Large Ol Chiki Script Text (Sharp 4dp Box)
@@ -351,9 +445,25 @@ fun LiveVoiceBridgeScreen(
                                             color = Color.White,
                                             strokeWidth = 2.dp
                                         )
-                                        Text("ध्वनि प्रसारण जारी...", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                        Text(
+                                            text = if (isHindi) "ध्वनि प्रसारण जारी..." else "Broadcasting...",
+                                            fontSize = 13.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
                                     } else {
-                                        Text("▶ सुनाएं (Piper TTS)", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.ic_volume_up),
+                                            contentDescription = "Listen",
+                                            tint = Color.White,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Text(
+                                            text = if (isHindi) "सुनाएं (Piper TTS)" else "Listen (Piper TTS)",
+                                            fontSize = 13.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
                                     }
                                 }
                             }
@@ -377,7 +487,7 @@ fun LiveVoiceBridgeScreen(
                                 )
                             }
 
-                            // Replay button
+                            // Replay button with Vector Icon
                             Box(
                                 modifier = Modifier
                                     .height(44.dp)
@@ -388,7 +498,12 @@ fun LiveVoiceBridgeScreen(
                                     .padding(horizontal = 14.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(text = "↺", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Primary)
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_refresh),
+                                    contentDescription = "Replay",
+                                    tint = Primary,
+                                    modifier = Modifier.size(18.dp)
+                                )
                             }
                         }
                     }
@@ -404,9 +519,9 @@ fun LiveVoiceBridgeScreen(
                     )
 
                     val quickCommands = listOf(
-                        Triple("📖 1. किताब खोलो (Open Books)", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "किताब खोलो"),
-                        Triple("🔢 2. 1 से 10 गिनो (Count 1-10)", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "1 से 10 गिनो"),
-                        Triple("🤫 3. शांत रहें (Maintain Silence)", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "शांत रहें")
+                        Triple("1. किताब खोलो (Open Books)", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "किताब खोलो"),
+                        Triple("2. 1 से 10 गिनो (Count 1-10)", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "1 से 10 गिनो"),
+                        Triple("3. शांत रहें (Maintain Silence)", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "शांत रहें")
                     )
 
                     quickCommands.forEach { (label, olchiki, hindi) ->
@@ -428,7 +543,12 @@ fun LiveVoiceBridgeScreen(
                                 Text(text = label, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = Primary)
                                 Text(text = olchiki, fontSize = 13.sp, color = Secondary, fontWeight = FontWeight.Bold)
                             }
-                            Text(text = "🔊", fontSize = 18.sp)
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_volume_up),
+                                contentDescription = "Play Command",
+                                tint = Primary,
+                                modifier = Modifier.size(20.dp)
+                            )
                         }
                     }
                 }
@@ -467,9 +587,11 @@ fun LiveVoiceBridgeScreen(
                 .padding(bottom = 16.dp)
                 .size(64.dp)
         ) {
-            Text(
-                text = if (isMicActive) "⏹" else "🎙️",
-                fontSize = 24.sp
+            Icon(
+                painter = painterResource(id = if (isMicActive) R.drawable.ic_stop else R.drawable.ic_mic),
+                contentDescription = if (isMicActive) "Stop" else "Listen",
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
             )
         }
     }

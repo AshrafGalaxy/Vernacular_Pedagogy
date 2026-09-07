@@ -29,6 +29,7 @@ data/raw/common_voice/clips/
 Santali dataset Mozilla/
 data/processed/voice_bank/
 assets/images/raw_sources/
+Assets_Flash_Cards/
 
 # IDE and OS files
 .DS_Store
