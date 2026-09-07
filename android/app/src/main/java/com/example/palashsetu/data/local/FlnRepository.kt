@@ -9,10 +9,15 @@ import org.json.JSONObject
 object FlnRepository {
 
     private val phrases = mutableListOf<FlnPhrase>()
+    private val normalizedLookupIndex = HashMap<String, FlnPhrase>()
+
+    var isLoadedFromAssets: Boolean = false
+        private set
 
     init {
-        // Populate gold-standard verified Grade 1-3 FLN curriculum phrases
+        // Pre-seed with foundational classroom imperatives
         loadCuratedCurriculum()
+        rebuildIndex()
     }
 
     fun initializeFromAssets(context: Context) {
@@ -20,141 +25,113 @@ object FlnRepository {
             val jsonString = context.assets.open("fln_lexicon.json").bufferedReader().use { it.readText() }
             val jsonArray = JSONArray(jsonString)
             if (jsonArray.length() > 0) {
-                phrases.clear()
+                val loadedList = mutableListOf<FlnPhrase>()
                 for (i in 0 until jsonArray.length()) {
                     val obj = jsonArray.getJSONObject(i)
-                    phrases.add(
-                        FlnPhrase(
-                            id = obj.optString("id", "fln_$i"),
-                            hindi = obj.optString("hindi", ""),
-                            olchiki = obj.optString("olchiki", obj.optString("santali", "")),
-                            english = obj.optString("english", ""),
-                            phoneticDevanagari = obj.optString("phonetic_devanagari", obj.optString("phonetic", "")),
-                            grade = obj.optInt("grade", 2),
-                            category = obj.optString("category", "Classroom Management")
+                    val id = obj.optString("id", "fln_$i")
+                    val hindi = obj.optString("source_hindi_normalized", obj.optString("hindi", "")).trim()
+                    val olchiki = obj.optString("target_olchiki_santhali", obj.optString("olchiki", obj.optString("santali", ""))).trim()
+                    val phonetic = obj.optString("phonetic_deva_santhali", obj.optString("phonetic_devanagari", obj.optString("phonetic", ""))).trim()
+                    val domain = obj.optString("domain", "classroom_command")
+                    val gradeStr = obj.optString("nipun_target_grade", "Grade 2")
+                    val grade = when {
+                        gradeStr.contains("1") -> 1
+                        gradeStr.contains("3") -> 3
+                        else -> 2
+                    }
+
+                    val category = mapDomainToCategory(domain)
+
+                    if (hindi.isNotEmpty() && olchiki.isNotEmpty()) {
+                        loadedList.add(
+                            FlnPhrase(
+                                id = id,
+                                hindi = hindi,
+                                olchiki = olchiki,
+                                english = obj.optString("english", ""),
+                                phoneticDevanagari = if (phonetic.isNotEmpty() && !phonetic.startsWith("[")) "[$phonetic]" else phonetic,
+                                grade = grade,
+                                category = category,
+                                domain = domain
+                            )
                         )
-                    )
+                    }
+                }
+
+                if (loadedList.isNotEmpty()) {
+                    phrases.clear()
+                    phrases.addAll(loadedList)
+                    rebuildIndex()
+                    isLoadedFromAssets = true
                 }
             }
         } catch (e: Exception) {
-            // Fallback to static curated list
+            // Keep curated fallback
             if (phrases.isEmpty()) {
                 loadCuratedCurriculum()
+                rebuildIndex()
             }
         }
+    }
+
+    fun mapDomainToCategory(domain: String): String {
+        return when (domain) {
+            "classroom_command" -> "कक्षा प्रबंधन"
+            "socio_emotional_praise" -> "प्रशंसा व प्रोत्साहन"
+            "inquiry_evaluation" -> "अनुशासन"
+            "numeracy", "vocabulary_numbers" -> "गिनती व गणित"
+            "vocabulary_actions", "vocabulary_animals_fauna", "vocabulary_vegetables", "vocabulary_fruits_food", "vocabulary_body_parts", "body_parts_health", "environment_realia", "vocabulary_classroom_objects", "vocabulary_colors_attributes" -> "गतिविधि"
+            "kinship_community" -> "अभिवादन"
+            else -> "कक्षा प्रबंधन"
+        }
+    }
+
+    private fun rebuildIndex() {
+        normalizedLookupIndex.clear()
+        for (phrase in phrases) {
+            val key = normalizeKey(phrase.hindi)
+            if (key.isNotEmpty()) {
+                normalizedLookupIndex[key] = phrase
+            }
+        }
+    }
+
+    fun normalizeKey(text: String): String {
+        return text.trim()
+            .replace(Regex("[।?!.,;:\"]+"), "")
+            .replace(Regex("\\s+"), " ")
+            .lowercase()
     }
 
     private fun loadCuratedCurriculum() {
         phrases.addAll(
             listOf(
-                FlnPhrase(
-                    id = "fln_01",
-                    hindi = "किताब खोलो",
-                    olchiki = "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
-                    english = "Open your book",
-                    phoneticDevanagari = "[पुथी झीज मे]",
-                    grade = 1,
-                    category = "कक्षा प्रबंधन"
-                ),
-                FlnPhrase(
-                    id = "fln_02",
-                    hindi = "बहुत अच्छा काम किया!",
-                    olchiki = "ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ!",
-                    english = "Great job! Well done!",
-                    phoneticDevanagari = "[अडी नापाय कामी!]",
-                    grade = 1,
-                    category = "प्रशंसा व प्रोत्साहन"
-                ),
-                FlnPhrase(
-                    id = "fln_03",
-                    hindi = "अपनी बारी का इंतज़ार करो",
-                    olchiki = "ᱟᱢᱟᱜ ᱯᱟᱞᱟ ᱛᱟᱺᱜᱤ ᱢᱮ",
-                    english = "Wait for your turn",
-                    phoneticDevanagari = "[आमाग पाला तांगी मे]",
-                    grade = 2,
-                    category = "अनुशासन"
-                ),
-                FlnPhrase(
-                    id = "fln_04",
-                    hindi = "हाथ ऊपर उठाओ",
-                    olchiki = "ᱛᱤ ᱛᱩᱞ ᱢᱮ",
-                    english = "Raise your hands",
-                    phoneticDevanagari = "[ती तुल मे]",
-                    grade = 1,
-                    category = "कक्षा प्रबंधन"
-                ),
-                FlnPhrase(
-                    id = "fln_05",
-                    hindi = "क्या सबको समझ आया?",
-                    olchiki = "ᱪᱮᱫ ᱡᱚᱛᱚ ᱦᱚᱲ ᱯᱮ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱼᱟ?",
-                    english = "Did everyone understand?",
-                    phoneticDevanagari = "[चेद जोतो होड़ पे बुझाव केद-आ?]",
-                    grade = 2,
-                    category = "कक्षा प्रबंधन"
-                ),
-                FlnPhrase(
-                    id = "fln_06",
-                    hindi = "बैठ जाओ",
-                    olchiki = "ᱫᱩᱲᱩᱵ ᱢᱮ",
-                    english = "Sit down",
-                    phoneticDevanagari = "[दुड़ुब मे]",
-                    grade = 1,
-                    category = "अनुशासन"
-                ),
-                FlnPhrase(
-                    id = "fln_07",
-                    hindi = "1 से 10 गिनो",
-                    olchiki = "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ",
-                    english = "Count from 1 to 10",
-                    phoneticDevanagari = "[मिद खोन गेल लेखाए पे]",
-                    grade = 2,
-                    category = "गिनती व गणित"
-                ),
-                FlnPhrase(
-                    id = "fln_08",
-                    hindi = "शांत रहें",
-                    olchiki = "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ",
-                    english = "Maintain silence",
-                    phoneticDevanagari = "[थीर ताहेन पे]",
-                    grade = 1,
-                    category = "अनुशासन"
-                ),
-                FlnPhrase(
-                    id = "fln_09",
-                    hindi = "नमस्ते / जोहार",
-                    olchiki = "ᱡᱚᱦᱟᱨ",
-                    english = "Greetings / Johar",
-                    phoneticDevanagari = "[जोहार]",
-                    grade = 1,
-                    category = "अभिवादन"
-                ),
-                FlnPhrase(
-                    id = "fln_10",
-                    hindi = "ताली बजाओ",
-                    olchiki = "ᱛᱷᱟᱹᱭ ᱛᱟᱦᱟᱹᱭ ᱢᱮ",
-                    english = "Clap your hands",
-                    phoneticDevanagari = "[थाय ताहाय मे]",
-                    grade = 1,
-                    category = "गतिविधि"
-                ),
-                FlnPhrase(
-                    id = "fln_11",
-                    hindi = "बच्चो, अपनी गणित की किताब निकालो और पृष्ठ संख्या बारह खोलो।",
-                    olchiki = "ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ, ᱟᱯᱮᱭᱟᱜ ᱮᱞᱠᱷᱟ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ ᱟᱨ ᱜᱮᱞ ᱵᱟᱨ ᱥᱟᱦᱴᱟ ᱩᱰᱩᱠ ᱯᱮ᱾",
-                    english = "Children, take out your math book and turn to page twelve.",
-                    phoneticDevanagari = "[गिदरा को, आपेयाग एलखा पुथी झीज पे आर गेल बार साहटा उडुक पे]",
-                    grade = 2,
-                    category = "कक्षा प्रबंधन"
-                )
+                FlnPhrase("fln_01", "किताब खोलो", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ", "Open your book", "[पुथी झीज मे]", 1, "कक्षा प्रबंधन", "classroom_command"),
+                FlnPhrase("fln_02", "बहुत अच्छा काम किया!", "ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ!", "Great job! Well done!", "[अडी नापाय कामी!]", 1, "प्रशंसा व प्रोत्साहन", "socio_emotional_praise"),
+                FlnPhrase("fln_03", "अपनी बारी का इंतज़ार करो", "ᱟᱢᱟᱜ ᱯᱟᱞᱟ ᱛᱟᱺᱜᱤ ᱢᱮ", "Wait for your turn", "[आमाग पाला तांगी मे]", 2, "अनुशासन", "inquiry_evaluation"),
+                FlnPhrase("fln_04", "हाथ ऊपर उठाओ", "ᱛᱤ ᱛᱩᱞ ᱢᱮ", "Raise your hands", "[ती तुल मे]", 1, "कक्षा प्रबंधन", "classroom_command"),
+                FlnPhrase("fln_05", "क्या सबको समझ आया?", "ᱪᱮᱫ ᱡᱚᱛᱚ ᱦᱚᱲ ᱯᱮ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱼᱟ?", "Did everyone understand?", "[चेद जोतो होड़ पे बुझाव केद-आ?]", 2, "अनुशासन", "inquiry_evaluation"),
+                FlnPhrase("fln_06", "बैठ जाओ", "ᱫᱩᱲᱩᱵ ᱢᱮ", "Sit down", "[दुड़ुब मे]", 1, "अनुशासन", "classroom_command"),
+                FlnPhrase("fln_07", "1 से 10 गिनो", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "Count from 1 to 10", "[मिद खोन गेल लेखाए पे]", 2, "गिनती व गणित", "numeracy"),
+                FlnPhrase("fln_08", "शांत रहें", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "Maintain silence", "[थीर ताहेन पे]", 1, "अनुशासन", "classroom_command"),
+                FlnPhrase("fln_09", "नमस्ते / जोहार", "ᱡᱚᱦᱟᱨ", "Greetings / Johar", "[जोहार]", 1, "अभिवादन", "kinship_community"),
+                FlnPhrase("fln_10", "ताली बजाओ", "ᱛᱷᱟᱹᱭ ᱛᱟᱦᱟᱹᱭ ᱢᱮ", "Clap your hands", "[थाय ताहाय मे]", 1, "गतिविधि", "vocabulary_actions"),
+                FlnPhrase("fln_11", "बच्चो, अपनी गणित की किताब निकालो और पृष्ठ संख्या बारह खोलो।", "ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ, ᱟᱯᱮᱭᱟᱜ ᱮᱞᱠᱷᱟ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ ᱟᱨ ᱜᱮᱞ ᱵᱟᱨ ᱥᱟᱦᱴᱟ ᱩᱰᱩᱠ ᱯᱮ᱾", "Children, take out your math book and turn to page twelve.", "[गिदरा को, आपेयाग एलखा पुथी झीज पे आर गेल बार साहटा उडुक पे]", 2, "कक्षा प्रबंधन", "classroom_command")
             )
         )
     }
 
     fun getAllPhrases(): List<FlnPhrase> = phrases.toList()
 
+    fun getPhrasesCount(): Int = phrases.size
+
     fun getPhrasesByCategory(category: String): List<FlnPhrase> {
         if (category == "सभी (All)" || category == "All") return phrases.toList()
         return phrases.filter { it.category.equals(category, ignoreCase = true) }
+    }
+
+    fun getPhrasesByGrade(grade: Int): List<FlnPhrase> {
+        return phrases.filter { it.grade == grade }
     }
 
     fun searchPhrases(query: String): List<FlnPhrase> {
@@ -169,8 +146,8 @@ object FlnRepository {
     }
 
     fun findExactMatch(hindiQuery: String): TranslationResult? {
-        val trimmed = hindiQuery.trim().replace(Regex("[।?!.,]+$"), "")
-        val match = phrases.firstOrNull { it.hindi.trim().replace(Regex("[।?!.,]+$"), "") == trimmed }
+        val key = normalizeKey(hindiQuery)
+        val match = normalizedLookupIndex[key]
         return match?.let {
             TranslationResult(
                 sourceHindi = it.hindi,

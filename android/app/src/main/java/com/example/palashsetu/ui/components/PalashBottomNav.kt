@@ -45,7 +45,7 @@ fun PalashBottomNav(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        BottomTab.values().forEach { tab ->
+        BottomTab.entries.forEach { tab ->
             val isSelected = tab == selectedTab
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
