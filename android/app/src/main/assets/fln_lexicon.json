@@ -1,0 +1,2946 @@
+[
+  {
+    "id": "FLN_NUM_001",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "एक से पाँच तक गिनो",
+    "target_olchiki_santhali": "ᱢᱤᱫ ᱠᱷᱚᱱ ᱢᱚᱬᱮ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "मिद खोन मोणे ध़ाबिज लेखाय मे"
+  },
+  {
+    "id": "FLN_NUM_002",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चलो हम सब मिलकर दस तक गिनती करें",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गेल ध़ाबिज लेखाय बो"
+  },
+  {
+    "id": "FLN_NUM_003",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह बड़ा पत्थर है और वह छोटा कंकड़ है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱨᱟᱝ ᱫᱷᱤᱨᱤ ᱠᱟᱱᱟ ᱟᱨ ᱦᱟᱱᱟ ᱫᱚ ᱦᱩᱰᱤᱧ ᱜᱤᱴᱤᱞ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "नोवा दो मारांग धीरी काना आर हाना दो हुडिञ गिटील काना"
+  },
+  {
+    "id": "FLN_NUM_004",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "इसमें एक और जोड़ो",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱨᱮ ᱟᱨ ᱢᱤᱫᱴᱟᱝ ᱡᱩᱲᱟᱹᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "नोवा रे आर मिदटांग जुड़ा़व मे"
+  },
+  {
+    "id": "FLN_NUM_005",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दो में से एक निकाल लो",
+    "target_olchiki_santhali": "ᱵᱟᱨᱭᱟ ᱠᱷᱚᱱ ᱢᱤᱫᱴᱟᱝ ᱚᱰᱚᱠ ᱢᱮ",
+    "phonetic_deva_santhali": "बारया खोन मिदटांग ओडोक मे"
+  },
+  {
+    "id": "FLN_NUM_006",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "गोल घेरे को पहचानो",
+    "target_olchiki_santhali": "ᱜᱩᱞᱟᱹᱭ ᱠᱷᱚᱸᱫᱽ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "गुला़य खोंद चीन्हा़व मे"
+  },
+  {
+    "id": "FLN_NUM_007",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कौन सी रस्सी लंबी है और कौन सी छोटी?",
+    "target_olchiki_santhali": "ᱚᱠᱟᱴᱟᱜ ᱫᱚᱣᱨᱤ ᱡᱤᱞᱤᱧᱟ ᱟᱨ ᱚᱠᱟᱴᱟᱜ ᱠᱷᱟᱴᱚᱣᱟ?",
+    "phonetic_deva_santhali": "ओकाटाग दोवरी जीलिञा आर ओकाटाग खाटोवा?"
+  },
+  {
+    "id": "FLN_NUM_008",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "इन कंकड़ों को गिनकर बताओ",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱤᱴᱤᱞ ᱠᱚ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "नोवा गिटील को लेखा काते ला़य मे"
+  },
+  {
+    "id": "FLN_NUM_009",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तीन चिड़ियाँ पेड़ पर बैठी हैं",
+    "target_olchiki_santhali": "ᱯᱮᱭᱟ ᱪᱮᱬᱮ ᱫᱟᱨᱮ ᱨᱮᱠᱚ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "पेया चेणे़ दारे रेको दुड़ुब आकाना"
+  },
+  {
+    "id": "FLN_NUM_010",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चार और दो मिलकर कितने होते हैं?",
+    "target_olchiki_santhali": "ᱯᱩᱱᱭᱟᱹ ᱟᱨ ᱵᱟᱨᱭᱟ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱤᱱᱟᱹᱜ ᱦᱩᱭᱩᱜ-ᱟ?",
+    "phonetic_deva_santhali": "पुन्या़ आर बारया मेसा काते तीना़ग हुयुग-आ?"
+  },
+  {
+    "id": "FLN_NUM_011",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "यह चौकोर आकृति बनाओ",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱯᱩᱱᱠᱚᱬ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "नोवा पुनकोण चीता़र बेनाव मे"
+  },
+  {
+    "id": "FLN_NUM_012",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कम और ज़्यादा की पहचान करो",
+    "target_olchiki_santhali": "ᱠᱚᱢ ᱟᱨ ᱵᱟᱹᱲᱛᱤ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "कोम आर बा़ड़ती चीन्हा़व मे"
+  },
+  {
+    "id": "FLN_NUM_013",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "पाँच में तीन जोड़ने पर आठ बनता है",
+    "target_olchiki_santhali": "ᱢᱚᱬᱮ ᱨᱮ ᱯᱮ ᱡᱩᱲᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱤᱨᱟᱹᱞ ᱦᱩᱭᱩᱜ-ᱟ",
+    "phonetic_deva_santhali": "मोणे़ रे पे जुड़ा़व लेखान इरा़ल हुयुग-आ"
+  },
+  {
+    "id": "FLN_NUM_014",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इस पंक्ति में पहला बच्चा कौन है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱛᱷᱟᱨ ᱨᱮ ᱯᱟᱹᱦᱤᱞ ᱜᱤᱫᱽᱨᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?",
+    "phonetic_deva_santhali": "नोवा थार रे पा़हिल गिदरा़ दो ओकोय कानाय?"
+  },
+  {
+    "id": "FLN_NUM_015",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चलो हम सब मिलकर बीस तक उल्टी गिनती करें",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱠᱷᱚᱱ ᱩᱞᱴᱟᱹᱣ ᱞᱮᱠᱷᱟᱭ ᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते इसी खोन उलटा़व लेखाय बो"
+  },
+  {
+    "id": "FLN_NUM_016",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आठ में से चार घटाने पर कितना बचेगा?",
+    "target_olchiki_santhali": "ᱤᱨᱟᱹᱞ ᱠᱷᱚᱱ ᱯᱩᱱ ᱜᱷᱟᱴᱟᱣ ᱞᱮᱠᱷᱟᱱ ᱛᱤᱱᱟᱹᱜ ᱥᱟᱨᱮᱲᱚᱜ-ᱟ?",
+    "phonetic_deva_santhali": "इरा़ल खोन पुन घाटाव लेखान तीना़ग सारेड़౉ग-आ?"
+  },
+  {
+    "id": "FLN_NUM_017",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इन डंडियों को बराबर-बराबर बाँटो",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱴᱷᱮᱝᱜᱟ ᱠᱚ ᱥᱚᱢᱟᱱ-ᱥᱚᱢᱟᱱ ᱦᱟᱹᱴᱤᱧ ᱯᱮ",
+    "phonetic_deva_santhali": "नोवा ठेंगा को सोमान-सोमान हा़टिञ पे"
+  },
+  {
+    "id": "FLN_NUM_018",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "किस टोकरी में ज़्यादा आम हैं?",
+    "target_olchiki_santhali": "ᱚᱠᱟ ᱴᱩᱠᱨᱤ ᱨᱮ ᱵᱟᱹᱲᱛᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ?",
+    "phonetic_deva_santhali": "ओका टुकरी रे बा़ड़ती उल मेनाग-आ?"
+  },
+  {
+    "id": "FLN_NUM_019",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दस और पाँच मिलकर पंद्रह होते हैं",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱟᱨ ᱢᱚᱬᱮ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱮᱞ ᱢᱚᱬᱮ ᱦᱩᱭᱩᱜ-ᱟ",
+    "phonetic_deva_santhali": "गेल आर मोणे़ मेसा काते गेल मोणे़ हुयुग-आ"
+  },
+  {
+    "id": "FLN_NUM_020",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "भारी वस्तु को उठाओ और हल्की को पहचानो",
+    "target_olchiki_santhali": "ᱦᱟᱢᱟᱞ ᱡᱤᱱᱤᱥ ᱛᱩᱞ ᱢᱮ ᱟᱨ ᱨᱟᱣᱟᱞᱟᱜ ᱪᱤᱱᱦᱟᱹᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "हामाल जीनिस तुल मे आर रावालाग चीन्हा़व मे"
+  },
+  {
+    "id": "FLN_NUM_021",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "इस पैटर्न को आगे बढ़ाओ",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱛᱷᱟᱨ-ᱛᱚᱦᱚᱨ ᱞᱟᱦᱟ ᱛᱮ ᱤᱫᱤ ᱢᱮ",
+    "phonetic_deva_santhali": "नोवा थार-तोहोर लाहा ते इदी मे"
+  },
+  {
+    "id": "FLN_NUM_022",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "तीन का पहाड़ा सब मिलकर बोलो",
+    "target_olchiki_santhali": "ᱯᱮ ᱨᱮᱱᱟᱜ ᱯᱟᱦᱟᱲᱟ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱯᱮ",
+    "phonetic_deva_santhali": "पे रेनाग पाहाड़ा सानाम को मेसा काते ला़य पे"
+  },
+  {
+    "id": "FLN_NUM_023",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "दस के दो बंडल मिलकर बीस बनते हैं",
+    "target_olchiki_santhali": "ᱜᱮᱞ-ᱜᱮᱞ ᱨᱮᱱᱟᱜ ᱵᱟᱨᱭᱟ ᱯᱚᱴᱚᱢ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱤᱥᱤ ᱦᱩᱭᱩᱜ-ᱟ",
+    "phonetic_deva_santhali": "गेल-गेल रेनाग बारया पोटोम मेसा काते इसी हुयुग-आ"
+  },
+  {
+    "id": "FLN_NUM_024",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मापक छड़ी से मेज़ की लंबाई नापो",
+    "target_olchiki_santhali": "ᱡᱚᱠᱷᱟ ᱴᱷᱮᱝᱜᱟ ᱛᱮ ᱴᱮᱵᱩᱞ ᱨᱮᱱᱟᱜ ᱡᱤᱞᱤᱧ ᱡᱚᱠᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "जोखा ठेंगा ते डेबुल रेनाग जीलिञ जोखाय मे"
+  },
+  {
+    "id": "FLN_NUM_025",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चलो हम सब मिलकर गणित का खेल खेलें",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱞᱮᱠᱷᱟ ᱨᱮᱱᱟᱜ ᱮᱱᱮᱡ ᱮᱱᱮᱡᱟᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते लेखा रेनाग एनेज एनेजाबो"
+  },
+  {
+    "id": "FLN_CMD_001",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपनी जगह पर बैठो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱡᱟᱜᱟ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग जागा रे दुड़ुब मे"
+  },
+  {
+    "id": "FLN_CMD_002",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सब बच्चे सीधे खड़े हो जाओ",
+    "target_olchiki_santhali": "ᱡᱚᱛᱚ ᱜᱤᱫᱽᱨᱟᱹ ᱥᱚᱡᱷᱮ ᱛᱤᱸᱜᱩᱱ ᱯᱮ",
+    "phonetic_deva_santhali": "जोतो गिदरा़ सोज्हे ति़ंगुन पे"
+  },
+  {
+    "id": "FLN_CMD_003",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपनी किताब खोलो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग पुथि झिज मे"
+  },
+  {
+    "id": "FLN_CMD_004",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "किताब बंद करो",
+    "target_olchiki_santhali": "ᱯᱩᱛᱷᱤ ᱯᱚᱴᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "पुथि पोटोम मे"
+  },
+  {
+    "id": "FLN_CMD_005",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सब शांत रहो और ध्यान से सुनो",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱛᱷᱤᱨᱩᱜ ᱯᱮ ᱟᱨ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम को थिरुग पे आर धेयान ते आंजोम पे"
+  },
+  {
+    "id": "FLN_CMD_006",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपनी स्लेट दिखाओ",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱥᱞᱮᱴ ᱩᱫᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग स्लेट उदुक मे"
+  },
+  {
+    "id": "FLN_CMD_007",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हाथ धोकर आओ",
+    "target_olchiki_santhali": "ᱛᱤ ᱟᱹᱨᱩᱵ ᱠᱟᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "ती आ़रुब काते हिजुग मे"
+  },
+  {
+    "id": "FLN_CMD_008",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "एक सीधी कतार बनाओ",
+    "target_olchiki_santhali": "ᱢᱤᱫᱴᱟᱝ ᱥᱚᱡᱷᱮ ᱛᱷᱟᱨ ᱵᱮᱱᱟᱣ ᱯᱮ",
+    "phonetic_deva_santhali": "मिदटांग सोज्हे थार बेनाव पे"
+  },
+  {
+    "id": "FLN_CMD_009",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "श्यामपट्ट की ओर देखो",
+    "target_olchiki_santhali": "ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ ᱥᱮᱫ ᱠᱚᱭᱚᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "हेंदे पाटा सेद कोयोक मे"
+  },
+  {
+    "id": "FLN_CMD_010",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पेंसिल और कॉपी निकालो",
+    "target_olchiki_santhali": "ᱯᱮᱱᱥᱤᱞ ᱟᱨ ᱠᱷᱟᱛᱟ ᱚᱰᱚᱠ ᱢᱮ",
+    "phonetic_deva_santhali": "पेन्सिल आर खाता ओडोक मे"
+  },
+  {
+    "id": "FLN_CMD_011",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अपने साथी की मदद करो",
+    "target_olchiki_santhali": "ᱟᱢᱨᱮᱱ ᱜᱟᱛᱮ ᱜᱚᱲᱚ ᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आमरेन गाते गोड़ो आय मे"
+  },
+  {
+    "id": "FLN_CMD_012",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "यह पाठ ज़ोर से पढ़ो",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱯᱟᱲᱦᱟᱣ ᱟᱲᱟᱝ ᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "नोवा पाड़हाव आड़ांग ते पाड़हाव मे"
+  },
+  {
+    "id": "FLN_CMD_013",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "साफ़-साफ़ अक्षरों में लिखो",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ-ᱥᱟᱯᱷᱟ ᱟᱠᱷᱚᱨ ᱛᱮ ᱚᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "साफा-साफा आखोर ते ओल मे"
+  },
+  {
+    "id": "FLN_CMD_014",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हाथ ऊपर उठाओ",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱛᱤ ᱪᱮᱛᱟᱱ ᱛᱩᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग ती चेतान तुल मे"
+  },
+  {
+    "id": "FLN_CMD_015",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चलो, हम सब मिलकर गोल घेरा बनाएँ",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱜᱩᱞᱟᱹᱭ ᱵᱮᱱᱟᱣᱟᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते गुला़य बेनावाबो"
+  },
+  {
+    "id": "FLN_CMD_016",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कचरा कूड़ेदान में डालो",
+    "target_olchiki_santhali": "ᱡᱟᱵᱽᱨᱟ ᱠᱩᱲᱟᱹᱫᱟᱱ ᱨᱮ ᱜᱤᱰᱤ ᱢᱮ",
+    "phonetic_deva_santhali": "जाबरा कुड़ा़दान रे गिडी मे"
+  },
+  {
+    "id": "FLN_CMD_017",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अपने बस्ते को व्यवस्थित रखो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱡᱷᱳᱞᱟ ᱥᱟᱡᱟᱣ ᱠᱟᱛᱮ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग झोला साजाव काते दोहोय मे"
+  },
+  {
+    "id": "FLN_CMD_018",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अपनी-अपनी जगह पर वापस जाओ",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ-ᱟᱯᱱᱟᱨ ᱡᱟᱜᱟ ᱛᱮ ᱨᱩᱣᱟᱹᱲ ᱯᱮ",
+    "phonetic_deva_santhali": "आपनार-आपनार जागा ते रुवा़ड़ पे"
+  },
+  {
+    "id": "FLN_CMD_019",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चलो, हम सब मिलकर प्रार्थना गाएँ",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧᱟᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते बिन्ति सेरेञाबो"
+  },
+  {
+    "id": "FLN_CMD_020",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सब मिलकर ताली बजाओ",
+    "target_olchiki_santhali": "ᱡᱚᱛᱚ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱛᱟᱹᱞᱤ ᱛᱷᱟᱯᱟᱭ ᱯᱮ",
+    "phonetic_deva_santhali": "जोतो को मेसा काते ता़ली थापाय पे"
+  },
+  {
+    "id": "FLN_CMD_021",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "जो पूछना है, बारी-बारी से पूछो",
+    "target_olchiki_santhali": "ᱡᱟᱦᱟᱸ ᱠᱩᱠᱞᱤ ᱢᱮᱱᱟᱜ-ᱟ, ᱵᱟᱨᱤ-ᱵᱟᱨᱤ ᱛᱮ ᱠᱩᱞᱤᱭ ᱯᱮ",
+    "phonetic_deva_santhali": "जाहां कुकली मेनाग-आ, बारी-बारी ते कुलिय पे"
+  },
+  {
+    "id": "FLN_CMD_022",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चित्र देखकर कहानी बताओ",
+    "target_olchiki_santhali": "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "चीता़र ञेल काते का़ह्नी ला़य मे"
+  },
+  {
+    "id": "FLN_CMD_023",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अपना काम पूरा करके दिखाओ",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱠᱟᱹᱢᱤ ᱯᱩᱨᱟᱹᱣ ᱠᱟᱛᱮ ᱩᱫᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग का़मी पुरा़व काते उदुक मे"
+  },
+  {
+    "id": "FLN_CMD_024",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कक्षा में दौड़ो मत, आराम से चलो",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱮ ᱟᱞᱚᱯᱮ ᱫᱟᱹᱲᱟ, ᱵᱷᱟᱹᱜᱤ ᱛᱮ ᱛᱟᱲᱟᱢ ᱯᱮ",
+    "phonetic_deva_santhali": "चानाच रे आलोपे दा़ड़ा, भागी ते ताड़ाम पे"
+  },
+  {
+    "id": "FLN_CMD_025",
+    "domain": "classroom_command",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चलो, हम सब मिलकर गतिविधि शुरू करें",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱠᱟᱹᱢᱤᱦᱚᱨᱟ ᱮᱦᱚᱵᱟᱵᱚ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते का़मीहोरा एह౉बाबो"
+  },
+  {
+    "id": "FLN_ENV_001",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह महुआ का पेड़ है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱢᱟᱛᱠᱚᱢ ᱫᱟᱨᱮ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "नोवा दो मातकोम दारे काना"
+  },
+  {
+    "id": "FLN_ENV_002",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "साल का पत्ता हरा होता है",
+    "target_olchiki_santhali": "ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "सारजोम साकाम हा़रिया़ड़ गेया"
+  },
+  {
+    "id": "FLN_ENV_003",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मिट्टी के बर्तन में पानी रखो",
+    "target_olchiki_santhali": "ᱦᱟᱥᱟ ᱴᱩᱠᱩᱡ ᱨᱮ ᱫᱟᱜ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "हासा टुकुज रे दाग दोहोय मे"
+  },
+  {
+    "id": "FLN_ENV_004",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "गाय हमें दूध देती है",
+    "target_olchiki_santhali": "ᱜᱟᱹᱭ ᱫᱚ ᱛᱚᱣᱟᱭ ᱮᱢᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गा़य दो तोवाय एमाबोना"
+  },
+  {
+    "id": "FLN_ENV_005",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कुत्ता घर की रखवाली करता है",
+    "target_olchiki_santhali": "ᱥᱮᱛᱟ ᱫᱚ ᱚᱲᱟᱜ-ᱮ ᱨᱩᱠᱷᱤᱭᱟᱹᱭᱟ",
+    "phonetic_deva_santhali": "सेता दो ओड़ाग-ए रुखिया़या"
+  },
+  {
+    "id": "FLN_ENV_006",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बिल्ली दूध पीती है",
+    "target_olchiki_santhali": "ᱯᱩᱥᱤ ᱫᱚ ᱛᱚᱣᱟᱭ ᱧᱩᱭᱟ",
+    "phonetic_deva_santhali": "पुसी दो तोवाय ञुआ"
+  },
+  {
+    "id": "FLN_ENV_007",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चिड़िया आकाश में उड़ती है",
+    "target_olchiki_santhali": "ᱪᱮᱬᱮ ᱫᱚ ᱥᱮᱨᱢᱟ ᱨᱮᱭ ᱩᱰᱟᱹᱣᱜ-ᱟ",
+    "phonetic_deva_santhali": "चेणे़ दो सेरमा रेय उडा़वग-आ"
+  },
+  {
+    "id": "FLN_ENV_008",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नदी में बहुत पानी बह रहा है",
+    "target_olchiki_santhali": "ᱜᱟᱰᱟ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱜ ᱞᱤᱸᱜᱤᱱ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "गाडा रे अ़डी आयमा दाग लिंगीन काना"
+  },
+  {
+    "id": "FLN_ENV_009",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "जंगल में बहुत सारे पेड़ हैं",
+    "target_olchiki_santhali": "ᱵᱤᱨ ᱨᱮ ᱟᱹᱰᱤ ᱟᱭᱢᱟ ᱫᱟᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "बीर रे अ़डी आयमा दारे मेनाग-आ"
+  },
+  {
+    "id": "FLN_ENV_010",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सूरज पूरब से निकलता है",
+    "target_olchiki_santhali": "ᱥᱤᱧ ᱪᱟᱸᱫᱚ ᱫᱚ ᱥᱟᱢᱟᱝ ᱠᱷᱚᱱᱮ ᱨᱟᱠᱟᱵ-ᱟ",
+    "phonetic_deva_santhali": "सिञ चा़न्दो दो सामांग खोने राकाब-आ"
+  },
+  {
+    "id": "FLN_ENV_011",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "रात में चाँद चमकता है",
+    "target_olchiki_santhali": "ᱧᱤᱫᱟᱹ ᱨᱮ ᱧᱤᱫᱟᱹ ᱪᱟᱸᱫᱚᱭ ᱡᱩᱞᱩᱜ-ᱟ",
+    "phonetic_deva_santhali": "ञिदा़ रे ञिदा़ चा़न्दोय जुलुग-आ"
+  },
+  {
+    "id": "FLN_ENV_012",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आज बहुत तेज़ बारिश हो रही है",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱟᱹᱰᱤ ᱡᱩᱨ ᱫᱟᱜ ᱡᱟᱹᱲᱤ ᱮᱫᱟᱭ",
+    "phonetic_deva_santhali": "तेहेञ अ़डी जुर दाग जा़ड़ी एदाय"
+  },
+  {
+    "id": "FLN_ENV_013",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "फूल पर तितली बैठी है",
+    "target_olchiki_santhali": "ᱵᱟᱦᱟ ᱨᱮ ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "बाहा रे पिपिड़िया़ंग दुड़ुब आकाना"
+  },
+  {
+    "id": "FLN_ENV_014",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सूखे पत्तों को इकट्ठा करो",
+    "target_olchiki_santhali": "ᱨᱚᱦᱚᱲ ᱥᱟᱠᱟᱢ ᱠᱚ ᱡᱟᱣᱨᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "रोहोड़ साकाम को जावराय मे"
+  },
+  {
+    "id": "FLN_ENV_015",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बैल खेत जोतता है",
+    "target_olchiki_santhali": "ᱰᱟᱝᱜᱽᱨᱟ ᱫᱚ ᱠᱷᱮᱛ-ᱮ ᱥᱤᱭᱟ",
+    "phonetic_deva_santhali": "डांगरा दो खेत-ए सीया"
+  },
+  {
+    "id": "FLN_ENV_016",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "तालाब में मछलियाँ तैर रही हैं",
+    "target_olchiki_santhali": "ᱯᱩᱠᱷᱨᱤ ᱨᱮ ᱦᱟᱹᱠᱩ ᱠᱚ ᱯᱟᱹᱭᱨᱟᱹᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "पुखरी रे हा़कु को पा़यरा़ग काना"
+  },
+  {
+    "id": "FLN_ENV_017",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आम का फल मीठा होता है",
+    "target_olchiki_santhali": "ᱩᱞ ᱡᱚ ᱫᱚ ᱦᱮᱲᱮᱢ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "उल जो दो हेड़ेम गेया"
+  },
+  {
+    "id": "FLN_ENV_018",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कौआ पेड़ की डाल पर बैठा है",
+    "target_olchiki_santhali": "ᱠᱟᱣᱟ ᱫᱚ ᱫᱟᱨᱮ ᱰᱟᱹᱨ ᱨᱮᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कावा दो दारे डा़र रेय दुड़ुब आकाना"
+  },
+  {
+    "id": "FLN_ENV_019",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "साँप ज़मीन के बिल में रहता है",
+    "target_olchiki_santhali": "ᱵᱤᱧ ᱫᱚ ᱦᱟᱥᱟ ᱵᱷᱩᱜᱟᱹᱜ ᱨᱮᱭ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "बिञ दो हासा भुगा़ग रेय ताहे़ना"
+  },
+  {
+    "id": "FLN_ENV_020",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "धान पकने पर पीला हो जाता है",
+    "target_olchiki_santhali": "ᱦᱳᱲᱳ ᱵᱤᱞᱤ ᱞᱮᱱᱠᱷᱟᱱ ᱥᱟᱥᱟᱝ ᱜᱮ ᱧᱮᱞᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "होड़ो बीली लेनखान सासांग गे ञेल౉ग-ᱟ"
+  },
+  {
+    "id": "FLN_ENV_021",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हवा चलने से पत्ते हिल रहे हैं",
+    "target_olchiki_santhali": "ᱦᱚᱭ ᱛᱮ ᱥᱟᱠᱟᱢ ᱠᱚ ᱦᱤᱞᱟᱹᱣᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "होय ते साकाम को हीलावग काना"
+  },
+  {
+    "id": "FLN_ENV_022",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आग में सूखी लकड़ियाँ डालो",
+    "target_olchiki_santhali": "ᱥᱮᱸᱜᱮᱞ ᱨᱮ ᱨᱚᱦᱚᱲ ᱥᱟᱦᱟᱱ ᱠᱷᱟᱸᱡᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "सेंगेल रे रोहोड़ साहान खा़न्जोय मे"
+  },
+  {
+    "id": "FLN_ENV_023",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "पहाड़ बहुत ऊँचा है",
+    "target_olchiki_santhali": "ᱵᱩᱨᱩ ᱫᱚ ᱟᱹᱰᱤ ᱩᱥᱩᱞ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "बुरु दो अ़डी उसुल गेया"
+  },
+  {
+    "id": "FLN_ENV_024",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "पेड़ की छाया में बैठो",
+    "target_olchiki_santhali": "ᱫᱟᱨᱮ ᱩᱢᱩᱞ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "दारे उमुल रे दुड़ुब मे"
+  },
+  {
+    "id": "FLN_ENV_025",
+    "domain": "environment_realia",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चलो हम सब मिलकर एक नया पौधा लगाएँ",
+    "target_olchiki_santhali": "ᱫᱮᱞᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱤᱫᱴᱟᱝ ᱱᱟᱣᱟ ᱫᱟᱨᱮᱵᱚ ᱨᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "देलाबो सानाम को मेसा काते मिदटांग नावा दारेबो रोहोया"
+  },
+  {
+    "id": "FLN_KIN_001",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेरी माँ मुझे प्यार करती है",
+    "target_olchiki_santhali": "ᱤᱧ ᱟᱭᱳ ᱫᱚ ᱤᱧᱮ ᱫᱩᱞᱟᱹᱲᱟᱹᱧᱟ",
+    "phonetic_deva_santhali": "इञ आयो दो इञे दुला़ड़ा़ञा"
+  },
+  {
+    "id": "FLN_KIN_002",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पिताजी खेत में काम करते हैं",
+    "target_olchiki_santhali": "ᱵᱟᱵᱟ ᱫᱚ ᱠᱷᱮᱛ ᱨᱮᱭ ᱠᱟᱹᱢᱤᱭᱟ",
+    "phonetic_deva_santhali": "बाबा दो खेत रेय का़मीया"
+  },
+  {
+    "id": "FLN_KIN_003",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह मेरा छोटा भाई है",
+    "target_olchiki_santhali": "ᱱᱩᱭ ᱫᱚ ᱤᱧᱤᱡ ᱵᱚᱠᱚᱧ ᱠᱚᱲᱟ ᱠᱟᱱᱟᱭ",
+    "phonetic_deva_santhali": "नुय दो इञिज बोकोञ कोड़ा कानाय"
+  },
+  {
+    "id": "FLN_KIN_004",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेरी बड़ी बहन स्कूल जा रही है",
+    "target_olchiki_santhali": "ᱤᱧᱤᱡ ᱢᱟᱨᱟᱝ ᱫᱟᱹᱭ ᱟᱥᱲᱟ ᱛᱮᱭ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "इञिज मारांग दा़य आसड़ा तेय चालाग काना"
+  },
+  {
+    "id": "FLN_KIN_005",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शिक्षक हमें पढ़ा रहे हैं",
+    "target_olchiki_santhali": "ᱢᱟᱪᱮᱛ ᱫᱚ ᱟᱵᱚᱭ ᱯᱟᱲᱦᱟᱣᱮᱫ ᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "माचेत दो आबोय पाड़हावेद बोना"
+  },
+  {
+    "id": "FLN_KIN_006",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दादाजी हमें कहानी सुनाते हैं",
+    "target_olchiki_santhali": "ᱜᱚᱲᱚᱢ ᱦᱟᱲᱟᱢ ᱫᱚ ᱠᱟᱹᱦᱱᱤᱭ ᱞᱟᱹᱭᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गोड़ोम हाड़ाम दो का़हनीय ला़याबोना"
+  },
+  {
+    "id": "FLN_KIN_007",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दादी माँ बहुत प्यार से खाना खिलाती हैं",
+    "target_olchiki_santhali": "ᱜᱚᱲᱚᱢ ᱵᱩᱰᱷᱤ ᱫᱚ ᱟᱹᱰᱤ ᱫᱩᱞᱟᱹᱲ ᱛᱮ ᱡᱚᱢᱮ ᱮᱢᱟᱵᱚᱱᱟ",
+    "phonetic_deva_santhali": "गोड़ोम बुढ़ी दो अ़डी दुला़ड़ ते जोमे एमाबोना"
+  },
+  {
+    "id": "FLN_KIN_008",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "वह मेरा सबसे अच्छा दोस्त है",
+    "target_olchiki_santhali": "ᱩᱱᱤ ᱫᱚ ᱤᱧᱤᱡ ᱡᱚᱛᱚ ᱠᱷᱚᱱ ᱵᱷᱟᱹᱜᱤ ᱜᱟᱛᱮ ᱠᱟᱱᱟᱭ",
+    "phonetic_deva_santhali": "उनी दो इञिज जोतो खोन भागी गाते कानाय"
+  },
+  {
+    "id": "FLN_KIN_009",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सभी बच्चे अपनी कक्षा में बैठो",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱟᱯᱱᱟᱨ ᱪᱟᱱᱟᱪ ᱨᱮ ᱫᱩᱲᱩᱵ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम गिदरा़ आपनार चानाच रे दुड़ुब पे"
+  },
+  {
+    "id": "FLN_KIN_010",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गाँव के मुखिया का नाम क्या है?",
+    "target_olchiki_santhali": "ᱟᱹᱛᱩ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱧᱡᱷᱤ ᱦᱟᱲᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "आ़तु रीनिज मा़ञ्झी हाड़ामाग ञुतुम दो चेद?"
+  },
+  {
+    "id": "FLN_KIN_011",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "डॉक्टर बीमार लोगों का इलाज करते हैं",
+    "target_olchiki_santhali": "ᱰᱟᱠᱛᱚᱨ ᱫᱚ ᱨᱩᱣᱟᱹ ᱦᱚᱲ ᱠᱚᱭ ᱨᱟᱱ ᱠᱚᱣᱟ",
+    "phonetic_deva_santhali": "डाकतर दो रुवा़ होड़ कोय रान कोवा"
+  },
+  {
+    "id": "FLN_KIN_012",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "किसान हमारे लिए अनाज उगाता है",
+    "target_olchiki_santhali": "ᱪᱟᱥᱤ ᱦᱚᱲ ᱫᱚ ᱟᱵᱚ ᱞᱟᱹᱜᱤᱫ ᱡᱚᱢᱟᱜ-ᱮ ᱪᱟᱥᱟ",
+    "phonetic_deva_santhali": "चासी होड़ दो आबो ला़गिद जोमाग-ए चासा"
+  },
+  {
+    "id": "FLN_KIN_013",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "लड़कियाँ मैदान में खेल रही हैं",
+    "target_olchiki_santhali": "ᱠᱩᱲᱤ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱴᱟᱺᱰᱤ ᱨᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कुड़ी गिदरा़ को टा़न्डी रेको एनेज काना"
+  },
+  {
+    "id": "FLN_KIN_014",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "लड़के गेंद से खेल रहे हैं",
+    "target_olchiki_santhali": "ᱠᱚᱲᱟ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱵᱚᱞ ᱛᱮᱠᱚ ᱮᱱᱮᱡ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "कोड़ा गिदरा़ को बोल तेको एनेज काना"
+  },
+  {
+    "id": "FLN_KIN_015",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हम सब मिलकर अपने बड़ों का आदर करेंगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱢᱟᱨᱟᱝ ᱦᱚᱲ ᱠᱚᱵᱚ ᱢᱟᱱᱟᱣ ᱠᱚᱣᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को मेसा काते मारांग होड़ कोबो मानाव कोवा"
+  },
+  {
+    "id": "FLN_KIN_016",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "चाचा बाज़ार से नई किताबें लाए हैं",
+    "target_olchiki_santhali": "ᱠᱟᱠᱟ ᱫᱚ ᱵᱟᱡᱟᱨ ᱠᱷᱚᱱ ᱱᱟᱣᱟ ᱯᱩᱛᱷᱤ ᱠᱚᱭ ᱟᱹᱜᱩ ᱟᱠᱟᱫᱟ",
+    "phonetic_deva_santhali": "काका दो बाजार खोन नावा पुथि कोय आ़गु आकादा"
+  },
+  {
+    "id": "FLN_KIN_017",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मेरी चाची बहुत स्वादिष्ट खाना बनाती हैं",
+    "target_olchiki_santhali": "ᱤᱧ ᱠᱟᱹᱠᱤ ᱫᱚ ᱟᱹᱰᱤ ᱥᱤᱵᱤᱞ ᱡᱚᱢᱟᱜ-ᱮ ᱛᱮᱭᱟᱨᱟ",
+    "phonetic_deva_santhali": "इञ का़की दो अ़डी सिबिल जोमाग-ए तेयारा"
+  },
+  {
+    "id": "FLN_KIN_018",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब अपने गाँव को साफ़ रखेंगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱵᱚᱣᱟᱜ ᱟᱹᱛᱩ ᱥᱟᱯᱷᱟᱵᱚ ᱫᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को आबोवाग आ़तु साफाबो दोहोया"
+  },
+  {
+    "id": "FLN_KIN_019",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अतिथि को पानी पिलाओ",
+    "target_olchiki_santhali": "ᱯᱮᱲᱟ ᱦᱚᱲ ᱫᱟᱜ ᱮᱢᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "पेड़ा होड़ दाग एमाय मे"
+  },
+  {
+    "id": "FLN_KIN_020",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कक्षा का मॉनिटर कौन है?",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱤᱱᱤᱡ ᱢᱩᱠᱷᱤᱭᱟᱹ ᱫᱚ ᱚᱠᱚᱭ ᱠᱟᱱᱟᱭ?",
+    "phonetic_deva_santhali": "चानाच रीनिज मुखिया़ दो ओकोय कानाय?"
+  },
+  {
+    "id": "FLN_KIN_021",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सब मिलकर प्रार्थना गाओ",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱵᱤᱱᱛᱤ ᱥᱮᱨᱮᱧ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम को मेसा काते बिनती सेरेञ पे"
+  },
+  {
+    "id": "FLN_KIN_022",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अपने सहपाठी के साथ मिलकर पढ़ो",
+    "target_olchiki_santhali": "ᱟᱢᱨᱮᱱ ᱯᱟᱹᱴᱷᱩᱣᱟᱹ ᱜᱟᱛᱮ ᱥᱟᱶ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "आमरेन पा़ठुवा़ गाते साव मेसा काते पाड़हाव मे"
+  },
+  {
+    "id": "FLN_KIN_023",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "बगीचे के माली पौधे सींच रहे हैं",
+    "target_olchiki_santhali": "ᱵᱟᱜᱟᱱ ᱨᱤᱱᱤᱡ ᱢᱟᱹᱞᱤ ᱫᱚ ᱫᱟᱨᱮ ᱨᱮ ᱫᱟᱜ-ᱮ ᱫᱩᱞᱮᱫᱟ",
+    "phonetic_deva_santhali": "बागान रीनिज मा़ली दो दारे रे दाग-ए दुलेदा"
+  },
+  {
+    "id": "FLN_KIN_024",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सफाईकर्मी विद्यालय को स्वच्छ रखते हैं",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟᱭ ᱦᱚᱲ ᱫᱚ ᱟᱥᱲᱟ ᱥᱟᱯᱷᱟᱭ ᱫᱚᱦᱚᱭᱟ",
+    "phonetic_deva_santhali": "साफाय होड़ दो आसड़ा साफाय दोहोया"
+  },
+  {
+    "id": "FLN_KIN_025",
+    "domain": "kinship_community",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब मिलकर अपने समाज को आगे बढ़ाएँगे",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱢᱮᱥᱟ ᱠᱟᱛᱮ ᱟᱵᱚᱣᱟᱜ ᱥᱟᱶᱛᱟᱵᱚ ᱞᱟᱦᱟᱭᱟ",
+    "phonetic_deva_santhali": "आबो सानाम को मेसा काते आबोवाग सावंताबो लाहाया"
+  },
+  {
+    "id": "FLN_BOD_001",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने सिर को छुओ",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱵᱚᱦᱚᱜ ᱡᱚᱴᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग बोहोग जोतेद मे"
+  },
+  {
+    "id": "FLN_BOD_002",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपनी आँखें बंद करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱢᱮᱫ ᱞᱟᱦᱩᱴ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग मेद लाहुट मे"
+  },
+  {
+    "id": "FLN_BOD_003",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कान से हम सुनते हैं",
+    "target_olchiki_santhali": "ᱞᱩᱛᱩᱨ ᱛᱮ ᱟᱵᱚᱵᱚ ᱟᱧᱡᱚᱢᱟ",
+    "phonetic_deva_santhali": "लुतुर ते आबोबो आंजोमा"
+  },
+  {
+    "id": "FLN_BOD_004",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नाक से हम साँस लेते हैं",
+    "target_olchiki_santhali": "ᱢᱩᱸ ᱛᱮ ᱟᱵᱚᱵᱚ ᱥᱟᱦᱮᱫᱟ",
+    "phonetic_deva_santhali": "मुँ ते आबोबो साहेदा"
+  },
+  {
+    "id": "FLN_BOD_005",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने दाँत साफ़ करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱫᱟᱛᱟ ᱥᱟᱯᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग दाता साफाय मे"
+  },
+  {
+    "id": "FLN_BOD_006",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जीभ से स्वाद का पता चलता है",
+    "target_olchiki_santhali": "ᱟᱞᱟᱝ ᱛᱮ ᱥᱤᱵᱤᱞ ᱵᱟᱰᱟᱭᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "आलांग ते सिबिल बाडाय౉ग-आ"
+  },
+  {
+    "id": "FLN_BOD_007",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हाथों से ताली बजाओ",
+    "target_olchiki_santhali": "ᱛᱤ ᱛᱮ ᱛᱷᱟᱹᱭᱟᱹᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "ती ते था़य़ा़ड़ मे"
+  },
+  {
+    "id": "FLN_BOD_008",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पैरों से कदम ताल करो",
+    "target_olchiki_santhali": "ᱡᱟᱸᱜᱟ ᱛᱮ ᱛᱟᱲᱟᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "जा़न्गा ते ताड़ाम मे"
+  },
+  {
+    "id": "FLN_BOD_009",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खाना खाने से पहले हाथ धोओ",
+    "target_olchiki_santhali": "ᱡᱚᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱟᱹᱨᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "जोम माड़ांग रे ती आ़रुब मे"
+  },
+  {
+    "id": "FLN_BOD_010",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अपने बाल में कंघी करो",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱩᱵ ᱱᱟᱹᱠᱤᱡ ᱢᱮ",
+    "phonetic_deva_santhali": "आमाग उब ना़किज मे"
+  },
+  {
+    "id": "FLN_BOD_011",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "नाखूनों को साफ़ और छोटा रखो",
+    "target_olchiki_santhali": "ᱨᱟᱢᱟ ᱠᱚ ᱥᱟᱯᱷᱟ ᱟᱨ ᱠᱷᱟᱴᱚ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "रामा को साफा आर खाटो दोहोय मे"
+  },
+  {
+    "id": "FLN_BOD_012",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "साफ़ पानी ही पीना चाहिए",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ ᱫᱟᱜ ᱜᱮ ᱧᱩ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "साफा दाग गे ञु ला़कती काना"
+  },
+  {
+    "id": "FLN_BOD_013",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "प्रतिदिन स्नान करना अच्छी आदत है",
+    "target_olchiki_santhali": "ᱫᱤᱱᱟᱹᱢ ᱦᱤᱞᱚᱜ ᱩᱢᱩᱜ ᱫᱚ ᱵᱷᱟᱹᱜᱤ ᱦᱮᱣᱟ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "दीना़म हीलोग उमुग दो भागी हेवा काना"
+  },
+  {
+    "id": "FLN_BOD_014",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "खाँसते समय मुँह पर हाथ रखो",
+    "target_olchiki_santhali": "ᱠᱷᱚᱜ ᱡᱚᱠᱷᱟᱜ ᱢᱚᱪᱟ ᱨᱮ ᱛᱤ ᱫᱚᱦᱚᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "खोग जोखाग मोचा रे ती दोहोय मे"
+  },
+  {
+    "id": "FLN_BOD_015",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "धूल से अपनी आँखों को बचाओ",
+    "target_olchiki_santhali": "ᱫᱷᱩᱲᱤ ᱠᱷᱚᱱ ᱟᱢᱟᱜ ᱢᱮᱫ ᱵᱟᱧᱪᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "धुड़ी खोन आमाग मेद बा़ञचाव मे"
+  },
+  {
+    "id": "FLN_BOD_016",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "साफ़ कपड़े पहनकर स्कूल आओ",
+    "target_olchiki_santhali": "ᱥᱟᱯᱷᱟ ᱞᱩᱜᱽᱲᱤ ᱦᱚᱨᱚᱜ ᱠᱟᱛᱮ ᱟᱥᱲᱟ ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "साफा लुगड़ी होरोग काते आसड़ा हीजुग मे"
+  },
+  {
+    "id": "FLN_BOD_017",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "समय पर सोओ और सुबह जल्दी जागो",
+    "target_olchiki_santhali": "ᱚᱠᱛᱚ ᱨᱮ ᱜᱤᱛᱤᱡ ᱢᱮ ᱟᱨ ᱥᱮᱛᱟᱜ ᱨᱮ ᱵᱮᱨᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "ओकतो रे गीतीज मे आर सेताग रे बेरेद मे"
+  },
+  {
+    "id": "FLN_BOD_018",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "ताज़ा फल और हरी सब्ज़ियाँ खाओ",
+    "target_olchiki_santhali": "ᱵᱤᱞᱤ ᱡᱚ ᱟᱨ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱩᱛᱩ ᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "बीली जो आर हा़रिया़ड़ उतु जोम मे"
+  },
+  {
+    "id": "FLN_BOD_019",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "व्यायाम करने से शरीर मज़बूत बनता है",
+    "target_olchiki_santhali": "ᱠᱟᱹᱥᱨᱟᱹᱛ ᱞᱮᱠᱷᱟᱱ ᱦᱚᱲᱢᱚ ᱠᱮᱴᱮᱡᱚᱜ-ᱟ",
+    "phonetic_deva_santhali": "का़सरा़त लेखान होड़मो केटेज౉ग-आ"
+  },
+  {
+    "id": "FLN_BOD_020",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अगर तबियत खराब लगे तो शिक्षक को बताओ",
+    "target_olchiki_santhali": "ᱦᱚᱲᱢᱚ ᱵᱟᱹᱲᱤᱡ ᱵᱩᱡᱷᱟᱹᱣ ᱞᱮᱠᱷᱟᱱ ᱢᱟᱪᱮᱛ ᱞᱟᱹᱭᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "होड़मो बा़ड़िज बुझा़व लेखान माचेत ला़याय मे"
+  },
+  {
+    "id": "FLN_BOD_021",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "खुले में रखा खाना मत खाओ",
+    "target_olchiki_santhali": "ᱚᱴᱟᱝ ᱨᱮ ᱫᱚᱦᱚ ᱟᱠᱟᱱ ᱡᱚᱢᱟᱜ ᱟᱞᱚᱢ ᱡᱚᱢᱟ",
+    "phonetic_deva_santhali": "ओटांग रे दोहो आकान जोमाग आलोम जोमा"
+  },
+  {
+    "id": "FLN_BOD_022",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "गंदे हाथों से आँखों को मत मलो",
+    "target_olchiki_santhali": "ᱵᱟᱹᱲᱤᱡ ᱛᱤ ᱛᱮ ᱢᱮᱫ ᱟᱞᱚᱢ ᱜᱟᱹᱥᱤᱭᱟ",
+    "phonetic_deva_santhali": "बा़ड़िज ती ते मेद आलोम गा़सीया"
+  },
+  {
+    "id": "FLN_BOD_023",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कक्षा में हमेशा सीधे बैठकर पढ़ो",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ ᱨᱮ ᱡᱟᱣᱜᱮ ᱥᱚᱡᱷᱮ ᱫᱩᱲᱩᱵ ᱠᱟᱛᱮ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "चानाच रे जावगे सोज्हे दुड़ुब काते पाड़हाव मे"
+  },
+  {
+    "id": "FLN_BOD_024",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "खेलने के बाद हाथ-मुँह धोना चाहिए",
+    "target_olchiki_santhali": "ᱮᱱᱮᱡ ᱛᱟᱭᱚᱢ ᱛᱤ-ᱢᱚᱪᱟ ᱟᱹᱨᱩᱵ ᱞᱟᱹᱠᱛᱤ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "एनेज तायोम ती-मोचा आ़रुब ला़कती काना"
+  },
+  {
+    "id": "FLN_BOD_025",
+    "domain": "body_parts_health",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "स्वस्थ शरीर में ही स्वस्थ मन रहता है",
+    "target_olchiki_santhali": "ᱱᱤᱨᱚᱜ ᱦᱚᱲᱢᱚ ᱨᱮᱜᱮ ᱱᱟᱯᱟᱭ ᱢᱚᱱᱮ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "नीरोग होड़मो रेगे नापाय मोने ताहे़ना"
+  },
+  {
+    "id": "FLN_INQ_001",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह क्या है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱪᱮᱫ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो चेद काना?"
+  },
+  {
+    "id": "FLN_INQ_002",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तुम्हारा नाम क्या है?",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱧᱩᱛᱩᱢ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "आमाग ञुतुम दो चेद?"
+  },
+  {
+    "id": "FLN_INQ_003",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तुम कहाँ रहते हो?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚ ᱚᱠᱟᱨᱮᱢ ᱛᱟᱦᱮᱸᱱᱟ?",
+    "phonetic_deva_santhali": "आम दो ओकारेम ताहे़ना?"
+  },
+  {
+    "id": "FLN_INQ_004",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह चित्र किसका है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱪᱤᱛᱟᱹᱨ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा चीता़र दो ओकोयाग काना?"
+  },
+  {
+    "id": "FLN_INQ_005",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यह कौन सा रंग है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱚᱠᱟ ᱨᱚᱝ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो ओका रंग काना?"
+  },
+  {
+    "id": "FLN_INQ_006",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "यहाँ आओ और इसे देखो",
+    "target_olchiki_santhali": "ᱱᱚᱸᱰᱮ ᱦᱤᱡᱩᱜ ᱢᱮ ᱟᱨ ᱱᱚᱣᱟ ᱧᱮᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "नोंडे हीजुग मे आर नोवा ञेल मे"
+  },
+  {
+    "id": "FLN_INQ_007",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "क्या तुम्हें समझ आया?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚᱢ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱟ?",
+    "phonetic_deva_santhali": "आम दोम बुझा़व केदा?"
+  },
+  {
+    "id": "FLN_INQ_008",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "फिर से कोशिश करो",
+    "target_olchiki_santhali": "ᱟᱨᱦᱚᱸ ᱢᱤᱫ ᱫᱷᱟᱣ ᱠᱩᱨᱩᱢᱩᱴᱩᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "आरहों मिद धाव कुरुमुटुय मे"
+  },
+  {
+    "id": "FLN_INQ_009",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "किसके पास पेंसिल नहीं है?",
+    "target_olchiki_santhali": "ᱚᱠᱚᱭ ᱴᱷᱮᱱ ᱯᱮᱱᱥᱤᱞ ᱵᱟᱹᱱᱩᱜ-ᱟ?",
+    "phonetic_deva_santhali": "ओकोय ठेन पेन्सिल बा़नुग-आ?"
+  },
+  {
+    "id": "FLN_INQ_010",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इस प्रश्न का उत्तर कौन जानता है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱠᱩᱠᱞᱤ ᱨᱮᱱᱟᱜ ᱛᱮᱞᱟ ᱚᱠᱚᱭᱮ ᱵᱟᱰᱟᱭᱟ?",
+    "phonetic_deva_santhali": "नोवा कुकली रेनाग तेला ओकोये बाडाया?"
+  },
+  {
+    "id": "FLN_INQ_011",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "ज़ोर से बोलो ताकि सब सुन सकें",
+    "target_olchiki_santhali": "ᱟᱲᱟᱝ ᱛᱮ ᱨᱚᱲ ᱢᱮ ᱡᱮᱢᱚᱱ ᱥᱟᱱᱟᱢ ᱠᱚ ᱟᱧᱡᱚᱢ ᱫᱟᱲᱮᱭᱟᱜ",
+    "phonetic_deva_santhali": "आड़ांग ते रोड़ मे जेमोन सानाम को आंजोम दाड़ेयाग"
+  },
+  {
+    "id": "FLN_INQ_012",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "क्या आपने अपना गृहकार्य पूरा किया?",
+    "target_olchiki_santhali": "ᱟᱢ ᱫᱚ ᱚᱲᱟᱜ ᱠᱟᱹᱢᱤᱢ ᱯᱩᱨᱟᱹᱣ ᱟᱠᱟᱫᱟ?",
+    "phonetic_deva_santhali": "आम दो ओड़ाग का़मीम पुरा़व आकादा?"
+  },
+  {
+    "id": "FLN_INQ_013",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इस शब्द का पहला अक्षर क्या है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱟᱹᱲᱟᱹ ᱨᱮᱱᱟᱜ ᱯᱟᱹᱦᱤᱞ ᱟᱠᱷᱚᱨ ᱫᱚ ᱪᱮᱫ?",
+    "phonetic_deva_santhali": "नोवा आ़ड़ा़ रेनाग पा़हिल आखोर दो चेद?"
+  },
+  {
+    "id": "FLN_INQ_014",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कोई संदेह हो तो मुझसे पूछो",
+    "target_olchiki_santhali": "ᱡᱟᱦᱟᱸᱱᱟᱜ ᱠᱩᱠᱞᱤ ᱛᱟᱦᱮᱸᱱ ᱠᱷᱟᱱ ᱤᱧ ᱠᱩᱞᱤᱭᱤᱧ ᱢᱮ",
+    "phonetic_deva_santhali": "जाहानाग कुकली ताहे़न खान इञ कुलीयीञ मे"
+  },
+  {
+    "id": "FLN_INQ_015",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अब किसकी बारी है?",
+    "target_olchiki_santhali": "ᱱᱤᱛᱚᱜ ᱫᱚ ᱚᱠᱚᱭᱟᱜ ᱯᱟᱞᱟ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नीत౉ग दो ओकोयाग पाला काना?"
+  },
+  {
+    "id": "FLN_INQ_016",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बोलने में संकोच मत करो",
+    "target_olchiki_santhali": "ᱨᱚᱲ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱚᱢ ᱞᱟᱡᱟᱣᱜ-ᱟ",
+    "phonetic_deva_santhali": "रोड़ ला़गिद आलोम लाजावग-आ"
+  },
+  {
+    "id": "FLN_INQ_017",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आज आपने क्या नया सीखा?",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱟᱢ ᱪᱮᱫ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟᱢ ᱪᱮᱫ ᱠᱮᱫᱟ?",
+    "phonetic_deva_santhali": "तेहेञ आम चेद नावा काथाम चेद केदा?"
+  },
+  {
+    "id": "FLN_INQ_018",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "इस कहानी से हमें क्या सीख मिलती है?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱠᱟᱹᱦᱱᱤ ᱠᱷᱚᱱ ᱟᱵᱚ ᱪᱮᱫ ᱥᱤᱠᱷᱱᱟᱹᱛᱵᱚ ᱧᱟᱢᱮᱫᱟ?",
+    "phonetic_deva_santhali": "नोवा का़हनी खोन आबो चेद सीखना़तबो ञामेदा?"
+  },
+  {
+    "id": "FLN_INQ_019",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "एक छोटी सी कहानी सुनाओ",
+    "target_olchiki_santhali": "ᱢᱤᱫᱴᱟᱝ ᱠᱟᱹᱴᱤᱡ ᱠᱟᱹᱦᱱᱤ ᱞᱟᱹᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "मिदटांग का़टीज का़हनी ला़य मे"
+  },
+  {
+    "id": "FLN_INQ_020",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आज देर से आने का क्या कारण था?",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱵᱤᱞᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱨᱮᱱᱟᱜ ᱪᱮᱫ ᱠᱟᱨᱚᱱ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "तेहेञ बीलोम ते हीजुग रेनाग चेद कारोन ताहे़ काना?"
+  },
+  {
+    "id": "FLN_INQ_021",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "उत्तर देने से पहले हाथ उठाओ",
+    "target_olchiki_santhali": "ᱛᱮᱞᱟ ᱮᱢ ᱢᱟᱬᱟᱝ ᱨᱮ ᱛᱤ ᱛᱩᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "तेला एम माड़ांग रे ती तुल मे"
+  },
+  {
+    "id": "FLN_INQ_022",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सवाल को ध्यान से सुनो",
+    "target_olchiki_santhali": "ᱠᱩᱠᱞᱤ ᱫᱷᱮᱭᱟᱱ ᱛᱮ ᱟᱧᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "कुकली धेयान ते आंजोम मे"
+  },
+  {
+    "id": "FLN_INQ_023",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "स्लेट पर अपनी पसंद का चित्र बनाओ",
+    "target_olchiki_santhali": "ᱥᱞᱮᱴ ᱨᱮ ᱟᱯᱱᱟᱨ ᱠᱩᱥᱤ ᱪᱤᱛᱟᱹᱨ ᱵᱮᱱᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "स्लेट रे आपनार कुसी चीता़र बेनाव मे"
+  },
+  {
+    "id": "FLN_INQ_024",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "क्या आप इस वाक्य को पढ़ सकते हैं?",
+    "target_olchiki_santhali": "ᱟᱢ ᱱᱚᱣᱟ ᱟᱹᱭᱟᱹᱛ ᱯᱟᱲᱦᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ?",
+    "phonetic_deva_santhali": "आम नोवा आ़य़ात पाड़हाव दाड़ेयाग-आ?"
+  },
+  {
+    "id": "FLN_INQ_025",
+    "domain": "inquiry_evaluation",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आगे आकर सबको पढ़कर सुनाओ",
+    "target_olchiki_santhali": "ᱥᱟᱢᱟᱝ ᱛᱮ ᱦᱮᱡ ᱠᱟᱛᱮ ᱥᱟᱱᱟᱢ ᱠᱚ ᱯᱟᱲᱦᱟᱣ ᱟᱧᱡᱚᱢ ᱟᱠᱚ ᱢᱮ",
+    "phonetic_deva_santhali": "सामांग ते हेज काते सानाम को पाड़हाव आंजोम आको मे"
+  },
+  {
+    "id": "FLN_SOC_001",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नमस्ते / जोहार",
+    "target_olchiki_santhali": "ᱡᱚᱦᱟᱨ",
+    "phonetic_deva_santhali": "जोहार"
+  },
+  {
+    "id": "FLN_SOC_002",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ प्रभात",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱥᱮᱛᱟᱜ",
+    "phonetic_deva_santhali": "सा़गुन सेताग"
+  },
+  {
+    "id": "FLN_SOC_003",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ दोपहर",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱛᱤᱠᱤᱱ",
+    "phonetic_deva_santhali": "सा़गुन तीकीन"
+  },
+  {
+    "id": "FLN_SOC_004",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शुभ संध्या",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱛᱟᱹᱨᱟᱹᱥᱤᱧ",
+    "phonetic_deva_santhali": "सा़गुन ता़रा़सीञ"
+  },
+  {
+    "id": "FLN_SOC_005",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "स्वागत है",
+    "target_olchiki_santhali": "ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ",
+    "phonetic_deva_santhali": "सा़गुन दाराम"
+  },
+  {
+    "id": "FLN_SOC_006",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बहुत अच्छा प्रयास किया",
+    "target_olchiki_santhali": "ᱟᱹᱰᱤ ᱢᱚᱡᱽ ᱠᱩᱨᱩᱢᱩᱴᱩ",
+    "phonetic_deva_santhali": "अ़डी मोज कुरुमुटु"
+  },
+  {
+    "id": "FLN_SOC_007",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शाबाश, बहुत बढ़िया!",
+    "target_olchiki_santhali": "ᱟᱹᱰᱤ ᱵᱷᱟᱹᱜᱤ!",
+    "phonetic_deva_santhali": "अ़डी भागी!"
+  },
+  {
+    "id": "FLN_SOC_008",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "धन्यवाद",
+    "target_olchiki_santhali": "ᱥᱟᱨᱦᱟᱣ",
+    "phonetic_deva_santhali": "सारहाव"
+  },
+  {
+    "id": "FLN_SOC_009",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हमेशा सच बोलो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱥᱟᱹᱨᱤ ᱠᱟᱛᱷᱟ ᱨᱚᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे सा़री काथा रोड़ मे"
+  },
+  {
+    "id": "FLN_SOC_010",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सबके साथ मिलकर रहो",
+    "target_olchiki_santhali": "ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱟᱶ ᱱᱟᱯᱟᱭ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱯᱮ",
+    "phonetic_deva_santhali": "सानाम को साव नापाय ते ताहे़न पे"
+  },
+  {
+    "id": "FLN_SOC_011",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आपस में झगड़ा मत करो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱛᱟᱞᱟ ᱨᱮ ᱟᱞᱚᱯᱮ ᱛᱚᱯᱚᱲᱟ",
+    "phonetic_deva_santhali": "आपनार ताला रे आलोपे तोपोड़ा"
+  },
+  {
+    "id": "FLN_SOC_012",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अपनी चीज़ें बाँटकर खेलो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱡᱤᱱᱤᱥ ᱦᱟᱹᱴᱤᱧ ᱠᱟᱛᱮ ᱮᱱᱮᱡ ᱯᱮ",
+    "phonetic_deva_santhali": "आपनार जीनिस हा़टीञ काते एनेज पे"
+  },
+  {
+    "id": "FLN_SOC_013",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गलती होने पर क्षमा माँगो",
+    "target_olchiki_santhali": "ᱵᱷᱩᱞ ᱞᱮᱠᱷᱟᱱ ᱤᱠᱟᱹ ᱠᱷᱚᱡᱽ ᱢᱮ",
+    "phonetic_deva_santhali": "भूल लेखान ईका़ खोज मे"
+  },
+  {
+    "id": "FLN_SOC_014",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दूसरों को क्षमा करना सीखो",
+    "target_olchiki_santhali": "ᱮᱴᱟᱜ ᱦᱚᱲ ᱤᱠᱟᱹ ᱠᱟᱠᱚ ᱪᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "एटाग होड़ ईका़ काको चेद मे"
+  },
+  {
+    "id": "FLN_SOC_015",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "जीव-जंतुओं पर दया करो",
+    "target_olchiki_santhali": "ᱡᱤᱵᱽ-ᱡᱤᱭᱟᱹᱞᱤ ᱠᱚ ᱫᱟᱭᱟ ᱠᱚ ᱢᱮ",
+    "phonetic_deva_santhali": "जीब-जीया़ली को दया को मे"
+  },
+  {
+    "id": "FLN_SOC_016",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हमेशा हँसते और मुस्कुराते रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱞᱟᱸᱫᱟᱭ ᱢᱮ ᱟᱨ ᱨᱟᱹᱥᱠᱟᱹ ᱛᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे ला़न्दाय मे आर रा़सका़ ते ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_017",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मुश्किल समय में हिम्मत मत हारो",
+    "target_olchiki_santhali": "ᱢᱩᱦᱤᱢ ᱚᱠᱛᱚ ᱨᱮ ᱢᱚᱱᱮ ᱟᱞᱚᱢ ᱠᱷᱟᱴᱚᱭᱟ",
+    "phonetic_deva_santhali": "मुहीम ओकतो रे मोने आलोम खाटोया"
+  },
+  {
+    "id": "FLN_SOC_018",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आप यह काम ज़रूर कर सकते हैं",
+    "target_olchiki_santhali": "ᱟᱢ ᱱᱚᱣᱟ ᱠᱟᱹᱢᱤ ᱱᱤᱦᱟᱹᱛᱤᱢ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "आम नोवा का़मी नीहा़तीम दाड़ेयाग-आ"
+  },
+  {
+    "id": "FLN_SOC_019",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हम सब मिलकर एक समान हैं",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚ ᱥᱚᱢᱟᱱ ᱜᱮᱭᱟᱵᱚ",
+    "phonetic_deva_santhali": "आबो सानाम को सोमान गेयाबो"
+  },
+  {
+    "id": "FLN_SOC_020",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अपने विद्यालय से प्रेम करो",
+    "target_olchiki_santhali": "ᱟᱯᱱᱟᱨ ᱟᱥᱲᱟ ᱫᱩᱞᱟᱹᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "आपनार आसड़ा दुला़ड़ मे"
+  },
+  {
+    "id": "FLN_SOC_021",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हमेशा नई बातें सीखते रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱱᱟᱣᱟ ᱠᱟᱛᱷᱟ ᱪᱮᱫᱚᱜ ᱛᱮᱜᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे नावा काथा चेद౉ग तेगे ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_022",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कल हम सब फिर मिलेंगे",
+    "target_olchiki_santhali": "ᱜᱟᱯᱟ ᱟᱵᱚ ᱥᱟᱱᱟᱢ ᱠᱚᱵᱚ ᱧᱟᱯᱟᱢᱟ",
+    "phonetic_deva_santhali": "गापा आबो सानाम कोबो ञापामा"
+  },
+  {
+    "id": "FLN_SOC_023",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सदा खुश और प्रसन्न रहो",
+    "target_olchiki_santhali": "ᱡᱟᱣᱜᱮ ᱨᱟᱹᱥᱠᱟᱹ ᱟᱨ ᱥᱩᱞᱩᱠ ᱨᱮ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "जावगे रा़सका़ आर सुलुक रे ताहे़न मे"
+  },
+  {
+    "id": "FLN_SOC_024",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आपने बहुत सुंदर चित्र बनाया है",
+    "target_olchiki_santhali": "ᱟᱢ ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱪᱤᱛᱟᱹᱨᱮᱢ ᱵᱮᱱᱟᱣ ᱟᱠᱟᱫᱟ",
+    "phonetic_deva_santhali": "आम अ़डी नापाय चीता़रेम बेनाव आकादा"
+  },
+  {
+    "id": "FLN_SOC_025",
+    "domain": "socio_emotional_praise",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "आपकी लिखावट बहुत साफ़ है",
+    "target_olchiki_santhali": "ᱟᱢᱟᱜ ᱚᱞ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱯᱷᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "आमाग ओल दो अ़डी साफा गेया"
+  },
+  {
+    "id": "FLN_NUM_026",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "छह से दस तक गिनो",
+    "target_olchiki_santhali": "ᱛᱩᱨᱩᱭ ᱠᱷᱚᱱ ᱜᱮᱞ ᱫᱷᱟᱹᱵᱤᱡ ᱞᱮᱠᱷᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "तुरुय खोन गेल ध़ाबिज लेखाय मे"
+  },
+  {
+    "id": "FLN_NUM_027",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या छह",
+    "target_olchiki_santhali": "ᱛᱩᱨᱩᱭ",
+    "phonetic_deva_santhali": "तुरुय"
+  },
+  {
+    "id": "FLN_NUM_028",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या सात",
+    "target_olchiki_santhali": "ᱮᱭᱟᱭ",
+    "phonetic_deva_santhali": "एयाय"
+  },
+  {
+    "id": "FLN_NUM_029",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या आठ",
+    "target_olchiki_santhali": "ᱤᱨᱟᱹᱞ",
+    "phonetic_deva_santhali": "इरा़ल"
+  },
+  {
+    "id": "FLN_NUM_030",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या नौ",
+    "target_olchiki_santhali": "ᱟᱨᱮ",
+    "phonetic_deva_santhali": "आरे"
+  },
+  {
+    "id": "FLN_NUM_031",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "संख्या दस",
+    "target_olchiki_santhali": "ᱜᱮᱞ",
+    "phonetic_deva_santhali": "गेल"
+  },
+  {
+    "id": "FLN_NUM_032",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या बीस",
+    "target_olchiki_santhali": "ᱤᱥᱤ",
+    "phonetic_deva_santhali": "इसी"
+  },
+  {
+    "id": "FLN_NUM_033",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या पचास",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "बार इसी गेल"
+  },
+  {
+    "id": "FLN_NUM_034",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "संख्या सौ",
+    "target_olchiki_santhali": "ᱥᱟᱭ",
+    "phonetic_deva_santhali": "साय"
+  },
+  {
+    "id": "FLN_NUM_035",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "यह कितने रुपये हैं?",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱫᱚ ᱛᱤᱱᱟᱹᱜ ᱴᱟᱠᱟ ᱠᱟᱱᱟ?",
+    "phonetic_deva_santhali": "नोवा दो तीना़ग टाका काना?"
+  },
+  {
+    "id": "FLN_NUM_036",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दस रुपये का सिक्का",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱴᱟᱠᱟ ᱨᱮᱱᱟᱜ ᱠᱩᱭᱤᱱ",
+    "phonetic_deva_santhali": "गेल टाका रेनाग कुयीन"
+  },
+  {
+    "id": "FLN_NUM_037",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "आज सोमवार है",
+    "target_olchiki_santhali": "ᱛᱮᱦᱮᱧ ᱫᱚ ᱚᱛᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "तेहेञ दो ओते माहाँ काना"
+  },
+  {
+    "id": "FLN_NUM_038",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कल मंगलवार है",
+    "target_olchiki_santhali": "ᱜᱟᱯᱟ ᱫᱚ ᱵᱟᱞᱮ ᱢᱟᱦᱟᱸ ᱠᱟᱱᱟ",
+    "phonetic_deva_santhali": "गापा दो बाले माहाँ काना"
+  },
+  {
+    "id": "FLN_NUM_039",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "रविवार को छुट्टी होती है",
+    "target_olchiki_santhali": "ᱥᱤᱸᱜᱮ ᱢᱟᱦᱟᱸ ᱫᱚ ᱪᱷᱩᱴᱤ ᱛᱟᱦᱮᱸᱱᱟ",
+    "phonetic_deva_santhali": "सिंगे माहाँ दो छुटी ताहे़ना"
+  },
+  {
+    "id": "FLN_NUM_040",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सुबह का समय",
+    "target_olchiki_santhali": "ᱥᱮᱛᱟᱜ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "सेताग ओकतो"
+  },
+  {
+    "id": "FLN_NUM_041",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दोपहर का समय",
+    "target_olchiki_santhali": "ᱛᱤᱠᱤᱱ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "तीकीन ओकतो"
+  },
+  {
+    "id": "FLN_NUM_042",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "शाम का समय",
+    "target_olchiki_santhali": "ᱛᱟᱹᱨᱟᱹᱥᱤᱧ ᱚᱠᱛᱚ",
+    "phonetic_deva_santhali": "ता़रा़सीञ ओकतो"
+  },
+  {
+    "id": "FLN_NUM_043",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "इनमें से कौन अधिक लंबा है?",
+    "target_olchiki_santhali": "ᱱᱩᱠᱤᱱ ᱢᱩᱫᱽ ᱨᱮ ᱚᱠᱚᱭ ᱡᱤᱞᱤᱧ ᱜᱮᱭᱟᱭ?",
+    "phonetic_deva_santhali": "नुकीन मुद रे ओकोय जीलीञ गेयाय?"
+  },
+  {
+    "id": "FLN_NUM_044",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "शिक्षक के पास कौन बैठा है?",
+    "target_olchiki_santhali": "ᱢᱟᱪᱮᱛ ᱥᱩᱨ ᱨᱮ ᱚᱠᱚᱭ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ?",
+    "phonetic_deva_santhali": "माचेत सुर रे ओकोय दुड़ुब आकानाय?"
+  },
+  {
+    "id": "FLN_NUM_045",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "वह पेड़ बहुत दूर है",
+    "target_olchiki_santhali": "ᱦᱟᱱᱟ ᱫᱟᱨᱮ ᱫᱚ ᱟᱹᱰᱤ ᱥᱟᱺᱜᱤᱧ ᱨᱮ ᱢᱮᱱᱟᱜ-ᱟ",
+    "phonetic_deva_santhali": "हाना दारे दो अ़डी सा़न्गीञ रे मेनाग-आ"
+  },
+  {
+    "id": "FLN_NUM_046",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "दो कदम आगे चलो",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱛᱟᱲᱟᱢ ᱞᱟᱦᱟ ᱛᱮ ᱥᱮᱱᱚᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "बार ताड़ाम लाहा ते सेन౉ग मे"
+  },
+  {
+    "id": "FLN_NUM_047",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "एक कदम पीछे हटो",
+    "target_olchiki_santhali": "ᱢᱤᱫ ᱛᱟᱲᱟᱢ ᱛᱟᱭᱚᱢ ᱛᱮ ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "मिद ताड़ाम तायोम ते हीजुग मे"
+  },
+  {
+    "id": "FLN_NUM_048",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "यह रेखा मोटी है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱢᱚᱴᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "नोवा गार दो मोटा गेया"
+  },
+  {
+    "id": "FLN_NUM_049",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "यह रेखा पतली है",
+    "target_olchiki_santhali": "ᱱᱚᱣᱟ ᱜᱟᱟᱨ ᱫᱚ ᱯᱟᱛᱞᱟ ᱜᱮᱭᱟ",
+    "phonetic_deva_santhali": "नोवा गार दो पातला गेया"
+  },
+  {
+    "id": "FLN_NUM_050",
+    "domain": "numeracy",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "हमने गणित का खेल पूरा कर लिया",
+    "target_olchiki_santhali": "ᱟᱵᱚ ᱞᱮᱠᱷᱟ ᱮᱱᱮᱡᱵᱚ ᱯᱩᱨᱟᱹᱣ ᱠᱮᱫᱟ",
+    "phonetic_deva_santhali": "आबो लेखा एनेजबो पुरा़व केदा"
+  },
+  {
+    "id": "FLN_VOC_NUM_001",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "एक",
+    "target_olchiki_santhali": "ᱢᱤᱫ",
+    "phonetic_deva_santhali": "मिद"
+  },
+  {
+    "id": "FLN_VOC_NUM_002",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दो",
+    "target_olchiki_santhali": "ᱵᱟᱨ",
+    "phonetic_deva_santhali": "बार"
+  },
+  {
+    "id": "FLN_VOC_NUM_003",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तीन",
+    "target_olchiki_santhali": "ᱯᱮ",
+    "phonetic_deva_santhali": "पे"
+  },
+  {
+    "id": "FLN_VOC_NUM_004",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चार",
+    "target_olchiki_santhali": "ᱯᱩᱱ",
+    "phonetic_deva_santhali": "पुन"
+  },
+  {
+    "id": "FLN_VOC_NUM_005",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पाँच",
+    "target_olchiki_santhali": "ᱢᱚᱬᱮ",
+    "phonetic_deva_santhali": "मोणे"
+  },
+  {
+    "id": "FLN_VOC_NUM_006",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "छह",
+    "target_olchiki_santhali": "ᱛᱩᱨᱩᱭ",
+    "phonetic_deva_santhali": "तुरुय"
+  },
+  {
+    "id": "FLN_VOC_NUM_007",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सात",
+    "target_olchiki_santhali": "ᱮᱭᱟᱭ",
+    "phonetic_deva_santhali": "एयाय"
+  },
+  {
+    "id": "FLN_VOC_NUM_008",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "आठ",
+    "target_olchiki_santhali": "ᱤᱨᱟᱹᱞ",
+    "phonetic_deva_santhali": "इरा़ल"
+  },
+  {
+    "id": "FLN_VOC_NUM_009",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नौ",
+    "target_olchiki_santhali": "ᱟᱨᱮ",
+    "phonetic_deva_santhali": "आरे"
+  },
+  {
+    "id": "FLN_VOC_NUM_010",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दस",
+    "target_olchiki_santhali": "ᱜᱮᱞ",
+    "phonetic_deva_santhali": "गेल"
+  },
+  {
+    "id": "FLN_VOC_NUM_011",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "ग्यारह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱢᱤᱫ",
+    "phonetic_deva_santhali": "गेल मिद"
+  },
+  {
+    "id": "FLN_VOC_NUM_012",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बारह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱵᱟᱨ",
+    "phonetic_deva_santhali": "गेल बार"
+  },
+  {
+    "id": "FLN_VOC_NUM_013",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तेरह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱯᱮ",
+    "phonetic_deva_santhali": "गेल पे"
+  },
+  {
+    "id": "FLN_VOC_NUM_014",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चौदह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱯᱩᱱ",
+    "phonetic_deva_santhali": "गेल पुन"
+  },
+  {
+    "id": "FLN_VOC_NUM_015",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पंद्रह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱢᱚᱬᱮ",
+    "phonetic_deva_santhali": "गेल मोणे"
+  },
+  {
+    "id": "FLN_VOC_NUM_016",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सोलह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱛᱩᱨᱩᱭ",
+    "phonetic_deva_santhali": "गेल तुरुय"
+  },
+  {
+    "id": "FLN_VOC_NUM_017",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सत्रह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱮᱭᱟᱭ",
+    "phonetic_deva_santhali": "गेल एयाय"
+  },
+  {
+    "id": "FLN_VOC_NUM_018",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अट्ठारह",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱤᱨᱟᱹᱞ",
+    "phonetic_deva_santhali": "गेल इरा़ल"
+  },
+  {
+    "id": "FLN_VOC_NUM_019",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "उन्नीस",
+    "target_olchiki_santhali": "ᱜᱮᱞ ᱟᱨᱮ",
+    "phonetic_deva_santhali": "गेल आरे"
+  },
+  {
+    "id": "FLN_VOC_NUM_020",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बीस",
+    "target_olchiki_santhali": "ᱤᱥᱤ",
+    "phonetic_deva_santhali": "इसी"
+  },
+  {
+    "id": "FLN_VOC_NUM_021",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "तीस",
+    "target_olchiki_santhali": "ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "इसी गेल"
+  },
+  {
+    "id": "FLN_VOC_NUM_022",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चालीस",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱤᱥᱤ",
+    "phonetic_deva_santhali": "बार इसी"
+  },
+  {
+    "id": "FLN_VOC_NUM_023",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "पचास",
+    "target_olchiki_santhali": "ᱵᱟᱨ ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "बार इसी गेल"
+  },
+  {
+    "id": "FLN_VOC_NUM_024",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "साठ",
+    "target_olchiki_santhali": "ᱯᱮ ᱤᱥᱤ",
+    "phonetic_deva_santhali": "पे इसी"
+  },
+  {
+    "id": "FLN_VOC_NUM_025",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सत्तर",
+    "target_olchiki_santhali": "ᱯᱮ ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "पे इसी गेल"
+  },
+  {
+    "id": "FLN_VOC_NUM_026",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "अस्सी",
+    "target_olchiki_santhali": "ᱯᱩᱱ ᱤᱥᱤ",
+    "phonetic_deva_santhali": "पुन इसी"
+  },
+  {
+    "id": "FLN_VOC_NUM_027",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "नब्बे",
+    "target_olchiki_santhali": "ᱯᱩᱱ ᱤᱥᱤ ᱜᱮᱞ",
+    "phonetic_deva_santhali": "पुन इसी गेल"
+  },
+  {
+    "id": "FLN_VOC_NUM_028",
+    "domain": "vocabulary_numbers",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "सौ",
+    "target_olchiki_santhali": "ᱥᱟᱭ",
+    "phonetic_deva_santhali": "साय"
+  },
+  {
+    "id": "FLN_VOC_FRU_001",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "आम",
+    "target_olchiki_santhali": "ᱩᱞ",
+    "phonetic_deva_santhali": "उल"
+  },
+  {
+    "id": "FLN_VOC_FRU_002",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "महुआ",
+    "target_olchiki_santhali": "ᱢᱟᱛᱠᱚᱢ",
+    "phonetic_deva_santhali": "मातकोम"
+  },
+  {
+    "id": "FLN_VOC_FRU_003",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "केला",
+    "target_olchiki_santhali": "ᱠᱟᱭᱨᱟ",
+    "phonetic_deva_santhali": "कायरा"
+  },
+  {
+    "id": "FLN_VOC_FRU_004",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जामुन",
+    "target_olchiki_santhali": "ᱠᱩᱫᱽ",
+    "phonetic_deva_santhali": "कूद"
+  },
+  {
+    "id": "FLN_VOC_FRU_005",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "अमरूद",
+    "target_olchiki_santhali": "ᱵᱮᱞᱟᱹᱛᱤ ᱟᱛᱷᱟ",
+    "phonetic_deva_santhali": "बेला़ती आथा"
+  },
+  {
+    "id": "FLN_VOC_FRU_006",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कटहल",
+    "target_olchiki_santhali": "ᱠᱟᱱᱴᱷᱟᱲ",
+    "phonetic_deva_santhali": "कान्ठाड़"
+  },
+  {
+    "id": "FLN_VOC_FRU_007",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "पपीता",
+    "target_olchiki_santhali": "ᱟᱢᱨᱤᱛ",
+    "phonetic_deva_santhali": "अमृत"
+  },
+  {
+    "id": "FLN_VOC_FRU_008",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बेर",
+    "target_olchiki_santhali": "ᱡᱟᱹᱱᱩᱢ ᱡᱚ",
+    "phonetic_deva_santhali": "जा़नुम जो"
+  },
+  {
+    "id": "FLN_VOC_FRU_009",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "इमली",
+    "target_olchiki_santhali": "ᱡᱚᱡᱚ",
+    "phonetic_deva_santhali": "जोजो"
+  },
+  {
+    "id": "FLN_VOC_FRU_010",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "केंदु (तेंदू)",
+    "target_olchiki_santhali": "ᱛᱤᱨᱤᱞ",
+    "phonetic_deva_santhali": "तीरील"
+  },
+  {
+    "id": "FLN_VOC_FRU_011",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पानी",
+    "target_olchiki_santhali": "ᱫᱟᱜ",
+    "phonetic_deva_santhali": "दाग"
+  },
+  {
+    "id": "FLN_VOC_FRU_012",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दूध",
+    "target_olchiki_santhali": "ᱛᱚᱣᱟ",
+    "phonetic_deva_santhali": "तोवा"
+  },
+  {
+    "id": "FLN_VOC_FRU_013",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "भात (पका चावल)",
+    "target_olchiki_santhali": "ᱫᱟᱠᱟ",
+    "phonetic_deva_santhali": "दाका"
+  },
+  {
+    "id": "FLN_VOC_FRU_014",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चावल (कच्चा)",
+    "target_olchiki_santhali": "ᱪᱟᱣᱞᱮ",
+    "phonetic_deva_santhali": "चावले"
+  },
+  {
+    "id": "FLN_VOC_FRU_015",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नमक",
+    "target_olchiki_santhali": "ᱵᱩᱞᱩᱝ",
+    "phonetic_deva_santhali": "बुलुंग"
+  },
+  {
+    "id": "FLN_VOC_FRU_016",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "तेल",
+    "target_olchiki_santhali": "ᱥᱩᱱᱩᱢ",
+    "phonetic_deva_santhali": "सुनुम"
+  },
+  {
+    "id": "FLN_VOC_FRU_017",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "दाल",
+    "target_olchiki_santhali": "ᱫᱟᱹᱞ",
+    "phonetic_deva_santhali": "दा़ल"
+  },
+  {
+    "id": "FLN_VOC_FRU_018",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "रोटी (पीठा)",
+    "target_olchiki_santhali": "ᱯᱤᱴᱷᱟᱹ",
+    "phonetic_deva_santhali": "पीठा़"
+  },
+  {
+    "id": "FLN_VOC_FRU_019",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गुड़",
+    "target_olchiki_santhali": "ᱜᱩᱲ",
+    "phonetic_deva_santhali": "गुड़"
+  },
+  {
+    "id": "FLN_VOC_FRU_020",
+    "domain": "vocabulary_fruits_food",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "शहद",
+    "target_olchiki_santhali": "ᱧᱮᱞᱮ ᱨᱟᱥᱟ",
+    "phonetic_deva_santhali": "ञेले रासा"
+  },
+  {
+    "id": "FLN_VOC_VEG_001",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "आलू",
+    "target_olchiki_santhali": "ᱟᱹᱞᱩ",
+    "phonetic_deva_santhali": "आ़लू"
+  },
+  {
+    "id": "FLN_VOC_VEG_002",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "प्याज",
+    "target_olchiki_santhali": "ᱯᱮᱭᱟᱸᱡᱽ",
+    "phonetic_deva_santhali": "पेयांज"
+  },
+  {
+    "id": "FLN_VOC_VEG_003",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "टमाटर",
+    "target_olchiki_santhali": "ᱵᱤᱞᱟᱹᱛᱤ",
+    "phonetic_deva_santhali": "बीला़ती"
+  },
+  {
+    "id": "FLN_VOC_VEG_004",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बैंगन",
+    "target_olchiki_santhali": "ᱵᱮᱸᱜᱟᱲ",
+    "phonetic_deva_santhali": "बेंगाड़"
+  },
+  {
+    "id": "FLN_VOC_VEG_005",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कद्दू (लौकी)",
+    "target_olchiki_santhali": "ᱦᱚᱛᱚᱫ",
+    "phonetic_deva_santhali": "होतोद"
+  },
+  {
+    "id": "FLN_VOC_VEG_006",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कोहड़ा (पीला कद्दू)",
+    "target_olchiki_santhali": "ᱠᱟᱠᱷᱟᱨᱩ",
+    "phonetic_deva_santhali": "काखारु"
+  },
+  {
+    "id": "FLN_VOC_VEG_007",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हरी पत्ती / साग",
+    "target_olchiki_santhali": "ᱟᱲᱟᱜ",
+    "phonetic_deva_santhali": "आड़ाग"
+  },
+  {
+    "id": "FLN_VOC_VEG_008",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हरी मिर्च",
+    "target_olchiki_santhali": "ᱢᱟᱹᱨᱤᱪ",
+    "phonetic_deva_santhali": "मा़रीच"
+  },
+  {
+    "id": "FLN_VOC_VEG_009",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "अदरक",
+    "target_olchiki_santhali": "ᱟᱫᱟ",
+    "phonetic_deva_santhali": "आदा"
+  },
+  {
+    "id": "FLN_VOC_VEG_010",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "लहसुन",
+    "target_olchiki_santhali": "ᱨᱟᱹᱥᱩᱬ",
+    "phonetic_deva_santhali": "रा़सुण"
+  },
+  {
+    "id": "FLN_VOC_VEG_011",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "मूली",
+    "target_olchiki_santhali": "ᱢᱩᱞᱟᱹ",
+    "phonetic_deva_santhali": "मुला़"
+  },
+  {
+    "id": "FLN_VOC_VEG_012",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "करेला",
+    "target_olchiki_santhali": "ᱠᱟᱨᱞᱟ",
+    "phonetic_deva_santhali": "कारला"
+  },
+  {
+    "id": "FLN_VOC_VEG_013",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "खीरा",
+    "target_olchiki_santhali": "ᱛᱟᱹᱦᱩᱸ",
+    "phonetic_deva_santhali": "ता़हुँ"
+  },
+  {
+    "id": "FLN_VOC_VEG_014",
+    "domain": "vocabulary_vegetables",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "मशरूम (कुकुड़मुत्ता)",
+    "target_olchiki_santhali": "ᱚᱛ",
+    "phonetic_deva_santhali": "ओत"
+  },
+  {
+    "id": "FLN_VOC_ANI_001",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "गाय",
+    "target_olchiki_santhali": "ᱜᱟᱹᱭ",
+    "phonetic_deva_santhali": "गा़य"
+  },
+  {
+    "id": "FLN_VOC_ANI_002",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बैल",
+    "target_olchiki_santhali": "ᱰᱟᱝᱜᱽᱨᱟ",
+    "phonetic_deva_santhali": "डांगरा"
+  },
+  {
+    "id": "FLN_VOC_ANI_003",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बछड़ा",
+    "target_olchiki_santhali": "ᱫᱟᱢᱲᱟ",
+    "phonetic_deva_santhali": "दामड़ा"
+  },
+  {
+    "id": "FLN_VOC_ANI_004",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "भैंस",
+    "target_olchiki_santhali": "ᱠᱟᱰᱟ",
+    "phonetic_deva_santhali": "काडा"
+  },
+  {
+    "id": "FLN_VOC_ANI_005",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बकरी",
+    "target_olchiki_santhali": "ᱢᱮᱨᱚᱢ",
+    "phonetic_deva_santhali": "मेरोम"
+  },
+  {
+    "id": "FLN_VOC_ANI_006",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "भेड़",
+    "target_olchiki_santhali": "ᱵᱷᱤᱰᱤ",
+    "phonetic_deva_santhali": "भीडी"
+  },
+  {
+    "id": "FLN_VOC_ANI_007",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कुत्ता",
+    "target_olchiki_santhali": "ᱥᱮᱛᱟ",
+    "phonetic_deva_santhali": "सेता"
+  },
+  {
+    "id": "FLN_VOC_ANI_008",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बिल्ली",
+    "target_olchiki_santhali": "ᱯᱩᱥᱤ",
+    "phonetic_deva_santhali": "पुसी"
+  },
+  {
+    "id": "FLN_VOC_ANI_009",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "घोड़ा",
+    "target_olchiki_santhali": "ᱥᱟᱫᱚᱢ",
+    "phonetic_deva_santhali": "सादोम"
+  },
+  {
+    "id": "FLN_VOC_ANI_010",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "सुअर",
+    "target_olchiki_santhali": "ᱥᱩᱠᱨᱤ",
+    "phonetic_deva_santhali": "सुकरी"
+  },
+  {
+    "id": "FLN_VOC_ANI_011",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बाघ",
+    "target_olchiki_santhali": "ᱛᱟᱹᱨᱩᱵ",
+    "phonetic_deva_santhali": "ता़रुब"
+  },
+  {
+    "id": "FLN_VOC_ANI_012",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "भालू",
+    "target_olchiki_santhali": "ᱵᱟᱱᱟ",
+    "phonetic_deva_santhali": "बाना"
+  },
+  {
+    "id": "FLN_VOC_ANI_013",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हाथी",
+    "target_olchiki_santhali": "ᱦᱟᱹᱛᱤ",
+    "phonetic_deva_santhali": "हा़ती"
+  },
+  {
+    "id": "FLN_VOC_ANI_014",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बंदर",
+    "target_olchiki_santhali": "ᱜᱟᱹᱰᱤ",
+    "phonetic_deva_santhali": "गा़डी"
+  },
+  {
+    "id": "FLN_VOC_ANI_015",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हिरण",
+    "target_olchiki_santhali": "ᱡᱷᱚᱝᱠᱟᱨ",
+    "phonetic_deva_santhali": "झोंकार"
+  },
+  {
+    "id": "FLN_VOC_ANI_016",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "खरगोश",
+    "target_olchiki_santhali": "ᱠᱩᱞᱟᱹᱭ",
+    "phonetic_deva_santhali": "कुला़य"
+  },
+  {
+    "id": "FLN_VOC_ANI_017",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चूहा",
+    "target_olchiki_santhali": "ᱜᱩᱛᱩ",
+    "phonetic_deva_santhali": "गुतू"
+  },
+  {
+    "id": "FLN_VOC_ANI_018",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "साँप",
+    "target_olchiki_santhali": "ᱵᱤᱧ",
+    "phonetic_deva_santhali": "बिञ"
+  },
+  {
+    "id": "FLN_VOC_ANI_019",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेंढक",
+    "target_olchiki_santhali": "ᱨᱚᱴᱮ",
+    "phonetic_deva_santhali": "रोटे"
+  },
+  {
+    "id": "FLN_VOC_ANI_020",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मछली",
+    "target_olchiki_santhali": "ᱦᱟᱹᱠᱩ",
+    "phonetic_deva_santhali": "हा़कु"
+  },
+  {
+    "id": "FLN_VOC_ANI_021",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चिड़िया",
+    "target_olchiki_santhali": "ᱪᱮᱬᱮ",
+    "phonetic_deva_santhali": "चेणे"
+  },
+  {
+    "id": "FLN_VOC_ANI_022",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कौआ",
+    "target_olchiki_santhali": "ᱠᱟᱣᱟ",
+    "phonetic_deva_santhali": "कावा"
+  },
+  {
+    "id": "FLN_VOC_ANI_023",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कबूतर",
+    "target_olchiki_santhali": "ᱯᱚᱛᱟᱢ",
+    "phonetic_deva_santhali": "पोताम"
+  },
+  {
+    "id": "FLN_VOC_ANI_024",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तोता",
+    "target_olchiki_santhali": "ᱢᱤᱨᱩ",
+    "phonetic_deva_santhali": "मीरू"
+  },
+  {
+    "id": "FLN_VOC_ANI_025",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "मोर",
+    "target_olchiki_santhali": "ᱢᱟᱨᱟᱜ",
+    "phonetic_deva_santhali": "माराग"
+  },
+  {
+    "id": "FLN_VOC_ANI_026",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मुर्गी",
+    "target_olchiki_santhali": "ᱥᱤᱢ",
+    "phonetic_deva_santhali": "सीम"
+  },
+  {
+    "id": "FLN_VOC_ANI_027",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मुर्गा",
+    "target_olchiki_santhali": "ᱥᱟᱺᱰᱤ ᱥᱤᱢ",
+    "phonetic_deva_santhali": "साँडी सीम"
+  },
+  {
+    "id": "FLN_VOC_ANI_028",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "बत्तख",
+    "target_olchiki_santhali": "ᱜᱷᱮᱸᱣᱮ",
+    "phonetic_deva_santhali": "घेंवे"
+  },
+  {
+    "id": "FLN_VOC_ANI_029",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "तितली",
+    "target_olchiki_santhali": "ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ",
+    "phonetic_deva_santhali": "पीपीड़िया़ंग"
+  },
+  {
+    "id": "FLN_VOC_ANI_030",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चींटी",
+    "target_olchiki_santhali": "ᱢᱩᱡᱽ",
+    "phonetic_deva_santhali": "मुज"
+  },
+  {
+    "id": "FLN_VOC_ANI_031",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "मक्खी",
+    "target_olchiki_santhali": "ᱨᱳ",
+    "phonetic_deva_santhali": "रो"
+  },
+  {
+    "id": "FLN_VOC_ANI_032",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "मधुमक्खी",
+    "target_olchiki_santhali": "ᱧᱮᱞᱮ",
+    "phonetic_deva_santhali": "ञेले"
+  },
+  {
+    "id": "FLN_VOC_ANI_033",
+    "domain": "vocabulary_animals_fauna",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "कछुआ",
+    "target_olchiki_santhali": "ᱦᱚᱨᱚ",
+    "phonetic_deva_santhali": "होरो"
+  },
+  {
+    "id": "FLN_VOC_OBJ_001",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "किताब",
+    "target_olchiki_santhali": "ᱯᱩᱛᱷᱤ",
+    "phonetic_deva_santhali": "पुथी"
+  },
+  {
+    "id": "FLN_VOC_OBJ_002",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कॉपी",
+    "target_olchiki_santhali": "ᱠᱷᱟᱛᱟ",
+    "phonetic_deva_santhali": "खाता"
+  },
+  {
+    "id": "FLN_VOC_OBJ_003",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कलम",
+    "target_olchiki_santhali": "ᱠᱚᱞᱚᱢ",
+    "phonetic_deva_santhali": "कोलोम"
+  },
+  {
+    "id": "FLN_VOC_OBJ_004",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पेंसिल",
+    "target_olchiki_santhali": "ᱯᱮᱱᱥᱤᱞ",
+    "phonetic_deva_santhali": "पेन्सिल"
+  },
+  {
+    "id": "FLN_VOC_OBJ_005",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "स्लेट",
+    "target_olchiki_santhali": "ᱥᱞᱮᱴ",
+    "phonetic_deva_santhali": "स्लेट"
+  },
+  {
+    "id": "FLN_VOC_OBJ_006",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चॉक",
+    "target_olchiki_santhali": "ᱪᱚᱠ",
+    "phonetic_deva_santhali": "चोक"
+  },
+  {
+    "id": "FLN_VOC_OBJ_007",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "श्यामपट्ट",
+    "target_olchiki_santhali": "ᱦᱮᱸᱫᱮ ᱯᱟᱴᱟ",
+    "phonetic_deva_santhali": "हेंदे पाटा"
+  },
+  {
+    "id": "FLN_VOC_OBJ_008",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बस्ता (थैला)",
+    "target_olchiki_santhali": "ᱛᱷᱟᱹᱞᱤ",
+    "phonetic_deva_santhali": "था़ली"
+  },
+  {
+    "id": "FLN_VOC_OBJ_009",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मेज़",
+    "target_olchiki_santhali": "ᱴᱮᱵᱩᱞ",
+    "phonetic_deva_santhali": "डेबुल"
+  },
+  {
+    "id": "FLN_VOC_OBJ_010",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कुर्सी",
+    "target_olchiki_santhali": "ᱢᱟᱹᱪᱤ",
+    "phonetic_deva_santhali": "मा़ची"
+  },
+  {
+    "id": "FLN_VOC_OBJ_011",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "कागज़",
+    "target_olchiki_santhali": "ᱠᱟᱜᱚᱡᱽ",
+    "phonetic_deva_santhali": "कागोज"
+  },
+  {
+    "id": "FLN_VOC_OBJ_012",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "घंटी",
+    "target_olchiki_santhali": "ᱜᱷᱟᱹᱱᱴᱤ",
+    "phonetic_deva_santhali": "घा़न्टी"
+  },
+  {
+    "id": "FLN_VOC_OBJ_013",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "विद्यालय (स्कूल)",
+    "target_olchiki_santhali": "ᱟᱥᱲᱟ",
+    "phonetic_deva_santhali": "आसड़ा"
+  },
+  {
+    "id": "FLN_VOC_OBJ_014",
+    "domain": "vocabulary_classroom_objects",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कक्षा",
+    "target_olchiki_santhali": "ᱪᱟᱱᱟᱪ",
+    "phonetic_deva_santhali": "चानाच"
+  },
+  {
+    "id": "FLN_VOC_COL_001",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "लाल",
+    "target_olchiki_santhali": "ᱟᱨᱟᱜ",
+    "phonetic_deva_santhali": "आरा़ग"
+  },
+  {
+    "id": "FLN_VOC_COL_002",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हरा",
+    "target_olchiki_santhali": "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ",
+    "phonetic_deva_santhali": "हा़रिया़ड़"
+  },
+  {
+    "id": "FLN_VOC_COL_003",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पीला",
+    "target_olchiki_santhali": "ᱥᱟᱥᱟᱝ",
+    "phonetic_deva_santhali": "सासांग"
+  },
+  {
+    "id": "FLN_VOC_COL_004",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नीला",
+    "target_olchiki_santhali": "ᱞᱤᱞ",
+    "phonetic_deva_santhali": "लील"
+  },
+  {
+    "id": "FLN_VOC_COL_005",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सफेद",
+    "target_olchiki_santhali": "ᱯᱩᱸᱰ",
+    "phonetic_deva_santhali": "पुंड"
+  },
+  {
+    "id": "FLN_VOC_COL_006",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "काला",
+    "target_olchiki_santhali": "ᱦᱮᱸᱫᱮ",
+    "phonetic_deva_santhali": "हेंदे"
+  },
+  {
+    "id": "FLN_VOC_COL_007",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "गोल",
+    "target_olchiki_santhali": "ᱜᱩᱞᱟᱹᱭ",
+    "phonetic_deva_santhali": "गुला़य"
+  },
+  {
+    "id": "FLN_VOC_COL_008",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "चौकोर",
+    "target_olchiki_santhali": "ᱯᱩᱱᱠᱚᱬ",
+    "phonetic_deva_santhali": "पुनकोण"
+  },
+  {
+    "id": "FLN_VOC_COL_009",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बड़ा",
+    "target_olchiki_santhali": "ᱢᱟᱨᱟᱝ",
+    "phonetic_deva_santhali": "मारांग"
+  },
+  {
+    "id": "FLN_VOC_COL_010",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "छोटा",
+    "target_olchiki_santhali": "ᱦᱩᱰᱤᱧ",
+    "phonetic_deva_santhali": "हुडीञ"
+  },
+  {
+    "id": "FLN_VOC_COL_011",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "लंबा",
+    "target_olchiki_santhali": "ᱡᱤᱞᱤᱧ",
+    "phonetic_deva_santhali": "जीलीञ"
+  },
+  {
+    "id": "FLN_VOC_COL_012",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नाटा (छोटा)",
+    "target_olchiki_santhali": "ᱠᱷᱟᱴᱚ",
+    "phonetic_deva_santhali": "खाटो"
+  },
+  {
+    "id": "FLN_VOC_COL_013",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "भारी",
+    "target_olchiki_santhali": "ᱦᱟᱢᱟᱞ",
+    "phonetic_deva_santhali": "हामाल"
+  },
+  {
+    "id": "FLN_VOC_COL_014",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "हल्का",
+    "target_olchiki_santhali": "ᱨᱟᱣᱟᱞ",
+    "phonetic_deva_santhali": "रावाल"
+  },
+  {
+    "id": "FLN_VOC_COL_015",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "नया",
+    "target_olchiki_santhali": "ᱱᱟᱣᱟ",
+    "phonetic_deva_santhali": "नावा"
+  },
+  {
+    "id": "FLN_VOC_COL_016",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "पुराना",
+    "target_olchiki_santhali": "ᱢᱟᱨᱮ",
+    "phonetic_deva_santhali": "मारे"
+  },
+  {
+    "id": "FLN_VOC_COL_017",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "मीठा",
+    "target_olchiki_santhali": "ᱦᱮᱲᱮᱢ",
+    "phonetic_deva_santhali": "हेड़ेम"
+  },
+  {
+    "id": "FLN_VOC_COL_018",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "खट्टा",
+    "target_olchiki_santhali": "ᱡᱚᱡᱚ",
+    "phonetic_deva_santhali": "जोजो"
+  },
+  {
+    "id": "FLN_VOC_COL_019",
+    "domain": "vocabulary_colors_attributes",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "तीखा",
+    "target_olchiki_santhali": "ᱦᱟᱫᱽ",
+    "phonetic_deva_santhali": "हाद"
+  },
+  {
+    "id": "FLN_VOC_BOD_001",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सिर",
+    "target_olchiki_santhali": "ᱵᱚᱦᱚᱜ",
+    "phonetic_deva_santhali": "बोहोग"
+  },
+  {
+    "id": "FLN_VOC_BOD_002",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "आँख",
+    "target_olchiki_santhali": "ᱢᱮᱫ",
+    "phonetic_deva_santhali": "मेद"
+  },
+  {
+    "id": "FLN_VOC_BOD_003",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "कान",
+    "target_olchiki_santhali": "ᱞᱩᱛᱩᱨ",
+    "phonetic_deva_santhali": "लुतुर"
+  },
+  {
+    "id": "FLN_VOC_BOD_004",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "नाक",
+    "target_olchiki_santhali": "ᱢᱩᱸ",
+    "phonetic_deva_santhali": "मुँ"
+  },
+  {
+    "id": "FLN_VOC_BOD_005",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "मुँह",
+    "target_olchiki_santhali": "ᱢᱚᱪᱟ",
+    "phonetic_deva_santhali": "मोचा"
+  },
+  {
+    "id": "FLN_VOC_BOD_006",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दाँत",
+    "target_olchiki_santhali": "ᱫᱟᱛᱟ",
+    "phonetic_deva_santhali": "दाता"
+  },
+  {
+    "id": "FLN_VOC_BOD_007",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जीभ",
+    "target_olchiki_santhali": "ᱟᱞᱟᱝ",
+    "phonetic_deva_santhali": "आलांग"
+  },
+  {
+    "id": "FLN_VOC_BOD_008",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हाथ",
+    "target_olchiki_santhali": "ᱛᱤ",
+    "phonetic_deva_santhali": "ती"
+  },
+  {
+    "id": "FLN_VOC_BOD_009",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पैर",
+    "target_olchiki_santhali": "ᱡᱟᱸᱜᱟ",
+    "phonetic_deva_santhali": "जा़न्गा"
+  },
+  {
+    "id": "FLN_VOC_BOD_010",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पेट",
+    "target_olchiki_santhali": "ᱞᱟᱡ",
+    "phonetic_deva_santhali": "लाज"
+  },
+  {
+    "id": "FLN_VOC_BOD_011",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बाल",
+    "target_olchiki_santhali": "ᱩᱵ",
+    "phonetic_deva_santhali": "उब"
+  },
+  {
+    "id": "FLN_VOC_BOD_012",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "नाखून",
+    "target_olchiki_santhali": "ᱨᱟᱢᱟ",
+    "phonetic_deva_santhali": "रामा"
+  },
+  {
+    "id": "FLN_VOC_BOD_013",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "गर्दन",
+    "target_olchiki_santhali": "ᱦᱚᱴᱚᱜ",
+    "phonetic_deva_santhali": "होटोग"
+  },
+  {
+    "id": "FLN_VOC_BOD_014",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "उँगली",
+    "target_olchiki_santhali": "ᱠᱟᱹᱴᱩᱵ",
+    "phonetic_deva_santhali": "का़टुब"
+  },
+  {
+    "id": "FLN_VOC_BOD_015",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 2",
+    "source_hindi_normalized": "पीठ",
+    "target_olchiki_santhali": "ᱫᱮᱭᱟ",
+    "phonetic_deva_santhali": "देया"
+  },
+  {
+    "id": "FLN_VOC_BOD_016",
+    "domain": "vocabulary_body_parts",
+    "nipun_target_grade": "Grade 3",
+    "source_hindi_normalized": "छाती",
+    "target_olchiki_santhali": "ᱠᱚᱲᱟᱢ",
+    "phonetic_deva_santhali": "कोड़ाम"
+  },
+  {
+    "id": "FLN_VOC_ACT_001",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बैठो",
+    "target_olchiki_santhali": "ᱫᱩᱲᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "दुड़ुब मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_002",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खड़े हो जाओ",
+    "target_olchiki_santhali": "ᱛᱤᱸᱜᱩᱱ ᱢᱮ",
+    "phonetic_deva_santhali": "ति़ंगुन मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_003",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "आओ",
+    "target_olchiki_santhali": "ᱦᱤᱡᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "हीजुग मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_004",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जाओ",
+    "target_olchiki_santhali": "ᱪᱟᱞᱟᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "चालाग मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_005",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खाओ",
+    "target_olchiki_santhali": "ᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "जोम मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_006",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पियो",
+    "target_olchiki_santhali": "ᱧᱩᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "ञुय मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_007",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सोओ",
+    "target_olchiki_santhali": "ᱜᱤᱛᱤᱡ ᱢᱮ",
+    "phonetic_deva_santhali": "गीतीज मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_008",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "जागो",
+    "target_olchiki_santhali": "ᱵᱮᱨᱮᱫ ᱢᱮ",
+    "phonetic_deva_santhali": "बेरेद मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_009",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "पढ़ो",
+    "target_olchiki_santhali": "ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "पाड़हाव मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_010",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "लिखो",
+    "target_olchiki_santhali": "ᱚᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "ओल मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_011",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "सुनो",
+    "target_olchiki_santhali": "ᱟᱧᱡᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "आंजोम मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_012",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बोलो",
+    "target_olchiki_santhali": "ᱨᱚᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "रोड़ मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_013",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "देखो",
+    "target_olchiki_santhali": "ᱧᱮᱞ ᱢᱮ",
+    "phonetic_deva_santhali": "ञेल मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_014",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दिखाओ",
+    "target_olchiki_santhali": "ᱩᱫᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "उदुक मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_015",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दे दो",
+    "target_olchiki_santhali": "ᱮᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "एम मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_016",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "लो",
+    "target_olchiki_santhali": "ᱦᱟᱛᱟᱣ ᱢᱮ",
+    "phonetic_deva_santhali": "हाताव मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_017",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खेलो",
+    "target_olchiki_santhali": "ᱮᱱᱮᱡ ᱢᱮ",
+    "phonetic_deva_santhali": "एनेज मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_018",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "दौड़ो",
+    "target_olchiki_santhali": "ᱫᱟᱹᱲ ᱢᱮ",
+    "phonetic_deva_santhali": "दा़ड़ मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_019",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "चलो (कदम बढ़ाओ)",
+    "target_olchiki_santhali": "ᱛᱟᱲᱟᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "ताड़ाम मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_020",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "हँसो",
+    "target_olchiki_santhali": "ᱞᱟᱸᱫᱟᱭ ᱢᱮ",
+    "phonetic_deva_santhali": "ला़न्दाय मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_021",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "धोओ",
+    "target_olchiki_santhali": "ᱟᱹᱨᱩᱵ ᱢᱮ",
+    "phonetic_deva_santhali": "आ़रुब मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_022",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "खोलो",
+    "target_olchiki_santhali": "ᱡᱷᱤᱡᱽ ᱢᱮ",
+    "phonetic_deva_santhali": "झिज मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_023",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "बंद करो",
+    "target_olchiki_santhali": "ᱯᱚᱴᱚᱢ ᱢᱮ",
+    "phonetic_deva_santhali": "पोटोम मे"
+  },
+  {
+    "id": "FLN_VOC_ACT_024",
+    "domain": "vocabulary_actions",
+    "nipun_target_grade": "Grade 1",
+    "source_hindi_normalized": "शांत रहो",
+    "target_olchiki_santhali": "ᱛᱷᱤᱨᱩᱜ ᱢᱮ",
+    "phonetic_deva_santhali": "थीरुग मे"
+  }
+]
