@@ -102,9 +102,10 @@ fun LiveVoiceBridgeScreen(
     var currentSpeed by remember { mutableStateOf(0.9f) }
     var selectedDialect by remember { mutableStateOf("ᱥᱟᱱᱛᱟᱲᱤ") }
 
-    // Pre-warm ASR, VAD and Piper TTS models in background
+    // Pre-warm ASR, VAD, Piper TTS, and ONNX NMT models in background
     LaunchedEffect(Unit) {
         asrEngine.initialize()
+        nmtEngine.initialize(context)
         audioEngine.warmUp()
     }
 

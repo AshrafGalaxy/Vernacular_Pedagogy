@@ -1,43 +1,109 @@
 package com.example.palashsetu.domain.engine
 
+import android.content.Context
+import android.util.Log
 import com.example.palashsetu.data.local.FlnRepository
 import com.example.palashsetu.data.model.TranslationResult
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
+/**
+ * Multi-Tier Neural Machine Translation Engine for Hindi → Santhali.
+ *
+ * Architecture:
+ *   Tier 1: SQLite B-Tree Fast-Path (FlnRepository) — <0.1ms exact match lookup
+ *   Tier 2: On-Device ONNX Neural Inference (OnnxTranslator) — IndicTrans2 INT8
+ *
+ * Usage:
+ *   1. Call initialize(context) once during app startup
+ *   2. Call translate(hindiInput) for each translation request
+ */
 class NmtEngine {
 
+    private val tag = "NmtEngine"
+    private var onnxTranslator: OnnxTranslator? = null
+    private var isOnnxAvailable: Boolean = false
+
+    /**
+     * Initializes the ONNX neural translation backend.
+     * Must be called from a coroutine scope during app initialization.
+     * If ONNX models are not available, the engine gracefully falls back
+     * to the deterministic SQLite fast-path only.
+     */
+    suspend fun initialize(context: Context) = withContext(Dispatchers.IO) {
+        try {
+            val translator = OnnxTranslator(context)
+            val success = translator.initialize()
+            if (success) {
+                onnxTranslator = translator
+                isOnnxAvailable = true
+                Log.i(tag, "NMT Engine initialized: Tier-1 SQLite + Tier-2 ONNX Neural Inference")
+            } else {
+                Log.w(tag, "ONNX initialization failed — running in SQLite-only mode")
+            }
+        } catch (e: Exception) {
+            Log.w(tag, "ONNX models not available (${e.message}) — running in SQLite-only mode")
+        }
+    }
+
+    /**
+     * Translates Hindi text to Santhali using the multi-tier architecture.
+     *
+     * @param hindiInput Source Hindi text to translate
+     * @return TranslationResult with Ol Chiki translation and metadata
+     */
     suspend fun translate(hindiInput: String): TranslationResult {
-        // Step 1: Check Tier-1 Deterministic Cache (< 15ms)
+        val startTime = System.currentTimeMillis()
+
+        // ─── Tier 1: Deterministic SQLite Fast-Path (<0.1ms) ───
         val fastPathResult = FlnRepository.findExactMatch(hindiInput)
         if (fastPathResult != null) {
-            delay(21) // simulate microscopic B-tree lookup
-            return fastPathResult
+            val latency = System.currentTimeMillis() - startTime
+            return fastPathResult.copy(
+                latencyMs = latency.coerceAtLeast(1),
+                isTier1FastPath = true
+            )
         }
 
-        // Step 2: Fallback to IndicTrans2 INT8 CT2 Neural Inference
-        delay(380) // simulate CTranslate2 forward pass latency
-
-        // Dynamic rule-based mapping for demo classroom commands
-        val (olchiki, phonetic) = when {
-            hindiInput.contains("किताब") && hindiInput.contains("खोलो") ->
-                Pair("ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "[पुथी झीज पे]")
-            hindiInput.contains("बैठ") ->
-                Pair("ᱫᱩᱲᱩᱵ ᱢᱮ", "[दुड़ुब मे]")
-            hindiInput.contains("गिन") ->
-                Pair("ᱞᱮᱠᱷᱟᱭ ᱢᱮ", "[लेखाए मे]")
-            hindiInput.contains("अच्छा") ->
-                Pair("ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ", "[अडी नापाय]")
-            else ->
-                Pair("ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ, ᱟᱯᱮᱭᱟᱜ ᱮᱞᱠᱷᱟ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ ᱟᱨ ᱜᱮᱞ ᱵᱟᱨ ᱥᱟᱦᱴᱟ ᱩᱰᱩᱠ ᱯᱮ᱾", "[गिदरा को, आपेयाग एलखा पुथी झीज पे आर गेल बार साहटा उडुक पे]")
+        // ─── Tier 2: On-Device ONNX Neural Inference ───
+        if (isOnnxAvailable) {
+            try {
+                val onnxResult = onnxTranslator?.translate(hindiInput)
+                if (onnxResult != null && onnxResult.targetText.isNotBlank()) {
+                    val latency = System.currentTimeMillis() - startTime
+                    return TranslationResult(
+                        sourceHindi = hindiInput,
+                        targetOlChiki = onnxResult.targetText,
+                        phoneticGuide = "", // Neural output has no phonetic guide
+                        isTier1FastPath = false,
+                        latencyMs = latency,
+                        verifiedByJcert = false // Neural translations are not JCERT-verified
+                    )
+                }
+            } catch (e: Exception) {
+                Log.w(tag, "ONNX inference failed for '$hindiInput': ${e.message}")
+            }
         }
 
+        // ─── Fallback: Generic response when all tiers fail ───
+        val latency = System.currentTimeMillis() - startTime
         return TranslationResult(
             sourceHindi = hindiInput,
-            targetOlChiki = olchiki,
-            phoneticGuide = phonetic,
+            targetOlChiki = "⚠ ᱛᱟᱨᱡᱚᱢᱟ ᱵᱟᱝ ᱧᱟᱢ ᱟᱠᱟᱱᱟ", // "Translation not available" in Ol Chiki
+            phoneticGuide = "[तारजोमा बांग ञाम आकाना]",
             isTier1FastPath = false,
-            latencyMs = 420,
-            verifiedByJcert = true
+            latencyMs = latency,
+            verifiedByJcert = false
         )
+    }
+
+    /**
+     * Releases all engine resources.
+     */
+    fun release() {
+        onnxTranslator?.release()
+        onnxTranslator = null
+        isOnnxAvailable = false
+        Log.i(tag, "NMT Engine resources released")
     }
 }
