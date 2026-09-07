@@ -1,6 +1,5 @@
 package com.example.palashsetu.ui.screens.auth
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,14 +25,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +46,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.data.local.UserSessionManager
@@ -68,10 +65,12 @@ fun TeacherLoginScreen(
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
 
-    // Load initial profile from session manager
+    // Session state
     val savedProfile = remember { UserSessionManager.getProfile(context) }
+    var currentLanguage by remember { mutableStateOf(UserSessionManager.getLanguage(context)) }
+    val isHindi = currentLanguage == "hi"
 
-    var selectedSalutation by remember { mutableStateOf(savedProfile.salutation.ifBlank { "श्री" }) }
+    var selectedSalutation by remember { mutableStateOf(savedProfile.salutation.ifBlank { if (isHindi) "श्री" else "Sir" }) }
     var teacherName by remember { mutableStateOf(savedProfile.name) }
     var pin by remember { mutableStateOf("") }
     var isPinVisible by remember { mutableStateOf(false) }
@@ -79,15 +78,23 @@ fun TeacherLoginScreen(
     var nameError by remember { mutableStateOf<String?>(null) }
     var pinError by remember { mutableStateOf<String?>(null) }
 
-    val salutationOptions = listOf(
-        Triple("श्री", "Sir", "👨‍🏫"),
-        Triple("श्रीमती", "Ma'am", "👩‍🏫"),
-        Triple("शिक्षक", "Teacher", "🧑‍🏫")
-    )
+    val salutationOptions = if (isHindi) {
+        listOf(
+            Triple("श्री", "Sir", "👨‍🏫"),
+            Triple("श्रीमती", "Ma'am", "👩‍🏫"),
+            Triple("शिक्षक", "Teacher", "🧑‍🏫")
+        )
+    } else {
+        listOf(
+            Triple("Sir", "श्री", "👨‍🏫"),
+            Triple("Ma'am", "श्रीमती", "👩‍🏫"),
+            Triple("Teacher", "शिक्षक", "🧑‍🏫")
+        )
+    }
 
-    val currentAvatar = when (selectedSalutation) {
-        "श्रीमती" -> "👩‍🏫"
-        "शिक्षक" -> "🧑‍🏫"
+    val currentAvatar = when {
+        selectedSalutation.contains("श्रीमती") || selectedSalutation.equals("Ma'am", ignoreCase = true) -> "👩‍🏫"
+        selectedSalutation.contains("शिक्षक") || selectedSalutation.equals("Teacher", ignoreCase = true) -> "🧑‍🏫"
         else -> "👨‍🏫"
     }
 
@@ -95,93 +102,159 @@ fun TeacherLoginScreen(
         modifier = modifier
             .fillMaxSize()
             .background(Background)
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // App Header Brand
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Language Toggle (Hindi / English)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 modifier = Modifier
-                    .size(68.dp)
-                    .clip(RoundedCornerShape(18.dp))
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(SurfaceContainerLow)
+                    .border(1.dp, Color(0xFFCBD5E1), RoundedCornerShape(20.dp))
+                    .padding(2.dp)
+            ) {
+                Row {
+                    listOf("hi" to "🇮🇳 हिन्दी", "en" to "English").forEach { (code, label) ->
+                        val isSelected = currentLanguage == code
+                        val pillBg by animateColorAsState(
+                            targetValue = if (isSelected) Primary else Color.Transparent,
+                            label = "langPillBg"
+                        )
+                        val pillText by animateColorAsState(
+                            targetValue = if (isSelected) Color.White else Color(0xFF475569),
+                            label = "langPillText"
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(pillBg)
+                                .clickable {
+                                    currentLanguage = code
+                                    UserSessionManager.saveLanguage(context, code)
+                                    // Adjust salutation to match selected language
+                                    selectedSalutation = if (code == "hi") "श्री" else "Sir"
+                                }
+                                .padding(horizontal = 10.dp, vertical = 4.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = label,
+                                fontSize = 11.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                color = pillText
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        // App Brand Emblem & Title
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(54.dp)
+                    .clip(RoundedCornerShape(14.dp))
                     .background(Primary),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "ᱯᱥ",
-                    fontSize = 32.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "PALASH-SETU",
-                fontSize = 24.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Primary,
-                letterSpacing = 1.2.sp
+                letterSpacing = 1.sp
             )
             Text(
-                text = "झारखंड प्राथमिक मातृभाषा सेतु • NIPUN FLN",
-                fontSize = 12.sp,
+                text = if (isHindi) "झारखंड प्राथमिक मातृभाषा सेतु • NIPUN FLN" else "Jharkhand Primary Vernacular Bridge • NIPUN FLN",
+                fontSize = 11.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Secondary
             )
         }
 
-        // Teacher Setup Card
+        // Compact, Non-Bloated Teacher Profile Card
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(
-                modifier = Modifier.padding(20.dp),
+                modifier = Modifier.padding(14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                // Interactive Avatar
-                Box(
-                    modifier = Modifier
-                        .size(72.dp)
-                        .clip(CircleShape)
-                        .background(PrimaryContainer),
-                    contentAlignment = Alignment.Center
+                // Compact Avatar & Title
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(text = currentAvatar, fontSize = 40.sp)
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .clip(CircleShape)
+                            .background(PrimaryContainer),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = currentAvatar, fontSize = 28.sp)
+                    }
+
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = if (isHindi) "शिक्षक प्रोफाइल सेटअप" else "Teacher Profile Setup",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Primary
+                        )
+                        Text(
+                            text = if (teacherName.isNotBlank()) "$selectedSalutation ${teacherName.trim()}" else if (isHindi) "विवरण दर्ज करें" else "Enter credentials",
+                            fontSize = 12.sp,
+                            color = Color(0xFF64748B),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
 
-                // Dynamic Display Header
-                Text(
-                    text = if (teacherName.isNotBlank()) "$selectedSalutation ${teacherName.trim()}" else "शिक्षक प्रोफाइल सेटअप",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Primary,
-                    textAlign = TextAlign.Center
-                )
-
-                // 1. Salutation Selector
+                // 1. Salutation Selector (Symmetric 3 Pills)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "संबोधन चुनें (Select Salutation):",
-                        fontSize = 12.sp,
+                        text = if (isHindi) "संबोधन (Salutation):" else "Salutation:",
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF475569),
-                        modifier = Modifier.padding(bottom = 6.dp)
+                        modifier = Modifier.padding(bottom = 4.dp)
                     )
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        salutationOptions.forEach { (salutation, english, emoji) ->
-                            val isSelected = selectedSalutation == salutation
+                        salutationOptions.forEach { (salutation, _, emoji) ->
+                            val isSelected = selectedSalutation.equals(salutation, ignoreCase = true)
                             val backgroundColor by animateColorAsState(
                                 targetValue = if (isSelected) Primary else SurfaceContainerLow,
                                 label = "salutationBg"
@@ -194,32 +267,30 @@ fun TeacherLoginScreen(
                             Box(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .clip(RoundedCornerShape(12.dp))
+                                    .height(36.dp)
+                                    .clip(RoundedCornerShape(10.dp))
                                     .background(backgroundColor)
                                     .border(
                                         width = 1.dp,
                                         color = if (isSelected) Primary else Color(0xFFCBD5E1),
-                                        shape = RoundedCornerShape(12.dp)
+                                        shape = RoundedCornerShape(10.dp)
                                     )
                                     .clickable {
                                         selectedSalutation = salutation
-                                    }
-                                    .padding(vertical = 10.dp),
+                                    },
                                 contentAlignment = Alignment.Center
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.Center
                                 ) {
-                                    Text(text = emoji, fontSize = 14.sp)
+                                    Text(text = emoji, fontSize = 13.sp)
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = "$salutation\n($english)",
+                                        text = salutation,
                                         fontSize = 11.sp,
                                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                        color = textColor,
-                                        textAlign = TextAlign.Center,
-                                        lineHeight = 14.sp
+                                        color = textColor
                                     )
                                 }
                             }
@@ -227,14 +298,14 @@ fun TeacherLoginScreen(
                     }
                 }
 
-                // 2. Teacher Name Input Field
+                // 2. Teacher Name Field (Compact, tight spacing)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "शिक्षक का नाम (Teacher Name):",
-                        fontSize = 12.sp,
+                        text = if (isHindi) "शिक्षक का नाम (Teacher Name):" else "Teacher Name:",
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF475569),
-                        modifier = Modifier.padding(bottom = 6.dp)
+                        modifier = Modifier.padding(bottom = 4.dp)
                     )
 
                     OutlinedTextField(
@@ -243,11 +314,17 @@ fun TeacherLoginScreen(
                             teacherName = it
                             if (nameError != null && it.isNotBlank()) nameError = null
                         },
-                        placeholder = { Text("उदा. पूजा सोरेन / Ramesh Soren", fontSize = 14.sp) },
+                        placeholder = {
+                            Text(
+                                text = if (isHindi) "उदा. पूजा सोरेन / रमेश मुर्मू" else "e.g. Ramesh Soren",
+                                fontSize = 13.sp,
+                                color = Color(0xFF94A3B8)
+                            )
+                        },
                         isError = nameError != null,
                         supportingText = {
                             if (nameError != null) {
-                                Text(text = nameError!!, color = Color(0xFFBA1A1A), fontSize = 11.sp)
+                                Text(text = nameError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp)
                             }
                         },
                         singleLine = true,
@@ -256,7 +333,7 @@ fun TeacherLoginScreen(
                             imeAction = ImeAction.Next
                         ),
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(10.dp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = Primary,
                             unfocusedBorderColor = Color(0xFFCBD5E1)
@@ -264,33 +341,15 @@ fun TeacherLoginScreen(
                     )
                 }
 
-                // 3. 100% Functional PIN Section
+                // 3. 4-Digit Security PIN (No bloated spacing, No demo button)
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = if (savedProfile.isConfigured) "4-अंकीय शिक्षक पिन (Enter PIN):" else "4-अंकीय सुरक्षा पिन सेट करें (Set PIN):",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF475569)
-                        )
-                        TextButton(
-                            onClick = {
-                                pin = "2604"
-                                pinError = null
-                            }
-                        ) {
-                            Text(
-                                text = "DEMO PIN भरें (2604)",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Secondary
-                            )
-                        }
-                    }
+                    Text(
+                        text = if (isHindi) "4-अंकीय सुरक्षा पिन सेट करें (PIN):" else "Set 4-Digit Security PIN:",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF475569),
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
 
                     OutlinedTextField(
                         value = pin,
@@ -300,16 +359,22 @@ fun TeacherLoginScreen(
                                 if (pinError != null) pinError = null
                             }
                         },
-                        placeholder = { Text("4 अंकों का पिन दर्ज करें (e.g. 2604)", fontSize = 14.sp) },
+                        placeholder = {
+                            Text(
+                                text = if (isHindi) "4 अंकों का पिन दर्ज करें (उदा. 2604)" else "4-digit PIN (e.g. 2604)",
+                                fontSize = 13.sp,
+                                color = Color(0xFF94A3B8)
+                            )
+                        },
                         visualTransformation = if (isPinVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         isError = pinError != null,
                         supportingText = {
                             if (pinError != null) {
-                                Text(text = pinError!!, color = Color(0xFFBA1A1A), fontSize = 11.sp)
+                                Text(text = pinError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp)
                             } else {
                                 Text(
-                                    text = if (savedProfile.isConfigured) "अपने पहले से सेट पिन या डेमो पिन 2604 से प्रवेश करें" else "भविष्य के ऑफलाइन एक्सेस हेतु 4 अंक निर्धारित करें",
-                                    fontSize = 11.sp,
+                                    text = if (isHindi) "ऑफलाइन सुरक्षा हेतु 4 अंकों का पिन" else "4-digit PIN for offline access",
+                                    fontSize = 10.sp,
                                     color = Color(0xFF64748B)
                                 )
                             }
@@ -318,7 +383,7 @@ fun TeacherLoginScreen(
                             IconButton(onClick = { isPinVisible = !isPinVisible }) {
                                 Text(
                                     text = if (isPinVisible) "🙈" else "👁️",
-                                    fontSize = 16.sp
+                                    fontSize = 14.sp
                                 )
                             }
                         },
@@ -331,7 +396,7 @@ fun TeacherLoginScreen(
                         ),
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(10.dp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = Primary,
                             unfocusedBorderColor = Color(0xFFCBD5E1)
@@ -339,30 +404,28 @@ fun TeacherLoginScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
-                // Enter Classroom Action Button
+                // 4. Enter Classroom Action Button (Strictly Single Line, No Arrow Wrapping)
                 Button(
                     onClick = {
                         focusManager.clearFocus()
 
-                        // Validation
                         var hasError = false
                         if (teacherName.isBlank()) {
-                            nameError = "कृपया शिक्षक का नाम दर्ज करें (Enter Teacher Name)"
+                            nameError = if (isHindi) "कृपया शिक्षक का नाम दर्ज करें" else "Please enter teacher name"
                             hasError = true
                         }
 
                         if (pin.length != 4) {
-                            pinError = "कृपया 4 अंकों का संख्यात्मक पिन दर्ज करें (4 Digits Required)"
+                            pinError = if (isHindi) "कृपया 4 अंकों का पिन दर्ज करें" else "Please enter a 4-digit PIN"
                             hasError = true
                         } else if (savedProfile.isConfigured && !UserSessionManager.verifyPin(context, pin)) {
-                            pinError = "गलत पिन! पुनः प्रयास करें या डेमो पिन (2604) का उपयोग करें"
+                            pinError = if (isHindi) "गलत पिन! पुनः प्रयास करें" else "Incorrect PIN! Try again"
                             hasError = true
                         }
 
                         if (!hasError) {
-                            // Save profile to session manager
                             UserSessionManager.saveProfile(
                                 context = context,
                                 salutation = selectedSalutation,
@@ -374,26 +437,30 @@ fun TeacherLoginScreen(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(52.dp),
-                    shape = RoundedCornerShape(12.dp),
+                        .height(44.dp),
+                    shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Primary)
                 ) {
                     Text(
-                        text = "कक्षा में प्रवेश करें (Enter Classroom) ➔",
-                        fontSize = 15.sp,
+                        text = if (isHindi) "कक्षा में प्रवेश करें" else "Enter Classroom",
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = Color.White,
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
         }
 
+        // Bottom Guarantee Label
         Text(
-            text = "⚡ 100% स्थानीय गणना • इंटरनेट की कोई आवश्यकता नहीं",
-            fontSize = 11.sp,
+            text = if (isHindi) "⚡ 100% स्थानीय गणना • इंटरनेट की आवश्यकता नहीं" else "⚡ 100% On-Device AI • No Internet Required",
+            fontSize = 10.sp,
             color = Color(0xFF64748B),
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(top = 2.dp, bottom = 8.dp)
         )
     }
 }

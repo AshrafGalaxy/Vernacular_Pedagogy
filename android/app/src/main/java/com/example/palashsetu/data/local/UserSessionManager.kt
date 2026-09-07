@@ -10,6 +10,7 @@ object UserSessionManager {
     private const val KEY_NAME = "teacher_name"
     private const val KEY_PIN = "teacher_pin"
     private const val KEY_CONFIGURED = "is_configured"
+    private const val KEY_LANGUAGE = "app_language" // "hi" or "en"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -31,6 +32,14 @@ object UserSessionManager {
             .putString(KEY_PIN, pin)
             .putBoolean(KEY_CONFIGURED, true)
             .apply()
+    }
+
+    fun getLanguage(context: Context): String {
+        return getPrefs(context).getString(KEY_LANGUAGE, "hi") ?: "hi"
+    }
+
+    fun saveLanguage(context: Context, language: String) {
+        getPrefs(context).edit().putString(KEY_LANGUAGE, language).apply()
     }
 
     fun getTeacherDisplayName(context: Context): String {

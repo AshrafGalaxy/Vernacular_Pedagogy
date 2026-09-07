@@ -28,3 +28,19 @@
 ## 3. Modular Phase-Based Execution
 - Work in structured, verified phases.
 - Ensure the Grade 1–3 Santhali FLN database is verified, normalized, and indexed before proceeding to dependent downstream tasks.
+
+## 4. Android UI/UX Design System & Layout Guidelines
+- **Symmetry & Compact Spacing (Anti-Bloat)**:
+  - Maintain tight, balanced vertical and horizontal spacing.
+  - Spacing between adjacent form fields must be concise (`8dp` to `10dp`).
+  - Container and card inner padding should be strictly `14dp` to `16dp` (never bloated 20dp+).
+  - Button heights: compact `42dp` to `46dp`. Pill/chip heights: `32dp` to `36dp`.
+- **Zero Button Text/Icon Wrapping**:
+  - Button text and accompanying icons must never break or wrap onto a second line.
+  - Enforce `maxLines = 1`, `softWrap = false`, and concise bilingual/language-aware labels.
+- **Bilingual Interface (Hindi & English)**:
+  - Support seamless switching between Hindi (`हिन्दी`) and English across screens, honoring user choice stored in `UserSessionManager`.
+- **Launcher Icon & Visual Branding Integrity**:
+  - App launcher icon in the Android app drawer and home screen must consistently match the in-app brand emblem (`ᱯᱥ` Palash-Setu Ol Chiki characters on Navy `#00236f` with subtle Palash terracotta glow).
+- **Clean Production Form Design**:
+  - Eliminate redundant debug helper buttons (e.g. "DEMO PIN भरें") from user-facing UI cards while keeping robust fallback validation.
