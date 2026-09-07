@@ -170,17 +170,17 @@ def main():
         print("[INFO] Repository not present yet, will be cloned if training runs.")
 
     # Step 4: Check if merged FP32 model exists on Colab
-    print("\n[ORCHESTRATOR] Checking for existing merged FP32 model on Colab...")
-    check_cmd = (
-        f"python3 -c \""
-        f"import os, sys; "
-        f"p = '/content/indictrans2_sat_merged'; "
-        f"has_w = os.path.exists(os.path.join(p, 'model.safetensors')) or os.path.exists(os.path.join(p, 'pytorch_model.bin')); "
-        f"print('MERGED_EXISTS=' + str(has_w)); "
-        f"sys.exit(0 if has_w else 1)\""
+    import base64
+    check_py = (
+        "import os, sys\n"
+        "p = '/content/indictrans2_sat_merged'\n"
+        "has_w = os.path.exists(os.path.join(p, 'model.safetensors')) or os.path.exists(os.path.join(p, 'pytorch_model.bin'))\n"
+        "print('MERGED_EXISTS=' + str(has_w))\n"
+        "sys.exit(0 if has_w else 1)\n"
     )
+    b64 = base64.b64encode(check_py.encode()).decode()
     check_code = run_wsl(
-        f"echo \"{check_cmd}\" | {COLAB_CLI} exec -s phase2-train",
+        f"echo \"import base64; exec(base64.b64decode('{b64}'))\" | {COLAB_CLI} exec -s phase2-train",
         desc="Verifying Merged FP32 Model Status",
         timeout=60
     )
