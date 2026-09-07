@@ -161,13 +161,14 @@ def main():
 
     # Step 3: Sync repository code on Colab
     print("\n[ORCHESTRATOR] Syncing code on remote Colab session...")
+    import base64
+    git_pull_py = "import subprocess; subprocess.run(['git', '-C', '/content/Vernacular_Pedagogy', 'pull', 'origin', 'main'], check=False)"
+    git_b64 = base64.b64encode(git_pull_py.encode()).decode()
     sync_code = run_wsl(
-        f"echo 'cd /content/Vernacular_Pedagogy && git pull origin main' | {COLAB_CLI} exec -s phase2-train",
+        f"echo \"import base64; exec(base64.b64decode('{git_b64}'))\" | {COLAB_CLI} exec -s phase2-train",
         desc="Syncing repository code on Colab",
         timeout=60
     )
-    if sync_code != 0:
-        print("[INFO] Repository not present yet, will be cloned if training runs.")
 
     # Step 4: Check if merged FP32 model exists on Colab
     import base64

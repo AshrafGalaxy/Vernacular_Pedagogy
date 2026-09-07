@@ -636,7 +636,7 @@ def patch_remote_tokenizer(model_name, auth_token=None):
         for _k in ["src_vocab_file", "tgt_vocab_file", "do_lower_case", "unk_token", "bos_token", "eos_token", "pad_token"]:
             kwargs.pop(_k, None)
 
-        # Call super().__init__() FIRST — this initializes _special_tokens_map
+        # Call super().__init__() FIRST -- this initializes _special_tokens_map
         super().__init__(
             src_vocab_file=self.src_vocab_fp,
             tgt_vocab_file=self.tgt_vocab_fp,
