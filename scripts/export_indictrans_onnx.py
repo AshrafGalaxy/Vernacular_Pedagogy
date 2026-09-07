@@ -83,6 +83,7 @@ def install_onnx_dependencies():
         "optimum[onnxruntime]",
         "onnxruntime",
         "onnx",
+        "onnxscript",
     ]
     for pkg in packages:
         try:
@@ -95,6 +96,9 @@ def install_onnx_dependencies():
             elif pkg == "onnx":
                 import onnx  # type: ignore
                 print(f"  ✓ onnx: {getattr(onnx, '__version__', '?')}")
+            elif pkg == "onnxscript":
+                import onnxscript  # type: ignore
+                print(f"  ✓ onnxscript: {getattr(onnxscript, '__version__', '?')}")
         except ImportError:
             print(f"  ✗ {pkg}: MISSING — installing...")
             run_cmd_strict(f"pip install {pkg}", description=f"Install {pkg}")
