@@ -19,6 +19,7 @@ ENV/
 *.tar.gz
 *.zip
 models/tts/samples/
+models/mt/indictrans2_sat_int8_ct2/
 Get_started_managed_agents.ipynb
 
 # Audio raw dumps (keep cache seeds, ignore large scrapes)

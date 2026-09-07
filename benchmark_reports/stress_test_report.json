@@ -1,0 +1,388 @@
+{
+  "timestamp": "2026-09-07T15:54:30Z",
+  "database_stress": {
+    "integrity": "ok",
+    "total_records": 368,
+    "qps": 35553.26750256752,
+    "p50_ms": 0.02350006252527237,
+    "p95_ms": 0.038804946234449675,
+    "p99_ms": 0.08560395333915957,
+    "max_ms": 1.0121000232174993,
+    "edge_cases": [
+      {
+        "description": "Exact Match (अपनी किताब खोलो)",
+        "input": "अपनी किताब खोलो",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
+        "status": "PASS"
+      },
+      {
+        "description": "Exact Match (बैठो)",
+        "input": "बैठो",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱫᱩᱲᱩᱵ ᱢᱮ",
+        "status": "PASS"
+      },
+      {
+        "description": "Trailing Whitespace",
+        "input": "अपनी किताब खोलो   ",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
+        "status": "PASS"
+      },
+      {
+        "description": "Punctuation Appended",
+        "input": "अपनी किताब खोलो!",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
+        "status": "PASS"
+      },
+      {
+        "description": "Leading Whitespace",
+        "input": "   अपनी किताब खोलो",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ",
+        "status": "PASS"
+      },
+      {
+        "description": "Atomic Vocab (किताब)",
+        "input": "किताब",
+        "expected_hit": true,
+        "actual_hit": true,
+        "result": "ᱯᱩᱛᱷᱤ",
+        "status": "PASS"
+      },
+      {
+        "description": "Non-Existent Command (Fallback Trigger)",
+        "input": "अंतरिक्ष यान चालू करो",
+        "expected_hit": false,
+        "actual_hit": false,
+        "result": "(Fallback to Neural MT)",
+        "status": "PASS"
+      },
+      {
+        "description": "Empty String Input",
+        "input": "",
+        "expected_hit": false,
+        "actual_hit": false,
+        "result": "(Fallback to Neural MT)",
+        "status": "PASS"
+      },
+      {
+        "description": "Special Characters Only",
+        "input": "???@@#$$%",
+        "expected_hit": false,
+        "actual_hit": false,
+        "result": "(Fallback to Neural MT)",
+        "status": "PASS"
+      },
+      {
+        "description": "Devanagari Digits (१०)",
+        "input": "१०",
+        "expected_hit": false,
+        "actual_hit": false,
+        "result": "(Fallback to Neural MT)",
+        "status": "PASS"
+      }
+    ]
+  },
+  "tts_throttling": {
+    "benchmarks": [
+      {
+        "threads": 1,
+        "label": "Single-Core Throttle (ARM A53 Power-Saver Mode)",
+        "results": [
+          {
+            "case": "Ultra-Short Command (1 word)",
+            "text": "ᱢᱮ",
+            "description": "Go/Do (atomic command)",
+            "latency_ms": 91.89359995070845,
+            "duration_s": 1.024,
+            "rtf": 0.08973984370186372,
+            "peak_amplitude": 0.27417418360710144,
+            "rms_energy": 0.026120686903595924,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Standard Command (2 words)",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ",
+            "description": "Sit down",
+            "latency_ms": 61.37670006137341,
+            "duration_s": 0.64,
+            "rtf": 0.09590109384589596,
+            "peak_amplitude": 0.307710736989975,
+            "rms_energy": 0.06554338335990906,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Open Book Command",
+            "text": "ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ",
+            "description": "Open book",
+            "latency_ms": 82.87529996596277,
+            "duration_s": 0.928,
+            "rtf": 0.08930528013573574,
+            "peak_amplitude": 0.8546961545944214,
+            "rms_energy": 0.14890097081661224,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Numeracy Sequence (1 to 10)",
+            "text": "ᱢᱤᱫ ᱵᱟᱨ ᱯᱮ ᱯᱩᱱ ᱢᱚᱬᱮ ᱛᱩᱨᱩᱭ ᱮᱭᱟᱭ ᱤᱨᱟᱹᱞ ᱟᱨᱮ ᱜᱮᱞ",
+            "description": "Count 1 to 10",
+            "latency_ms": 331.6894000163302,
+            "duration_s": 4.064,
+            "rtf": 0.08161648622449069,
+            "peak_amplitude": 0.5503240823745728,
+            "rms_energy": 0.10530631989240646,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Compound Pedagogical Praise",
+            "text": "ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ! ᱟᱢ ᱟᱹᱰᱤ ᱪᱚᱨᱚᱠ ᱯᱟᱲᱦᱟᱣ ᱠᱮᱫᱟ",
+            "description": "Very good work! You read beautifully",
+            "latency_ms": 446.55180000700057,
+            "duration_s": 5.408,
+            "rtf": 0.08257244822614655,
+            "peak_amplitude": 0.5990107655525208,
+            "rms_energy": 0.05635126680135727,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "All Ol Chiki Vowels & Signs",
+            "text": "ᱚ ᱟ ᱤ ᱩ ᱮ ᱳ ᱸ ᱹ ᱰᱷ ᱼ ᱽ",
+            "description": "Script phoneme coverage stress test",
+            "latency_ms": 115.72569992858917,
+            "duration_s": 1.408,
+            "rtf": 0.08219154824473662,
+            "peak_amplitude": 0.5109767317771912,
+            "rms_energy": 0.07800769805908203,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Punctuation & Special Chars",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ! ??? ... ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ,",
+            "description": "Punctuation resilience test",
+            "latency_ms": 175.62470003031194,
+            "duration_s": 2.128,
+            "rtf": 0.08253040414958268,
+            "peak_amplitude": 0.5525138974189758,
+            "rms_energy": 0.08982782810926437,
+            "is_clipping": false,
+            "pass_budget": true
+          }
+        ],
+        "avg_rtf": 0.08626530064692171,
+        "max_rtf": 0.09590109384589596,
+        "avg_latency_ms": 186.53388570861094
+      },
+      {
+        "threads": 2,
+        "label": "Dual-Core Mode (Standard Budget Tablet)",
+        "results": [
+          {
+            "case": "Ultra-Short Command (1 word)",
+            "text": "ᱢᱮ",
+            "description": "Go/Do (atomic command)",
+            "latency_ms": 62.260699924081564,
+            "duration_s": 1.024,
+            "rtf": 0.0608014647696109,
+            "peak_amplitude": 0.27417421340942383,
+            "rms_energy": 0.026120686903595924,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Standard Command (2 words)",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ",
+            "description": "Sit down",
+            "latency_ms": 47.63159994035959,
+            "duration_s": 0.64,
+            "rtf": 0.07442437490681186,
+            "peak_amplitude": 0.30771076679229736,
+            "rms_energy": 0.06554338335990906,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Open Book Command",
+            "text": "ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ",
+            "description": "Open book",
+            "latency_ms": 50.33429991453886,
+            "duration_s": 0.928,
+            "rtf": 0.05423954732170135,
+            "peak_amplitude": 0.8546960353851318,
+            "rms_energy": 0.14890097081661224,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Numeracy Sequence (1 to 10)",
+            "text": "ᱢᱤᱫ ᱵᱟᱨ ᱯᱮ ᱯᱩᱱ ᱢᱚᱬᱮ ᱛᱩᱨᱩᱭ ᱮᱭᱟᱭ ᱤᱨᱟᱹᱞ ᱟᱨᱮ ᱜᱮᱞ",
+            "description": "Count 1 to 10",
+            "latency_ms": 221.2434000102803,
+            "duration_s": 4.064,
+            "rtf": 0.054439812994655584,
+            "peak_amplitude": 0.5503240823745728,
+            "rms_energy": 0.10530631989240646,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Compound Pedagogical Praise",
+            "text": "ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ! ᱟᱢ ᱟᱹᱰᱤ ᱪᱚᱨᱚᱠ ᱯᱟᱲᱦᱟᱣ ᱠᱮᱫᱟ",
+            "description": "Very good work! You read beautifully",
+            "latency_ms": 269.7427999228239,
+            "duration_s": 5.408,
+            "rtf": 0.04987847631709021,
+            "peak_amplitude": 0.5990106463432312,
+            "rms_energy": 0.05635126307606697,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "All Ol Chiki Vowels & Signs",
+            "text": "ᱚ ᱟ ᱤ ᱩ ᱮ ᱳ ᱸ ᱹ ᱰᱷ ᱼ ᱽ",
+            "description": "Script phoneme coverage stress test",
+            "latency_ms": 82.12869998533279,
+            "duration_s": 1.408,
+            "rtf": 0.05833004260321931,
+            "peak_amplitude": 0.5109767317771912,
+            "rms_energy": 0.07800769805908203,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Punctuation & Special Chars",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ! ??? ... ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ,",
+            "description": "Punctuation resilience test",
+            "latency_ms": 136.74009998794645,
+            "duration_s": 2.128,
+            "rtf": 0.06425756578380942,
+            "peak_amplitude": 0.5525140166282654,
+            "rms_energy": 0.08982782810926437,
+            "is_clipping": false,
+            "pass_budget": true
+          }
+        ],
+        "avg_rtf": 0.05948161209955695,
+        "max_rtf": 0.07442437490681186,
+        "avg_latency_ms": 124.29737138362336
+      },
+      {
+        "threads": 4,
+        "label": "Quad-Core Mode (Peak Multithreaded Tablet)",
+        "results": [
+          {
+            "case": "Ultra-Short Command (1 word)",
+            "text": "ᱢᱮ",
+            "description": "Go/Do (atomic command)",
+            "latency_ms": 49.727799952961504,
+            "duration_s": 1.024,
+            "rtf": 0.04856230464156397,
+            "peak_amplitude": 0.27417421340942383,
+            "rms_energy": 0.026120686903595924,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Standard Command (2 words)",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ",
+            "description": "Sit down",
+            "latency_ms": 33.3675000583753,
+            "duration_s": 0.64,
+            "rtf": 0.052136718841211405,
+            "peak_amplitude": 0.307710736989975,
+            "rms_energy": 0.06554338335990906,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Open Book Command",
+            "text": "ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ",
+            "description": "Open book",
+            "latency_ms": 36.98959993198514,
+            "duration_s": 0.928,
+            "rtf": 0.03985948268532881,
+            "peak_amplitude": 0.8546960353851318,
+            "rms_energy": 0.14890097081661224,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Numeracy Sequence (1 to 10)",
+            "text": "ᱢᱤᱫ ᱵᱟᱨ ᱯᱮ ᱯᱩᱱ ᱢᱚᱬᱮ ᱛᱩᱨᱩᱭ ᱮᱭᱟᱭ ᱤᱨᱟᱹᱞ ᱟᱨᱮ ᱜᱮᱞ",
+            "description": "Count 1 to 10",
+            "latency_ms": 195.50370005890727,
+            "duration_s": 4.064,
+            "rtf": 0.04810622540819569,
+            "peak_amplitude": 0.5503240823745728,
+            "rms_energy": 0.10530631989240646,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Compound Pedagogical Praise",
+            "text": "ᱟᱹᱰᱤ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ! ᱟᱢ ᱟᱹᱰᱤ ᱪᱚᱨᱚᱠ ᱯᱟᱲᱦᱟᱣ ᱠᱮᱫᱟ",
+            "description": "Very good work! You read beautifully",
+            "latency_ms": 210.2317000972107,
+            "duration_s": 5.408,
+            "rtf": 0.038874204899632156,
+            "peak_amplitude": 0.5990106463432312,
+            "rms_energy": 0.05635126307606697,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "All Ol Chiki Vowels & Signs",
+            "text": "ᱚ ᱟ ᱤ ᱩ ᱮ ᱳ ᱸ ᱹ ᱰᱷ ᱼ ᱽ",
+            "description": "Script phoneme coverage stress test",
+            "latency_ms": 60.47779996879399,
+            "duration_s": 1.408,
+            "rtf": 0.042952982932382096,
+            "peak_amplitude": 0.5109767317771912,
+            "rms_energy": 0.07800769805908203,
+            "is_clipping": false,
+            "pass_budget": true
+          },
+          {
+            "case": "Punctuation & Special Chars",
+            "text": "ᱫᱩᱲᱩᱵ ᱢᱮ! ??? ... ᱯᱚᱛᱚᱵ ᱡᱷᱤᱡᱽ ᱢᱮ,",
+            "description": "Punctuation resilience test",
+            "latency_ms": 81.07139996718615,
+            "duration_s": 2.128,
+            "rtf": 0.03809746239059499,
+            "peak_amplitude": 0.5525140166282654,
+            "rms_energy": 0.08982782810926437,
+            "is_clipping": false,
+            "pass_budget": true
+          }
+        ],
+        "avg_rtf": 0.044084197399844156,
+        "max_rtf": 0.052136718841211405,
+        "avg_latency_ms": 95.33850000506001
+      }
+    ]
+  },
+  "nmt_diagnostic": {
+    "status": "DIAGNOSED",
+    "has_nans": true,
+    "load_time_s": 0.6772538999794051,
+    "log_probs": [
+      "nan",
+      "nan",
+      "nan",
+      "nan"
+    ]
+  }
+}
