@@ -7,8 +7,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -156,48 +158,57 @@ fun LiveVoiceBridgeScreen(
                 ) {
                     Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(IntrinsicSize.Min),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             // Teacher side (Sharp 4dp container)
                             Row(
                                 modifier = Modifier
                                     .weight(1f)
+                                    .fillMaxHeight()
                                     .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
                                     .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
-                                    .padding(8.dp),
+                                    .padding(horizontal = 10.dp, vertical = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_school),
                                     contentDescription = "Teacher",
                                     tint = Primary,
-                                    modifier = Modifier.size(18.dp)
+                                    modifier = Modifier.size(20.dp)
                                 )
-                                Column {
+                                Column(
+                                    verticalArrangement = Arrangement.Center,
+                                    modifier = Modifier.fillMaxHeight()
+                                ) {
                                     Text(
                                         text = if (isHindi) "शिक्षक" else "Teacher",
-                                        fontSize = 10.sp,
+                                        fontSize = 11.sp,
                                         color = Color(0xFF64748B),
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.SemiBold,
+                                        maxLines = 1,
+                                        softWrap = false
                                     )
                                     Text(
                                         text = if (isHindi) "हिन्दी" else "Hindi",
-                                        fontSize = 12.sp,
+                                        fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Primary
+                                        color = Primary,
+                                        maxLines = 1,
+                                        softWrap = false
                                     )
                                 }
                             }
 
-                            // Sync icon (Sharp 4dp container with vector icon)
+                            // Sync icon (Sharp 4dp container with vector icon, vertically centered)
                             Box(
                                 modifier = Modifier
-                                    .padding(horizontal = 8.dp)
-                                    .size(32.dp)
+                                    .size(34.dp)
                                     .clip(controlCornerShape)
                                     .background(PrimaryContainer),
                                 contentAlignment = Alignment.Center
@@ -214,31 +225,40 @@ fun LiveVoiceBridgeScreen(
                             Row(
                                 modifier = Modifier
                                     .weight(1f)
+                                    .fillMaxHeight()
                                     .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
                                     .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
-                                    .padding(8.dp),
+                                    .padding(horizontal = 10.dp, vertical = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_backpack),
                                     contentDescription = "Student",
                                     tint = Secondary,
-                                    modifier = Modifier.size(18.dp)
+                                    modifier = Modifier.size(20.dp)
                                 )
-                                Column {
+                                Column(
+                                    verticalArrangement = Arrangement.Center,
+                                    modifier = Modifier.fillMaxHeight()
+                                ) {
                                     Text(
                                         text = if (isHindi) "विद्यार्थी" else "Student",
-                                        fontSize = 10.sp,
+                                        fontSize = 11.sp,
                                         color = Color(0xFF64748B),
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.SemiBold,
+                                        maxLines = 1,
+                                        softWrap = false
                                     )
                                     Text(
-                                        text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ (Ol Chiki)",
-                                        fontSize = 12.sp,
+                                        text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali)",
+                                        fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Secondary
+                                        color = Secondary,
+                                        maxLines = 1,
+                                        softWrap = false,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                 }
                             }
@@ -390,10 +410,10 @@ fun LiveVoiceBridgeScreen(
                                     modifier = Modifier
                                         .clip(controlCornerShape)
                                         .background(Primary)
-                                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                                 Text(
-                                    text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली - ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali - Ol Chiki)",
+                                    text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali)",
                                     fontSize = 11.sp,
                                     color = Color(0xFF475569),
                                     maxLines = 1,
@@ -408,7 +428,7 @@ fun LiveVoiceBridgeScreen(
                                     .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
                                     .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                                    .padding(horizontal = 8.dp, vertical = 3.dp)
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_check_circle),

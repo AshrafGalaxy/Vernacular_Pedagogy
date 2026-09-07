@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.R
@@ -57,7 +58,8 @@ fun PhoneticGuideCard(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.weight(1f, fill = false).padding(end = 8.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_record_voice_over),
@@ -69,7 +71,10 @@ fun PhoneticGuideCard(
                     text = if (isHindi) "शिक्षक उच्चारण मार्गदर्शिका" else "Teacher Phonetic Guide",
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Secondary
+                    color = Secondary,
+                    maxLines = 1,
+                    softWrap = false,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             Text(
@@ -77,10 +82,12 @@ fun PhoneticGuideCard(
                 fontSize = 11.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF663500),
+                maxLines = 1,
+                softWrap = false,
                 modifier = Modifier
                     .clip(controlCornerShape)
                     .background(Color(0xFFFFE0B2))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
             )
         }
 

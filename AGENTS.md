@@ -59,3 +59,12 @@
 - **No Duplicate Window Insets / Status Bar Padding (Anti-Bloat TopBar)**:
   - When screens or components are rendered inside a `Scaffold` where `padding(innerPadding)` is already applied, Compose's `Scaffold` has already consumed and applied the system `statusBars` inset.
   - Never apply `WindowInsets.statusBars` or `windowInsetsPadding` onto components (such as `PalashTopBar`) that reside inside `Scaffold`'s `innerPadding`. Doing so applies double status bar padding and creates bloated dead space above navigation headers. Keep top bar vertical padding concise (`vertical = 8.dp`) with vertically centered controls.
+- **Equal-Height Symmetry for Paired Horizontal Cards, Badges & Sections (Intrinsic Height & Single-Line Enforcement)**:
+  - When rendering adjacent cards, paired status boxes (e.g. Teacher vs Student in Language Bridge), header badges (e.g. `Classroom Broadcast` vs `JCERT Verified`), or side-by-side action buttons horizontally inside a `Row`:
+    - **Never let adjacent containers calculate wrap-content heights independently**. Doing so creates jarring height asymmetry whenever one container has longer text, multi-line wrapping, or taller font metrics (such as Ol Chiki vs Devanagari/English).
+    - **Always enforce Intrinsic Height Matching**:
+      Apply `Modifier.height(IntrinsicSize.Min)` (or `IntrinsicSize.Max`) to the parent `Row`, and apply `Modifier.fillMaxHeight()` to each adjacent child container or card. This forces Compose to measure all children uniformly and locks them to the exact same vertical dimension.
+    - **Enforce Single-Line Text on Paired Labels & Badges**:
+      Pair titles, language chips, badges, and button labels with `maxLines = 1`, `softWrap = false`, and `overflow = TextOverflow.Ellipsis`. Avoid overly verbose bracketed subtitles inside compact paired boxes (e.g. use `ᱥᱟᱱᱛᱟᱲᱤ (Santali)` / `ᱥᱟᱱᱛᱟᱲᱤ (संथाली)` rather than lengthy text that forces uneven line wrapping).
+    - **Centered Optical Alignment**:
+      Containers must use `verticalAlignment = Alignment.CenterVertically` with centered inner content (`verticalArrangement = Arrangement.Center`), ensuring optical baseline symmetry and an immaculate, minimalist, premium finish.
