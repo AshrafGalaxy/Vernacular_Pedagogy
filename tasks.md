@@ -52,16 +52,31 @@
 - [x] **Task 3.2:** Build autonomous cloud training worker (`scripts/run_phase3_cloud_train.py`) and update Colab notebook (`notebooks/colab_phase3_piper_tts.ipynb`) with deterministic Ol Chiki character alignment (`--phoneme-type text`).
 - [x] **Task 3.3:** Build local cloud orchestrator (`scripts/launch_phase3_on_colab.py`) for automated Colab T4 GPU execution and artifact download.
 - [x] **Task 3.4:** Build local ONNX CPU verification and latency benchmark harness (`scripts/verify_tts.py`).
-- [ ] **Task 3.5:** Execute training on Colab Tesla T4 GPU, export `sat_piper_model.onnx` (~30 MB), and verify FLN audio synthesis.
+- [x] **Task 3.5:** Execute training on Colab Tesla T4 GPU, export `sat_piper_model.onnx` (60.6 MB, RTF 0.04-0.08), and verify FLN audio synthesis.
+- [x] **Task 3.6:** Publish verified models, SQLite database, and audio samples to Hugging Face Model Hub (`Ashraf01k/vernacular-pedagogy-santhali`).
+- [x] **Task 3.7:** Perform hardware stress testing, CPU thread throttling (1, 2, 4 threads), and edge-case evaluation (`scripts/run_model_stress_tests.py`).
 
 ---
 
-## Phase 4: Offline Android Runtime & End-to-End Latency Verification
-- [ ] **Task 4.1:** Build end-to-end local inference orchestration harness (`scripts/verify_pipeline.py`).
-  - Silero VAD audio stream segmenter.
-  - Vosk / Sherpa-ONNX streaming Hindi ASR.
-  - Hybrid translation router (SQLite Fast-Path $\to$ CTranslate2 INT8 Fallback).
-  - Piper TTS ONNX audio generation.
-- [ ] **Task 4.2:** Measure total spoken voice translation latency ($\le$ 3.0s budget).
-- [ ] **Task 4.3:** Verify memory consumption under Android Low Memory Killer budget ($\le$ 295 MB).
-- [ ] **Task 4.4:** Generate Android deployment assets and final documentation walkthrough.
+## Phase 4: Voice Domain Completion & Offline Hindi ASR Engine
+- [ ] **Task 4.1:** Ingest and configure lightweight offline Hindi ASR engine:
+  - Download & configure offline Hindi ASR (Sherpa-ONNX Zipformer / Vosk Hindi small / Whisper-tiny ONNX INT8 ~39 MB) into `models/asr/`.
+  - Integrate Silero VAD ONNX (~2 MB) for classroom noise suppression and voice boundary detection.
+  - Verify local CPU speech-to-text transcription latency (<400 ms).
+- [ ] **Task 4.2:** Pristine FP32 $\to$ INT8 Re-quantization of IndicTrans2:
+  - Re-export merged LoRA checkpoint on Colab using strict FP32 precision to eliminate CPU float16 underflow/overflow (zero NaNs).
+  - Enable flawless open-ended sentence translation fallback outside the 368-entry FLN database.
+
+---
+
+## Phase 5: Judge Demonstration Harness & Unified Prototype
+- [ ] **Task 5.1:** Build End-to-End Latency & Pipeline Integration Harness (`scripts/verify_pipeline.py`):
+  - Audio Input $\to$ VAD $\to$ Hindi ASR $\to$ Hybrid Router (SQLite Fast-Path / CT2 MT) $\to$ Ol Chiki Text $\to$ Piper TTS $\to$ Audio Output.
+- [ ] **Task 5.2:** Build Interactive Live Demonstration UI (Local Browser / GUI Prototype):
+  - **Live Microphone Input**: Real-time spoken Hindi recording $\to$ instant transcription $\to$ Santhali speech playback.
+  - **Curriculum Domain Clicker (Fail-Safe Judge Mode)**: 1-click execution across all 15 NIPUN Bharat classroom domains (sit down, open book, count 1-10, praise, objects).
+  - **Real-Time Scientific Telemetry**: Live dials showing ASR ms, Router ms (0.02ms), TTS ms (33ms), Total Turnaround, and RTF.
+  - **Free-Form Input Box**: For judge to type any custom phrase.
+- [ ] **Task 5.3:** Android Jetpack Compose Prototype Packaging:
+  - Package Kotlin Jetpack Compose app per `docs/ANDROID_FRONTEND_SPECIFICATION.md` bundling `fln_lexicon.sqlite`, `sat_piper_model.onnx`, and ONNX Runtime AAR.
+
