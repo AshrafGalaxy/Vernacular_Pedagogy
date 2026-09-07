@@ -299,25 +299,16 @@ def main():
 
             # Decoder export (first step, no past KV cache)
             print("  [ONNX] Exporting decoder (initial step)...")
-            decoder = model.get_decoder()
-            config = model.config
+            decoder_path = os.path.join(onnx_output_dir, "decoder_model.onnx")
 
-            # Get number of decoder layers and attention heads
-            num_layers = config.decoder_layers if hasattr(config, "decoder_layers") else config.num_hidden_layers
-            d_model = config.d_model if hasattr(config, "d_model") else config.hidden_size
-            num_heads = config.decoder_attention_heads if hasattr(config, "decoder_attention_heads") else config.num_attention_heads
-            head_dim = d_model // num_heads
+            # Determine d_model directly from encoder outputs
+            with torch.no_grad():
+                enc_out = encoder(dummy_input_ids, dummy_attention_mask)
+                d_model = enc_out.last_hidden_state.shape[-1]
 
             dummy_decoder_input_ids = torch.ones(1, 1, dtype=torch.long)
             dummy_encoder_hidden_states = torch.randn(1, 32, d_model)
             dummy_encoder_attention_mask = torch.ones(1, 32, dtype=torch.long)
-
-            # Build decoder forward args for first step (no past)
-            decoder_inputs = {
-                "input_ids": dummy_decoder_input_ids,
-                "encoder_hidden_states": dummy_encoder_hidden_states,
-                "encoder_attention_mask": dummy_encoder_attention_mask,
-            }
 
             # Full model forward for decoder (uses model's forward to get logits + past)
             class DecoderWrapper(torch.nn.Module):
@@ -334,7 +325,6 @@ def main():
                         use_cache=True,
                     )
                     logits = outputs.logits
-                    # Flatten past_key_values for export
                     past_kv = outputs.past_key_values
                     flat_past = []
                     for layer_past in past_kv:
@@ -345,7 +335,12 @@ def main():
             decoder_wrapper = DecoderWrapper(model)
             decoder_wrapper.eval()
 
-            decoder_path = os.path.join(onnx_output_dir, "decoder_model.onnx")
+            # Inspect dynamic shapes directly from forward pass
+            with torch.no_grad():
+                sample_dec_out = decoder_wrapper(dummy_decoder_input_ids, dummy_encoder_hidden_states, dummy_encoder_attention_mask)
+                dummy_past_kv = list(sample_dec_out[1:])
+                num_layers = len(dummy_past_kv) // 4
+                print(f"  [INFO] Detected d_model={d_model}, num_layers={num_layers}, past_tensors={len(dummy_past_kv)}")
 
             # Build output names
             output_names = ["logits"]
@@ -387,15 +382,12 @@ def main():
 
             class DecoderWithPastWrapper(torch.nn.Module):
                 """Wraps the full model for decoder with past KV cache export."""
-                def __init__(self, full_model, num_layers, num_heads, head_dim):
+                def __init__(self, full_model, num_layers):
                     super().__init__()
                     self.model = full_model
                     self.num_layers = num_layers
-                    self.num_heads = num_heads
-                    self.head_dim = head_dim
 
                 def forward(self, decoder_input_ids, encoder_attention_mask, *past_kv_flat):
-                    # Reconstruct past_key_values tuple from flat args
                     past_key_values = []
                     idx = 0
                     for _ in range(self.num_layers):
@@ -424,14 +416,9 @@ def main():
                             flat_new_past.append(tensor)
                     return (logits,) + tuple(flat_new_past)
 
-            decoder_past_wrapper = DecoderWithPastWrapper(model, num_layers, num_heads, head_dim)
+            decoder_past_wrapper = DecoderWithPastWrapper(model, num_layers)
             decoder_past_wrapper.eval()
 
-            # Create dummy past KV tensors
-            past_seq_len = 1  # After first decoder step
-            encoder_seq_len = 32
-
-            dummy_past_kv = []
             past_input_names = ["decoder_input_ids", "encoder_attention_mask"]
             past_dynamic_axes = {
                 "decoder_input_ids": {0: "batch_size"},
@@ -440,14 +427,6 @@ def main():
             }
 
             for i in range(num_layers):
-                # decoder self-attention past
-                dk = torch.randn(1, num_heads, past_seq_len, head_dim)
-                dv = torch.randn(1, num_heads, past_seq_len, head_dim)
-                # encoder cross-attention past
-                ek = torch.randn(1, num_heads, encoder_seq_len, head_dim)
-                ev = torch.randn(1, num_heads, encoder_seq_len, head_dim)
-                dummy_past_kv.extend([dk, dv, ek, ev])
-
                 past_input_names.extend([
                     f"past_key_values.{i}.decoder.key",
                     f"past_key_values.{i}.decoder.value",
