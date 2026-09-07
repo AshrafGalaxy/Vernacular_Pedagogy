@@ -29,9 +29,15 @@ import subprocess
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if SCRIPT_DIR not in sys.path:
+if "__file__" in globals() and __file__:
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+else:
+    SCRIPT_DIR = "/content/Vernacular_Pedagogy/scripts"
+
+if os.path.exists(SCRIPT_DIR) and SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
+if "/content/Vernacular_Pedagogy/scripts" not in sys.path and os.path.exists("/content/Vernacular_Pedagogy/scripts"):
+    sys.path.insert(0, "/content/Vernacular_Pedagogy/scripts")
 
 
 def run_cmd(cmd, cwd=None, capture=False):
