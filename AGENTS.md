@@ -53,3 +53,6 @@
   - Use clean Android vector drawables (`ic_visibility`, etc.) for form controls rather than text emojis.
 - **Clean Production Form Design**:
   - Eliminate redundant debug helper buttons (e.g. "DEMO PIN भरें") from user-facing UI cards while keeping robust fallback validation.
+- **No Text Field Clipping in Compact Form Controls (BasicTextField Pattern)**:
+  - Never apply `Modifier.height(44.dp)` directly onto Material 3's `OutlinedTextField`. Material 3 `OutlinedTextField` enforces `minHeight = 56dp` and hardcoded internal `16dp` vertical padding (total 32dp), which squeezes the inner text area down to ~12dp and causes severe clipping of text glyphs (especially Devanagari upper/lower matras, Ol Chiki characters, and English descenders/ascenders).
+  - For compact, unbloated form fields (`44dp`), always use `BasicTextField` wrapped in a vertically centered `Box`/`Row` container with `SolidColor(Primary)` cursor, `4dp` sharp corners (`RoundedCornerShape(4.dp)`), `#F8FAFC` container fill, `#0F172A` high-contrast text color, and dynamic border states (`Primary` on focus, `#BA1A1A` on error, `#CBD5E1` resting). This preserves exact `44dp` height symmetry with zero text clipping.

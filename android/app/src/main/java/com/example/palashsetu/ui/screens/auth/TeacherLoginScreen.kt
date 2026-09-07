@@ -25,15 +25,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -309,7 +313,7 @@ fun TeacherLoginScreen(
                     }
                 }
 
-                // 2. Teacher Name Field (Sharp 4dp Corners)
+                // 2. Teacher Name Field (Sharp 4dp Corners, BasicTextField Anti-Clipping)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = if (isHindi) "शिक्षक का नाम (Teacher Name):" else "Teacher Name:",
@@ -319,47 +323,23 @@ fun TeacherLoginScreen(
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
 
-                    OutlinedTextField(
+                    CompactFormField(
                         value = teacherName,
                         onValueChange = {
                             teacherName = it
                             if (nameError != null && it.isNotBlank()) nameError = null
                         },
-                        placeholder = {
-                            Text(
-                                text = if (isHindi) "उदा. पूजा सोरेन / रमेश मुर्मू" else "e.g. Ramesh Soren",
-                                fontSize = 13.sp,
-                                color = Color(0xFF94A3B8)
-                            )
-                        },
+                        placeholder = if (isHindi) "उदा. पूजा सोरेन / रमेश मुर्मू" else "e.g. Ramesh Soren",
                         isError = nameError != null,
-                        supportingText = if (nameError != null) {
-                            { Text(text = nameError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp) }
-                        } else null,
-                        singleLine = true,
+                        errorMessage = nameError,
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(44.dp),
-                        shape = controlCornerShape,
                         textStyle = TextStyle(
                             color = Color(0xFF0F172A),
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium
-                        ),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedTextColor = Color(0xFF0F172A),
-                            unfocusedTextColor = Color(0xFF0F172A),
-                            focusedContainerColor = Color(0xFFF8FAFC),
-                            unfocusedContainerColor = Color(0xFFF8FAFC),
-                            cursorColor = Primary,
-                            focusedBorderColor = Primary,
-                            unfocusedBorderColor = Color(0xFFCBD5E1),
-                            focusedPlaceholderColor = Color(0xFF94A3B8),
-                            unfocusedPlaceholderColor = Color(0xFF94A3B8)
                         )
                     )
                 }
@@ -374,7 +354,7 @@ fun TeacherLoginScreen(
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
 
-                    OutlinedTextField(
+                    CompactFormField(
                         value = pin,
                         onValueChange = {
                             if (it.length <= 4 && it.all { char -> char.isDigit() }) {
@@ -382,20 +362,20 @@ fun TeacherLoginScreen(
                                 if (pinError != null) pinError = null
                             }
                         },
-                        placeholder = {
-                            Text(
-                                text = if (isHindi) "4 अंकों का पिन (उदा. 2604)" else "4-digit PIN (e.g. 2604)",
-                                fontSize = 13.sp,
-                                color = Color(0xFF94A3B8)
-                            )
-                        },
+                        placeholder = if (isHindi) "4 अंकों का पिन (उदा. 2604)" else "4-digit PIN (e.g. 2604)",
                         visualTransformation = if (isPinVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         isError = pinError != null,
-                        supportingText = if (pinError != null) {
-                            { Text(text = pinError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp) }
-                        } else null,
+                        errorMessage = pinError,
                         trailingIcon = {
-                            IconButton(onClick = { isPinVisible = !isPinVisible }) {
+                            Box(
+                                modifier = Modifier
+                                    .size(28.dp)
+                                    .clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = null
+                                    ) { isPinVisible = !isPinVisible },
+                                contentAlignment = Alignment.Center
+                            ) {
                                 Icon(
                                     painter = painterResource(id = if (isPinVisible) R.drawable.ic_visibility_off else R.drawable.ic_visibility),
                                     contentDescription = "Toggle PIN Visibility",
@@ -411,27 +391,11 @@ fun TeacherLoginScreen(
                         keyboardActions = KeyboardActions(
                             onDone = { focusManager.clearFocus() }
                         ),
-                        singleLine = true,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(44.dp),
-                        shape = controlCornerShape,
                         textStyle = TextStyle(
                             color = Color(0xFF0F172A),
                             fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
                             letterSpacing = 2.sp
-                        ),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedTextColor = Color(0xFF0F172A),
-                            unfocusedTextColor = Color(0xFF0F172A),
-                            focusedContainerColor = Color(0xFFF8FAFC),
-                            unfocusedContainerColor = Color(0xFFF8FAFC),
-                            cursorColor = Primary,
-                            focusedBorderColor = Primary,
-                            unfocusedBorderColor = Color(0xFFCBD5E1),
-                            focusedPlaceholderColor = Color(0xFF94A3B8),
-                            unfocusedPlaceholderColor = Color(0xFF94A3B8)
                         )
                     )
                 }
@@ -496,3 +460,109 @@ fun TeacherLoginScreen(
         )
     }
 }
+
+/**
+ * Stitch Architectural Geometry Compact Form Field.
+ * Uses BasicTextField centered in a 44dp Box to completely eliminate
+ * text clipping of Devanagari matras, Ol Chiki glyphs, and descenders/ascenders
+ * while strictly adhering to 44dp height and 4dp sharp corner styling.
+ */
+@Composable
+private fun CompactFormField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    errorMessage: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    textStyle: TextStyle = TextStyle(
+        color = Color(0xFF0F172A),
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Medium
+    ),
+    cursorColor: Color = Primary
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+    val focusRequester = remember { FocusRequester() }
+
+    val borderColor = when {
+        isError -> Color(0xFFBA1A1A)
+        isFocused -> Primary
+        else -> Color(0xFFCBD5E1)
+    }
+
+    Column(modifier = modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(44.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(Color(0xFFF8FAFC))
+                .border(
+                    width = if (isFocused || isError) 1.5.dp else 1.dp,
+                    color = borderColor,
+                    shape = RoundedCornerShape(4.dp)
+                )
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) {
+                    focusRequester.requestFocus()
+                }
+                .padding(horizontal = 12.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier.weight(1f),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    if (value.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            fontSize = textStyle.fontSize,
+                            color = Color(0xFF94A3B8),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    BasicTextField(
+                        value = value,
+                        onValueChange = onValueChange,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .focusRequester(focusRequester),
+                        textStyle = textStyle,
+                        singleLine = true,
+                        visualTransformation = visualTransformation,
+                        keyboardOptions = keyboardOptions,
+                        keyboardActions = keyboardActions,
+                        interactionSource = interactionSource,
+                        cursorBrush = SolidColor(cursorColor)
+                    )
+                }
+                if (trailingIcon != null) {
+                    Spacer(modifier = Modifier.width(6.dp))
+                    trailingIcon()
+                }
+            }
+        }
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage,
+                color = Color(0xFFBA1A1A),
+                fontSize = 10.sp,
+                modifier = Modifier.padding(start = 4.dp, top = 2.dp)
+            )
+        }
+    }
+}
+
