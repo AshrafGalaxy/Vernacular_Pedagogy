@@ -89,7 +89,6 @@ fun LiveVoiceBridgeScreen(
     var phoneticGuide by remember {
         mutableStateOf("[गिदरा को, आपेयाग एलखा पुथी झीज पे आर गेल बार साहटा उडुक पे]")
     }
-    var latencyDisplay by remember { mutableStateOf("420ms") }
     var isAudioPlaying by remember { mutableStateOf(false) }
     var playProgress by remember { mutableStateOf(0f) }
     var currentSpeed by remember { mutableStateOf(0.9f) }
@@ -101,7 +100,6 @@ fun LiveVoiceBridgeScreen(
             val result = nmtEngine.translate(hindiSentence)
             santaliOlChikiText = result.targetOlChiki
             phoneticGuide = result.phoneticGuide
-            latencyDisplay = if (result.isTier1FastPath) "21ms (Tier-1 Cache)" else "420ms (INT8 CT2)"
         }
     }
 
@@ -333,51 +331,6 @@ fun LiveVoiceBridgeScreen(
                             )
                             AudioWaveVisualizer(isAnimating = isMicActive)
                         }
-
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(controlCornerShape)
-                                .background(SurfaceContainerLow)
-                                .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                                .padding(horizontal = 10.dp, vertical = 6.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_bolt),
-                                    contentDescription = "Local ASR",
-                                    tint = Color(0xFF64748B),
-                                    modifier = Modifier.size(14.dp)
-                                )
-                                Text(
-                                    text = if (isHindi) "स्थानीय Vosk ASR" else "Local Vosk ASR",
-                                    fontSize = 11.sp,
-                                    color = Color(0xFF64748B)
-                                )
-                            }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_timer),
-                                    contentDescription = "Latency",
-                                    tint = Color(0xFF475569),
-                                    modifier = Modifier.size(14.dp)
-                                )
-                                Text(
-                                    text = latencyDisplay,
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = Color(0xFF475569)
-                                )
-                            }
-                        }
                     }
                 }
 
@@ -391,60 +344,30 @@ fun LiveVoiceBridgeScreen(
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                                modifier = Modifier.weight(1f, fill = false).padding(end = 8.dp)
-                            ) {
-                                Text(
-                                    text = if (isHindi) "कक्षा प्रसारण" else "Classroom Broadcast",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.White,
-                                    maxLines = 1,
-                                    softWrap = false,
-                                    modifier = Modifier
-                                        .clip(controlCornerShape)
-                                        .background(Primary)
-                                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                                )
-                                Text(
-                                    text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali)",
-                                    fontSize = 11.sp,
-                                    color = Color(0xFF475569),
-                                    maxLines = 1,
-                                    softWrap = false,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            Text(
+                                text = if (isHindi) "कक्षा प्रसारण" else "Classroom Broadcast",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                maxLines = 1,
+                                softWrap = false,
                                 modifier = Modifier
                                     .clip(controlCornerShape)
-                                    .background(SurfaceContainerLowest)
-                                    .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
+                                    .background(Primary)
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_check_circle),
-                                    contentDescription = "Verified",
-                                    tint = Color(0xFF1B5E20),
-                                    modifier = Modifier.size(13.dp)
-                                )
-                                Text(
-                                    text = if (isHindi) "JCERT अनुमोदित" else "JCERT Verified",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF1B5E20),
-                                    maxLines = 1,
-                                    softWrap = false
-                                )
-                            }
+                            )
+                            Text(
+                                text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali)",
+                                fontSize = 11.sp,
+                                color = Color(0xFF475569),
+                                maxLines = 1,
+                                softWrap = false,
+                                overflow = TextOverflow.Ellipsis
+                            )
                         }
 
                         // Large Ol Chiki Script Text (Sharp 4dp Box)
