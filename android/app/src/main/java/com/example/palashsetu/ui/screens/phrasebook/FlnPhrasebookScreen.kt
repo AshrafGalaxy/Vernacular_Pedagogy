@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,14 +16,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,10 +36,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.R
@@ -68,6 +78,10 @@ fun FlnPhrasebookScreen(
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategoryId by remember { mutableStateOf("ALL") }
     var currentlyPlayingId by remember { mutableStateOf<String?>(null) }
+
+    val searchInteractionSource = remember { MutableInteractionSource() }
+    val isSearchFocused by searchInteractionSource.collectIsFocusedAsState()
+    val searchFocusRequester = remember { FocusRequester() }
 
     val coroutineScope = rememberCoroutineScope()
     val audioEngine = remember { PedagogicalAudioEngine() }
@@ -133,7 +147,8 @@ fun FlnPhrasebookScreen(
     ) {
         PalashTopBar(
             currentLanguage = currentLanguage,
-            onLanguageToggle = onLanguageToggle
+            onLanguageToggle = onLanguageToggle,
+            locationName = if (isHindi) "झारखंड" else "Jharkhand"
         )
 
         Column(
@@ -141,65 +156,106 @@ fun FlnPhrasebookScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            // Title Header
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 10.dp)) {
-                    Text(
-                        text = if (isHindi) "शब्दावली" else "FLN Bank",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = Primary
-                    )
-                    Text(
-                        text = if (isHindi) "NIPUN भारत कक्षा 1–3 सत्यापित ध्वनि-बैंक" else "NIPUN Bharat Grade 1–3 Verified Soundbank",
-                        fontSize = 11.sp,
-                        color = Color(0xFF64748B)
-                    )
-                }
                 Text(
-                    text = if (isHindi) "${phrases.size} वाक्यांश" else "${phrases.size} Phrases",
+                    text = if (isHindi) "शब्दावली" else "FLN Bank",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Primary
+                )
+                Text(
+                    text = if (isHindi) "NIPUN भारत कक्षा 1–3" else "NIPUN Bharat Grade 1–3",
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Secondary,
-                    maxLines = 1,
-                    softWrap = false,
-                    modifier = Modifier
-                        .clip(controlCornerShape)
-                        .background(SurfaceContainerLow)
-                        .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
-                        .padding(horizontal = 10.dp, vertical = 5.dp)
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF64748B)
                 )
             }
 
-            // Search input with Vector Icon & Sharp 4dp Geometry
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                placeholder = {
-                    Text(
-                        text = if (isHindi) "खोजें (e.g. किताब, sit down, ᱯᱩᱛᱷᱤ...)" else "Search (e.g. book, sit down, ᱯᱩᱛᱷᱤ...)",
-                        fontSize = 13.sp,
-                        color = Color(0xFF94A3B8)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(44.dp)
+                    .clip(controlCornerShape)
+                    .background(Color(0xFFF8FAFC))
+                    .border(
+                        width = if (isSearchFocused) 1.5.dp else 1.dp,
+                        color = if (isSearchFocused) Primary else Color(0xFFCBD5E1),
+                        shape = controlCornerShape
                     )
-                },
-                leadingIcon = {
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
+                        searchFocusRequester.requestFocus()
+                    }
+                    .padding(horizontal = 12.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_search),
                         contentDescription = "Search",
-                        tint = Primary,
+                        tint = if (isSearchFocused) Primary else Color(0xFF64748B),
                         modifier = Modifier.size(18.dp)
                     )
-                },
-                singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp),
-                shape = controlCornerShape
-            )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Box(
+                        modifier = Modifier.weight(1f),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        if (searchQuery.isEmpty()) {
+                            Text(
+                                text = if (isHindi) "खोजें (e.g. किताब, sit down, ᱯᱩᱛᱷᱤ...)" else "Search (e.g. book, sit down, ᱯᱩᱛᱷᱤ...)",
+                                fontSize = 13.sp,
+                                color = Color(0xFF94A3B8),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                        BasicTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .focusRequester(searchFocusRequester),
+                            textStyle = TextStyle(
+                                color = Color(0xFF0F172A),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Medium
+                            ),
+                            singleLine = true,
+                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                            interactionSource = searchInteractionSource,
+                            cursorBrush = SolidColor(Primary)
+                        )
+                    }
+                    if (searchQuery.isNotEmpty()) {
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(controlCornerShape)
+                                .clickable { searchQuery = "" },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_close),
+                                contentDescription = "Clear",
+                                tint = Color(0xFF64748B),
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                }
+            }
 
             // Category pills row with Sharp 4dp Geometry
             Row(
