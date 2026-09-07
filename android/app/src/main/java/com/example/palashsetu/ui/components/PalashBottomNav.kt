@@ -61,41 +61,47 @@ fun PalashBottomNav(
             .fillMaxWidth()
             .background(SurfaceContainerLowest, navBarShape)
             .border(1.dp, Color(0xFFE2E8F0), navBarShape)
-            .padding(horizontal = 8.dp, vertical = 6.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
+            .padding(vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BottomTab.entries.forEach { tab ->
             val isSelected = tab == selectedTab
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+            Box(
                 modifier = Modifier
+                    .weight(1f)
                     .clip(tabCornerShape)
                     .clickable { onTabSelected(tab) }
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
+                    .padding(vertical = 4.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(34.dp)
-                        .clip(tabCornerShape)
-                        .background(if (isSelected) Primary else Color.Transparent),
-                    contentAlignment = Alignment.Center
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(
-                        painter = painterResource(id = tab.iconRes),
-                        contentDescription = tab.getLabel(isHindi),
-                        tint = if (isSelected) Color.White else Color(0xFF64748B),
-                        modifier = Modifier.size(19.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(34.dp)
+                            .clip(tabCornerShape)
+                            .background(if (isSelected) Primary else Color.Transparent),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = tab.iconRes),
+                            contentDescription = tab.getLabel(isHindi),
+                            tint = if (isSelected) Color.White else Color(0xFF64748B),
+                            modifier = Modifier.size(19.dp)
+                        )
+                    }
+                    Text(
+                        text = tab.getLabel(isHindi),
+                        fontSize = 11.sp,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                        color = if (isSelected) Primary else Color(0xFF64748B),
+                        maxLines = 1,
+                        softWrap = false,
+                        modifier = Modifier.padding(top = 2.dp)
                     )
                 }
-                Text(
-                    text = tab.getLabel(isHindi),
-                    fontSize = 11.sp,
-                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                    color = if (isSelected) Primary else Color(0xFF64748B),
-                    modifier = Modifier.padding(top = 2.dp)
-                )
             }
         }
     }
