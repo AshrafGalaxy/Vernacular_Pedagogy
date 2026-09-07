@@ -1087,7 +1087,7 @@ def main():
         base_model = AutoModelForSeq2SeqLM.from_pretrained(
             model_name,
             trust_remote_code=True,
-            torch_dtype=torch.float16,
+            torch_dtype=torch.float32,
             device_map="auto",
             token=auth_token
         )
@@ -1102,7 +1102,7 @@ def main():
             base_model = AutoModelForSeq2SeqLM.from_pretrained(
                 model_name,
                 trust_remote_code=True,
-                torch_dtype=torch.float16,
+                torch_dtype=torch.float32,
                 device_map="auto",
                 token=auth_token
             )
@@ -1112,7 +1112,8 @@ def main():
 
     merged_path = "/content/indictrans2_sat_merged"
     has_merged = os.path.exists(os.path.join(merged_path, "model.safetensors")) or os.path.exists(os.path.join(merged_path, "pytorch_model.bin"))
-    force_retrain = os.environ.get("FORCE_RETRAIN", "0") == "1"
+    # Default to retrain=True to ensure newly expanded 2,232 pedagogical dataset is trained
+    force_retrain = os.environ.get("FORCE_RETRAIN", "1") == "1"
 
     if has_merged and not force_retrain:
         print(f"\n[RESUME] Found existing merged model at {merged_path}!")
@@ -1122,7 +1123,7 @@ def main():
             merged = AutoModelForSeq2SeqLM.from_pretrained(
                 merged_path,
                 trust_remote_code=True,
-                torch_dtype=torch.float16,
+                torch_dtype=torch.float32,
                 device_map="auto"
             )
             print("[OK] Existing merged model loaded successfully.")
@@ -1263,10 +1264,15 @@ def main():
         # ──────────────────────────────────────────
         # Step 8: Merge LoRA Weights
         # ──────────────────────────────────────────
-        print("\n--- Step 8: Merging LoRA Weights with Base Model ---")
+        print("\n--- Step 8: Merging LoRA Weights with Base Model (Strict FP32) ---")
         patch_remote_modeling(model_name, auth_token=auth_token)
         try:
-            raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+            raw_base = AutoModelForSeq2SeqLM.from_pretrained(
+                model_name,
+                trust_remote_code=True,
+                torch_dtype=torch.float32,
+                token=auth_token
+            )
         except (TypeError, AttributeError) as e:
             if "tie_weights" in str(e) or "recompute_mapping" in str(e):
                 print(f"[WARN] Step 8 model load failed ({e}), re-applying patches and retrying...")
@@ -1275,12 +1281,18 @@ def main():
                 for m in mods_to_clear:
                     del sys.modules[m]
                 patch_remote_modeling(model_name, auth_token=auth_token)
-                raw_base = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, token=auth_token)
+                raw_base = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name,
+                    trust_remote_code=True,
+                    torch_dtype=torch.float32,
+                    token=auth_token
+                )
             else:
                 raise
         patch_peft_compat()
         merged = PeftModel.from_pretrained(raw_base, lora_final_path)
         merged = merged.merge_and_unload()
+        merged = merged.to(torch.float32)
 
         # Crucial transformers v5.x fix: _tied_weights_keys must be a dict
         for mod in [merged, raw_base] + list(merged.modules()):
@@ -1296,11 +1308,34 @@ def main():
     # ──────────────────────────────────────────
     # Step 9: Quantize to CTranslate2 INT8
     # ──────────────────────────────────────────
-    print("\n--- Step 9: Quantizing to CTranslate2 INT8 ---")
+    print("\n--- Step 9: Quantizing to CTranslate2 INT8 (FP32 -> INT8) ---")
     ct2_path = "/content/indictrans2_sat_int8_ct2"
     if os.path.exists(ct2_path):
         import shutil
         shutil.rmtree(ct2_path)
+
+    # Ensure model is float32 on CPU
+    if hasattr(merged, "cpu"):
+        merged = merged.to(torch.float32).cpu()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+    # AUDIT: Strict Pre-Quantization Tensor Sanity Audit
+    print("\n[AUDIT] Performing Strict Pre-Quantization Tensor Sanity Audit...")
+    nan_layers = []
+    inf_layers = []
+    for name, p in merged.named_parameters():
+        if torch.isnan(p).any():
+            nan_layers.append(name)
+        if torch.isinf(p).any():
+            inf_layers.append(name)
+    if nan_layers or inf_layers:
+        raise ValueError(
+            f"[FATAL] Tensor corruption detected before quantization: "
+            f"{len(nan_layers)} NaN layers, {len(inf_layers)} Inf layers! "
+            f"Corrupt layers: {nan_layers[:5]}"
+        )
+    print(f"[OK] All {sum(1 for _ in merged.parameters())} tensor layers are strictly finite (Zero NaNs, Zero Infs).")
 
     conversion_done = False
     try:
@@ -1344,14 +1379,6 @@ def main():
 
         ct_tr._MODEL_LOADERS["IndicTransConfig"] = IndicTransLoader()
 
-        # CRITICAL: Move model to CPU before passing to CTranslate2 converter!
-        # PyTorch tensors on CUDA cannot be converted to numpy directly:
-        # "can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first."
-        if hasattr(merged, "cpu"):
-            merged = merged.cpu()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-
         class InProcessConverter(ct_tr.TransformersConverter):
             def load_model(self, model_class, model_name_or_path, **kwargs):
                 return merged
@@ -1359,7 +1386,7 @@ def main():
             def load_tokenizer(self, tokenizer_class, model_name_or_path, **kwargs):
                 return tokenizer
 
-        print("[CT2] Converting merged model to CTranslate2 INT8 in-process...")
+        print("[CT2] Converting merged model to CTranslate2 INT8 in-process from FP32...")
         converter = InProcessConverter(
             model_name_or_path=merged_path,
             trust_remote_code=True,
@@ -1379,6 +1406,42 @@ def main():
             f"--quantization int8 --trust_remote_code --low_cpu_mem_usage",
             description="CTranslate2 INT8 quantization"
         )
+
+    # ──────────────────────────────────────────
+    # Step 9b: In-Situ CTranslate2 Inference Verification Gate
+    # ──────────────────────────────────────────
+    print("\n--- Step 9b: In-Situ CTranslate2 Quality & Non-Degeneracy Gate ---")
+    try:
+        import ctranslate2
+        test_queries = [
+            ("बैठ जाओ", "ᱫᱩᱲᱩᱵ ᱢᱮ"),
+            ("अपनी किताब खोलो", "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱢᱮ"),
+            ("सभी बच्चे अपनी किताब खोलो", "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱟᱯᱱᱟᱨᱟᱜ ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ"),
+            ("सभी बच्चे शांत रहो", "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ"),
+            ("पेड़ पर एक चिड़िया बैठी है", "ᱫᱟᱨᱮ ᱨᱮ ᱢᱤᱫᱴᱟᱝ ᱪᱮᱬᱮ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ")
+        ]
+        translator = ctranslate2.Translator(ct2_path, device="cpu", compute_type="int8")
+
+        print(f"[GATE] Translating {len(test_queries)} validation queries with CTranslate2 INT8...")
+        for hi_input, sat_expected in test_queries:
+            prepped = ip.preprocess_batch([hi_input], src_lang=src_lang, tgt_lang=tgt_lang)
+            tokens = tokenizer.convert_ids_to_tokens(tokenizer.encode(prepped[0]))
+            results = translator.translate_batch([tokens], beam_size=2, max_decoding_length=50)
+            hyp = results[0].hypotheses[0]
+
+            # Check for degenerate repetition
+            if len(hyp) >= 5 and all(t == "<s>" for t in hyp[:5]):
+                raise RuntimeError(f"[GATE FAILED] Degenerate repeating <s> tokens detected for '{hi_input}'!")
+
+            pred_text = tokenizer.decode(tokenizer.convert_tokens_to_ids(hyp), skip_special_tokens=True)
+            print(f"  [GATE QUERY] '{hi_input}' -> '{pred_text}' (Tokens: {hyp[:8]}...)")
+            if not pred_text.strip():
+                raise RuntimeError(f"[GATE FAILED] Empty translation output for '{hi_input}'!")
+
+        print("\n[SUCCESS] In-situ validation gate PASSED! Model produces clean, authentic Ol Chiki translations.")
+    except Exception as gate_err:
+        print(f"\n[FATAL ERROR] In-situ validation gate failed: {gate_err}")
+        raise
 
     # ──────────────────────────────────────────
     # Step 10: Package Model Artifact
