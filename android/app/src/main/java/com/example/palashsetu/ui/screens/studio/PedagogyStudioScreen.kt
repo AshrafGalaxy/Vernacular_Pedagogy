@@ -227,21 +227,21 @@ fun PedagogyStudioScreen(
                         )
                     }
 
-                    // Localized Date & Student Name Header
+                    // Date & Student Name Header (Authentic Vernacular Primary Format)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = if (isHindi) "दिनांक: ०८/०९/२०२६" else "Date: 08/09/2026",
-                            fontSize = 11.sp,
+                            text = "दिनांक: ०८/०९/२०२६",
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF64748B)
                         )
                         Text(
-                            text = if (isHindi) "छात्र का नाम: ____________" else "Student Name: ____________",
-                            fontSize = 11.sp,
+                            text = "छात्र का नाम: ____________",
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF64748B)
                         )
@@ -253,25 +253,22 @@ fun PedagogyStudioScreen(
                             .clip(controlCornerShape)
                             .background(SurfaceContainerLow)
                             .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                            .padding(12.dp)
+                            .padding(14.dp)
                     ) {
-                        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(
-                                text = if (isHindi) "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।" else "Count the Mahua fruits and Sal leaves, write the total in boxes.",
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF0F172A)
-                            )
-                            Text(
-                                text = "OL CHIKI: ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾",
-                                fontSize = 15.sp,
+                                text = "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾",
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Primary
+                                color = Primary,
+                                lineHeight = 23.sp
                             )
                             Text(
-                                text = if (isHindi) "EN: Count the Mahua fruits and Sal leaves, write the total in boxes." else "HI: महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।",
-                                fontSize = 11.sp,
-                                color = Color(0xFF475569)
+                                text = "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xFF1E293B),
+                                lineHeight = 22.sp
                             )
                         }
                     }
@@ -282,7 +279,7 @@ fun PedagogyStudioScreen(
                             .clip(controlCornerShape)
                             .background(Color.White)
                             .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
-                            .padding(12.dp),
+                            .padding(horizontal = 10.dp, vertical = 14.dp),
                         horizontalArrangement = Arrangement.SpaceAround,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -299,14 +296,39 @@ fun PedagogyStudioScreen(
                                         painter = painterResource(id = R.drawable.ic_eco),
                                         contentDescription = "Sal Leaf",
                                         tint = Color(0xFF2E7D32),
-                                        modifier = Modifier.size(18.dp)
+                                        modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
-                            Text(text = if (isHindi) "ᱥᱟᱨᱡᱚᱢ (सखुआ)" else "ᱥᱟᱨᱡᱚᱢ (Sal)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
-                            Text(text = "[ 3 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
+                            Text(
+                                text = "ᱥᱟᱨᱡᱚᱢ",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "सखुआ",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xFF475569),
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "[ 3 ]",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Secondary
+                            )
                         }
-                        Text(text = "+", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
+                        Text(
+                            text = "+",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF64748B)
+                        )
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -320,14 +342,39 @@ fun PedagogyStudioScreen(
                                         painter = painterResource(id = R.drawable.ic_grain),
                                         contentDescription = "Mahua Fruit",
                                         tint = Color(0xFF8D6E63),
-                                        modifier = Modifier.size(18.dp)
+                                        modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
-                            Text(text = if (isHindi) "ᱢᱟᱹᱦᱩᱣᱟᱹ (महुआ)" else "ᱢᱟᱹᱦᱩᱣᱟᱹ (Mahua)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
-                            Text(text = "[ 2 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
+                            Text(
+                                text = "ᱢᱟᱹᱦᱩᱣᱟᱹ",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "महुआ",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xFF475569),
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "[ 2 ]",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Secondary
+                            )
                         }
-                        Text(text = "=", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
+                        Text(
+                            text = "=",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF64748B)
+                        )
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -338,8 +385,28 @@ fun PedagogyStudioScreen(
                                 tint = Primary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(text = if (isHindi) "ᱢᱚᱬᱮ (पाँच)" else "ᱢᱚᱬᱮ (Five)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
-                            Text(text = "[ ? ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1B5E20))
+                            Text(
+                                text = "ᱢᱚᱬᱮ",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Primary,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "पाँच",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xFF475569),
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            Text(
+                                text = "[ ? ]",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF1B5E20)
+                            )
                         }
                     }
 
