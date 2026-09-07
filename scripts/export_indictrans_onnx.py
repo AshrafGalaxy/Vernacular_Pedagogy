@@ -481,6 +481,18 @@ def main():
         reduction = (1 - int8_size / fp32_size) * 100
         print(f"  [OK] {onnx_file}: {fp32_size:.1f} MB → {int8_size:.1f} MB ({reduction:.1f}% reduction)")
 
+    # Save explicit vocabulary mappings from tokenizer
+    import json
+    if hasattr(tokenizer, "src_encoder") and hasattr(tokenizer, "tgt_encoder"):
+        try:
+            with open(os.path.join(onnx_int8_dir, "dict.SRC.json"), "w", encoding="utf-8") as f:
+                json.dump(tokenizer.src_encoder, f, ensure_ascii=False)
+            with open(os.path.join(onnx_int8_dir, "dict.TGT.json"), "w", encoding="utf-8") as f:
+                json.dump(tokenizer.tgt_encoder, f, ensure_ascii=False)
+            print("  [SAVED] dict.SRC.json and dict.TGT.json")
+        except Exception as ve:
+            print(f"  [WARN] Could not dump src/tgt encoders: {ve}")
+
     # Copy SentencePiece models and tokenizer configs
     for fname in ["model.SRC", "model.TGT", "tokenizer_config.json",
                    "special_tokens_map.json", "generation_config.json",

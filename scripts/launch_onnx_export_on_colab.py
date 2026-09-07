@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Local Orchestrator: Launches Phase 2.6 ONNX Export on Remote Colab T4 GPU Session.
-Connects to existing Colab session, executes export_indictrans_onnx.py,
-downloads the resulting ONNX INT8 model package into models/mt/.
+Connects to or provisions Colab session, checks for merged FP32 model (training if needed),
+executes export_indictrans_onnx.py, downloads the resulting ONNX INT8 model package,
+and copies models directly into android/app/src/main/assets/models/mt/.
 """
 
 import os
@@ -10,6 +11,8 @@ import sys
 import subprocess
 import time
 import tarfile
+import shutil
+import re
 
 # Force UTF-8 I/O for Windows consoles
 if sys.platform == "win32":
@@ -20,8 +23,33 @@ if sys.platform == "win32":
         pass
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ENV_FILE = os.path.join(BASE_DIR, ".env")
 MODELS_MT = os.path.join(BASE_DIR, "models", "mt")
+ANDROID_ASSETS_MT = os.path.join(BASE_DIR, "android", "app", "src", "main", "assets", "models", "mt")
 COLAB_CLI = "/home/ashraf/.local/bin/colab"
+
+
+def get_hf_token():
+    """Retrieve HF_TOKEN from environment variable or .env file."""
+    token = os.environ.get("HF_TOKEN")
+    if token:
+        return token.strip()
+    if os.path.exists(ENV_FILE):
+        with open(ENV_FILE, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip().startswith("HF_TOKEN="):
+                    return line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
+
+
+def sanitize_token(token):
+    """Validate that HF token contains only safe characters."""
+    if not token:
+        return ""
+    if not re.match(r'^[a-zA-Z0-9_\-]+$', token):
+        print("[ERROR] HF_TOKEN contains unexpected characters. Aborting injection.", flush=True)
+        sys.exit(1)
+    return token
 
 
 def run_wsl(command, desc=None, timeout=None):
@@ -89,41 +117,105 @@ def ensure_colab_session(session_name="phase2-train", gpu="T4", max_retries=2):
     sys.exit(1)
 
 
+def inject_hf_token(token, session_name="phase2-train"):
+    """Safely inject HF_TOKEN into the remote Colab session."""
+    if not token:
+        print("[ORCHESTRATOR] No HF_TOKEN to inject. Skipping.", flush=True)
+        return
+
+    import base64
+    token_b64 = base64.b64encode(token.encode()).decode()
+    inject_script = (
+        f"import os, base64; "
+        f"t = base64.b64decode('{token_b64}').decode(); "
+        f"os.environ['HF_TOKEN'] = t; "
+        f"open('/content/.hf_token', 'w').write(t); "
+        f"print('Remote HF_TOKEN configured!')"
+    )
+    inject_cmd = f"echo \"{inject_script}\" | {COLAB_CLI} exec -s {session_name} --timeout 120"
+    code = run_wsl(inject_cmd, desc="Injecting HF_TOKEN into Colab Session", timeout=150)
+    if code != 0:
+        print("[WARN] HF_TOKEN injection failed or timed out. Continuing...", flush=True)
+
+
 def main():
+    token = get_hf_token()
+    token = sanitize_token(token)
+
     print("=" * 65)
     print("Phase 2.6 ONNX Export Orchestrator (Google Colab Tesla T4)")
     print("=" * 65)
-    print(f"Base directory: {BASE_DIR}")
-    print(f"Model output:   {MODELS_MT}")
+    print(f"HF Token detected: {'Yes (Length ' + str(len(token)) + ')' if token else 'No'}")
+    print(f"Base directory:    {BASE_DIR}")
+    print(f"Model output:      {MODELS_MT}")
+    print(f"Android assets:    {ANDROID_ASSETS_MT}")
 
     os.makedirs(MODELS_MT, exist_ok=True)
+    os.makedirs(ANDROID_ASSETS_MT, exist_ok=True)
 
     # Step 1: Ensure remote GPU session is alive
     ensure_colab_session("phase2-train", gpu="T4")
 
-    # Step 2: Sync repository code on Colab
+    # Step 2: Inject HF Token
+    inject_hf_token(token, session_name="phase2-train")
+
+    # Step 3: Sync repository code on Colab
     print("\n[ORCHESTRATOR] Syncing code on remote Colab session...")
-    run_wsl(
+    sync_code = run_wsl(
         f"echo 'cd /content/Vernacular_Pedagogy && git pull origin main' | {COLAB_CLI} exec -s phase2-train",
         desc="Syncing repository code on Colab",
         timeout=60
     )
+    if sync_code != 0:
+        print("[INFO] Repository not present yet, will be cloned if training runs.")
 
-    # Step 3: Execute ONNX Export Cloud Worker
-    print("\n[ORCHESTRATOR] Executing ONNX Export Cloud Worker...")
+    # Step 4: Check if merged FP32 model exists on Colab
+    print("\n[ORCHESTRATOR] Checking for existing merged FP32 model on Colab...")
+    check_cmd = (
+        f"python3 -c \""
+        f"import os, sys; "
+        f"p = '/content/indictrans2_sat_merged'; "
+        f"has_w = os.path.exists(os.path.join(p, 'model.safetensors')) or os.path.exists(os.path.join(p, 'pytorch_model.bin')); "
+        f"print('MERGED_EXISTS=' + str(has_w)); "
+        f"sys.exit(0 if has_w else 1)\""
+    )
+    check_code = run_wsl(
+        f"echo \"{check_cmd}\" | {COLAB_CLI} exec -s phase2-train",
+        desc="Verifying Merged FP32 Model Status",
+        timeout=60
+    )
+
+    if check_code != 0:
+        print("\n" + "=" * 65)
+        print("[ORCHESTRATOR] Merged FP32 model not found on Colab disk.")
+        print("Running Phase 2 Training & Merging first (~10-12 mins on T4 GPU)...")
+        print("=" * 65)
+        train_script = "/mnt/c/Users/Ashraf/Desktop/26042/scripts/run_phase2_cloud_train.py"
+        code = run_wsl(
+            f"TERM=xterm {COLAB_CLI} exec -s phase2-train --timeout 3600 -f {train_script}",
+            desc="Executing Phase 2 Cloud Training & Merging Worker",
+            timeout=3700
+        )
+        if code != 0:
+            print(f"[FATAL] Phase 2 training worker failed with exit code {code}.")
+            sys.exit(code)
+
+    # Step 5: Execute ONNX Export Cloud Worker
+    print("\n" + "=" * 65)
+    print("[ORCHESTRATOR] Executing ONNX Export Cloud Worker (~5-7 mins)...")
+    print("=" * 65)
     export_script = "/mnt/c/Users/Ashraf/Desktop/26042/scripts/export_indictrans_onnx.py"
     code = run_wsl(
         f"TERM=xterm {COLAB_CLI} exec -s phase2-train --timeout 1800 -f {export_script}",
-        desc="Running ONNX Export on Colab Tesla T4 GPU",
+        desc="Running ONNX Export & INT8 Quantization on Colab T4 GPU",
         timeout=1900
     )
     if code != 0:
-        print("[FATAL] ONNX Export worker failed on Colab.")
+        print(f"[FATAL] ONNX Export worker failed on Colab with exit code {code}.")
         sys.exit(code)
 
-    # Step 4: Download ONNX INT8 Package
+    # Step 6: Download ONNX INT8 Package
     target_archive = os.path.join(MODELS_MT, "indictrans2_sat_onnx_int8.tar.gz")
-
     print("\n[ORCHESTRATOR] Downloading ONNX INT8 Model Package...")
     wsl_dest = "/mnt/c/Users/Ashraf/Desktop/26042/models/mt/indictrans2_sat_onnx_int8.tar.gz"
     code = run_wsl(
@@ -132,34 +224,44 @@ def main():
         timeout=600
     )
 
-    # Step 5: Verify and extract
+    # Step 7: Verify, extract, and deploy into Android assets
     if os.path.exists(target_archive):
         size_mb = os.path.getsize(target_archive) / (1024 * 1024)
         print(f"\n{'=' * 65}")
         print(f"[SUCCESS] Downloaded ONNX INT8 Archive: {target_archive}")
         print(f"  Archive Size: {size_mb:.1f} MB")
 
-        with tarfile.open(target_archive, "r:gz") as tf:
-            for m in tf.getmembers():
-                print(f"    - {m.name}: {m.size:,} bytes")
-        print(f"{'=' * 65}")
-
         # Extract to models/mt/indictrans2_sat_onnx_int8/
         extract_dir = os.path.join(MODELS_MT, "indictrans2_sat_onnx_int8")
         if os.path.exists(extract_dir):
-            import shutil
             shutil.rmtree(extract_dir)
         with tarfile.open(target_archive, "r:gz") as tf:
             tf.extractall(MODELS_MT)
         print(f"[OK] Extracted to: {extract_dir}")
+
+        # Deploy files directly to Android assets (android/app/src/main/assets/models/mt/)
+        print(f"\n[ORCHESTRATOR] Deploying ONNX models & vocabularies to Android assets...")
+        deployed_files = []
+        for root, _, files in os.walk(extract_dir):
+            for file in files:
+                src_path = os.path.join(root, file)
+                dst_path = os.path.join(ANDROID_ASSETS_MT, file)
+                shutil.copy2(src_path, dst_path)
+                f_size = os.path.getsize(dst_path) / (1024 * 1024)
+                deployed_files.append((file, f_size))
+
+        print(f"[DEPLOY] Deployed {len(deployed_files)} files to {ANDROID_ASSETS_MT}:")
+        for name, size in deployed_files:
+            print(f"  ✓ {name} ({size:.1f} MB)")
+        print(f"{'=' * 65}")
     else:
         print(f"[ERROR] Expected archive not found at: {target_archive}")
         sys.exit(1)
 
-    # Step 6: Clean up Colab Session
+    # Step 8: Clean up Colab Session to preserve credits
     print("\n[ORCHESTRATOR] Stopping Colab session to preserve compute credits...")
     run_wsl(f"{COLAB_CLI} stop -s phase2-train", desc="Stopping Colab Session", timeout=30)
-    print("\n[PHASE 2.6 COMPLETE] ONNX INT8 model exported, downloaded, and extracted!")
+    print("\n[PHASE 2.6 COMPLETE] ONNX INT8 model exported, downloaded, and bundled into Android app!")
 
 
 if __name__ == "__main__":
