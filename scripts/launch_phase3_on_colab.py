@@ -160,11 +160,19 @@ def main():
     # 2. Inject HF_TOKEN into remote Colab kernel
     inject_hf_token(token, session_name=active_session)
 
+    # 2.5 Upload local Mozilla voicebank archive to Colab if available
+    local_vb = os.path.join(BASE_DIR, "data", "processed", "voice_bank", "santali_voicebank_16k.tar.gz")
+    if os.path.exists(local_vb):
+        vb_size_mb = os.path.getsize(local_vb) / (1024 * 1024)
+        print(f"\n[ORCHESTRATOR] Found preprocessed local Mozilla voicebank ({vb_size_mb:.1f} MB). Uploading to Colab...", flush=True)
+        upload_cmd = f"{COLAB_CLI} upload -s {active_session} /mnt/c/Users/Ashraf/Desktop/26042/data/processed/voice_bank/santali_voicebank_16k.tar.gz /content/santali_voicebank_16k.tar.gz"
+        run_wsl(upload_cmd, desc="Uploading local Mozilla voicebank archive to Colab", timeout=600)
+
     # 3. Run Phase 3 Training Worker
     train_script = "/mnt/c/Users/Ashraf/Desktop/26042/scripts/run_phase3_cloud_train.py"
-    train_cmd = f"TERM=xterm {COLAB_CLI} exec -s {active_session} --timeout 3600 -f {train_script}"
+    train_cmd = f"TERM=xterm {COLAB_CLI} exec -s {active_session} --timeout 5400 -f {train_script}"
     t0 = time.time()
-    code = run_wsl(train_cmd, desc=f"Starting Piper TTS Training Worker on {active_session} (T4 GPU)", timeout=3700)
+    code = run_wsl(train_cmd, desc=f"Starting Piper TTS Training Worker on {active_session} (T4 GPU)", timeout=5500)
     elapsed = (time.time() - t0) / 60
 
     if code != 0:

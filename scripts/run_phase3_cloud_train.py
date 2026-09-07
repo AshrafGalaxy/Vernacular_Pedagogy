@@ -3,13 +3,13 @@
 """
 Phase 3 Cloud Training Worker (Runs on Google Colab Tesla T4 GPU VM)
 Automates the full Voice Synthesis pipeline on the remote Colab instance:
-1. Clones/pulls Vernacular_Pedagogy repository.
+1. Clones/pulls latest main branch of Vernacular_Pedagogy repository.
 2. Installs Piper TTS, PyTorch Lightning, and audio processing tools.
-3. Ingests authentic Santhali speech data (AI4Bharat IndicVoices-R & Common Voice).
-4. Preprocesses dataset with deterministic Ol Chiki character-level alignment.
-5. Warm-starts fine-tuning of Piper VITS architecture on NVIDIA T4 GPU.
-6. Exports trained checkpoint to ONNX format (sat_piper_model.onnx ~30 MB).
-7. Serializes configuration JSON (sat_piper_model.onnx.json).
+3. Ingests authentic Santhali speech data (XKaab 100hrs & 4hrs + IndicVoices-R).
+4. Preprocesses dataset with deterministic Ol Chiki -> IPA phonetic alignment.
+5. Warm-starts fine-tuning of Piper VITS architecture on NVIDIA T4 GPU (80 epochs).
+6. Exports trained checkpoint to ONNX format (sat_piper_model.onnx ~60 MB).
+7. Serializes configuration JSON (sat_piper_model.onnx.json) with IPA & Ol Chiki maps.
 8. Runs in-process inference validation on sample FLN pedagogical phrases.
 9. Packages /content/sat_piper_model.tar.gz ready for download.
 """
@@ -118,7 +118,7 @@ def install_dependencies():
             description="Clone rhasspy/piper repository"
         )
 
-    # Patch 1: Remove unbuildable piper-phonemize from requirements.txt (not needed for --phoneme-type text)
+    # Patch 1: Remove unbuildable piper-phonemize from requirements.txt
     req_path = os.path.join(piper_dir, "src", "python", "requirements.txt")
     if os.path.exists(req_path):
         with open(req_path, "r", encoding="utf-8") as f:
@@ -126,24 +126,55 @@ def install_dependencies():
         with open(req_path, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
-    # Patch 2: Pure-Python Ol Chiki codepoints phonemizer in preprocess.py
+    # Patch 2: Ol Chiki -> IPA Phonemizer with standard eSpeak acoustic map in preprocess.py
     prep_path = os.path.join(piper_dir, "src", "python", "piper_train", "preprocess.py")
     if os.path.exists(prep_path):
         with open(prep_path, "r", encoding="utf-8") as f:
             prep_code = f.read()
-        pure_py = '''def _build_sat_map():
-    m = {"_": [0], "^": [1], "$": [2], " ": [3]}
-    punct = [".", ",", "!", "?", "-", ":", ";", "\'", \'"\', "(", ")", "[", "]", "/", "`", "~", chr(0x1C7E), chr(0x1C7F)]
-    cid = 4
-    for p in punct:
-        if p not in m:
-            m[p] = [cid]
-            cid += 1
-    for code in range(0x1C50, 0x1C80):
-        c = chr(code)
-        if c not in m:
-            m[c] = [cid]
-            cid += 1
+
+        ipa_preprocess_code = '''import sys
+sys.path.insert(0, "/content/Vernacular_Pedagogy")
+from scripts.santhali_phonemizer import santhali_to_ipa
+
+# Base 154-symbol eSpeak IPA map matching piper_base.ckpt (en_US/lessac/medium)
+_BASE_ESPEAK_MAP = {
+    "_": [0], "^": [1], "$": [2], " ": [3], "!": [4], "\'": [5], "(": [6], ")": [7],
+    ",": [8], "-": [9], ".": [10], ":": [11], ";": [12], "?": [13], "a": [14], "b": [15],
+    "c": [16], "d": [17], "e": [18], "f": [19], "h": [20], "i": [21], "j": [22], "k": [23],
+    "l": [24], "m": [25], "n": [26], "o": [27], "p": [28], "q": [29], "r": [30], "s": [31],
+    "t": [32], "u": [33], "v": [34], "w": [35], "x": [36], "y": [37], "z": [38], "æ": [39],
+    "ç": [40], "ð": [41], "ø": [42], "ħ": [43], "ŋ": [44], "œ": [45], "ǀ": [46], "ǁ": [47],
+    "ǂ": [48], "ǃ": [49], "ɐ": [50], "ɑ": [51], "ɒ": [52], "ɓ": [53], "ɔ": [54], "ɕ": [55],
+    "ɖ": [56], "ɗ": [57], "ɘ": [58], "ə": [59], "ɚ": [60], "ɛ": [61], "ɜ": [62], "ɞ": [63],
+    "ɟ": [64], "ɠ": [65], "ɡ": [66], "ɢ": [67], "ɣ": [68], "ɤ": [69], "ɥ": [70], "ɦ": [71],
+    "ɧ": [72], "ɨ": [73], "ɪ": [74], "ɫ": [75], "ɬ": [76], "ɭ": [77], "ɮ": [78], "ɯ": [79],
+    "ɰ": [80], "ɱ": [81], "ɲ": [82], "ɳ": [83], "ɴ": [84], "ɵ": [85], "ɶ": [86], "ɸ": [87],
+    "ɹ": [88], "ɺ": [89], "ɻ": [90], "ɽ": [91], "ɾ": [92], "ʀ": [93], "ʁ": [94], "ʂ": [95],
+    "ʃ": [96], "ʄ": [97], "ʈ": [98], "ʉ": [99], "ʊ": [100], "ʋ": [101], "ʌ": [102], "ʍ": [103],
+    "ʎ": [104], "ʏ": [105], "ʐ": [106], "ʑ": [107], "ʒ": [108], "ʔ": [109], "ʕ": [110],
+    "ʘ": [111], "ʙ": [112], "ʛ": [113], "ʜ": [114], "ʝ": [115], "ʟ": [116], "ʡ": [117],
+    "ʢ": [118], "ʲ": [119], "ˈ": [120], "ˌ": [121], "ː": [122], "ˑ": [123], "˞": [124],
+    "β": [125], "θ": [126], "χ": [127], "ᵻ": [128], "ⱱ": [129], "0": [130], "1": [131],
+    "2": [132], "3": [133], "4": [134], "5": [135], "6": [136], "7": [137], "8": [138],
+    "9": [139], "̧": [140], "̃": [141], "̪": [142], "̯": [143], "̩": [144], "ʰ": [145],
+    "ˤ": [146], "ε": [147], "↓": [148], "#": [149], "\\"": [150], "↑": [151], "̺": [152],
+    "̻": [153]
+}
+
+def _build_sat_map():
+    m = dict(_BASE_ESPEAK_MAP)
+    # Direct Ol Chiki aliases to base IPA phoneme IDs
+    aliases = {
+        "ᱛ": "t", "ᱫ": "d", "ᱠ": "k", "ᱜ": "ɡ", "ᱯ": "p", "ᱵ": "b",
+        "ᱢ": "m", "ᱱ": "n", "ᱝ": "ŋ", "ᱧ": "ɲ", "ᱬ": "ɳ", "ᱴ": "ʈ",
+        "ᱰ": "ɖ", "ᱲ": "ɽ", "ᱪ": "c", "ᱡ": "ɟ", "ᱥ": "s", "ᱦ": "h",
+        "ᱞ": "l", "ᱨ": "r", "ᱣ": "w", "ᱭ": "j", "ᱚ": "ɔ", "ᱟ": "a",
+        "ᱤ": "i", "ᱩ": "u", "ᱮ": "e", "ᱳ": "o", "ᱸ": "̃", "ᱹ": "ə",
+        "ᱻ": "ː", "ᱼ": "ʔ", "᱾": ".", "᱿": ".", "ᱷ": "ʰ"
+    }
+    for olck_char, ipa_sym in aliases.items():
+        if ipa_sym in _BASE_ESPEAK_MAP:
+            m[olck_char] = _BASE_ESPEAK_MAP[ipa_sym]
     return m
 
 _GLOBAL_CODEPOINTS = {"sat": _build_sat_map(), "default": _build_sat_map()}
@@ -155,7 +186,8 @@ def get_max_phonemes():
     return 256
 
 def phonemize_codepoints(text):
-    return [[c for c in text]]
+    ipa_str = santhali_to_ipa(text)
+    return [[c for c in ipa_str]]
 
 def phoneme_ids_codepoints(language, phonemes, missing_phonemes=None):
     cmap = _GLOBAL_CODEPOINTS.get(language, _GLOBAL_CODEPOINTS["sat"])
@@ -178,8 +210,13 @@ def tashkeel_run(t):
 phonemize_espeak = None
 phoneme_ids_espeak = None
 get_espeak_map = None'''
+
         import re
-        prep_code = re.sub(r'from piper_phonemize import[\s\S]+?tashkeel_run,\n\)', pure_py, prep_code)
+        if "from piper_phonemize import" in prep_code:
+            prep_code = re.sub(r'from piper_phonemize import[\s\S]+?tashkeel_run,\n\)', ipa_preprocess_code, prep_code)
+        elif "def _build_sat_map():" in prep_code:
+            prep_code = re.sub(r'def _build_sat_map\(\):[\s\S]+?get_espeak_map = None', ipa_preprocess_code, prep_code)
+
         with open(prep_path, "w", encoding="utf-8") as f:
             f.write(prep_code)
 
@@ -202,7 +239,7 @@ get_espeak_map = None'''
             with open(ma_init, "w", encoding="utf-8") as f:
                 f.write(ma_code)
 
-    # Patch 5: PyTorch 2.6 & NumPy 2.x backward compatibility for PyTorch Lightning in piper_train
+    # Patch 5: PyTorch 2.6 & NumPy 2.x backward compatibility
     compat_code = (
         "import numpy as np\n"
         "np.Inf = np.inf\n"
@@ -238,7 +275,6 @@ get_espeak_map = None'''
         with open(main_py, "r", encoding="utf-8") as f:
             main_code = f.read()
 
-        # Intercept base checkpoint before Trainer construction
         code_before_trainer = (
             "    base_ckpt = getattr(args, 'resume_from_checkpoint', None)\n"
             "    args.resume_from_checkpoint = None\n"
@@ -249,7 +285,6 @@ get_espeak_map = None'''
                 code_before_trainer + "    trainer = Trainer.from_argparse_args(args)"
             )
 
-        # Configure checkpoint saving with explicit dirpath and save_last=True
         old_cb = "trainer.callbacks = [ModelCheckpoint(every_n_epochs=args.checkpoint_epochs)]"
         new_cb = (
             "ckpt_dir = args.dataset_dir / 'lightning_logs' / 'checkpoints'\n"
@@ -266,7 +301,6 @@ get_espeak_map = None'''
         if old_cb in main_code:
             main_code = main_code.replace(old_cb, new_cb)
 
-        # Warm-start model_g and model_d weights before trainer.fit
         warmstart_code = (
             "    if base_ckpt:\n"
             "        _LOGGER.info('Warm-starting weights from base checkpoint: %s', base_ckpt)\n"
@@ -282,7 +316,7 @@ get_espeak_map = None'''
         with open(main_py, "w", encoding="utf-8") as f:
             f.write(main_code)
 
-    # Patch 7: Legacy TorchScript ONNX export (dynamo=False) to bypass Dynamo assertions
+    # Patch 7: TorchScript ONNX export (dynamo=False)
     export_py = os.path.join(piper_dir, "src", "python", "piper_train", "export_onnx.py")
     if os.path.exists(export_py):
         with open(export_py, "r", encoding="utf-8") as f:
@@ -318,29 +352,26 @@ def setup_repository():
     return repo_dir
 
 
-def prepare_dataset(repo_dir: str, auth_token: str = ""):
-    """Fetch or ingest Santhali speech dataset and generate LJSpeech format."""
-    print("\n--- Step 3: Preparing Santhali Speech Dataset ---", flush=True)
+def prepare_dataset(repo_dir: str, auth_token: str = "", target_clips: int = 2500):
+    """Fetch and ingest Santhali speech dataset and generate LJSpeech format."""
+    print(f"\n--- Step 3: Preparing Santhali Speech Dataset (Target: {target_clips} clips) ---", flush=True)
     data_dir = "/content/dataset"
     os.makedirs(data_dir, exist_ok=True)
     meta_path = os.path.join(data_dir, "metadata.csv")
     wavs_dir = os.path.join(data_dir, "wavs")
 
-    # Check if pre-packaged voicebank exists in repo or /content
+    # Check if pre-packaged voicebank exists in /content (e.g. uploaded from local Mozilla Common Voice)
     pre_packaged = "/content/santali_voicebank_16k.tar.gz"
     if os.path.exists(pre_packaged):
-        print(f"[INGEST] Unpacking existing archive: {pre_packaged}...", flush=True)
+        print(f"[INGEST] Unpacking user's pre-packaged voicebank: {pre_packaged}...", flush=True)
         run_cmd_strict(f"tar -xzf {pre_packaged} -C {data_dir}", description="Unpack voicebank")
-    else:
-        # Run 04_fetch_santhali_audio.py to stream from Hugging Face
-        print("[INGEST] Running 04_fetch_santhali_audio.py...", flush=True)
-        token_arg = f"--hf-token {auth_token}" if auth_token else ""
-        run_cmd_strict(
-            f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir} --max-samples 700",
-            description="Fetch Santhali speech dataset"
-        )
 
-    # Validate dataset content
+    token_arg = f"--hf-token {auth_token}" if auth_token else ""
+    run_cmd_strict(
+        f"python3 {repo_dir}/scripts/04_fetch_santhali_audio.py {token_arg} --output-dir {data_dir} --target-total {target_clips} --single-speaker",
+        description="Fetch Santhali speech dataset"
+    )
+
     if not os.path.exists(meta_path) or not os.path.exists(wavs_dir):
         raise RuntimeError(f"[FATAL] Dataset missing metadata.csv or wavs/ in {data_dir}")
 
@@ -349,8 +380,6 @@ def prepare_dataset(repo_dir: str, auth_token: str = ""):
     wav_count = len(glob.glob(os.path.join(wavs_dir, "*.wav")))
 
     print(f"[OK] Dataset prepared: {clip_count} metadata rows, {wav_count} WAV files.", flush=True)
-    if clip_count < 10 or wav_count < 10:
-        print(f"[WARN] Sample count ({wav_count}) is small, but proceeding with fine-tuning test.")
     return data_dir
 
 
@@ -392,7 +421,7 @@ def download_base_checkpoint():
     return base_ckpt
 
 
-def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 25):
+def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 80):
     """Fine-tune Piper VITS on Tesla T4 GPU."""
     print(f"\n--- Step 6: Fine-Tuning Piper VITS (Max Epochs: {max_epochs}) ---", flush=True)
     cmd = (
@@ -402,7 +431,7 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 25):
         f"--devices 1 "
         f"--batch-size 16 "
         f"--validation-split 0.05 "
-        f"--checkpoint-epochs 5 "
+        f"--checkpoint-epochs 10 "
         f"--max_epochs {max_epochs} "
         f"--resume_from_checkpoint {base_ckpt}"
     )
@@ -415,13 +444,12 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 25):
 def export_onnx_model(training_dir: str):
     """Export the trained PyTorch checkpoint to ONNX format."""
     print("\n--- Step 7: Exporting to ONNX Format ---", flush=True)
-    # Find latest checkpoint across checkpoints/ and lightning_logs/
     ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "checkpoints", "*.ckpt"))
     if not ckpts:
         ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "**", "*.ckpt"), recursive=True)
     if not ckpts:
         raise RuntimeError(f"No checkpoint found in {training_dir}/lightning_logs")
-    # Prefer last.ckpt if available, otherwise latest by ctime
+
     last_ckpt = os.path.join(training_dir, "lightning_logs", "checkpoints", "last.ckpt")
     latest_ckpt = last_ckpt if os.path.exists(last_ckpt) else max(ckpts, key=os.path.getctime)
     print(f"[EXPORT] Converting checkpoint: {latest_ckpt}", flush=True)
@@ -432,7 +460,6 @@ def export_onnx_model(training_dir: str):
     export_cmd = f"python3 -m piper_train.export_onnx {latest_ckpt} {onnx_out}"
     run_cmd_strict(export_cmd, cwd="/content/piper/src/python", description="ONNX export")
 
-    # Copy config.json to model.onnx.json
     config_src = os.path.join(training_dir, "config.json")
     if os.path.exists(config_src):
         shutil.copy2(config_src, json_out)
@@ -445,37 +472,98 @@ def export_onnx_model(training_dir: str):
     return onnx_out, json_out
 
 
+def run_insitu_validation(onnx_path: str, config_path: str):
+    """Run in-process audio synthesis verification on Colab before packaging."""
+    print("\n--- Step 8: In-Situ Audio Synthesis Verification ---", flush=True)
+    test_dir = "/content/test_samples"
+    os.makedirs(test_dir, exist_ok=True)
+
+    validation_script = f"""
+import sys, os, json, numpy as np, onnxruntime as ort, soundfile as sf
+sys.path.insert(0, "/content/Vernacular_Pedagogy")
+from scripts.santhali_phonemizer import santhali_to_ipa
+
+with open('{config_path}', 'r', encoding='utf-8') as f:
+    cfg = json.load(f)
+
+ph_map = cfg['phoneme_id_map']
+session = ort.InferenceSession('{onnx_path}', providers=['CPUExecutionProvider'])
+
+test_sentences = [
+    ("val_01", "ᱡᱚᱦᱟᱨ, ᱪᱮᱫ ᱞᱮᱠᱟ ᱢᱮᱱᱟᱜ ᱵᱤᱱᱟ?"),
+    ("val_02", "ᱤᱧ ᱫᱚ ᱵᱤᱨ ᱛᱮᱧ ᱥᱮᱱᱚᱜᱼᱟ᱾"),
+    ("val_03", "ᱱᱚᱣᱟ ᱫᱚ ᱢᱤᱫᱴᱟᱝ ᱯᱩᱛᱷᱤ ᱠᱟᱱᱟ᱾"),
+    ("val_04", "ᱢᱚᱬᱮ ᱜᱚᱴᱟᱝ ᱪᱮᱬᱮ ᱩᱰᱟᱹᱣ ᱮᱱᱟ᱾"),
+    ("val_05", "ᱟᱢ ᱚᱠᱟᱛᱮᱢ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ?")
+]
+
+pad = ph_map.get('_', [0])[0]
+bos = ph_map.get('^', [1])[0]
+eos = ph_map.get('$', [2])[0]
+
+print("[VALIDATION] Synthesizing 5 sample sentences...")
+for sid, text in test_sentences:
+    ipa = santhali_to_ipa(text)
+    ids = [bos]
+    for c in ipa:
+        if c in ph_map:
+            ids.extend(ph_map[c])
+            ids.append(pad)
+    ids.append(eos)
+
+    phoneme_ids = np.array(ids, dtype=np.int64)[None, :]
+    lengths = np.array([phoneme_ids.shape[1]], dtype=np.int64)
+    scales = np.array([0.667, 1.0, 0.8], dtype=np.float32)
+
+    audio = session.run(None, {{
+        'input': phoneme_ids,
+        'input_lengths': lengths,
+        'scales': scales
+    }})[0].squeeze()
+
+    out_wav = os.path.join('{test_dir}', f'{{sid}}.wav')
+    sf.write(out_wav, audio, 16000)
+    dur = len(audio) / 16000.0
+    rms = np.sqrt(np.mean(audio**2))
+    print(f"  {{sid}}: {{text[:25]}} -> {{dur:.2f}}s, RMS: {{rms:.4f}} -> {{out_wav}}")
+
+print("[OK] In-situ synthesis verified successfully!")
+"""
+    run_cmd_strict(f"python3 -c '{validation_script}'", description="In-situ synthesis verification")
+
+
 def package_artifacts():
-    """Compress the exported ONNX model and config into a single tarball."""
-    print("\n--- Step 8: Packaging TTS Model Artifacts ---", flush=True)
+    """Compress the exported ONNX model, config, and sample WAVs into a single tarball."""
+    print("\n--- Step 9: Packaging TTS Model Artifacts ---", flush=True)
     tar_path = "/content/sat_piper_model.tar.gz"
     run_cmd_strict(
-        f"cd /content && tar -czf {tar_path} sat_piper_model.onnx sat_piper_model.onnx.json",
+        f"cd /content && tar -czf {tar_path} sat_piper_model.onnx sat_piper_model.onnx.json test_samples",
         description="Package TTS model"
     )
     size_mb = os.path.getsize(tar_path) / (1024 * 1024)
-    print(f"\n{'=' * 60}", flush=True)
+    print(f"\n{'=' * 65}", flush=True)
     print(f"[PHASE 3 SUCCESS] Final Piper TTS Model Package Ready!", flush=True)
     print(f"  Path: {tar_path}", flush=True)
     print(f"  Package Size: {size_mb:.1f} MB", flush=True)
-    print(f"{'=' * 60}", flush=True)
+    print(f"{'=' * 65}", flush=True)
     return tar_path
 
 
 def main():
-    print("=" * 60, flush=True)
+    print("=" * 65, flush=True)
     print("Vernacular Pedagogy: Phase 3 Cloud Voice Synthesis (Piper TTS)", flush=True)
-    print("=" * 60, flush=True)
+    print("=" * 65, flush=True)
 
     auth_token = os.environ.get("HF_TOKEN", "").strip()
 
     install_dependencies()
     repo_dir = setup_repository()
-    dataset_dir = prepare_dataset(repo_dir, auth_token=auth_token)
+    dataset_dir = prepare_dataset(repo_dir, auth_token=auth_token, target_clips=2500)
     training_dir = preprocess_dataset(dataset_dir)
     base_ckpt = download_base_checkpoint()
-    train_piper_model(training_dir, base_ckpt, max_epochs=25)
-    export_onnx_model(training_dir)
+    train_piper_model(training_dir, base_ckpt, max_epochs=80)
+    onnx_path, config_path = export_onnx_model(training_dir)
+    run_insitu_validation(onnx_path, config_path)
     package_artifacts()
 
 

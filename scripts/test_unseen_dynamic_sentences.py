@@ -34,6 +34,8 @@ import onnxruntime as ort
 import scipy.io.wavfile as wav
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
+from scripts.santhali_phonemizer import santhali_to_ipa
 DB_PATH = os.path.join(BASE_DIR, "assets", "fln_lexicon.sqlite")
 TRAIN_TSV_PATH = os.path.join(BASE_DIR, "data", "processed", "bitext", "train.tsv")
 MT_DIR = os.path.join(BASE_DIR, "models", "mt", "indictrans2_sat_int8_ct2")
@@ -99,8 +101,12 @@ def synthesize_audio(session, char_to_id, text: str):
     eos = char_to_id.get("$", [2])[0] if isinstance(char_to_id.get("$"), list) else char_to_id.get("$", 2)
     pad = char_to_id.get("_", [0])[0] if isinstance(char_to_id.get("_"), list) else char_to_id.get("_", 0)
 
+    # Convert Ol Chiki orthography to standard IPA phoneme representation
+    ipa_text = santhali_to_ipa(text)
+    lookup_text = ipa_text if any(c in char_to_id for c in ipa_text) else text
+
     phoneme_ids = [bos]
-    for char in text:
+    for char in lookup_text:
         if char in char_to_id:
             val = char_to_id[char]
             if isinstance(val, list):

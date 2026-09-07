@@ -26,6 +26,8 @@ Get_started_managed_agents.ipynb
 # Audio raw dumps (keep cache seeds, ignore large scrapes)
 data/raw/youtube_audio/*.mp3
 data/raw/common_voice/clips/
+Santali dataset Mozilla/
+data/processed/voice_bank/
 
 # IDE and OS files
 .DS_Store
