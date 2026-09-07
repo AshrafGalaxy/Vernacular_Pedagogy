@@ -68,3 +68,14 @@
       Pair titles, language chips, badges, and button labels with `maxLines = 1`, `softWrap = false`, and `overflow = TextOverflow.Ellipsis`. Avoid overly verbose bracketed subtitles inside compact paired boxes (e.g. use `ᱥᱟᱱᱛᱟᱲᱤ (Santali)` / `ᱥᱟᱱᱛᱟᱲᱤ (संथाली)` rather than lengthy text that forces uneven line wrapping).
     - **Centered Optical Alignment**:
       Containers must use `verticalAlignment = Alignment.CenterVertically` with centered inner content (`verticalArrangement = Arrangement.Center`), ensuring optical baseline symmetry and an immaculate, minimalist, premium finish.
+
+## 5. Ephemeral Screenshot Verification & Zero Cache Accumulation
+- **Never Retain Screenshot Artifacts**:
+  - Screenshots taken via ADB for physical device or emulator UI verification are strictly transient and ephemeral inspection tools.
+  - **Immediate Deletion**: Immediately after viewing/verifying a screenshot, permanently delete the screenshot file from:
+    - The local artifact / brain directory (`*.png`)
+    - The device temporary storage (`/sdcard/*.png` or `/data/local/tmp/*.png`)
+    - Any temporary media storage (`.tempmediaStorage`)
+  - **Zero Cache Bloat**: Never collect, persist, or accumulate screenshot image binaries across turns. Do not leave screenshots building up cache memory on the host machine or the connected Android device.
+  - **Text-First Walkthrough Documentation**: In walkthroughs, reports, and summaries, document layout structure, coordinates, and verification state using clear, structured markdown and concise technical descriptions rather than storing heavy image binaries.
+
