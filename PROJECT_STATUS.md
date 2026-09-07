@@ -16,6 +16,7 @@ Last Updated: Phase 3 Stack & Pipeline Hardening Complete
 | **Dual Audio Ingest (XKaab + IndicVoices-R)** | **100% COMPLETE** | Cloud / Local Pipeline | **NONE** (Raw audio decoding & gating verified) |
 | **Piper TTS Cloud Training & Export** | **100% COMPLETE** | Google Colab (T4) | **NONE** (`sat_piper_model.onnx` 60.6 MB verified, RTF 0.05–0.08) |
 | **Colab Multi-Account Failover** | **100% COMPLETE** | Local Orchestrator | **NONE** (`ashraf305a@gmail.com` authenticated & run) |
+| **Hugging Face Model Hub Hosting** | **100% COMPLETE** | Hugging Face Hub | **NONE** ([`Ashraf01k/vernacular-pedagogy-santhali`](https://huggingface.co/Ashraf01k/vernacular-pedagogy-santhali) live) |
 | **Android Edge Runtime Packaging** | **PLANNED** | Local Workstation | **Ready: Phase 4 Implementation** |
 
 
@@ -89,10 +90,16 @@ Comprehensive breakdown available in [`docs/STORAGE_FOOTPRINT_SPECIFICATION.md`]
 
 ## 5. Hugging Face Model Hub & Agent Skill
 
-- **Model Hub Repository:** `Ashraf01k/vernacular-pedagogy-santhali`
+- **Model Hub Repository:** [`Ashraf01k/vernacular-pedagogy-santhali`](https://huggingface.co/Ashraf01k/vernacular-pedagogy-santhali) (**LIVE & 100% COMPLETE**)
 - **Automation Upload Script:** [`scripts/upload_models_to_huggingface.py`](file:///c:/Users/Ashraf/Desktop/26042/scripts/upload_models_to_huggingface.py)
+- **Hosted Assets:**
+  - `sat_piper_model.onnx` (60.6 MB) & `sat_piper_model.onnx.json`
+  - `sat_piper_model.tar.gz` (55.7 MB)
+  - `indictrans2_sat_int8_ct2.tar.gz` (286.7 MB)
+  - `fln_lexicon.sqlite` (184 KB)
+  - Classroom benchmark audio samples (`samples/*.wav`)
+  - Complete Model Card (`README.md`) with tags and offline usage code.
 - **Agent Skill:** Registered at [`.agents/skills/hf-cli/SKILL.md`](file:///c:/Users/Ashraf/Desktop/26042/.agents/skills/hf-cli/SKILL.md) and global Antigravity skills.
-- **Status:** CLI installed and authenticated as `user=Ashraf01k`. Ready for automated upload upon granting write access.
 
 ---
 
