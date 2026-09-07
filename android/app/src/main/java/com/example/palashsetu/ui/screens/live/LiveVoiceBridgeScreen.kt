@@ -431,10 +431,12 @@ fun LiveVoiceBridgeScreen(
                                             modifier = Modifier.size(18.dp)
                                         )
                                         Text(
-                                            text = if (isHindi) "सुनाएं (Piper TTS)" else "Listen (Piper TTS)",
+                                            text = if (isHindi) "सुनाएं" else "Listen",
                                             fontSize = 13.sp,
                                             fontWeight = FontWeight.Bold,
-                                            color = Color.White
+                                            color = Color.White,
+                                            maxLines = 1,
+                                            softWrap = false
                                         )
                                     }
                                 }
