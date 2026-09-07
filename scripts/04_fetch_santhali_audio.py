@@ -131,7 +131,8 @@ def fetch_from_huggingface(
     split: str = "train",
     hf_token: Optional[str] = None,
     output_dir: str = DEFAULT_OUTPUT_DIR,
-    max_samples: Optional[int] = None
+    max_samples: Optional[int] = None,
+    data_files: Optional[str] = None
 ) -> Tuple[int, float]:
     """
     Streams or downloads speech dataset from Hugging Face, validates Ol Chiki transcripts,
@@ -153,24 +154,16 @@ def fetch_from_huggingface(
     print(f"\n[FETCH] Connecting to Hugging Face dataset: '{dataset_name}' (config={config}, split={split}, cap={target_cap})...")
 
     try:
+        load_kwargs = {"split": split, "token": token or None}
         if config:
-            ds = load_dataset(dataset_name, config, split=split, token=token or None, streaming=True)
-        else:
-            ds = load_dataset(dataset_name, split=split, token=token or None, streaming=True)
-        is_streaming = True
-        print(f"[FETCH] Connected in streaming mode for {dataset_name}.")
-    except Exception as e_stream:
-        print(f"[WARN] Streaming mode failed ({e_stream}), trying standard download...")
-        try:
-            if config:
-                ds = load_dataset(dataset_name, config, split=split, token=token or None)
-            else:
-                ds = load_dataset(dataset_name, split=split, token=token or None)
-            is_streaming = False
-            print(f"[FETCH] Loaded {len(ds)} raw samples from {dataset_name}.")
-        except Exception as e:
-            print(f"[WARN] Failed to load {dataset_name} ({config}): {e}")
-            return 0, 0.0
+            load_kwargs["name"] = config
+        if data_files:
+            load_kwargs["data_files"] = data_files
+        ds = load_dataset(dataset_name, **load_kwargs)
+        print(f"[FETCH] Successfully loaded {len(ds)} samples from {dataset_name}.")
+    except Exception as e:
+        print(f"[WARN] Failed to load {dataset_name} ({config or data_files}): {e}")
+        return 0, 0.0
 
     saved_count = 0
     total_duration = 0.0
@@ -266,15 +259,15 @@ def main():
     print(f"Hugging Face Auth: {'Detected' if token else 'None'}")
     print("=" * 60)
 
-    # Source 1: AI4Bharat IndicVoices-R (Studio-quality Indian Vernacular Speech)
-    print("\nAttempting Source 1: AI4Bharat IndicVoices-R ('ai4bharat/indicvoices_r', Santali)...")
-    c1, t1 = fetch_from_huggingface("ai4bharat/indicvoices_r", config="Santali", split="train", hf_token=token, output_dir=args.output_dir, max_samples=500)
+    # Source 1: XKaab Santhali Speech Corpus (2,619 Clean Verified Clips, Native Ol Chiki, Single 218 MB Parquet)
+    print("\nAttempting Source 1: XKaab Santali Speech Corpus ('XKaab/ASR-Santali_4hrs', valid)...")
+    c1, t1 = fetch_from_huggingface("XKaab/ASR-Santali_4hrs", config=None, split="valid", hf_token=token, output_dir=args.output_dir, max_samples=500)
     total_clips += c1
     total_time += t1
 
-    # Source 2: XKaab Santhali Speech Corpus (Acoustic Diversity)
-    print("\nAttempting Source 2: XKaab Santali Speech Corpus ('XKaab/ASR-Santali_4hrs', valid)...")
-    c2, t2 = fetch_from_huggingface("XKaab/ASR-Santali_4hrs", config=None, split="valid", hf_token=token, output_dir=args.output_dir, max_samples=200)
+    # Source 2: AI4Bharat IndicVoices-R (Targeted Single-Shard Ingestion)
+    print("\nAttempting Source 2: AI4Bharat IndicVoices-R ('ai4bharat/indicvoices_r', Santali shard 0)...")
+    c2, t2 = fetch_from_huggingface("ai4bharat/indicvoices_r", config=None, data_files="Santali/train-00000-of-00108.parquet", split="train", hf_token=token, output_dir=args.output_dir, max_samples=200)
     total_clips += c2
     total_time += t2
 
