@@ -53,14 +53,16 @@ def load_fln_records(filepath: str):
 def generate_semantically_sound_bitext(fln_records):
     """
     Generates natural, semantically verified pedagogical sentences.
-    Prevents absurd cross-product anomalies (e.g., 'taking a chair out of a schoolbag',
-    'blue papaya', or 'red jackfruit').
+    Prevents absurd cross-product anomalies and expands all 15 NIPUN Bharat
+    domains into plural, polite, and dynamic sentence structures.
     """
-    # Build fast lookup dictionary: hindi_word -> olchiki_word
-    vocab_map = {}
+    # Group records by domain
+    domain_records = {}
     for r in fln_records:
-        clean_hi = r["source_hindi_normalized"].split("(")[0].strip()
-        vocab_map[clean_hi] = r["target_olchiki_santhali"]
+        d = r.get("domain", "general")
+        if d not in domain_records:
+            domain_records[d] = []
+        domain_records[d].append(r)
 
     pairs = []
     seen = set()
@@ -74,113 +76,149 @@ def generate_semantically_sound_bitext(fln_records):
                 seen.add(key)
                 pairs.append({"source": norm_hi, "target": norm_sat})
 
-    # 1. Add all 368 verified FLN gold-standard records (sentences and single-word vocabulary)
+    # 1. Base FLN gold-standard seeds (368 verified records)
     for r in fln_records:
         add_pair(r["source_hindi_normalized"], r["target_olchiki_santhali"])
 
-    # 2. Schoolbag items: ONLY items that physically fit inside a schoolbag
-    bag_items = [
+    # Extract domains
+    cmd_records = domain_records.get("classroom_command", [])
+    act_records = domain_records.get("vocabulary_actions", [])
+    obj_records = domain_records.get("vocabulary_classroom_objects", [])
+    num_records = domain_records.get("vocabulary_numbers", [])
+    anim_records = domain_records.get("vocabulary_animals_fauna", [])
+    fruit_records = domain_records.get("vocabulary_fruits_food", [])
+    veg_records = domain_records.get("vocabulary_vegetables", [])
+    body_records = domain_records.get("vocabulary_body_parts", [])
+    color_records = domain_records.get("vocabulary_colors_attributes", [])
+    praise_records = domain_records.get("socio_emotional_praise", [])
+    kin_records = domain_records.get("kinship_community", [])
+    env_records = domain_records.get("environment_realia", [])
+
+    # 2. Classroom Imperatives & Action Expansions (Singular, Plural, Polite, Spatial)
+    command_expansions = [
+        ("सभी बच्चे {hi}", "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ {sat}"),
+        ("कृपया {hi}", "ᱫᱟᱭᱟᱠᱟᱛᱮ {sat}"),
+        ("यहाँ {hi}", "ᱱᱚᱸᱰᱮ {sat}"),
+        ("वहाँ {hi}", "ᱚᱸᱰᱮ {sat}"),
+        ("जल्दी {hi}", "ᱞᱚᱜᱚᱱ {sat}"),
+        ("ध्यान से {hi}", "ᱫᱷᱮᱭᱟᱱ ᱛᱮ {sat}"),
+        ("आकर {hi}", "ᱦᱮᱡ ᱠᱟᱛᱮ {sat}"),
+        ("सभी छात्र {hi}", "ᱥᱟᱱᱟᱢ ᱪᱮᱞᱟ {sat}"),
+        ("घर पर {hi}", "ᱚᱲᱟᱜ ᱨᱮ {sat}"),
+        ("कक्षा में {hi}", "ᱠᱞᱟᱥ ᱨᱮ {sat}"),
+    ]
+    for r in cmd_records + act_records:
+        hi_base = r["source_hindi_normalized"]
+        sat_base = r["target_olchiki_santhali"]
+        for hi_tpl, sat_tpl in command_expansions:
+            add_pair(hi_tpl.format(hi=hi_base), sat_tpl.format(sat=sat_base))
+
+    # 3. Classroom Object Manipulation & Dialogue Frames
+    obj_templates = [
+        ("अपनी {hi} निकालो", "ᱟᱢᱟᱜ {sat} ᱚᱰᱚᱠ ᱢᱮ"),
+        ("अपनी {hi} मेज पर रखो", "ᱟᱢᱟᱜ {sat} ᱴᱮᱵᱩᱞ ᱨᱮ ᱫᱚᱦᱚᱭ ᱢᱮ"),
+        ("अपनी {hi} बस्ते में रखो", "ᱟᱢᱟᱜ {sat} ᱛᱷᱟᱹᱞᱤ ᱨᱮ ᱫᱚᱦᱚᱭ ᱢᱮ"),
+        ("अपनी {hi} दिखाओ", "ᱟᱢᱟᱜ {sat} ᱩᱫᱩᱜ ᱢᱮ"),
+        ("मुझे {hi} दो", "ᱤᱧ {sat} ᱮᱢᱟᱹᱧ ᱢᱮ"),
+        ("क्या आपके पास {hi} है?", "ᱪᱮᱫ ᱟᱢ ᱴᱷᱮᱱ {sat} ᱢᱮᱱᱟᱜ-ᱟ?"),
+        ("यहाँ {hi} है", "ᱱᱚᱸᱰᱮ {sat} ᱢᱮᱱᱟᱜ-ᱟ"),
+        ("वह {hi} है", "ᱦᱟᱹᱱᱤ {sat} ᱠᱟᱱᱟᱭ"),
+        ("यह किसकी {hi} है?", "ᱱᱚᱣᱟ ᱫᱚ ᱚᱠᱚᱭᱟᱜ {sat} ᱠᱟᱱᱟ?"),
+        ("अपनी {hi} साफ़ रखो", "ᱟᱢᱟᱜ {sat} ᱥᱟᱯᱷᱟ ᱫᱚᱦᱚᱭ ᱢᱮ"),
+        ("सभी बच्चे अपनी {hi} निकालें", "ᱥᱟᱱᱟᱢ ᱜᱤᱫᱽᱨᱟᱹ ᱟᱯᱱᱟᱨᱟᱜ {sat} ᱚᱰᱚᱠ ᱯᱮ"),
+        ("काले बोर्ड पर {hi} रखो", "ᱦᱮᱸᱫᱮ ᱵᱳᱨᱰ ᱨᱮ {sat} ᱫᱚᱦᱚᱭ ᱢᱮ"),
+    ]
+    for r in obj_records:
+        hi_word = r["source_hindi_normalized"]
+        sat_word = r["target_olchiki_santhali"]
+        for hi_t, sat_t in obj_templates:
+            add_pair(hi_t.format(hi=hi_word), sat_t.format(sat=sat_word))
+
+    # 4. Body Parts & Hygiene Commands
+    body_templates = [
+        ("अपना {hi} साफ़ करो", "ᱟᱢᱟᱜ {sat} ᱥᱟᱯᱷᱟᱭ ᱢᱮ"),
+        ("अपना {hi} छुओ", "ᱟᱢᱟᱜ {sat} ᱡᱚᱴᱮᱫ ᱢᱮ"),
+        ("अपना {hi} दिखाओ", "ᱟᱢᱟᱜ {sat} ᱩᱫᱩᱜ ᱢᱮ"),
+        ("दोनों {hi} साफ़ करो", "ᱵᱟᱱᱟᱨ {sat} ᱥᱟᱯᱷᱟᱭ ᱢᱮ"),
+        ("दोनों {hi} धो लो", "ᱵᱟᱱᱟᱨ {sat} ᱟᱹᱨᱩᱵ ᱢᱮ"),
+    ]
+    for r in body_records:
+        hi_word = r["source_hindi_normalized"]
+        sat_word = r["target_olchiki_santhali"]
+        for hi_t, sat_t in body_templates:
+            add_pair(hi_t.format(hi=hi_word), sat_t.format(sat=sat_word))
+
+    # 5. Fruits and Vegetables (Eating, Washing, Bringing)
+    food_templates = [
+        ("मीठा {hi} खाओ", "ᱦᱮᱲᱮᱢ {sat} ᱡᱚᱢ ᱢᱮ"),
+        ("ताज़ा {hi} खाओ", "ᱵᱤᱞᱤ {sat} ᱡᱚᱢ ᱢᱮ"),
+        ("थाली में {hi} रखो", "ᱛᱷᱟᱹᱨᱤ ᱨᱮ {sat} ᱫᱚᱦᱚᱭ ᱢᱮ"),
+        ("मुझे {hi} पसंद है", "ᱤᱧ {sat} ᱠᱩᱥᱤᱭᱟᱜ-ᱟᱹᱧ"),
+        ("क्या आप {hi} खाएंगे?", "ᱪᱮᱫ ᱟᱢ {sat} ᱮᱢ ᱡᱚᱢ-ᱟ?"),
+        ("बाज़ार से {hi} लाओ", "ᱵᱟᱡᱟᱨ ᱠᱷᱚᱱ {sat} ᱟᱹᱜᱩᱭ ᱢᱮ"),
+    ]
+    for r in fruit_records + veg_records:
+        hi_word = r["source_hindi_normalized"]
+        sat_word = r["target_olchiki_santhali"]
+        for hi_t, sat_t in food_templates:
+            add_pair(hi_t.format(hi=hi_word), sat_t.format(sat=sat_word))
+
+    # 6. Animals & Nature Descriptions
+    animal_templates = [
+        ("{hi} घास खा रहा है", "{sat} ᱜᱷᱟᱥᱮ ᱡᱚᱢᱮᱫᱟ"),
+        ("{hi} पानी पी रहा है", "{sat} ᱫᱟᱜ-ᱮ ᱧᱩᱭᱮᱫᱟ"),
+        ("{hi} दौड़ रहा है", "{sat} ᱫᱟᱹᱲᱮᱫᱟ"),
+        ("पेड़ पर {hi} बैठा है", "ᱫᱟᱨᱮ ᱨᱮ {sat} ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ"),
+        ("वहाँ एक {hi} है", "ᱚᱸᱰᱮ ᱢᱤᱫᱴᱟᱝ {sat} ᱢᱮᱱᱟᱭᱟ"),
+        ("घर के पास {hi} है", "ᱚᱲᱟᱜ ᱥᱩᱨ ᱨᱮ {sat} ᱢᱮᱱᱟᱭᱟ"),
+    ]
+    for r in anim_records:
+        hi_word = r["source_hindi_normalized"]
+        sat_word = r["target_olchiki_santhali"]
+        for hi_t, sat_t in animal_templates:
+            add_pair(hi_t.format(hi=hi_word), sat_t.format(sat=sat_word))
+
+    # 7. Numeracy & Counting Combinations (Numbers 1-20 with School Objects)
+    count_nouns = [
         ("किताब", "ᱯᱩᱛᱷᱤ"),
         ("पेंसिल", "ᱯᱮᱱᱥᱤᱞ"),
-        ("रबर", "ᱨᱚᱵᱚᱨ"),
-        ("स्लेट", "ᱥᱞᱮᱴ"),
-        ("चॉक", "ᱪᱚᱠ")
+        ("लड़का", "ᱠᱚᱲᱟ"),
+        ("लड़की", "ᱠᱩᱲᱤ"),
+        ("पेड़", "ᱫᱟᱨᱮ"),
+        ("सेब", "ᱥᱮᱣ"),
+        ("आम", "ᱩᱞ"),
+        ("चिड़िया", "ᱪᱮᱬᱮ"),
+        ("तारा", "ᱤᱯᱤᱞ"),
+        ("फूल", "ᱵᱟᱦᱟ"),
     ]
-    for hi_item, sat_item in bag_items:
-        add_pair(f"बस्ते से {hi_item} निकालो", f"ᱛᱷᱟᱹᱞᱤ ᱠᱷᱚᱱ {sat_item} ᱚᱰᱚᱠ ᱢᱮ")
-        add_pair(f"बस्ते में {hi_item} रखो", f"ᱛᱷᱟᱹᱞᱤ ᱨᱮ {sat_item} ᱫᱚᱦᱚᱭ ᱢᱮ")
-        add_pair(f"अपना {hi_item} दिखाओ", f"ᱟᱢᱟᱜ {sat_item} ᱩᱫᱩᱜ ᱢᱮ")
-        add_pair(f"मुझे {hi_item} दो", f"ᱤᱧ {sat_item} ᱮᱢᱟᱹᱧ ᱢᱮ")
-        add_pair(f"क्या आपके पास {hi_item} है?", f"ᱪᱮᱫ ᱟᱢ ᱴᱷᱮᱱ {sat_item} ᱢᱮᱱᱟᱜ-ᱟ?")
+    for r in num_records[:20]:
+        hi_num = r["source_hindi_normalized"]
+        sat_num = r["target_olchiki_santhali"]
+        for hi_n, sat_n in count_nouns:
+            add_pair(f"{hi_num} {hi_n}", f"{sat_num} {sat_n}")
+            add_pair(f"यहाँ {hi_num} {hi_n} हैं", f"ᱱᱚᱸᱰᱮ {sat_num} {sat_n} ᱢᱮᱱᱟᱜ-ᱟ")
+            add_pair(f"मुझे {hi_num} {hi_n} दो", f"ᱤᱧ {sat_num} {sat_n} ᱮᱢᱟᱹᱧ ᱢᱮ")
 
-    # 3. Classroom furniture & large items (Natural commands)
-    large_items = [
-        ("कुर्सी", "ᱢᱟᱹᱪᱤ", "कुर्सी पर बैठो", "ᱢᱟᱹᱪᱤ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ"),
-        ("कुर्सी", "ᱢᱟᱹᱪᱤ", "कुर्सी यहाँ लाओ", "ᱢᱟᱹᱪᱤ ᱱᱚᱸᱰᱮ ᱟᱹᱜᱩᱭ ᱢᱮ"),
-        ("मेज", "ᱴᱮᱵᱩᱞ", "मेज पर किताब रखो", "ᱴᱮᱵᱩᱞ ᱨᱮ ᱯᱩᱛᱷᱤ ᱫᱚᱦᱚᱭ ᱢᱮ"),
-        ("मेज", "ᱴᱮᱵᱩᱞ", "मेज साफ़ करो", "ᱴᱮᱵᱩᱞ ᱥᱟᱯᱷᱟᱭ ᱢᱮ"),
-        ("घंटी", "ᱜᱷᱟᱹᱱᱴᱤ", "घंटी बजाओ", "ᱜᱷᱟᱹᱱᱴᱤ ᱨᱩᱭ ᱢᱮ"),
-        ("घंटी", "ᱜᱷᱟᱹᱱᱴᱤ", "घंटी बज गई", "ᱜᱷᱟᱹᱱᱴᱤ ᱥᱟᱰᱮ ᱮᱱᱟ")
+    # 8. Kinship & Respectful Social Expressions
+    kin_templates = [
+        ("अपने {hi} की बात सुनो", "ᱟᱢᱟᱜ {sat} ᱟᱜ ᱠᱟᱛᱷᱟ ᱟᱧᱡᱚᱢ ᱢᱮ"),
+        ("अपने {hi} को प्रणाम करो", "ᱟᱢᱟᱜ {sat} ᱫᱚ ᱡᱚᱦᱟᱨ ᱟᱭ ᱢᱮ"),
+        ("अपने {hi} की मदद करो", "ᱟᱢᱟᱜ {sat} ᱜᱚᱲᱚᱣᱟᱭ ᱢᱮ"),
     ]
-    for _, _, hi_sent, sat_sent in large_items:
-        add_pair(hi_sent, sat_sent)
+    for r in kin_records:
+        hi_word = r["source_hindi_normalized"]
+        sat_word = r["target_olchiki_santhali"]
+        for hi_t, sat_t in kin_templates:
+            add_pair(hi_t.format(hi=hi_word), sat_t.format(sat=sat_word))
 
-    # 4. Realistic and Natural Color Associations (No 'blue papaya' or 'red jackfruit'!)
-    natural_color_pairs = [
-        # Red
-        ("लाल सेब", "ᱟᱨᱟᱜ ᱥᱮᱣ", "यह लाल सेब है", "ᱱᱚᱣᱟ ᱫᱚ ᱟᱨᱟᱜ ᱥᱮᱣ ᱠᱟᱱᱟ"),
-        ("लाल सेब", "ᱟᱨᱟᱜ ᱥᱮᱣ", "मीठा लाल सेब खाओ", "ᱦᱮᱲᱮᱢ ᱟᱨᱟᱜ ᱥᱮᱣ ᱡᱚᱢ ᱢᱮ"),
-        ("लाल अनार", "ᱟᱨᱟᱜ ᱟᱱᱟᱨ", "लाल अनार लाओ", "ᱟᱨᱟᱜ ᱟᱱᱟᱨ ᱟᱹᱜᱩᱭ ᱢᱮ"),
-        ("लाल टमाटर", "ᱟᱨᱟᱜ ᱵᱤᱞᱟᱹᱛᱤ", "ताज़ा लाल टमाटर खाओ", "ᱵᱤᱞᱤ ᱟᱨᱟᱜ ᱵᱤᱞᱟᱹᱛᱤ ᱡᱚᱢ ᱢᱮ"),
-        # Yellow
-        ("पीला केला", "ᱥᱟᱥᱟᱝ ᱠᱟᱭᱨᱟ", "पीला केला मीठा है", "ᱥᱟᱥᱟᱝ ᱠᱟᱭᱨᱟ ᱫᱚ ᱦᱮᱲᱮᱢ ᱜᱮᱭᱟ"),
-        ("पीला केला", "ᱥᱟᱥᱟᱝ ᱠᱟᱭᱨᱟ", "ताज़ा पीला केला खाओ", "ᱵᱤᱞᱤ ᱥᱟᱥᱟᱝ ᱠᱟᱭᱨᱟ ᱡᱚᱢ ᱢᱮ"),
-        ("पीला आम", "ᱥᱟᱥᱟᱝ ᱩᱞ", "पेड़ पर पीला आम है", "ᱫᱟᱨᱮ ᱨᱮ ᱥᱟᱥᱟᱝ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ"),
-        ("पीला आम", "ᱥᱟᱥᱟᱝ ᱩᱞ", "मीठा पीला आम खाओ", "ᱦᱮᱲᱮᱢ ᱥᱟᱥᱟᱝ ᱩᱞ ᱡᱚᱢ ᱢᱮ"),
-        # Green
-        ("हरी मिर्च", "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱢᱟᱹᱨᱤᱪ", "हरी मिर्च तीखी है", "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱢᱟᱹᱨᱤᱪ ᱫᱚ ᱦᱟᱫᱽ ᱜᱮᱭᱟ"),
-        ("हरा अमरूद", "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱟᱢᱨᱩᱫᱽ", "ताज़ा हरा अमरूद खाओ", "ᱵᱤᱞᱤ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱟᱢᱨᱩᱫᱽ ᱡᱚᱢ ᱢᱮ"),
-        ("हरी घास", "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱷᱟᱥ", "गाय हरी घास खा रही है", "ᱜᱟᱹᱭ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱷᱟᱥᱮ ᱡᱚᱢᱮᱫᱟ"),
-        ("हरा पत्ता", "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱥᱟᱠᱟᱢ", "पेड़ का पत्ता हरा है", "ᱫᱟᱨᱮ ᱨᱮᱭᱟᱜ ᱥᱟᱠᱟᱢ ᱫᱚ ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱜᱮᱭᱟ"),
-        # White
-        ("सफेद दूध", "ᱯᱩᱸᱰ ᱛᱳᱣᱟ", "गरम सफेद दूध पियो", "ᱞᱚᱞᱚ ᱯᱩᱸᱰ ᱛᱳᱣᱟ ᱧᱩᱭ ᱢᱮ"),
-        ("सफेद चावल", "ᱯᱩᱸᱰ ᱪᱟᱣᱞᱮ", "थाली में सफेद चावल रखो", "ᱛᱷᱟᱹᱨᱤ ᱨᱮ ᱯᱩᱸᱰ ᱪᱟᱣᱞᱮ ᱫᱚᱦᱚᱭ ᱢᱮ"),
-        ("सफेद चॉक", "ᱯᱩᱸᱰ ᱪᱚᱠ", "सफेद चॉक से लिखो", "ᱯᱩᱸᱰ ᱪᱚᱠ ᱛᱮ ᱚᱞ ᱢᱮ"),
-        # Black
-        ("काला कौआ", "ᱦᱮᱸᱫᱮ ᱠᱟᱶᱦᱮ", "पेड़ पर काला कौआ बैठा है", "ᱫᱟᱨᱮ ᱨᱮ ᱦᱮᱸᱫᱮ ᱠᱟᱶᱦᱮ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ"),
-        ("काली स्लेट", "ᱦᱮᱸᱫᱮ ᱥᱞᱮᱴ", "काली स्लेट पर चॉक से लिखो", "ᱦᱮᱸᱫᱮ ᱥᱞᱮᱴ ᱨᱮ ᱪᱚᱠ ᱛᱮ ᱚᱞ ᱢᱮ")
-    ]
-    for hi_np, sat_np, hi_sent, sat_sent in natural_color_pairs:
-        add_pair(hi_np, sat_np)
-        add_pair(hi_sent, sat_sent)
+    # 9. Praise & Pedagogical Encouragement
+    for r in praise_records:
+        hi_p = r["source_hindi_normalized"]
+        sat_p = r["target_olchiki_santhali"]
+        add_pair(f"{hi_p}, तुमने अच्छा किया", f"{sat_p}, ᱟᱢ ᱱᱟᱯᱟᱭ ᱠᱟᱹᱢᱤ ᱠᱮᱫᱟ")
+        add_pair(f"{hi_p}, आगे बढ़ो", f"{sat_p}, ᱞᱟᱦᱟᱜ ᱢᱮ")
 
-    # 5. Realistic Counting (Concrete Nouns & Body Parts)
-    counting_seeds = [
-        ("एक", "ᱢᱤᱫ", "किताब", "ᱯᱩᱛᱷᱤ"),
-        ("दो", "ᱵᱟᱨ", "किताब", "ᱯᱩᱛᱷᱤ"),
-        ("तीन", "ᱯᱮ", "किताब", "ᱯᱩᱛᱷᱤ"),
-        ("चार", "ᱯᱩᱱ", "किताब", "ᱯᱩᱛᱷᱤ"),
-        ("पाँच", "ᱢᱚᱬᱮ", "किताब", "ᱯᱩᱛᱷᱤ"),
-        ("एक", "ᱢᱤᱫ", "पेंसिल", "ᱯᱮᱱᱥᱤᱞ"),
-        ("दो", "ᱵᱟᱨ", "पेंसिल", "ᱯᱮᱱᱥᱤᱞ"),
-        ("तीन", "ᱯᱮ", "पेंसिल", "ᱯᱮᱱᱥᱤᱞ"),
-        ("पाँच", "ᱢᱚᱬᱮ", "पेंसिल", "ᱯᱮᱱᱥᱤᱞ"),
-        ("एक", "ᱢᱤᱫ", "सेब", "ᱥᱮᱣ"),
-        ("दो", "ᱵᱟᱨ", "सेब", "ᱥᱮᱣ"),
-        ("तीन", "ᱯᱮ", "सेब", "ᱥᱮᱣ"),
-        ("चार", "ᱯᱩᱱ", "सेब", "ᱥᱮᱣ"),
-        ("पाँच", "ᱢᱚᱬᱮ", "सेब", "ᱥᱮᱣ"),
-        ("दो", "ᱵᱟᱨ", "आँख", "ᱢᱮᱫ"),
-        ("दो", "ᱵᱟᱨ", "कान", "ᱞᱩᱛᱩᱨ"),
-        ("दो", "ᱵᱟᱨ", "हाथ", "ᱛᱤ"),
-        ("दो", "ᱵᱟᱨ", "पैर", "ᱡᱟᱸᱜᱟ"),
-        ("दस", "ᱜᱮᱞ", "उँगली", "ᱠᱟᱹᱴᱩᱵ")
-    ]
-    for num_hi, num_sat, noun_hi, noun_sat in counting_seeds:
-        add_pair(f"{num_hi} {noun_hi}", f"{num_sat} {noun_sat}")
-        add_pair(f"यहाँ {num_hi} {noun_hi} हैं", f"ᱱᱚᱸᱰᱮ {num_sat} {noun_sat} ᱢᱮᱱᱟᱜ-ᱟ")
-        add_pair(f"मुझे {num_hi} {noun_hi} दो", f"ᱤᱧ {num_sat} {noun_sat} ᱮᱢᱟᱹᱧ ᱢᱮ")
-        add_pair(f"{num_hi} {noun_hi} गिनकर बताओ", f"{num_sat} {noun_sat} ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱞᱟᱹᱭ ᱢᱮ")
-
-    # 6. Natural Animal & Nature Sentences
-    nature_sentences = [
-        ("गाय घास खा रही है", "ᱜᱟᱹᱭ ᱜᱷᱟᱥᱮ ᱡᱚᱢᱮᱫᱟ"),
-        ("बैल खेत जोत रहा है", "ᱰᱟᱝᱜᱽᱨᱟ ᱠᱷᱮᱛᱮ ᱥᱤᱭᱮᱫᱟ"),
-        ("बकरी पत्ता खा रही है", "ᱢᱮᱨᱚᱢ ᱥᱟᱠᱟᱢᱮ ᱡᱚᱢᱮᱫᱟ"),
-        ("कुत्ता दरवाज़े पर बैठा है", "ᱥᱮᱛᱟ ᱫᱩᱣᱟᱹᱨ ᱨᱮ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ"),
-        ("बिल्ली दूध पी रही है", "ᱯᱩᱥᱤ ᱛᱳᱣᱟᱭ ᱧᱩᱭᱮᱫᱟ"),
-        ("चिड़िया आकाश में उड़ रही है", "ᱪᱮᱬᱮ ᱥᱮᱨᱢᱟ ᱨᱮ ᱩᱰᱟᱹᱣᱜ ᱠᱟᱱᱟᱭ"),
-        ("तोता पेड़ पर बैठा है", "ᱢᱤᱨᱩ ᱫᱟᱨᱮ ᱨᱮ ᱫᱩᱲᱩᱵ ᱟᱠᱟᱱᱟᱭ"),
-        ("मोर नाच रहा है", "ᱢᱟᱨᱟᱜ ᱮᱱᱮᱡ ᱠᱟᱱᱟᱭ"),
-        ("नदी में साफ़ पानी बह रहा है", "ᱜᱟᱰᱟ ᱨᱮ ᱥᱟᱯᱷᱟ ᱫᱟᱜ ᱞᱤᱸᱜᱤᱱ ᱠᱟᱱᱟ"),
-        ("सूरज पूरब से निकलता है", "ᱵᱮᱲᱟ ᱫᱚ ᱥᱟᱢᱟᱝ ᱠᱷᱚᱱ ᱨᱟᱠᱟᱵ-ᱟ"),
-        ("बारिश हो रही है", "ᱫᱟᱜ ᱡᱟᱹᱲᱤ ᱧᱩᱨᱩᱜ ᱠᱟᱱᱟ"),
-        ("पेड़ हमें फल देते हैं", "ᱫᱟᱨᱮ ᱫᱚ ᱡᱚ ᱮᱢᱟᱵᱚᱱᱟ")
-    ]
-    for hi_sent, sat_sent in nature_sentences:
-        add_pair(hi_sent, sat_sent)
-
-    # 7. Ingest authentic BPCC bitext if present
+    # 10. Ingest authentic BPCC/IN22 bitext if present
     if os.path.exists(BPCC_TSV):
         print(f"\nMerging authentic BPCC bitext from {BPCC_TSV}...")
         bpcc_count = 0
