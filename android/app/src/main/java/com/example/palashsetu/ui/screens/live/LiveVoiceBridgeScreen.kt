@@ -31,8 +31,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.core.content.ContextCompat
 import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
 import androidx.compose.runtime.mutableStateOf
@@ -74,13 +80,14 @@ fun LiveVoiceBridgeScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val asrEngine = remember { AsrEngine() }
+    val asrEngine = remember { AsrEngine(context) }
     val nmtEngine = remember { NmtEngine() }
     val audioEngine = remember { PedagogicalAudioEngine(context) }
 
     val isHindi = currentLanguage == "hi"
 
     var isMicActive by remember { mutableStateOf(false) }
+    var micAudioLevel by remember { mutableStateOf(0.1f) }
     var teacherHindiText by remember {
         mutableStateOf("बच्चो, अपनी गणित की किताब निकालो और पृष्ठ संख्या बारह खोलो।")
     }
@@ -94,6 +101,11 @@ fun LiveVoiceBridgeScreen(
     var playProgress by remember { mutableStateOf(0f) }
     var currentSpeed by remember { mutableStateOf(0.9f) }
     var selectedDialect by remember { mutableStateOf("ᱥᱟᱱᱛᱟᱲᱤ") }
+
+    // Pre-warm ASR and VAD models in background
+    LaunchedEffect(Unit) {
+        asrEngine.initialize()
+    }
 
     fun triggerTranslation(hindiSentence: String) {
         teacherHindiText = hindiSentence
@@ -119,6 +131,40 @@ fun LiveVoiceBridgeScreen(
                     }
                 }
             }
+        }
+    }
+
+    fun startListeningSession() {
+        isMicActive = true
+        coroutineScope.launch {
+            asrEngine.startListening().collect { state ->
+                when (state) {
+                    is AsrState.Listening -> {
+                        micAudioLevel = state.audioLevel
+                    }
+                    is AsrState.PartialText -> {
+                        teacherHindiText = state.text
+                    }
+                    is AsrState.Recognized -> {
+                        isMicActive = false
+                        micAudioLevel = 0.1f
+                        triggerTranslation(state.finalSentence)
+                        playAudio()
+                    }
+                    AsrState.Idle -> {
+                        isMicActive = false
+                        micAudioLevel = 0.1f
+                    }
+                }
+            }
+        }
+    }
+
+    val micPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            startListeningSession()
         }
     }
 
@@ -540,23 +586,19 @@ fun LiveVoiceBridgeScreen(
             // Push-to-Talk Floating Microphone Button (Centered inside Box container)
             FloatingActionButton(
                 onClick = {
-                    isMicActive = !isMicActive
-                    if (isMicActive) {
-                        coroutineScope.launch {
-                            asrEngine.startListening().collect { state ->
-                                when (state) {
-                                    is AsrState.Listening -> {}
-                                    is AsrState.PartialText -> teacherHindiText = state.text
-                                    is AsrState.Recognized -> {
-                                        isMicActive = false
-                                        triggerTranslation(state.finalSentence)
-                                        playAudio()
-                                    }
-                                    AsrState.Idle -> isMicActive = false
-                                }
-                            }
+                    if (!isMicActive) {
+                        val hasPermission = ContextCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.RECORD_AUDIO
+                        ) == PackageManager.PERMISSION_GRANTED
+
+                        if (hasPermission) {
+                            startListeningSession()
+                        } else {
+                            micPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
                         }
                     } else {
+                        isMicActive = false
                         asrEngine.stopListening()
                     }
                 },

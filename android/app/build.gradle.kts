@@ -37,6 +37,10 @@ android {
         excludes += "/META-INF/{AL2.0,LGPL2.1}"
       }
     }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 kotlin {
@@ -84,4 +88,5 @@ dependencies {
 
   // Edge AI Neural Inference
   implementation(libs.onnxruntime.android)
+  implementation(libs.vosk.android)
 }
