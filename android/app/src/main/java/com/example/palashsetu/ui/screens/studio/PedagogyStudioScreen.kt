@@ -70,7 +70,7 @@ fun PedagogyStudioScreen(
     var showPdfDownloadedNotification by remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
-    val audioEngine = remember { PedagogicalAudioEngine() }
+    val audioEngine = remember { PedagogicalAudioEngine(context) }
 
     val controlCornerShape = RoundedCornerShape(4.dp)
     val cardCornerShape = RoundedCornerShape(8.dp)

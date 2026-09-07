@@ -82,9 +82,8 @@ fun FlnPhrasebookScreen(
     val searchInteractionSource = remember { MutableInteractionSource() }
     val isSearchFocused by searchInteractionSource.collectIsFocusedAsState()
     val searchFocusRequester = remember { FocusRequester() }
-
     val coroutineScope = rememberCoroutineScope()
-    val audioEngine = remember { PedagogicalAudioEngine() }
+    val audioEngine = remember { PedagogicalAudioEngine(context) }
 
     val categories = listOf(
         PhraseCategory("ALL", "सभी", "All"),
@@ -118,7 +117,7 @@ fun FlnPhrasebookScreen(
     fun playPhrase(phrase: FlnPhrase) {
         coroutineScope.launch {
             currentlyPlayingId = phrase.id
-            audioEngine.playSynthesizedAudio(phrase.olchiki).collect { state ->
+            audioEngine.playSynthesizedAudio(phrase.olchiki, phrase.id).collect { state ->
                 if (state is AudioPlayerState.Finished || state is AudioPlayerState.Idle) {
                     currentlyPlayingId = null
                 }

@@ -72,10 +72,11 @@ fun LiveVoiceBridgeScreen(
     onLanguageToggle: ((String) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val asrEngine = remember { AsrEngine() }
     val nmtEngine = remember { NmtEngine() }
-    val audioEngine = remember { PedagogicalAudioEngine() }
+    val audioEngine = remember { PedagogicalAudioEngine(context) }
 
     val isHindi = currentLanguage == "hi"
 
