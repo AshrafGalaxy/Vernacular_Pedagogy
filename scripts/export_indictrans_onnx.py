@@ -282,6 +282,14 @@ def main():
             dummy_input_ids = torch.ones(1, 32, dtype=torch.long)
             dummy_attention_mask = torch.ones(1, 32, dtype=torch.long)
 
+            export_kwargs = {
+                "opset_version": 14,
+                "do_constant_folding": True,
+            }
+            import inspect
+            if "dynamo" in inspect.signature(torch.onnx.export).parameters:
+                export_kwargs["dynamo"] = False
+
             torch.onnx.export(
                 encoder,
                 (dummy_input_ids, dummy_attention_mask),
@@ -293,8 +301,7 @@ def main():
                     "attention_mask": {0: "batch_size", 1: "sequence_length"},
                     "last_hidden_state": {0: "batch_size", 1: "sequence_length"},
                 },
-                opset_version=14,
-                do_constant_folding=True,
+                **export_kwargs,
             )
             print(f"  [OK] Encoder exported: {os.path.getsize(encoder_path)/(1024*1024):.1f} MB")
 
@@ -330,7 +337,8 @@ def main():
                     flat_past = []
                     for layer_past in past_kv:
                         for tensor in layer_past:
-                            flat_past.append(tensor)
+                            flat_new = tensor
+                            flat_past.append(flat_new)
                     return (logits,) + tuple(flat_past)
 
             decoder_wrapper = DecoderWrapper(model)
@@ -373,104 +381,106 @@ def main():
                 input_names=["decoder_input_ids", "encoder_hidden_states", "encoder_attention_mask"],
                 output_names=output_names,
                 dynamic_axes=dynamic_axes,
-                opset_version=14,
-                do_constant_folding=True,
+                **export_kwargs,
             )
             print(f"  [OK] Decoder exported: {os.path.getsize(decoder_path)/(1024*1024):.1f} MB")
 
             # Decoder with past export (iterative autoregressive steps)
-            print("  [ONNX] Exporting decoder_with_past (autoregressive step)...")
+            try:
+                print("  [ONNX] Exporting decoder_with_past (autoregressive step)...")
 
-            class DecoderWithPastWrapper(torch.nn.Module):
-                """Wraps the full model for decoder with past KV cache export."""
-                def __init__(self, full_model, num_layers):
-                    super().__init__()
-                    self.model = full_model
-                    self.num_layers = num_layers
+                class DecoderWithPastWrapper(torch.nn.Module):
+                    """Wraps the full model for decoder with past KV cache export."""
+                    def __init__(self, full_model, num_layers):
+                        super().__init__()
+                        self.model = full_model
+                        self.num_layers = num_layers
 
-                def forward(self, decoder_input_ids, encoder_attention_mask, *past_kv_flat):
-                    past_key_values = []
-                    idx = 0
-                    for _ in range(self.num_layers):
-                        layer_past = (
-                            past_kv_flat[idx],     # decoder key
-                            past_kv_flat[idx + 1], # decoder value
-                            past_kv_flat[idx + 2], # encoder key (cross-attention)
-                            past_kv_flat[idx + 3], # encoder value (cross-attention)
+                    def forward(self, decoder_input_ids, encoder_attention_mask, *past_kv_flat):
+                        past_key_values = []
+                        idx = 0
+                        for _ in range(self.num_layers):
+                            layer_past = (
+                                past_kv_flat[idx],     # decoder key
+                                past_kv_flat[idx + 1], # decoder value
+                                past_kv_flat[idx + 2], # encoder key (cross-attention)
+                                past_kv_flat[idx + 3], # encoder value (cross-attention)
+                            )
+                            past_key_values.append(layer_past)
+                            idx += 4
+
+                        outputs = self.model(
+                            decoder_input_ids=decoder_input_ids,
+                            encoder_outputs=None,
+                            attention_mask=encoder_attention_mask,
+                            past_key_values=tuple(past_key_values),
+                            use_cache=True,
                         )
-                        past_key_values.append(layer_past)
-                        idx += 4
 
-                    outputs = self.model(
-                        decoder_input_ids=decoder_input_ids,
-                        encoder_outputs=None,
-                        attention_mask=encoder_attention_mask,
-                        past_key_values=tuple(past_key_values),
-                        use_cache=True,
-                    )
+                        logits = outputs.logits
+                        new_past = outputs.past_key_values
+                        flat_new_past = []
+                        for layer_past in new_past:
+                            for tensor in layer_past:
+                                flat_new_past.append(tensor)
+                        return (logits,) + tuple(flat_new_past)
 
-                    logits = outputs.logits
-                    new_past = outputs.past_key_values
-                    flat_new_past = []
-                    for layer_past in new_past:
-                        for tensor in layer_past:
-                            flat_new_past.append(tensor)
-                    return (logits,) + tuple(flat_new_past)
+                decoder_past_wrapper = DecoderWithPastWrapper(model, num_layers)
+                decoder_past_wrapper.eval()
 
-            decoder_past_wrapper = DecoderWithPastWrapper(model, num_layers)
-            decoder_past_wrapper.eval()
+                past_input_names = ["decoder_input_ids", "encoder_attention_mask"]
+                past_dynamic_axes = {
+                    "decoder_input_ids": {0: "batch_size"},
+                    "encoder_attention_mask": {0: "batch_size", 1: "encoder_sequence_length"},
+                    "logits": {0: "batch_size", 1: "decoder_step"},
+                }
 
-            past_input_names = ["decoder_input_ids", "encoder_attention_mask"]
-            past_dynamic_axes = {
-                "decoder_input_ids": {0: "batch_size"},
-                "encoder_attention_mask": {0: "batch_size", 1: "encoder_sequence_length"},
-                "logits": {0: "batch_size", 1: "decoder_step"},
-            }
+                for i in range(num_layers):
+                    past_input_names.extend([
+                        f"past_key_values.{i}.decoder.key",
+                        f"past_key_values.{i}.decoder.value",
+                        f"past_key_values.{i}.encoder.key",
+                        f"past_key_values.{i}.encoder.value",
+                    ])
+                    for kind in ["decoder", "encoder"]:
+                        seq_dim_name = "past_decoder_sequence_length" if kind == "decoder" else "encoder_sequence_length"
+                        past_dynamic_axes[f"past_key_values.{i}.{kind}.key"] = {0: "batch_size", 2: seq_dim_name}
+                        past_dynamic_axes[f"past_key_values.{i}.{kind}.value"] = {0: "batch_size", 2: seq_dim_name}
 
-            for i in range(num_layers):
-                past_input_names.extend([
-                    f"past_key_values.{i}.decoder.key",
-                    f"past_key_values.{i}.decoder.value",
-                    f"past_key_values.{i}.encoder.key",
-                    f"past_key_values.{i}.encoder.value",
-                ])
-                for kind in ["decoder", "encoder"]:
-                    seq_dim_name = "past_decoder_sequence_length" if kind == "decoder" else "encoder_sequence_length"
-                    past_dynamic_axes[f"past_key_values.{i}.{kind}.key"] = {0: "batch_size", 2: seq_dim_name}
-                    past_dynamic_axes[f"past_key_values.{i}.{kind}.value"] = {0: "batch_size", 2: seq_dim_name}
+                past_output_names = ["logits"]
+                for i in range(num_layers):
+                    past_output_names.extend([
+                        f"present.{i}.decoder.key",
+                        f"present.{i}.decoder.value",
+                        f"present.{i}.encoder.key",
+                        f"present.{i}.encoder.value",
+                    ])
+                    for kind in ["decoder", "encoder"]:
+                        seq_dim_name = "past_decoder_sequence_length_plus_1" if kind == "decoder" else "encoder_sequence_length"
+                        past_dynamic_axes[f"present.{i}.{kind}.key"] = {0: "batch_size", 2: seq_dim_name}
+                        past_dynamic_axes[f"present.{i}.{kind}.value"] = {0: "batch_size", 2: seq_dim_name}
 
-            past_output_names = ["logits"]
-            for i in range(num_layers):
-                past_output_names.extend([
-                    f"present.{i}.decoder.key",
-                    f"present.{i}.decoder.value",
-                    f"present.{i}.encoder.key",
-                    f"present.{i}.encoder.value",
-                ])
-                for kind in ["decoder", "encoder"]:
-                    seq_dim_name = "past_decoder_sequence_length_plus_1" if kind == "decoder" else "encoder_sequence_length"
-                    past_dynamic_axes[f"present.{i}.{kind}.key"] = {0: "batch_size", 2: seq_dim_name}
-                    past_dynamic_axes[f"present.{i}.{kind}.value"] = {0: "batch_size", 2: seq_dim_name}
+                decoder_with_past_path = os.path.join(onnx_output_dir, "decoder_with_past_model.onnx")
 
-            decoder_with_past_path = os.path.join(onnx_output_dir, "decoder_with_past_model.onnx")
+                all_inputs = (
+                    dummy_decoder_input_ids,
+                    dummy_encoder_attention_mask,
+                    *dummy_past_kv,
+                )
 
-            all_inputs = (
-                dummy_decoder_input_ids,
-                dummy_encoder_attention_mask,
-                *dummy_past_kv,
-            )
-
-            torch.onnx.export(
-                decoder_past_wrapper,
-                all_inputs,
-                decoder_with_past_path,
-                input_names=past_input_names,
-                output_names=past_output_names,
-                dynamic_axes=past_dynamic_axes,
-                opset_version=14,
-                do_constant_folding=True,
-            )
-            print(f"  [OK] Decoder with past exported: {os.path.getsize(decoder_with_past_path)/(1024*1024):.1f} MB")
+                torch.onnx.export(
+                    decoder_past_wrapper,
+                    all_inputs,
+                    decoder_with_past_path,
+                    input_names=past_input_names,
+                    output_names=past_output_names,
+                    dynamic_axes=past_dynamic_axes,
+                    **export_kwargs,
+                )
+                print(f"  [OK] Decoder with past exported: {os.path.getsize(decoder_with_past_path)/(1024*1024):.1f} MB")
+            except Exception as dpe:
+                print(f"  [WARN] Decoder with past export encountered: {dpe}")
+                print("  [INFO] Proceeding with encoder + full decoder (supported natively by Android OnnxTranslator)")
 
             export_success = True
             print("[OK] Manual ONNX export complete!")
