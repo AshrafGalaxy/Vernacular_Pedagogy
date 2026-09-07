@@ -1,39 +1,55 @@
 package com.example.palashsetu.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.palashsetu.theme.Primary
-import com.example.palashsetu.theme.Secondary
-import com.example.palashsetu.theme.SurfaceContainerLow
-import androidx.compose.ui.platform.LocalContext
+import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
-import com.example.palashsetu.theme.TertiaryFixed
+import com.example.palashsetu.theme.Primary
+import com.example.palashsetu.theme.SurfaceContainerLow
 
+/**
+ * Vaani-Setu Standard Top Navigation Bar.
+ * Follows Stitch Architectural Geometry with 4dp sharp corners for the location chip,
+ * official vector location icon, status-bar inset awareness, and interactive profile avatar.
+ */
 @Composable
 fun PalashTopBar(
-    clusterName: String = "खूंटी (Hasada)",
+    locationName: String? = null,
+    clusterName: String? = null,
     teacherName: String? = null,
     isOffline: Boolean = true,
+    onProfileClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val resolvedLocation = locationName ?: clusterName ?: if (isHindi) "झारखंड" else "Jharkhand"
     val resolvedTeacherName = teacherName ?: UserSessionManager.getTeacherDisplayName(context)
     val initials = resolvedTeacherName.split(" ")
         .filter { it.isNotBlank() }
@@ -42,74 +58,64 @@ fun PalashTopBar(
         .joinToString("")
         .ifBlank { "VS" }
 
+    val controlCornerShape = RoundedCornerShape(4.dp)
+    val barCornerShape = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .background(Color.White, barCornerShape)
+            .border(
+                width = 1.dp,
+                color = Color(0xFFE2E8F0),
+                shape = barCornerShape
+            )
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .padding(horizontal = 16.dp, vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Location Cluster Chip
+        // Location Chip (Stitch Sharp 4dp Geometry + Vector Icon)
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .background(SurfaceContainerLow, RoundedCornerShape(20.dp))
-                .padding(horizontal = 12.dp, vertical = 6.dp)
+                .clip(controlCornerShape)
+                .background(SurfaceContainerLow)
+                .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
+                .padding(horizontal = 10.dp, vertical = 6.dp)
         ) {
-            Text(
-                text = "📍",
-                fontSize = 14.sp,
-                modifier = Modifier.padding(end = 4.dp)
+            Icon(
+                painter = painterResource(id = R.drawable.ic_location_on),
+                contentDescription = "Location",
+                tint = Primary,
+                modifier = Modifier.size(16.dp)
             )
+            Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = clusterName,
+                text = resolvedLocation,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
                 color = Primary
             )
         }
 
-        // Teacher Avatar & Status
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        // Clickable Teacher Avatar (Initials circle)
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(CircleShape)
+                .background(Primary)
+                .clickable {
+                    onProfileClick?.invoke()
+                },
+            contentAlignment = Alignment.Center
         ) {
-            // Status Badge
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .background(Color(0xFFE8F5E9), RoundedCornerShape(12.dp))
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(Color(0xFF2E7D32), CircleShape)
-                )
-                Text(
-                    text = " 100% Offline",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1B5E20)
-                )
-            }
-
-            // Avatar circle
-            Box(
-                modifier = Modifier
-                    .size(34.dp)
-                    .clip(CircleShape)
-                    .background(Primary),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = initials,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            }
+            Text(
+                text = initials,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
         }
     }
 }
