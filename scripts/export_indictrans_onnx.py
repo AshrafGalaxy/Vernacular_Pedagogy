@@ -29,15 +29,21 @@ import subprocess
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+repo_dir = "/content/Vernacular_Pedagogy"
+if not os.path.exists(repo_dir):
+    try:
+        subprocess.run(["git", "clone", "https://github.com/AshrafGalaxy/Vernacular_Pedagogy.git", repo_dir], check=False)
+    except Exception:
+        pass
+
 if "__file__" in globals() and __file__:
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 else:
-    SCRIPT_DIR = "/content/Vernacular_Pedagogy/scripts"
+    SCRIPT_DIR = os.path.join(repo_dir, "scripts")
 
-if os.path.exists(SCRIPT_DIR) and SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, SCRIPT_DIR)
-if "/content/Vernacular_Pedagogy/scripts" not in sys.path and os.path.exists("/content/Vernacular_Pedagogy/scripts"):
-    sys.path.insert(0, "/content/Vernacular_Pedagogy/scripts")
+for p in [SCRIPT_DIR, os.path.join(repo_dir, "scripts")]:
+    if os.path.exists(p) and p not in sys.path:
+        sys.path.insert(0, p)
 
 
 def run_cmd(cmd, cwd=None, capture=False):

@@ -172,20 +172,25 @@ def main():
     # Step 4: Check if merged FP32 model exists on Colab
     import base64
     check_py = (
-        "import os, sys\n"
+        "import os\n"
         "p = '/content/indictrans2_sat_merged'\n"
         "has_w = os.path.exists(os.path.join(p, 'model.safetensors')) or os.path.exists(os.path.join(p, 'pytorch_model.bin'))\n"
-        "print('MERGED_EXISTS=' + str(has_w))\n"
-        "sys.exit(0 if has_w else 1)\n"
+        "print('MERGED_STATUS:' + ('EXISTS' if has_w else 'NOT_FOUND'))\n"
     )
     b64 = base64.b64encode(check_py.encode()).decode()
-    check_code = run_wsl(
-        f"echo \"import base64; exec(base64.b64decode('{b64}'))\" | {COLAB_CLI} exec -s phase2-train",
-        desc="Verifying Merged FP32 Model Status",
-        timeout=60
-    )
+    cmd = f"echo \"import base64; exec(base64.b64decode('{b64}'))\" | {COLAB_CLI} exec -s phase2-train"
+    try:
+        proc = subprocess.run(
+            ["wsl", "-d", "Ubuntu", "bash", "-c", cmd],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60
+        )
+        merged_exists = "MERGED_STATUS:EXISTS" in (proc.stdout or "")
+        print(f"[ORCHESTRATOR] Merged model on Colab: {'Found' if merged_exists else 'Not found'}")
+    except Exception as e:
+        print(f"[WARN] Failed to verify merged model: {e}")
+        merged_exists = False
 
-    if check_code != 0:
+    if not merged_exists:
         print("\n" + "=" * 65)
         print("[ORCHESTRATOR] Merged FP32 model not found on Colab disk.")
         print("Running Phase 2 Training & Merging first (~10-12 mins on T4 GPU)...")
