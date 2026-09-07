@@ -58,10 +58,12 @@ data class PhraseCategory(val id: String, val hiLabel: String, val enLabel: Stri
 
 @Composable
 fun FlnPhrasebookScreen(
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
+    onLanguageToggle: ((String) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
 
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategoryId by remember { mutableStateOf("ALL") }
@@ -113,12 +115,26 @@ fun FlnPhrasebookScreen(
     val controlCornerShape = RoundedCornerShape(4.dp)
     val cardCornerShape = RoundedCornerShape(8.dp)
 
+    val categoryTranslationMap = remember {
+        mapOf(
+            "कक्षा प्रबंधन" to "Classroom",
+            "प्रशंसा व प्रोत्साहन" to "Praise",
+            "अनुशासन" to "Discipline",
+            "गतिविधि" to "Activity",
+            "गिनती व गणित" to "Math & Numbers",
+            "अभिवादन" to "Greetings"
+        )
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Background)
     ) {
-        PalashTopBar()
+        PalashTopBar(
+            currentLanguage = currentLanguage,
+            onLanguageToggle = onLanguageToggle
+        )
 
         Column(
             modifier = Modifier
@@ -133,7 +149,7 @@ fun FlnPhrasebookScreen(
             ) {
                 Column(modifier = Modifier.weight(1f).padding(end = 10.dp)) {
                     Text(
-                        text = if (isHindi) "FLN त्वरित शब्दावली" else "FLN Rapid Phrasebook",
+                        text = if (isHindi) "शब्दावली" else "FLN Bank",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = Primary
@@ -242,7 +258,7 @@ fun FlnPhrasebookScreen(
                                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                                 ) {
                                     Text(
-                                        text = phrase.category,
+                                        text = if (isHindi) phrase.category else (categoryTranslationMap[phrase.category] ?: phrase.category),
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Secondary,
@@ -251,14 +267,15 @@ fun FlnPhrasebookScreen(
                                             .padding(horizontal = 6.dp, vertical = 1.dp)
                                     )
                                     Text(
-                                        text = "Grade ${phrase.grade}",
+                                        text = if (isHindi) "कक्षा ${phrase.grade}" else "Grade ${phrase.grade}",
                                         fontSize = 10.sp,
                                         color = Color(0xFF64748B)
                                     )
                                 }
                                 Spacer(modifier = Modifier.height(4.dp))
+                                val primaryText = if (isHindi) phrase.hindi else phrase.english.ifBlank { phrase.hindi }
                                 Text(
-                                    text = phrase.hindi,
+                                    text = primaryText,
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF0F172A)
@@ -275,11 +292,19 @@ fun FlnPhrasebookScreen(
                                     fontSize = 12.sp,
                                     color = Color(0xFF663500)
                                 )
-                                Text(
-                                    text = "EN: ${phrase.english}",
-                                    fontSize = 11.sp,
-                                    color = Color(0xFF64748B)
-                                )
+                                if (isHindi && phrase.english.isNotBlank()) {
+                                    Text(
+                                        text = "EN: ${phrase.english}",
+                                        fontSize = 11.sp,
+                                        color = Color(0xFF64748B)
+                                    )
+                                } else if (!isHindi && phrase.english.isNotBlank()) {
+                                    Text(
+                                        text = "HI: ${phrase.hindi}",
+                                        fontSize = 11.sp,
+                                        color = Color(0xFF64748B)
+                                    )
+                                }
                             }
 
                             // Vector Audio Action Button (Sharp 4dp Geometry)

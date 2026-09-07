@@ -38,9 +38,8 @@ enum class BottomTab(
     val iconRes: Int
 ) {
     LIVE("लाइव सेतु", "Live Bridge", R.drawable.ic_mic),
-    PHRASEBOOK("FLN शब्दावली", "FLN Vocab", R.drawable.ic_book),
-    STUDIO("स्टूडियो", "Studio", R.drawable.ic_studio),
-    HEALTH("सिस्टम स्थिति", "System Health", R.drawable.ic_settings);
+    PHRASEBOOK("शब्दावली", "FLN Bank", R.drawable.ic_book),
+    STUDIO("स्टूडियो", "Studio", R.drawable.ic_studio);
 
     fun getLabel(isHindi: Boolean): String = if (isHindi) hiLabel else enLabel
 }
@@ -49,10 +48,10 @@ enum class BottomTab(
 fun PalashBottomNav(
     selectedTab: BottomTab,
     onTabSelected: (BottomTab) -> Unit,
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
 
     val navBarShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
     val tabCornerShape = RoundedCornerShape(4.dp)

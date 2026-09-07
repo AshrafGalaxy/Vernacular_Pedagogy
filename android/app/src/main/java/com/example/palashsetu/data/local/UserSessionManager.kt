@@ -42,12 +42,18 @@ object UserSessionManager {
         getPrefs(context).edit().putString(KEY_LANGUAGE, language).apply()
     }
 
-    fun getTeacherDisplayName(context: Context): String {
+    fun getTeacherDisplayName(context: Context, language: String = getLanguage(context)): String {
         val profile = getProfile(context)
+        val isHindi = language == "hi"
+        val normalizedSal = when {
+            profile.salutation.contains("श्रीमती") || profile.salutation.equals("Ma'am", ignoreCase = true) -> if (isHindi) "श्रीमती" else "Ma'am"
+            profile.salutation.contains("शिक्षक") || profile.salutation.equals("Teacher", ignoreCase = true) -> if (isHindi) "शिक्षक" else "Teacher"
+            else -> if (isHindi) "श्री" else "Sir"
+        }
         return if (profile.name.isNotBlank()) {
-            "${profile.salutation} ${profile.name}"
+            "$normalizedSal ${profile.name}"
         } else {
-            "शिक्षक (Teacher)"
+            if (isHindi) "शिक्षक" else "Teacher"
         }
     }
 

@@ -55,10 +55,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun PedagogyStudioScreen(
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
+    onLanguageToggle: ((String) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
 
     var selectedGrade by remember { mutableStateOf(2) }
     var isFlashcardMode by remember { mutableStateOf(false) }
@@ -76,7 +78,10 @@ fun PedagogyStudioScreen(
             .fillMaxSize()
             .background(Background)
     ) {
-        PalashTopBar()
+        PalashTopBar(
+            currentLanguage = currentLanguage,
+            onLanguageToggle = onLanguageToggle
+        )
 
         Column(
             modifier = Modifier
@@ -88,13 +93,13 @@ fun PedagogyStudioScreen(
         ) {
             Column {
                 Text(
-                    text = if (isHindi) "शिक्षण व वर्कशीट स्टूडियो" else "Pedagogy & Worksheet Studio",
+                    text = if (isHindi) "स्टूडियो" else "Studio",
                     fontSize = 19.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = Primary
                 )
                 Text(
-                    text = "Pedagogy Studio & Offline Printable Worksheets",
+                    text = if (isHindi) "ऑफलाइन प्रिंटेबल वर्कशीट व शिक्षण स्टूडियो" else "Pedagogy Studio & Offline Printable Worksheets",
                     fontSize = 11.sp,
                     color = Color(0xFF64748B)
                 )
@@ -163,7 +168,7 @@ fun PedagogyStudioScreen(
                             modifier = Modifier.size(14.dp)
                         )
                         Text(
-                            text = "ᱥᱟᱱᱛᱟᱲᱤ • Santali (Ol Chiki)",
+                            text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ • संथाली (ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ • Santali (Ol Chiki)",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
@@ -190,13 +195,13 @@ fun PedagogyStudioScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = if (isHindi) "अभ्यास पत्रक (Worksheet Canvas • Grade $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
+                            text = if (isHindi) "अभ्यास पत्रक (कक्षा $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = Primary
                         )
                         Text(
-                            text = "A4 B&W Ready",
+                            text = if (isHindi) "A4 प्रिंट हेतु तैयार" else "A4 B&W Ready",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Secondary,
@@ -205,6 +210,26 @@ fun PedagogyStudioScreen(
                                 .background(SurfaceContainerLow)
                                 .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+
+                    // Localized Date & Student Name Header
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = if (isHindi) "दिनांक: ०८/०९/२०२६" else "Date: 08/09/2026",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFF64748B)
+                        )
+                        Text(
+                            text = if (isHindi) "छात्र का नाम: ____________" else "Student Name: ____________",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFF64748B)
                         )
                     }
 
@@ -218,12 +243,7 @@ fun PedagogyStudioScreen(
                     ) {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(
-                                text = "EN: Count the Mahua fruits and Sal leaves, write the total in boxes.",
-                                fontSize = 12.sp,
-                                color = Color(0xFF475569)
-                            )
-                            Text(
-                                text = "HI: महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।",
+                                text = if (isHindi) "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।" else "Count the Mahua fruits and Sal leaves, write the total in boxes.",
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color(0xFF0F172A)
@@ -233,6 +253,11 @@ fun PedagogyStudioScreen(
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Primary
+                            )
+                            Text(
+                                text = if (isHindi) "EN: Count the Mahua fruits and Sal leaves, write the total in boxes." else "HI: महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।",
+                                fontSize = 11.sp,
+                                color = Color(0xFF475569)
                             )
                         }
                     }
@@ -264,7 +289,7 @@ fun PedagogyStudioScreen(
                                     )
                                 }
                             }
-                            Text(text = "ᱥᱟᱨᱡᱚᱢ (Sal)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
+                            Text(text = if (isHindi) "ᱥᱟᱨᱡᱚᱢ (सखुआ)" else "ᱥᱟᱨᱡᱚᱢ (Sal)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ 3 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
                         }
                         Text(text = "+", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
@@ -285,7 +310,7 @@ fun PedagogyStudioScreen(
                                     )
                                 }
                             }
-                            Text(text = "ᱢᱟᱹᱦᱩᱣᱟᱹ (Mahua)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
+                            Text(text = if (isHindi) "ᱢᱟᱹᱦᱩᱣᱟᱹ (महुआ)" else "ᱢᱟᱹᱦᱩᱣᱟᱹ (Mahua)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ 2 ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Secondary)
                         }
                         Text(text = "=", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF64748B))
@@ -299,7 +324,7 @@ fun PedagogyStudioScreen(
                                 tint = Primary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(text = "ᱢᱚᱬᱮ (Five)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
+                            Text(text = if (isHindi) "ᱢᱚᱬᱮ (पाँच)" else "ᱢᱚᱬᱮ (Five)", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Primary)
                             Text(text = "[ ? ]", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1B5E20))
                         }
                     }
@@ -400,9 +425,9 @@ fun PedagogyStudioScreen(
                     ) {
                         Text(
                             text = if (isCardFlipped) {
-                                if (isHindi) "कार्ड पृष्ठ (Back Side) - क्लिक करके पलटें" else "Card Back - Tap to flip"
+                                if (isHindi) "कार्ड पृष्ठ - क्लिक करके पलटें" else "Card Back - Tap to flip"
                             } else {
-                                if (isHindi) "कार्ड सम्मुख (Front Side) - क्लिक करके पलटें" else "Card Front - Tap to flip"
+                                if (isHindi) "कार्ड सम्मुख - क्लिक करके पलटें" else "Card Front - Tap to flip"
                             },
                             fontSize = 11.sp,
                             color = Color(0xFF64748B)
@@ -421,21 +446,25 @@ fun PedagogyStudioScreen(
                                 fontWeight = FontWeight.Bold,
                                 color = Primary
                             )
-                            Text(text = "[Sarjom Dare - Sal Tree]", fontSize = 13.sp, color = Secondary)
+                            Text(
+                                text = if (isHindi) "[सारजोम दारे - सखुआ का पेड़]" else "[Sarjom Dare - Sal Tree]",
+                                fontSize = 13.sp,
+                                color = Secondary
+                            )
                         } else {
                             Text(
-                                text = "सखुआ / साल का पेड़",
+                                text = if (isHindi) "सखुआ / साल का पेड़" else "Sal Tree (Shorea robusta)",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFF0F172A)
                             )
                             Text(
-                                text = "Sal Tree (Shorea robusta)",
+                                text = if (isHindi) "Sal Tree (Shorea robusta)" else "सखुआ / साल का पेड़",
                                 fontSize = 13.sp,
                                 color = Color(0xFF64748B)
                             )
                             Text(
-                                text = if (isHindi) "झारखंड का राज्य वृक्ष (State Tree of Jharkhand)" else "State Tree of Jharkhand",
+                                text = if (isHindi) "झारखंड का राज्य वृक्ष" else "State Tree of Jharkhand",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Secondary

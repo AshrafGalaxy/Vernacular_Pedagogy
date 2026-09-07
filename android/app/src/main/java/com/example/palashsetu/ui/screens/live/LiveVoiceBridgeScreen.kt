@@ -66,6 +66,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun LiveVoiceBridgeScreen(
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
+    onLanguageToggle: ((String) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -73,8 +75,7 @@ fun LiveVoiceBridgeScreen(
     val nmtEngine = remember { NmtEngine() }
     val audioEngine = remember { PedagogicalAudioEngine() }
 
-    val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
 
     var isMicActive by remember { mutableStateOf(false) }
     var teacherHindiText by remember {
@@ -120,27 +121,31 @@ fun LiveVoiceBridgeScreen(
         }
     }
 
-    Box(
+    val cardCornerShape = RoundedCornerShape(8.dp)
+    val controlCornerShape = RoundedCornerShape(4.dp)
+
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(Background)
     ) {
-        Column(
+        // Pinned Header TopBar
+        PalashTopBar(
+            currentLanguage = currentLanguage,
+            onLanguageToggle = onLanguageToggle
+        )
+
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(bottom = 80.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            // Header TopBar
-            PalashTopBar()
-
-            val cardCornerShape = RoundedCornerShape(8.dp)
-            val controlCornerShape = RoundedCornerShape(4.dp)
-
             Column(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .padding(bottom = 80.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 // Language Bridge Indicator Card (Sharp Stitch Geometry)
                 Card(
@@ -173,8 +178,18 @@ fun LiveVoiceBridgeScreen(
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Column {
-                                    Text(text = "शिक्षक", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
-                                    Text(text = "हिन्दी (Hindi)", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Primary)
+                                    Text(
+                                        text = if (isHindi) "शिक्षक" else "Teacher",
+                                        fontSize = 10.sp,
+                                        color = Color(0xFF64748B),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = if (isHindi) "हिन्दी" else "Hindi",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Primary
+                                    )
                                 }
                             }
 
@@ -213,8 +228,18 @@ fun LiveVoiceBridgeScreen(
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Column {
-                                    Text(text = if (isHindi) "विद्यार्थी" else "Student", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
-                                    Text(text = "ᱥᱟᱱᱛᱟᱲᱤ (Ol Chiki)", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Secondary)
+                                    Text(
+                                        text = if (isHindi) "विद्यार्थी" else "Student",
+                                        fontSize = 10.sp,
+                                        color = Color(0xFF64748B),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ (Ol Chiki)",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Secondary
+                                    )
                                 }
                             }
                         }
@@ -222,7 +247,8 @@ fun LiveVoiceBridgeScreen(
                         // Dialect Chips (Santali Only)
                         DialectChips(
                             selectedDialect = selectedDialect,
-                            onDialectSelect = { selectedDialect = it }
+                            onDialectSelect = { selectedDialect = it },
+                            currentLanguage = currentLanguage
                         )
                     }
                 }
@@ -249,7 +275,7 @@ fun LiveVoiceBridgeScreen(
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Text(
-                                    text = if (isHindi) "शिक्षक का हिंदी वाक्य • Live ASR" else "Teacher Speech • Live ASR",
+                                    text = if (isHindi) "शिक्षक का हिंदी वाक्य • Live ASR" else "Teacher Speech (Hindi) • Live ASR",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Primary
@@ -355,7 +381,7 @@ fun LiveVoiceBridgeScreen(
                                 modifier = Modifier.weight(1f, fill = false).padding(end = 8.dp)
                             ) {
                                 Text(
-                                    text = if (isHindi) "कक्षा प्रसारण" else "Broadcast",
+                                    text = if (isHindi) "कक्षा प्रसारण" else "Classroom Broadcast",
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White,
@@ -367,7 +393,7 @@ fun LiveVoiceBridgeScreen(
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
                                 Text(
-                                    text = "ᱥᱟᱱᱛᱟᱲᱤ (Santali - Ol Chiki)",
+                                    text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ (संथाली - ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ (Santali - Ol Chiki)",
                                     fontSize = 11.sp,
                                     color = Color(0xFF475569),
                                     maxLines = 1,
@@ -420,7 +446,10 @@ fun LiveVoiceBridgeScreen(
                         }
 
                         // Devanagari Teacher Phonetic Guide
-                        PhoneticGuideCard(phoneticText = phoneticGuide)
+                        PhoneticGuideCard(
+                            phoneticText = phoneticGuide,
+                            currentLanguage = currentLanguage
+                        )
 
                         // Piper TTS Audio Controls Bar (Sharp 4dp Controls, 44dp height)
                         Row(
@@ -512,17 +541,25 @@ fun LiveVoiceBridgeScreen(
                 // Section 3: Instant 1-Tap Classroom Commands (Sharp 4dp Rows)
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "त्वरित कक्षा निर्देश (Instant 1-Tap Commands):",
+                        text = if (isHindi) "त्वरित कक्षा निर्देश (1-टैप):" else "Instant Classroom Commands (1-Tap):",
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF334155)
                     )
 
-                    val quickCommands = listOf(
-                        Triple("1. किताब खोलो (Open Books)", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "किताब खोलो"),
-                        Triple("2. 1 से 10 गिनो (Count 1-10)", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "1 से 10 गिनो"),
-                        Triple("3. शांत रहें (Maintain Silence)", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "शांत रहें")
-                    )
+                    val quickCommands = if (isHindi) {
+                        listOf(
+                            Triple("1. किताब खोलो", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "किताब खोलो"),
+                            Triple("2. 1 से 10 गिनो", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "1 से 10 गिनो"),
+                            Triple("3. शांत रहें", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "शांत रहें")
+                        )
+                    } else {
+                        listOf(
+                            Triple("1. Open Books", "ᱯᱩᱛᱷᱤ ᱡᱷᱤᱡᱽ ᱯᱮ", "किताब खोलो"),
+                            Triple("2. Count 1 to 10", "ᱢᱤᱫ ᱠᱷᱚᱱ ᱜᱮᱞ ᱞᱮᱠᱷᱟᱭ ᱯᱮ", "1 से 10 गिनो"),
+                            Triple("3. Maintain Silence", "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱯᱮ", "शांत रहें")
+                        )
+                    }
 
                     quickCommands.forEach { (label, olchiki, hindi) ->
                         Row(
@@ -554,45 +591,44 @@ fun LiveVoiceBridgeScreen(
                 }
             }
 
-        }
-
-        // Push-to-Talk Floating Microphone Button
-        FloatingActionButton(
-            onClick = {
-                isMicActive = !isMicActive
-                if (isMicActive) {
-                    coroutineScope.launch {
-                        asrEngine.startListening().collect { state ->
-                            when (state) {
-                                is AsrState.Listening -> {}
-                                is AsrState.PartialText -> teacherHindiText = state.text
-                                is AsrState.Recognized -> {
-                                    isMicActive = false
-                                    triggerTranslation(state.finalSentence)
-                                    playAudio()
+            // Push-to-Talk Floating Microphone Button (Centered inside Box container)
+            FloatingActionButton(
+                onClick = {
+                    isMicActive = !isMicActive
+                    if (isMicActive) {
+                        coroutineScope.launch {
+                            asrEngine.startListening().collect { state ->
+                                when (state) {
+                                    is AsrState.Listening -> {}
+                                    is AsrState.PartialText -> teacherHindiText = state.text
+                                    is AsrState.Recognized -> {
+                                        isMicActive = false
+                                        triggerTranslation(state.finalSentence)
+                                        playAudio()
+                                    }
+                                    AsrState.Idle -> isMicActive = false
                                 }
-                                AsrState.Idle -> isMicActive = false
                             }
                         }
+                    } else {
+                        asrEngine.stopListening()
                     }
-                } else {
-                    asrEngine.stopListening()
-                }
-            },
-            containerColor = if (isMicActive) Color(0xFFDC2626) else Primary,
-            contentColor = Color.White,
-            shape = CircleShape,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp)
-                .size(64.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = if (isMicActive) R.drawable.ic_stop else R.drawable.ic_mic),
-                contentDescription = if (isMicActive) "Stop" else "Listen",
-                tint = Color.White,
-                modifier = Modifier.size(28.dp)
-            )
+                },
+                containerColor = if (isMicActive) Color(0xFFDC2626) else Primary,
+                contentColor = Color.White,
+                shape = CircleShape,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 16.dp)
+                    .size(64.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = if (isMicActive) R.drawable.ic_stop else R.drawable.ic_mic),
+                    contentDescription = if (isMicActive) "Stop" else "Listen",
+                    tint = Color.White,
+                    modifier = Modifier.size(28.dp)
+                )
+            }
         }
     }
 }

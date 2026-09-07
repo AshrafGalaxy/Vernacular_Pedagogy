@@ -71,6 +71,8 @@ import com.example.palashsetu.theme.SurfaceContainerLowest
 
 @Composable
 fun TeacherLoginScreen(
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
+    onLanguageChanged: (String) -> Unit = {},
     onLoginSuccess: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -79,10 +81,19 @@ fun TeacherLoginScreen(
 
     // Session state
     val savedProfile = remember { UserSessionManager.getProfile(context) }
-    var currentLanguage by remember { mutableStateOf(UserSessionManager.getLanguage(context)) }
     val isHindi = currentLanguage == "hi"
 
-    var selectedSalutation by remember { mutableStateOf(savedProfile.salutation.ifBlank { if (isHindi) "श्री" else "Sir" }) }
+    fun normalizeSalutation(sal: String, hindi: Boolean): String {
+        return when {
+            sal.contains("श्रीमती") || sal.equals("Ma'am", ignoreCase = true) -> if (hindi) "श्रीमती" else "Ma'am"
+            sal.contains("शिक्षक") || sal.equals("Teacher", ignoreCase = true) -> if (hindi) "शिक्षक" else "Teacher"
+            else -> if (hindi) "श्री" else "Sir"
+        }
+    }
+
+    var selectedSalutation by remember(currentLanguage) {
+        mutableStateOf(normalizeSalutation(savedProfile.salutation.ifBlank { if (isHindi) "श्री" else "Sir" }, isHindi))
+    }
     var teacherName by remember { mutableStateOf(savedProfile.name) }
     var pin by remember { mutableStateOf("") }
     var isPinVisible by remember { mutableStateOf(false) }
@@ -155,8 +166,8 @@ fun TeacherLoginScreen(
                                 .clip(controlCornerShape)
                                 .background(pillBg)
                                 .clickable {
-                                    currentLanguage = code
                                     UserSessionManager.saveLanguage(context, code)
+                                    onLanguageChanged(code)
                                     selectedSalutation = if (code == "hi") "श्री" else "Sir"
                                 }
                                 .padding(horizontal = 10.dp, vertical = 4.dp),
@@ -245,7 +256,7 @@ fun TeacherLoginScreen(
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = if (teacherName.isNotBlank()) "$selectedSalutation ${teacherName.trim()}" else if (isHindi) "विवरण दर्ज करें" else "Enter credentials",
+                        text = if (teacherName.isNotBlank()) "${normalizeSalutation(selectedSalutation, isHindi)} ${teacherName.trim()}" else if (isHindi) "विवरण दर्ज करें" else "Enter credentials",
                         fontSize = 12.sp,
                         color = Color(0xFF64748B),
                         maxLines = 1,
@@ -257,7 +268,7 @@ fun TeacherLoginScreen(
                 // 1. Salutation Selector (Symmetric 3 Pills with Sharp 4dp Corners)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = if (isHindi) "संबोधन (Salutation):" else "Salutation:",
+                        text = if (isHindi) "संबोधन:" else "Salutation:",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF475569),
@@ -269,7 +280,7 @@ fun TeacherLoginScreen(
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         salutationOptions.forEach { (salutation, _, emoji) ->
-                            val isSelected = selectedSalutation.equals(salutation, ignoreCase = true)
+                            val isSelected = normalizeSalutation(selectedSalutation, isHindi).equals(salutation, ignoreCase = true)
                             val backgroundColor by animateColorAsState(
                                 targetValue = if (isSelected) Primary else SurfaceContainerLow,
                                 label = "salutationBg"
@@ -316,7 +327,7 @@ fun TeacherLoginScreen(
                 // 2. Teacher Name Field (Sharp 4dp Corners, BasicTextField Anti-Clipping)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = if (isHindi) "शिक्षक का नाम (Teacher Name):" else "Teacher Name:",
+                        text = if (isHindi) "शिक्षक का नाम:" else "Teacher Name:",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF475569),
@@ -347,7 +358,7 @@ fun TeacherLoginScreen(
                 // 3. 4-Digit Security PIN (Sharp 4dp Corners + Clean Vector Eye Toggle)
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = if (isHindi) "4-अंकीय सुरक्षा पिन सेट करें (PIN):" else "Set 4-Digit Security PIN:",
+                        text = if (isHindi) "4-अंकीय सुरक्षा पिन सेट करें:" else "Set 4-Digit Security PIN:",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color(0xFF475569),

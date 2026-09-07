@@ -32,10 +32,10 @@ import com.example.palashsetu.theme.Primary
 fun DialectChips(
     selectedDialect: String = "ᱥᱟᱱᱛᱟᱲᱤ",
     onDialectSelect: (String) -> Unit = {},
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
     val controlCornerShape = RoundedCornerShape(4.dp)
 
     Row(
@@ -62,7 +62,7 @@ fun DialectChips(
                 .padding(horizontal = 12.dp, vertical = 6.dp)
         ) {
             Text(
-                text = "ᱥᱟᱱᱛᱟᱲᱤ • Santali (Ol Chiki)",
+                text = if (isHindi) "ᱥᱟᱱᱛᱟᱲᱤ • संथाली (ओल चिकी)" else "ᱥᱟᱱᱛᱟᱲᱤ • Santali (Ol Chiki)",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White

@@ -10,10 +10,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.ui.components.BottomTab
 import com.example.palashsetu.ui.components.PalashBottomNav
 import com.example.palashsetu.ui.screens.auth.TeacherLoginScreen
-import com.example.palashsetu.ui.screens.health.SystemHealthScreen
 import com.example.palashsetu.ui.screens.live.LiveVoiceBridgeScreen
 import com.example.palashsetu.ui.screens.phrasebook.FlnPhrasebookScreen
 import com.example.palashsetu.ui.screens.studio.PedagogyStudioScreen
@@ -22,11 +23,15 @@ import com.example.palashsetu.ui.screens.studio.PedagogyStudioScreen
 fun MainAppContainer(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     var isAuthenticated by remember { mutableStateOf(false) }
     var selectedTab by remember { mutableStateOf(BottomTab.LIVE) }
+    var currentLanguage by remember { mutableStateOf(UserSessionManager.getLanguage(context)) }
 
     if (!isAuthenticated) {
         TeacherLoginScreen(
+            currentLanguage = currentLanguage,
+            onLanguageChanged = { currentLanguage = it },
             onLoginSuccess = { isAuthenticated = true },
             modifier = modifier
         )
@@ -35,7 +40,8 @@ fun MainAppContainer(
             bottomBar = {
                 PalashBottomNav(
                     selectedTab = selectedTab,
-                    onTabSelected = { selectedTab = it }
+                    onTabSelected = { selectedTab = it },
+                    currentLanguage = currentLanguage
                 )
             },
             modifier = modifier.fillMaxSize()
@@ -46,10 +52,18 @@ fun MainAppContainer(
                     .padding(innerPadding)
             ) {
                 when (selectedTab) {
-                    BottomTab.LIVE -> LiveVoiceBridgeScreen()
-                    BottomTab.PHRASEBOOK -> FlnPhrasebookScreen()
-                    BottomTab.STUDIO -> PedagogyStudioScreen()
-                    BottomTab.HEALTH -> SystemHealthScreen()
+                    BottomTab.LIVE -> LiveVoiceBridgeScreen(
+                        currentLanguage = currentLanguage,
+                        onLanguageToggle = { currentLanguage = it }
+                    )
+                    BottomTab.PHRASEBOOK -> FlnPhrasebookScreen(
+                        currentLanguage = currentLanguage,
+                        onLanguageToggle = { currentLanguage = it }
+                    )
+                    BottomTab.STUDIO -> PedagogyStudioScreen(
+                        currentLanguage = currentLanguage,
+                        onLanguageToggle = { currentLanguage = it }
+                    )
                 }
             }
         }

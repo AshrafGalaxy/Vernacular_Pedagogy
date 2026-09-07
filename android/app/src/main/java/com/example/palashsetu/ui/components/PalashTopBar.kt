@@ -37,6 +37,8 @@ import com.example.palashsetu.theme.SurfaceContainerLow
  */
 @Composable
 fun PalashTopBar(
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
+    onLanguageToggle: ((String) -> Unit)? = null,
     locationName: String? = null,
     clusterName: String? = null,
     teacherName: String? = null,
@@ -45,7 +47,7 @@ fun PalashTopBar(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isHindi = UserSessionManager.getLanguage(context) == "hi"
+    val isHindi = currentLanguage == "hi"
     val resolvedLocation = locationName ?: clusterName ?: if (isHindi) "झारखंड" else "Jharkhand"
     val resolvedTeacherName = teacherName ?: UserSessionManager.getTeacherDisplayName(context)
     val initials = resolvedTeacherName.split(" ")
@@ -95,23 +97,80 @@ fun PalashTopBar(
             )
         }
 
-        // Clickable Teacher Avatar (Initials circle)
-        Box(
-            modifier = Modifier
-                .size(36.dp)
-                .clip(CircleShape)
-                .background(Primary)
-                .clickable {
-                    onProfileClick?.invoke()
-                },
-            contentAlignment = Alignment.Center
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Text(
-                text = initials,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
+            // Dynamic Language Switcher Pill (हिन्दी | English)
+            Row(
+                modifier = Modifier
+                    .clip(controlCornerShape)
+                    .background(SurfaceContainerLow)
+                    .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
+                    .padding(2.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(controlCornerShape)
+                        .background(if (isHindi) Primary else Color.Transparent)
+                        .clickable {
+                            if (!isHindi) {
+                                UserSessionManager.saveLanguage(context, "hi")
+                                onLanguageToggle?.invoke("hi")
+                            }
+                        }
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "हिन्दी",
+                        fontSize = 11.sp,
+                        fontWeight = if (isHindi) FontWeight.Bold else FontWeight.Medium,
+                        color = if (isHindi) Color.White else Color(0xFF475569)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .clip(controlCornerShape)
+                        .background(if (!isHindi) Primary else Color.Transparent)
+                        .clickable {
+                            if (isHindi) {
+                                UserSessionManager.saveLanguage(context, "en")
+                                onLanguageToggle?.invoke("en")
+                            }
+                        }
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "English",
+                        fontSize = 11.sp,
+                        fontWeight = if (!isHindi) FontWeight.Bold else FontWeight.Medium,
+                        color = if (!isHindi) Color.White else Color(0xFF475569)
+                    )
+                }
+            }
+
+            // Clickable Teacher Avatar (Initials circle)
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(Primary)
+                    .clickable {
+                        onProfileClick?.invoke()
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = initials,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
         }
     }
 }

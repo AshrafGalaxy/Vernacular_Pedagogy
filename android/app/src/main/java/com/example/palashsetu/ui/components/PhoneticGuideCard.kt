@@ -16,11 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.R
+import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.theme.Secondary
 import com.example.palashsetu.theme.SecondaryFixed
 import com.example.palashsetu.theme.SurfaceContainerLowest
@@ -32,8 +34,10 @@ import com.example.palashsetu.theme.SurfaceContainerLowest
 @Composable
 fun PhoneticGuideCard(
     phoneticText: String,
+    currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     modifier: Modifier = Modifier
 ) {
+    val isHindi = currentLanguage == "hi"
     val cardCornerShape = RoundedCornerShape(8.dp)
     val controlCornerShape = RoundedCornerShape(4.dp)
 
@@ -62,14 +66,14 @@ fun PhoneticGuideCard(
                     modifier = Modifier.size(16.dp)
                 )
                 Text(
-                    text = "उच्चारण मार्गदर्शिका (Teacher Phonetic Guide)",
+                    text = if (isHindi) "शिक्षक उच्चारण मार्गदर्शिका" else "Teacher Phonetic Guide",
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     color = Secondary
                 )
             }
             Text(
-                text = "देवनागरी लिपि",
+                text = if (isHindi) "देवनागरी लिपि" else "Devanagari Script",
                 fontSize = 11.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF663500),
