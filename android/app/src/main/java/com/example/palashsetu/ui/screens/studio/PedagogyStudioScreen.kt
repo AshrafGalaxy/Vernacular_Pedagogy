@@ -23,10 +23,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,10 +43,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.palashsetu.R
+import com.example.palashsetu.data.local.NipunCurriculumRepository
 import com.example.palashsetu.data.local.UserSessionManager
+import com.example.palashsetu.data.model.NipunCompetency
 import com.example.palashsetu.domain.engine.PedagogicalAudioEngine
 import com.example.palashsetu.domain.pdf.WorksheetPdfGenerator
 import com.example.palashsetu.theme.Background
@@ -66,6 +72,18 @@ fun PedagogyStudioScreen(
     val isHindi = currentLanguage == "hi"
 
     var selectedGrade by remember { mutableStateOf(2) }
+    var isDropdownExpanded by remember { mutableStateOf(false) }
+    val gradeCompetencies = remember(selectedGrade) {
+        NipunCurriculumRepository.getCompetenciesForGrade(context, selectedGrade)
+    }
+    var selectedCompetency by remember {
+        mutableStateOf(NipunCurriculumRepository.getDefaultCompetency(context, 2))
+    }
+
+    LaunchedEffect(selectedGrade) {
+        selectedCompetency = NipunCurriculumRepository.getDefaultCompetency(context, selectedGrade)
+    }
+
     var isFlashcardMode by remember { mutableStateOf(false) }
     var isCardFlipped by remember { mutableStateOf(false) }
     var showPdfDownloadedNotification by remember { mutableStateOf(false) }
@@ -193,6 +211,185 @@ fun PedagogyStudioScreen(
                 }
             }
 
+            // Section 3: NIPUN Bharat Competency Level Selector (Dropdown)
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (isHindi) "निपुण भारत दक्षता स्तर (Competency Outcome):" else "NIPUN Bharat Competency Outcome:",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF334155)
+                    )
+                    Text(
+                        text = "${gradeCompetencies.size} लक्ष्य",
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF64748B),
+                        modifier = Modifier
+                            .clip(controlCornerShape)
+                            .background(SurfaceContainerLow)
+                            .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
+                            .padding(horizontal = 6.dp, vertical = 2.dp)
+                    )
+                }
+
+                // Dropdown Trigger Container (Sharp 4dp, 44dp height, no text clipping)
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(44.dp)
+                            .clip(controlCornerShape)
+                            .background(SurfaceContainerLowest)
+                            .border(
+                                width = if (isDropdownExpanded) 1.5.dp else 1.dp,
+                                color = if (isDropdownExpanded) Primary else Color(0xFFCBD5E1),
+                                shape = controlCornerShape
+                            )
+                            .clickable { isDropdownExpanded = !isDropdownExpanded }
+                            .padding(horizontal = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            // Code pill badge
+                            Box(
+                                modifier = Modifier
+                                    .clip(controlCornerShape)
+                                    .background(if (selectedCompetency.isNumeracy) Color(0xFFECFDF5) else Color(0xFFEFF6FF))
+                                    .border(
+                                        1.dp,
+                                        if (selectedCompetency.isNumeracy) Color(0xFFA7F3D0) else Color(0xFFBFDBFE),
+                                        controlCornerShape
+                                    )
+                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    text = selectedCompetency.code,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = if (selectedCompetency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8),
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
+
+                            // Title & Description
+                            Text(
+                                text = selectedCompetency.title,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xFF0F172A),
+                                maxLines = 1,
+                                softWrap = false,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+
+                        Icon(
+                            painter = painterResource(
+                                id = if (isDropdownExpanded) R.drawable.ic_expand_less else R.drawable.ic_expand_more
+                            ),
+                            contentDescription = "Select Competency",
+                            tint = if (isDropdownExpanded) Primary else Color(0xFF64748B),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+
+                    // Dropdown Menu Popover
+                    DropdownMenu(
+                        expanded = isDropdownExpanded,
+                        onDismissRequest = { isDropdownExpanded = false },
+                        modifier = Modifier
+                            .fillMaxWidth(0.92f)
+                            .background(Color.White)
+                            .border(1.dp, Color(0xFFE2E8F0), cardCornerShape)
+                    ) {
+                        gradeCompetencies.forEach { competency ->
+                            val isSelected = competency.code == selectedCompetency.code
+                            DropdownMenuItem(
+                                text = {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                            verticalArrangement = Arrangement.spacedBy(2.dp)
+                                        ) {
+                                            Row(
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                            ) {
+                                                Box(
+                                                    modifier = Modifier
+                                                        .clip(controlCornerShape)
+                                                        .background(if (competency.isNumeracy) Color(0xFFECFDF5) else Color(0xFFEFF6FF))
+                                                        .border(
+                                                            1.dp,
+                                                            if (competency.isNumeracy) Color(0xFFA7F3D0) else Color(0xFFBFDBFE),
+                                                            controlCornerShape
+                                                        )
+                                                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                                                ) {
+                                                    Text(
+                                                        text = competency.code,
+                                                        fontSize = 11.sp,
+                                                        fontWeight = FontWeight.ExtraBold,
+                                                        color = if (competency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8),
+                                                        maxLines = 1,
+                                                        softWrap = false
+                                                    )
+                                                }
+                                                Text(
+                                                    text = competency.title,
+                                                    fontSize = 12.sp,
+                                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                                    color = if (isSelected) Primary else Color(0xFF1E293B),
+                                                    maxLines = 1,
+                                                    overflow = TextOverflow.Ellipsis
+                                                )
+                                            }
+                                            Text(
+                                                text = competency.subtitle,
+                                                fontSize = 11.sp,
+                                                color = Color(0xFF64748B),
+                                                maxLines = 1,
+                                                overflow = TextOverflow.Ellipsis
+                                            )
+                                        }
+                                        if (isSelected) {
+                                            Icon(
+                                                painter = painterResource(id = R.drawable.ic_check),
+                                                contentDescription = "Selected",
+                                                tint = Primary,
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
+                                    }
+                                },
+                                onClick = {
+                                    selectedCompetency = competency
+                                    isDropdownExpanded = false
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(if (isSelected) SurfaceContainerLow else Color.White)
+                            )
+                        }
+                    }
+                }
+            }
+
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = cardCornerShape,
@@ -209,12 +406,35 @@ fun PedagogyStudioScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = if (isHindi) "अभ्यास पत्रक (कक्षा $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Primary
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = if (isHindi) "अभ्यास पत्रक (कक्षा $selectedGrade)" else "Worksheet Canvas (Grade $selectedGrade)",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Primary
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .clip(controlCornerShape)
+                                    .background(if (selectedCompetency.isNumeracy) Color(0xFFECFDF5) else Color(0xFFEFF6FF))
+                                    .border(
+                                        1.dp,
+                                        if (selectedCompetency.isNumeracy) Color(0xFFA7F3D0) else Color(0xFFBFDBFE),
+                                        controlCornerShape
+                                    )
+                                    .padding(horizontal = 5.dp, vertical = 1.dp)
+                            ) {
+                                Text(
+                                    text = selectedCompetency.code,
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = if (selectedCompetency.isNumeracy) Color(0xFF047857) else Color(0xFF1D4ED8)
+                                )
+                            }
+                        }
                         Text(
                             text = if (isHindi) "A4 प्रिंट हेतु तैयार" else "A4 B&W Ready",
                             fontSize = 10.sp,
@@ -258,14 +478,14 @@ fun PedagogyStudioScreen(
                     ) {
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(
-                                text = "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾",
+                                text = selectedCompetency.instructionOlchiki.ifBlank { "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾" },
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Primary,
                                 lineHeight = 23.sp
                             )
                             Text(
-                                text = "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।",
+                                text = selectedCompetency.instructionHi.ifBlank { "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।" },
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color(0xFF1E293B),
@@ -413,7 +633,12 @@ fun PedagogyStudioScreen(
 
                     Button(
                         onClick = {
-                            val pdf = WorksheetPdfGenerator.generateWorksheetPdf(context, selectedGrade, isHindi)
+                            val pdf = WorksheetPdfGenerator.generateWorksheetPdf(
+                                context = context,
+                                grade = selectedGrade,
+                                isHindi = isHindi,
+                                competency = selectedCompetency
+                            )
                             if (pdf != null) {
                                 showPdfDownloadedNotification = true
                                 WorksheetPdfGenerator.openOrSharePdf(context, pdf)

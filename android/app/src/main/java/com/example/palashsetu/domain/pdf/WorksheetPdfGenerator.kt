@@ -14,9 +14,10 @@ import android.util.Log
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import com.example.palashsetu.data.model.NipunCompetency
 
 /**
- * Production A4 Vector PDF Worksheet Generator for Vaani-Setu.
+ * Production Offline Worksheet Vector PDF Generator.
  *
  * Generates crisp, printable 72-DPI vector A4 worksheets (595 x 842 points)
  * containing authentic Jharkhand JCERT headers, Ol Chiki & Hindi instructions,
@@ -31,7 +32,8 @@ object WorksheetPdfGenerator {
     fun generateWorksheetPdf(
         context: Context,
         grade: Int = 2,
-        isHindi: Boolean = true
+        isHindi: Boolean = true,
+        competency: NipunCompetency? = null
     ): File? {
         val document = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create()
@@ -39,14 +41,15 @@ object WorksheetPdfGenerator {
         val canvas = page.canvas
 
         try {
-            renderWorksheet(canvas, grade, isHindi)
+            renderWorksheet(canvas, grade, isHindi, competency)
             document.finishPage(page)
 
             val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
                 ?: context.filesDir
             if (!dir.exists()) dir.mkdirs()
 
-            val outputFile = File(dir, "VaaniSetu_Worksheet_Grade${grade}.pdf")
+            val code = competency?.code ?: "M${grade}.4"
+            val outputFile = File(dir, "VaaniSetu_Worksheet_${code}_Grade${grade}.pdf")
             FileOutputStream(outputFile).use { out ->
                 document.writeTo(out)
             }
@@ -60,7 +63,7 @@ object WorksheetPdfGenerator {
         }
     }
 
-    private fun renderWorksheet(canvas: Canvas, grade: Int, isHindi: Boolean) {
+    private fun renderWorksheet(canvas: Canvas, grade: Int, isHindi: Boolean, competency: NipunCompetency? = null) {
         // Paints
         val borderPaint = Paint().apply {
             color = Color.BLACK
@@ -143,8 +146,10 @@ object WorksheetPdfGenerator {
         // 3. Metadata Row (Class, Date, Name, Roll)
         currentY += 18f
         val metaLeft = margin + 15f
+        val code = competency?.code ?: "M${grade}.4"
+        val domainLabel = if (competency?.isLiteracy == true) "साक्षरता (Literacy)" else "संख्याज्ञान (Numeracy)"
         canvas.drawText("कक्षा (Grade): $grade", metaLeft, currentY, boldTextPaint)
-        canvas.drawText("विषय: गणित (गणित व संथाली संख्या)", metaLeft + 120f, currentY, boldTextPaint)
+        canvas.drawText("दक्षता: $code ($domainLabel)", metaLeft + 105f, currentY, boldTextPaint)
         canvas.drawText("दिनांक: ०८/०९/२०२६", PAGE_WIDTH - margin - 140f, currentY, textPaint)
 
         currentY += 18f
@@ -161,9 +166,12 @@ object WorksheetPdfGenerator {
         canvas.drawRoundRect(boxRect, 6f, 6f, fillBoxPaint)
         canvas.drawRoundRect(boxRect, 6f, 6f, thinBorderPaint)
 
-        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (Instructions):", margin + 22f, currentY + 18f, boldTextPaint)
-        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟᱭ ᱢᱮ ᱟᱨ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ᱾", margin + 22f, currentY + 36f, boldTextPaint)
-        canvas.drawText("हिन्दी: महुआ फल और सखुआ (साल) के पत्तों को गिनें और जोड़कर सही संख्या लिखें।", margin + 22f, currentY + 54f, textPaint)
+        val olchikiInstruction = competency?.instructionOlchiki ?: "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟᱭ ᱢᱮ ᱟᱨ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ᱾"
+        val hindiInstruction = competency?.instructionHi ?: "महुआ फल और सखुआ (साल) के पत्तों को गिनें और जोड़कर सही संख्या लिखें।"
+
+        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (NIPUN $code):", margin + 22f, currentY + 18f, boldTextPaint)
+        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: $olchikiInstruction", margin + 22f, currentY + 36f, boldTextPaint)
+        canvas.drawText("हिन्दी: $hindiInstruction", margin + 22f, currentY + 54f, textPaint)
 
         currentY += 85f
 
