@@ -79,7 +79,8 @@ def install_dependencies():
         "datasets",
         "huggingface_hub",
         "librosa",
-        "cython"
+        "cython",
+        "onnxscript"
     ]
     run_cmd_strict(
         f"pip install -q {' '.join(packages)}",
@@ -178,8 +179,25 @@ get_espeak_map = None'''
             with open(ma_init, "w", encoding="utf-8") as f:
                 f.write(ma_code)
 
-    # Patch 5: NumPy 2.x backward compatibility for PyTorch Lightning in piper_train
-    compat_np = "import numpy as np\nnp.Inf = np.inf\nnp.NAN = np.nan\nnp.PINF = np.inf\nnp.NINF = -np.inf\n"
+    # Patch 5: PyTorch 2.6 & NumPy 2.x backward compatibility for PyTorch Lightning in piper_train
+    compat_code = (
+        "import numpy as np\n"
+        "np.Inf = np.inf\n"
+        "np.NAN = np.nan\n"
+        "np.PINF = np.inf\n"
+        "np.NINF = -np.inf\n"
+        "import torch, pathlib\n"
+        "try:\n"
+        "    if hasattr(torch.serialization, 'add_safe_globals'):\n"
+        "        torch.serialization.add_safe_globals([pathlib.PosixPath, pathlib.WindowsPath])\n"
+        "except Exception:\n"
+        "    pass\n"
+        "_orig_torch_load = torch.load\n"
+        "def _safe_torch_load(*args, **kwargs):\n"
+        "    kwargs.setdefault('weights_only', False)\n"
+        "    return _orig_torch_load(*args, **kwargs)\n"
+        "torch.load = _safe_torch_load\n"
+    )
     for py_file in [
         os.path.join(piper_dir, "src", "python", "piper_train", "__main__.py"),
         os.path.join(piper_dir, "src", "python", "piper_train", "vits", "lightning.py")
@@ -187,9 +205,72 @@ get_espeak_map = None'''
         if os.path.exists(py_file):
             with open(py_file, "r", encoding="utf-8") as f:
                 content = f.read()
-            if "np.Inf = np.inf" not in content:
+            if "_safe_torch_load" not in content:
                 with open(py_file, "w", encoding="utf-8") as f:
-                    f.write(compat_np + content)
+                    f.write(compat_code + content)
+
+    # Patch 6: Pre-trained VITS warm-start weight transfer & checkpoint saving
+    main_py = os.path.join(piper_dir, "src", "python", "piper_train", "__main__.py")
+    if os.path.exists(main_py):
+        with open(main_py, "r", encoding="utf-8") as f:
+            main_code = f.read()
+
+        # Intercept base checkpoint before Trainer construction
+        code_before_trainer = (
+            "    base_ckpt = getattr(args, 'resume_from_checkpoint', None)\n"
+            "    args.resume_from_checkpoint = None\n"
+        )
+        if "base_ckpt = getattr(args, 'resume_from_checkpoint', None)" not in main_code:
+            main_code = main_code.replace(
+                "    trainer = Trainer.from_argparse_args(args)",
+                code_before_trainer + "    trainer = Trainer.from_argparse_args(args)"
+            )
+
+        # Configure checkpoint saving with explicit dirpath and save_last=True
+        old_cb = "trainer.callbacks = [ModelCheckpoint(every_n_epochs=args.checkpoint_epochs)]"
+        new_cb = (
+            "ckpt_dir = args.dataset_dir / 'lightning_logs' / 'checkpoints'\n"
+            "        ckpt_dir.mkdir(parents=True, exist_ok=True)\n"
+            "        trainer.callbacks = [\n"
+            "            ModelCheckpoint(\n"
+            "                dirpath=ckpt_dir,\n"
+            "                filename='{epoch:04d}',\n"
+            "                save_last=True,\n"
+            "                every_n_epochs=args.checkpoint_epochs,\n"
+            "            )\n"
+            "        ]"
+        )
+        if old_cb in main_code:
+            main_code = main_code.replace(old_cb, new_cb)
+
+        # Warm-start model_g and model_d weights before trainer.fit
+        warmstart_code = (
+            "    if base_ckpt:\n"
+            "        _LOGGER.info('Warm-starting weights from base checkpoint: %s', base_ckpt)\n"
+            "        model_base = VitsModel.load_from_checkpoint(base_ckpt, dataset=None)\n"
+            "        load_state_dict(model.model_g, model_base.model_g.state_dict())\n"
+            "        load_state_dict(model.model_d, model_base.model_d.state_dict())\n"
+            "        _LOGGER.info('Successfully loaded pre-trained weights into model_g and model_d!')\n"
+            "    trainer.fit(model)"
+        )
+        if "if base_ckpt:" not in main_code and "trainer.fit(model)" in main_code:
+            main_code = main_code.replace("    trainer.fit(model)", warmstart_code)
+
+        with open(main_py, "w", encoding="utf-8") as f:
+            f.write(main_code)
+
+    # Patch 7: Legacy TorchScript ONNX export (dynamo=False) to bypass Dynamo assertions
+    export_py = os.path.join(piper_dir, "src", "python", "piper_train", "export_onnx.py")
+    if os.path.exists(export_py):
+        with open(export_py, "r", encoding="utf-8") as f:
+            exp_code = f.read()
+        if "dynamo=False" not in exp_code:
+            exp_code = exp_code.replace(
+                "verbose=False,",
+                "verbose=False,\n        dynamo=False,"
+            )
+            with open(export_py, "w", encoding="utf-8") as f:
+                f.write(exp_code)
 
     # Install piper_train package with --no-deps
     run_cmd_strict(
@@ -288,7 +369,7 @@ def download_base_checkpoint():
     return base_ckpt
 
 
-def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 50):
+def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 25):
     """Fine-tune Piper VITS on Tesla T4 GPU."""
     print(f"\n--- Step 6: Fine-Tuning Piper VITS (Max Epochs: {max_epochs}) ---", flush=True)
     cmd = (
@@ -298,7 +379,7 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 50):
         f"--devices 1 "
         f"--batch-size 16 "
         f"--validation-split 0.05 "
-        f"--checkpoint-epochs 10 "
+        f"--checkpoint-epochs 5 "
         f"--max_epochs {max_epochs} "
         f"--resume_from_checkpoint {base_ckpt}"
     )
@@ -311,13 +392,16 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 50):
 def export_onnx_model(training_dir: str):
     """Export the trained PyTorch checkpoint to ONNX format."""
     print("\n--- Step 7: Exporting to ONNX Format ---", flush=True)
-    # Find latest checkpoint
-    ckpt_pattern = os.path.join(training_dir, "lightning_logs", "version_*", "checkpoints", "*.ckpt")
-    ckpts = glob.glob(ckpt_pattern)
+    # Find latest checkpoint across checkpoints/ and lightning_logs/
+    ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "checkpoints", "*.ckpt"))
     if not ckpts:
-        raise RuntimeError(f"No checkpoint found matching {ckpt_pattern}")
-    latest_ckpt = max(ckpts, key=os.path.getctime)
-    print(f"[EXPORT] Converting latest checkpoint: {latest_ckpt}", flush=True)
+        ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "**", "*.ckpt"), recursive=True)
+    if not ckpts:
+        raise RuntimeError(f"No checkpoint found in {training_dir}/lightning_logs")
+    # Prefer last.ckpt if available, otherwise latest by ctime
+    last_ckpt = os.path.join(training_dir, "lightning_logs", "checkpoints", "last.ckpt")
+    latest_ckpt = last_ckpt if os.path.exists(last_ckpt) else max(ckpts, key=os.path.getctime)
+    print(f"[EXPORT] Converting checkpoint: {latest_ckpt}", flush=True)
 
     onnx_out = "/content/sat_piper_model.onnx"
     json_out = "/content/sat_piper_model.onnx.json"
@@ -367,7 +451,7 @@ def main():
     dataset_dir = prepare_dataset(repo_dir, auth_token=auth_token)
     training_dir = preprocess_dataset(dataset_dir)
     base_ckpt = download_base_checkpoint()
-    train_piper_model(training_dir, base_ckpt, max_epochs=50)
+    train_piper_model(training_dir, base_ckpt, max_epochs=25)
     export_onnx_model(training_dir)
     package_artifacts()
 
