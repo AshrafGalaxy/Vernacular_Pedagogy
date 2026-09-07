@@ -30,6 +30,13 @@
 - Ensure the Grade 1–3 Santhali FLN database is verified, normalized, and indexed before proceeding to dependent downstream tasks.
 
 ## 4. Android UI/UX Design System & Layout Guidelines
+- **Brand Identity**:
+  - App name is strictly **Vaani-Setu** (**VAANI-SETU** / **वाणी सेतु** / Ol Chiki **ᱵᱟᱱᱤ ᱥᱮᱛᱩ**).
+  - Brand emblem & launcher icon initials: **`ᱵᱥ`** (BA-SA) in Ol Chiki on Navy `#00236f`.
+- **Sharp Corners (Stitch Architectural Geometry)**:
+  - Form fields, buttons, chips, and interactive controls must use sharp corners (`4dp` matching Stitch `rounded-lg`).
+  - Cards and major containers use subtle `8dp` corners (Stitch `rounded-xl`).
+  - Never use bubbly or overly curved `12dp` to `20dp` corners for interactive controls.
 - **Symmetry & Compact Spacing (Anti-Bloat)**:
   - Maintain tight, balanced vertical and horizontal spacing.
   - Spacing between adjacent form fields must be concise (`8dp` to `10dp`).
@@ -41,6 +48,8 @@
 - **Bilingual Interface (Hindi & English)**:
   - Support seamless switching between Hindi (`हिन्दी`) and English across screens, honoring user choice stored in `UserSessionManager`.
 - **Launcher Icon & Visual Branding Integrity**:
-  - App launcher icon in the Android app drawer and home screen must consistently match the in-app brand emblem (`ᱯᱥ` Palash-Setu Ol Chiki characters on Navy `#00236f` with subtle Palash terracotta glow).
+  - App launcher icon in the Android app drawer and home screen must consistently match the in-app brand emblem (`ᱵᱥ` Vaani-Setu Ol Chiki characters on Navy `#00236f` with subtle terracotta warmth).
+- **Professional Vector Icons**:
+  - Use clean Android vector drawables (`ic_visibility`, etc.) for form controls rather than text emojis.
 - **Clean Production Form Design**:
   - Eliminate redundant debug helper buttons (e.g. "DEMO PIN भरें") from user-facing UI cards while keeping robust fallback validation.

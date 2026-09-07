@@ -40,7 +40,7 @@ fun PalashTopBar(
         .take(2)
         .map { it.firstOrNull()?.toString() ?: "" }
         .joinToString("")
-        .ifBlank { "PS" }
+        .ifBlank { "VS" }
 
     Row(
         modifier = modifier
