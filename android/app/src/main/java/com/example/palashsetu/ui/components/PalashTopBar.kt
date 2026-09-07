@@ -7,13 +7,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -36,7 +33,7 @@ import com.example.palashsetu.theme.SurfaceContainerLow
 /**
  * Vaani-Setu Standard Top Navigation Bar.
  * Follows Stitch Architectural Geometry with 4dp sharp corners for the location chip,
- * official vector location icon, status-bar inset awareness, and interactive profile avatar.
+ * official vector location icon, and interactive profile avatar.
  */
 @Composable
 fun PalashTopBar(
@@ -70,8 +67,7 @@ fun PalashTopBar(
                 color = Color(0xFFE2E8F0),
                 shape = barCornerShape
             )
-            .windowInsetsPadding(WindowInsets.statusBars)
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
