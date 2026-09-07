@@ -170,9 +170,9 @@ def main():
 
     # 3. Run Phase 3 Training Worker
     train_script = "/mnt/c/Users/Ashraf/Desktop/26042/scripts/run_phase3_cloud_train.py"
-    train_cmd = f"TERM=xterm {COLAB_CLI} exec -s {active_session} --timeout 5400 -f {train_script}"
+    train_cmd = f"TERM=xterm {COLAB_CLI} exec -s {active_session} --timeout 7200 -f {train_script}"
     t0 = time.time()
-    code = run_wsl(train_cmd, desc=f"Starting Piper TTS Training Worker on {active_session} (T4 GPU)", timeout=5500)
+    code = run_wsl(train_cmd, desc=f"Starting Piper TTS Training Worker on {active_session} (T4 GPU)", timeout=7300)
     elapsed = (time.time() - t0) / 60
 
     if code != 0:

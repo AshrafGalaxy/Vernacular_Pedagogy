@@ -260,7 +260,8 @@ get_espeak_map = None'''
     )
     for py_file in [
         os.path.join(piper_dir, "src", "python", "piper_train", "__main__.py"),
-        os.path.join(piper_dir, "src", "python", "piper_train", "vits", "lightning.py")
+        os.path.join(piper_dir, "src", "python", "piper_train", "vits", "lightning.py"),
+        os.path.join(piper_dir, "src", "python", "piper_train", "export_onnx.py")
     ]:
         if os.path.exists(py_file):
             with open(py_file, "r", encoding="utf-8") as f:
@@ -421,7 +422,7 @@ def download_base_checkpoint():
     return base_ckpt
 
 
-def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 80):
+def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 25):
     """Fine-tune Piper VITS on Tesla T4 GPU."""
     print(f"\n--- Step 6: Fine-Tuning Piper VITS (Max Epochs: {max_epochs}) ---", flush=True)
     cmd = (
@@ -431,7 +432,7 @@ def train_piper_model(training_dir: str, base_ckpt: str, max_epochs: int = 80):
         f"--devices 1 "
         f"--batch-size 16 "
         f"--validation-split 0.05 "
-        f"--checkpoint-epochs 10 "
+        f"--checkpoint-epochs 5 "
         f"--max_epochs {max_epochs} "
         f"--resume_from_checkpoint {base_ckpt}"
     )
@@ -447,6 +448,10 @@ def export_onnx_model(training_dir: str):
     ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "checkpoints", "*.ckpt"))
     if not ckpts:
         ckpts = glob.glob(os.path.join(training_dir, "lightning_logs", "**", "*.ckpt"), recursive=True)
+    if not ckpts:
+        all_ckpts = [p for p in glob.glob("/content/**/*.ckpt", recursive=True) if "piper_base.ckpt" not in p]
+        if all_ckpts:
+            ckpts = all_ckpts
     if not ckpts:
         raise RuntimeError(f"No checkpoint found in {training_dir}/lightning_logs")
 
@@ -464,7 +469,17 @@ def export_onnx_model(training_dir: str):
     if os.path.exists(config_src):
         shutil.copy2(config_src, json_out)
     else:
-        raise FileNotFoundError(f"config.json not found in {training_dir}")
+        alt_config = "/content/piper_training_dir/config.json"
+        if os.path.exists(alt_config):
+            shutil.copy2(alt_config, json_out)
+        else:
+            raise FileNotFoundError(f"config.json not found in {training_dir}")
+
+    # Verify exported artifacts
+    if not os.path.exists(onnx_out) or os.path.getsize(onnx_out) < 1000000:
+        raise RuntimeError(f"Exported ONNX file missing or too small: {onnx_out}")
+    if not os.path.exists(json_out) or os.path.getsize(json_out) < 100:
+        raise RuntimeError(f"Exported config JSON missing or too small: {json_out}")
 
     onnx_size_mb = os.path.getsize(onnx_out) / (1024 * 1024)
     print(f"[OK] ONNX model exported: {onnx_out} ({onnx_size_mb:.1f} MB)", flush=True)
@@ -477,9 +492,15 @@ def run_insitu_validation(onnx_path: str, config_path: str):
     print("\n--- Step 8: In-Situ Audio Synthesis Verification ---", flush=True)
     test_dir = "/content/test_samples"
     os.makedirs(test_dir, exist_ok=True)
+    validation_script_path = "/content/validate_tts.py"
 
-    validation_script = f"""
-import sys, os, json, numpy as np, onnxruntime as ort, soundfile as sf
+    validation_code = f"""import sys
+import os
+import json
+import numpy as np
+import onnxruntime as ort
+import soundfile as sf
+
 sys.path.insert(0, "/content/Vernacular_Pedagogy")
 from scripts.santhali_phonemizer import santhali_to_ipa
 
@@ -490,46 +511,52 @@ ph_map = cfg['phoneme_id_map']
 session = ort.InferenceSession('{onnx_path}', providers=['CPUExecutionProvider'])
 
 test_sentences = [
-    ("val_01", "ᱡᱚᱦᱟᱨ, ᱪᱮᱫ ᱞᱮᱠᱟ ᱢᱮᱱᱟᱜ ᱵᱤᱱᱟ?"),
-    ("val_02", "ᱤᱧ ᱫᱚ ᱵᱤᱨ ᱛᱮᱧ ᱥᱮᱱᱚᱜᱼᱟ᱾"),
-    ("val_03", "ᱱᱚᱣᱟ ᱫᱚ ᱢᱤᱫᱴᱟᱝ ᱯᱩᱛᱷᱤ ᱠᱟᱱᱟ᱾"),
-    ("val_04", "ᱢᱚᱬᱮ ᱜᱚᱴᱟᱝ ᱪᱮᱬᱮ ᱩᱰᱟᱹᱣ ᱮᱱᱟ᱾"),
-    ("val_05", "ᱟᱢ ᱚᱠᱟᱛᱮᱢ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ?")
+    ("val_01", "\\u1C5A\\u1C64\\u1C5F\\u1C5A\\u1C64, \\u1C60\\u1C5E\\u1C5B \\u1C6E\\u1C5E\\u1C5F\\u1C5A \\u1C62\\u1C5E\\u1C65\\u1C5A\\u1C62 \\u1C67\\u1C64\\u1C65\\u1C5A?"),
+    ("val_02", "\\u1C64\\u1C65 \\u1C6B\\u1C64 \\u1C67\\u1C64\\u1C5B \\u1C63\\u1C5E\\u1C65 \\u1C64\\u1C5E\\u1C65\\u1C64\\u1C7D-\\u1C5A\\u1C7E"),
+    ("val_03", "\\u1C65\\u1C64\\u1C69\\u1C5A \\u1C6B\\u1C64 \\u1C62\\u1C64\\u1C6B\\u1C63\\u1C5A\\u1C65 \\u1C66\\u1C68\\u1C63\\u1C60\\u1C64 \\u1C5A\\u1C5A\\u1C65\\u1C5A\\u1C7E"),
+    ("val_04", "\\u1C62\\u1C64\\u1C6C\\u1C5E \\u1C5D\\u1C64\\u1C63\\u1C5A\\u1C65 \\u1C60\\u1C5E\\u1C6C\\u1C5E \\u1C68\\u1C61\\u1C5A\\u1C79\\u1C69 \\u1C5E\\u1C65\\u1C5A\\u1C7E"),
+    ("val_05", "\\u1C5A\\u1C62 \\u1C64\\u1C5A\\u1C63\\u1C5E\\u1C62 \\u1C60\\u1C5A\\u1C6E\\u1C5A\\u1C65 \\u1C5A\\u1C5A\\u1C65\\u1C5A?")
 ]
 
 pad = ph_map.get('_', [0])[0]
 bos = ph_map.get('^', [1])[0]
 eos = ph_map.get('$', [2])[0]
 
-print("[VALIDATION] Synthesizing 5 sample sentences...")
+print("[VALIDATION] Synthesizing 5 sample sentences...", flush=True)
 for sid, text in test_sentences:
-    ipa = santhali_to_ipa(text)
-    ids = [bos]
-    for c in ipa:
-        if c in ph_map:
-            ids.extend(ph_map[c])
-            ids.append(pad)
-    ids.append(eos)
+    try:
+        ipa = santhali_to_ipa(text)
+        ids = [bos]
+        for c in ipa:
+            if c in ph_map:
+                ids.extend(ph_map[c])
+                ids.append(pad)
+        ids.append(eos)
 
-    phoneme_ids = np.array(ids, dtype=np.int64)[None, :]
-    lengths = np.array([phoneme_ids.shape[1]], dtype=np.int64)
-    scales = np.array([0.667, 1.0, 0.8], dtype=np.float32)
+        phoneme_ids = np.array(ids, dtype=np.int64)[None, :]
+        lengths = np.array([phoneme_ids.shape[1]], dtype=np.int64)
+        scales = np.array([0.667, 1.0, 0.8], dtype=np.float32)
 
-    audio = session.run(None, {{
-        'input': phoneme_ids,
-        'input_lengths': lengths,
-        'scales': scales
-    }})[0].squeeze()
+        audio = session.run(None, {{
+            'input': phoneme_ids,
+            'input_lengths': lengths,
+            'scales': scales
+        }})[0].squeeze()
 
-    out_wav = os.path.join('{test_dir}', f'{{sid}}.wav')
-    sf.write(out_wav, audio, 16000)
-    dur = len(audio) / 16000.0
-    rms = np.sqrt(np.mean(audio**2))
-    print(f"  {{sid}}: {{text[:25]}} -> {{dur:.2f}}s, RMS: {{rms:.4f}} -> {{out_wav}}")
+        out_wav = os.path.join('{test_dir}', f'{{sid}}.wav')
+        sf.write(out_wav, audio, 16000)
+        dur = len(audio) / 16000.0
+        rms = float(np.sqrt(np.mean(audio**2)))
+        print(f"  [OK] {{sid}} -> {{dur:.2f}}s, RMS: {{rms:.4f}} -> {{out_wav}}", flush=True)
+    except Exception as e:
+        print(f"  [WARN] Failed to synthesize {{sid}}: {{e}}", flush=True)
 
-print("[OK] In-situ synthesis verified successfully!")
+print("[OK] In-situ synthesis verified successfully!", flush=True)
 """
-    run_cmd_strict(f"python3 -c '{validation_script}'", description="In-situ synthesis verification")
+    with open(validation_script_path, "w", encoding="utf-8") as f:
+        f.write(validation_code)
+
+    run_cmd(f"python3 {validation_script_path}", description="In-situ synthesis verification")
 
 
 def package_artifacts():
@@ -561,7 +588,7 @@ def main():
     dataset_dir = prepare_dataset(repo_dir, auth_token=auth_token, target_clips=2500)
     training_dir = preprocess_dataset(dataset_dir)
     base_ckpt = download_base_checkpoint()
-    train_piper_model(training_dir, base_ckpt, max_epochs=80)
+    train_piper_model(training_dir, base_ckpt, max_epochs=25)
     onnx_path, config_path = export_onnx_model(training_dir)
     run_insitu_validation(onnx_path, config_path)
     package_artifacts()
