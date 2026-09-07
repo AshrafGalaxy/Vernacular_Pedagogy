@@ -160,6 +160,12 @@ def fetch_from_huggingface(
         if data_files:
             load_kwargs["data_files"] = data_files
         ds = load_dataset(dataset_name, **load_kwargs)
+        try:
+            from datasets import Audio
+            if hasattr(ds, "column_names") and "audio" in ds.column_names:
+                ds = ds.cast_column("audio", Audio(sampling_rate=16000))
+        except Exception:
+            pass
         print(f"[FETCH] Successfully loaded {len(ds)} samples from {dataset_name}.")
     except Exception as e:
         print(f"[WARN] Failed to load {dataset_name} ({config or data_files}): {e}")
@@ -173,19 +179,32 @@ def fetch_from_huggingface(
         if target_cap and saved_count >= target_cap:
             break
 
-        # Extract transcript (support normalized, transcription, sentence, text)
-        raw_text = item.get("normalized") or item.get("transcription") or item.get("sentence") or item.get("text") or ""
+        # Extract transcript (support normalized, verbatim, transcription, sentence, text)
+        raw_text = item.get("normalized") or item.get("verbatim") or item.get("transcription") or item.get("sentence") or item.get("text") or ""
         norm_text = normalize_olchiki(raw_text)
 
         if not is_valid_olchiki_sentence(norm_text):
             continue
 
-        # Extract audio (support standard dict or torchcodec AudioDecoder)
+        # Extract audio (support pre-decoded array, raw bytes, or torchcodec AudioDecoder)
         audio_array = None
         orig_sr = 16000
         if "audio" in item and isinstance(item["audio"], dict):
-            audio_array = item["audio"].get("array")
-            orig_sr = item["audio"].get("sampling_rate", 16000)
+            if item["audio"].get("array") is not None:
+                audio_array = item["audio"]["array"]
+                orig_sr = item["audio"].get("sampling_rate", 16000)
+            elif item["audio"].get("bytes") is not None:
+                import io
+                try:
+                    import soundfile as sf
+                    audio_array, orig_sr = sf.read(io.BytesIO(item["audio"]["bytes"]))
+                except Exception:
+                    try:
+                        import torchaudio
+                        tensor, orig_sr = torchaudio.load(io.BytesIO(item["audio"]["bytes"]))
+                        audio_array = tensor.squeeze().cpu().numpy()
+                    except Exception:
+                        audio_array = None
         elif "audio_filepath" in item and hasattr(item["audio_filepath"], "get_all_samples"):
             samples_obj = item["audio_filepath"].get_all_samples()
             audio_tensor = samples_obj.data.squeeze().cpu().numpy()
@@ -194,6 +213,7 @@ def fetch_from_huggingface(
 
         if audio_array is None or len(audio_array) == 0:
             continue
+
 
         clip_id = f"sat_{dataset_name.split('/')[-1]}_{i:06d}"
         wav_path = os.path.join(wavs_dir, f"{clip_id}.wav")
@@ -259,17 +279,18 @@ def main():
     print(f"Hugging Face Auth: {'Detected' if token else 'None'}")
     print("=" * 60)
 
-    # Source 1: XKaab Santhali Speech Corpus (2,619 Clean Verified Clips, Native Ol Chiki, Single 218 MB Parquet)
+    # Source 1: XKaab Santhali Speech Corpus (Clean Verified Clips, Native Ol Chiki, Single 218 MB Parquet)
     print("\nAttempting Source 1: XKaab Santali Speech Corpus ('XKaab/ASR-Santali_4hrs', valid)...")
-    c1, t1 = fetch_from_huggingface("XKaab/ASR-Santali_4hrs", config=None, split="valid", hf_token=token, output_dir=args.output_dir, max_samples=500)
+    c1, t1 = fetch_from_huggingface("XKaab/ASR-Santali_4hrs", config=None, split="valid", hf_token=token, output_dir=args.output_dir, max_samples=300)
     total_clips += c1
     total_time += t1
 
     # Source 2: AI4Bharat IndicVoices-R (Targeted Single-Shard Ingestion)
     print("\nAttempting Source 2: AI4Bharat IndicVoices-R ('ai4bharat/indicvoices_r', Santali shard 0)...")
-    c2, t2 = fetch_from_huggingface("ai4bharat/indicvoices_r", config=None, data_files="Santali/train-00000-of-00108.parquet", split="train", hf_token=token, output_dir=args.output_dir, max_samples=200)
+    c2, t2 = fetch_from_huggingface("ai4bharat/indicvoices_r", config=None, data_files="Santali/train-00000-of-00108.parquet", split="train", hf_token=token, output_dir=args.output_dir, max_samples=250)
     total_clips += c2
     total_time += t2
+
 
     if total_clips > 0:
         package_voicebank(args.output_dir)
