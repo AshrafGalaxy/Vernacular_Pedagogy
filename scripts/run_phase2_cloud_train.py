@@ -1215,9 +1215,8 @@ def main():
                 num_train_epochs=3,
                 fp16=torch.cuda.is_available(),
                 eval_strategy="epoch",
-                save_strategy="epoch",
-                save_total_limit=1,
-                logging_steps=20,
+                save_strategy="no",
+                logging_steps=10,
                 report_to="none"
             )
         except TypeError:
@@ -1231,9 +1230,8 @@ def main():
                 num_train_epochs=3,
                 fp16=torch.cuda.is_available(),
                 evaluation_strategy="epoch",
-                save_strategy="epoch",
-                save_total_limit=1,
-                logging_steps=20,
+                save_strategy="no",
+                logging_steps=10,
                 report_to="none"
             )
 
@@ -1257,46 +1255,29 @@ def main():
         t0 = time.time()
         trainer.train()
         elapsed_min = (time.time() - t0) / 60
-        print(f"Training completed in {elapsed_min:.1f} minutes!")
+        print(f"Training completed in {elapsed_min:.1f} minutes!", flush=True)
         lora_final_path = "/content/indictrans2_sat_lora_final"
         trainer.save_model(lora_final_path)
-        print(f"[OK] LoRA adapter saved to {lora_final_path}")
+        print(f"[OK] LoRA adapter saved to {lora_final_path}", flush=True)
+
+        # Free trainer and training optimizer states to reclaim VRAM & system RAM
+        del trainer
+        del training_args
+        import gc; gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
         # ──────────────────────────────────────────
         # Step 8: Merge LoRA Weights
         # ──────────────────────────────────────────
-        print("\n--- Step 8: Merging LoRA Weights with Base Model (Strict FP32) ---")
-        patch_remote_modeling(model_name, auth_token=auth_token)
-        try:
-            raw_base = AutoModelForSeq2SeqLM.from_pretrained(
-                model_name,
-                trust_remote_code=True,
-                torch_dtype=torch.float32,
-                token=auth_token
-            )
-        except (TypeError, AttributeError) as e:
-            if "tie_weights" in str(e) or "recompute_mapping" in str(e):
-                print(f"[WARN] Step 8 model load failed ({e}), re-applying patches and retrying...")
-                mods_to_clear = [k for k in list(sys.modules.keys())
-                                 if "indictrans" in k.lower() or "modeling_indictrans" in k.lower()]
-                for m in mods_to_clear:
-                    del sys.modules[m]
-                patch_remote_modeling(model_name, auth_token=auth_token)
-                raw_base = AutoModelForSeq2SeqLM.from_pretrained(
-                    model_name,
-                    trust_remote_code=True,
-                    torch_dtype=torch.float32,
-                    token=auth_token
-                )
-            else:
-                raise
-        patch_peft_compat()
-        merged = PeftModel.from_pretrained(raw_base, lora_final_path)
-        merged = merged.merge_and_unload()
+        print("\n--- Step 8: Merging LoRA Weights with Base Model (Strict FP32) ---", flush=True)
+        # Convert peft_model to float32 before merging to guarantee zero NaN / underflow
+        peft_model = peft_model.to(torch.float32)
+        merged = peft_model.merge_and_unload()
         merged = merged.to(torch.float32)
 
         # Crucial transformers v5.x fix: _tied_weights_keys must be a dict
-        for mod in [merged, raw_base] + list(merged.modules()):
+        for mod in [merged] + list(merged.modules()):
             tied = getattr(mod, "_tied_weights_keys", None)
             if isinstance(tied, (list, tuple, set)):
                 mod._tied_weights_keys = {"lm_head.weight": "model.decoder.embed_tokens.weight"}
@@ -1304,7 +1285,7 @@ def main():
         merged.save_pretrained(merged_path)
         tokenizer.save_pretrained(merged_path)
         patch_remote_modeling(auth_token=auth_token)  # Ensure merged export is also patched
-        print(f"[OK] Merged model saved to: {merged_path}")
+        print(f"[OK] Merged model saved to: {merged_path}", flush=True)
 
     # ──────────────────────────────────────────
     # Step 9: Quantize to CTranslate2 INT8
