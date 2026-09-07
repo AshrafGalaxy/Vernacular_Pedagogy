@@ -14,10 +14,35 @@ object FlnRepository {
     var isLoadedFromAssets: Boolean = false
         private set
 
+    var isLoadedFromDatabase: Boolean = false
+        private set
+
     init {
         // Pre-seed with foundational classroom imperatives
         loadCuratedCurriculum()
         rebuildIndex()
+    }
+
+    fun initialize(context: Context) {
+        initializeFromDatabase(context)
+    }
+
+    fun initializeFromDatabase(context: Context) {
+        try {
+            val dbHelper = FlnDatabaseHelper.getInstance(context)
+            val dbList = dbHelper.loadAllPhrases()
+            if (dbList.isNotEmpty()) {
+                phrases.clear()
+                phrases.addAll(dbList)
+                rebuildIndex()
+                isLoadedFromDatabase = true
+                isLoadedFromAssets = true
+                return
+            }
+        } catch (e: Exception) {
+            // Fall back to assets
+        }
+        initializeFromAssets(context)
     }
 
     fun initializeFromAssets(context: Context) {

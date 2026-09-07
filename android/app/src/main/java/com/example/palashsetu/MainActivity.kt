@@ -16,8 +16,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize Tier-1 Room/SQLite Curriculum Cache
-        FlnRepository.initializeFromAssets(applicationContext)
+        // Initialize Tier-1 SQLite Curriculum B-Tree Index
+        FlnRepository.initialize(applicationContext)
 
         enableEdgeToEdge()
         setContent {
