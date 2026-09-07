@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -340,9 +341,21 @@ fun TeacherLoginScreen(
                         ),
                         modifier = Modifier.fillMaxWidth(),
                         shape = controlCornerShape,
+                        textStyle = TextStyle(
+                            color = Color(0xFF0F172A),
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        ),
                         colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = Color(0xFF0F172A),
+                            unfocusedTextColor = Color(0xFF0F172A),
+                            focusedContainerColor = Color(0xFFF8FAFC),
+                            unfocusedContainerColor = Color(0xFFF8FAFC),
+                            cursorColor = Primary,
                             focusedBorderColor = Primary,
-                            unfocusedBorderColor = Color(0xFFCBD5E1)
+                            unfocusedBorderColor = Color(0xFFCBD5E1),
+                            focusedPlaceholderColor = Color(0xFF94A3B8),
+                            unfocusedPlaceholderColor = Color(0xFF94A3B8)
                         )
                     )
                 }
@@ -405,9 +418,22 @@ fun TeacherLoginScreen(
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = controlCornerShape,
+                        textStyle = TextStyle(
+                            color = Color(0xFF0F172A),
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = 2.sp
+                        ),
                         colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = Color(0xFF0F172A),
+                            unfocusedTextColor = Color(0xFF0F172A),
+                            focusedContainerColor = Color(0xFFF8FAFC),
+                            unfocusedContainerColor = Color(0xFFF8FAFC),
+                            cursorColor = Primary,
                             focusedBorderColor = Primary,
-                            unfocusedBorderColor = Color(0xFFCBD5E1)
+                            unfocusedBorderColor = Color(0xFFCBD5E1),
+                            focusedPlaceholderColor = Color(0xFF94A3B8),
+                            unfocusedPlaceholderColor = Color(0xFF94A3B8)
                         )
                     )
                 }
