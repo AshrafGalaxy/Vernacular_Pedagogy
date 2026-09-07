@@ -9,6 +9,7 @@ import android.media.AudioFormat
 import android.media.AudioTrack
 import android.os.Build
 import android.util.Log
+import android.util.LruCache
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,17 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.FloatBuffer
 import java.nio.LongBuffer
+
+/**
+ * Telemetry performance metrics for Piper TTS synthesis.
+ */
+data class TtsTelemetry(
+    val synthesisDurationMs: Long = 0L,
+    val audioDurationMs: Long = 0L,
+    val realTimeFactor: Float = 0f,
+    val sampleRate: Int = 16000,
+    val isCacheHit: Boolean = false
+)
 
 /**
  * Production On-Device Neural TTS Engine for Santhali.
@@ -33,9 +45,18 @@ class PiperTtsEngine(private val context: Context) {
     private var ortSession: OrtSession? = null
     private var phonemeIdMap: Map<String, List<Long>> = emptyMap()
 
+    // 50-entry LRU Cache for instantaneous (<2ms) replay of frequent classroom commands
+    private val audioLruCache = LruCache<String, ShortArray>(50)
+
+    var lastTelemetry: TtsTelemetry = TtsTelemetry()
+        private set
+
     private var activeTrack: AudioTrack? = null
     var isInitialized: Boolean = false
         private set
+
+    fun getCacheSize(): Int = audioLruCache.size()
+    fun clearCache() { audioLruCache.evictAll() }
 
     /**
      * Initializes the ONNX Runtime session and loads phoneme map.
@@ -88,11 +109,29 @@ class PiperTtsEngine(private val context: Context) {
      * Synthesizes Ol Chiki text into 16 kHz 16-bit PCM audio.
      */
     fun synthesize(olchikiText: String, speed: Float = 0.9f): ShortArray? {
+        val trimmedText = olchikiText.trim()
+        if (trimmedText.isBlank()) return null
+
+        val cacheKey = "$trimmedText@$speed"
+        val cached = audioLruCache.get(cacheKey)
+        if (cached != null) {
+            val audioDuration = (cached.size.toFloat() / 16000f * 1000f).toLong().coerceAtLeast(1L)
+            lastTelemetry = TtsTelemetry(
+                synthesisDurationMs = 1L,
+                audioDurationMs = audioDuration,
+                realTimeFactor = 0.001f,
+                sampleRate = 16000,
+                isCacheHit = true
+            )
+            return cached
+        }
+
         val env = ortEnv ?: return null
         val session = ortSession ?: return null
         if (phonemeIdMap.isEmpty()) return null
 
-        val phonemeIds = SanthaliPhonemizer.textToPhonemeIds(olchikiText, phonemeIdMap)
+        val startTime = System.currentTimeMillis()
+        val phonemeIds = SanthaliPhonemizer.textToPhonemeIds(trimmedText, phonemeIdMap)
         if (phonemeIds.isEmpty()) return null
 
         val inputShape = longArrayOf(1, phonemeIds.size.toLong())
@@ -129,6 +168,20 @@ class PiperTtsEngine(private val context: Context) {
                 shortArray[i] = (sample.coerceIn(-1.0f, 1.0f) * 32767.0f).toInt().toShort()
             }
             outputs.close()
+
+            val synthesisDurationMs = (System.currentTimeMillis() - startTime).coerceAtLeast(1L)
+            val audioDurationMs = (shortArray.size.toFloat() / 16000f * 1000f).toLong().coerceAtLeast(1L)
+            val rtf = synthesisDurationMs.toFloat() / audioDurationMs.toFloat()
+
+            lastTelemetry = TtsTelemetry(
+                synthesisDurationMs = synthesisDurationMs,
+                audioDurationMs = audioDurationMs,
+                realTimeFactor = rtf,
+                sampleRate = 16000,
+                isCacheHit = false
+            )
+
+            audioLruCache.put(cacheKey, shortArray)
             return shortArray
         } catch (e: Exception) {
             Log.e(tag, "Error during Piper ONNX inference: ${e.message}", e)

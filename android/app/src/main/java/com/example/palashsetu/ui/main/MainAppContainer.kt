@@ -24,7 +24,7 @@ fun MainAppContainer(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    var isAuthenticated by remember { mutableStateOf(false) }
+    var isAuthenticated by remember { mutableStateOf(UserSessionManager.getProfile(context).isConfigured) }
     var selectedTab by remember { mutableStateOf(BottomTab.LIVE) }
     var currentLanguage by remember { mutableStateOf(UserSessionManager.getLanguage(context)) }
 

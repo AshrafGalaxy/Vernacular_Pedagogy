@@ -26,6 +26,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -55,6 +56,7 @@ import com.example.palashsetu.R
 import com.example.palashsetu.data.local.NipunCurriculumRepository
 import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.data.model.NipunCompetency
+import com.example.palashsetu.domain.engine.AudioPlayerState
 import com.example.palashsetu.domain.engine.PedagogicalAudioEngine
 import com.example.palashsetu.domain.pdf.WorksheetPdfGenerator
 import com.example.palashsetu.theme.Background
@@ -112,9 +114,14 @@ fun PedagogyStudioScreen(
     var isFlashcardMode by remember { mutableStateOf(false) }
     var isCardFlipped by remember { mutableStateOf(false) }
     var showPdfDownloadedNotification by remember { mutableStateOf(false) }
+    var isInstructionAudioPlaying by remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
     val audioEngine = remember { PedagogicalAudioEngine(context) }
+
+    LaunchedEffect(Unit) {
+        audioEngine.warmUp()
+    }
 
     val controlCornerShape = RoundedCornerShape(4.dp)
     val cardCornerShape = RoundedCornerShape(8.dp)
@@ -508,7 +515,7 @@ fun PedagogyStudioScreen(
                         )
                     }
 
-                    // Vernacular Ol Chiki & Hindi Instruction Box
+                    // Vernacular Ol Chiki & Hindi Instruction Box with Piper Audio Button
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -517,21 +524,72 @@ fun PedagogyStudioScreen(
                             .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                             .padding(14.dp)
                     ) {
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text(
-                                text = selectedCompetency.instructionOlchiki.ifBlank { "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾" },
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Primary,
-                                lineHeight = 23.sp
-                            )
-                            Text(
-                                text = selectedCompetency.instructionHi.ifBlank { "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।" },
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF1E293B),
-                                lineHeight = 21.sp
-                            )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            Column(
+                                modifier = Modifier.weight(1f).padding(end = 8.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text(
+                                    text = selectedCompetency.instructionOlchiki.ifBlank { "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾" },
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Primary,
+                                    lineHeight = 23.sp
+                                )
+                                Text(
+                                    text = selectedCompetency.instructionHi.ifBlank { "महुआ के फल और सखुआ के पत्ते गिनकर कुल संख्या लिखें।" },
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Color(0xFF1E293B),
+                                    lineHeight = 21.sp
+                                )
+                            }
+
+                            // Compact Piper Speech Playback Button (28dp, 4dp sharp corners)
+                            Box(
+                                modifier = Modifier
+                                    .size(28.dp)
+                                    .clip(controlCornerShape)
+                                    .background(if (isInstructionAudioPlaying) Color(0xFFDC2626) else Primary)
+                                    .clickable {
+                                        if (!isInstructionAudioPlaying) {
+                                            val textToSpeak = selectedCompetency.instructionOlchiki.ifBlank {
+                                                "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱛᱚ ᱮᱞ ᱚᱞ ᱢᱮ᱾"
+                                            }
+                                            coroutineScope.launch {
+                                                isInstructionAudioPlaying = true
+                                                audioEngine.playSynthesizedAudio(textToSpeak).collect { state ->
+                                                    if (state is AudioPlayerState.Finished || state is AudioPlayerState.Idle) {
+                                                        isInstructionAudioPlaying = false
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            audioEngine.stopPlayback()
+                                            isInstructionAudioPlaying = false
+                                        }
+                                    },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (isInstructionAudioPlaying) {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(14.dp),
+                                        color = Color.White,
+                                        strokeWidth = 1.5.dp
+                                    )
+                                } else {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_volume_up),
+                                        contentDescription = "Speak Instruction",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(15.dp)
+                                    )
+                                }
+                            }
                         }
                     }
 

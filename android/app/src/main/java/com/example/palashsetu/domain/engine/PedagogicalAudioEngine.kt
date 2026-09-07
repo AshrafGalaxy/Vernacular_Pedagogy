@@ -77,4 +77,13 @@ class PedagogicalAudioEngine(
         currentSpeed = if (currentSpeed == 0.9f) 1.0f else 0.9f
         return currentSpeed
     }
+
+    val lastTelemetry: TtsTelemetry?
+        get() = ttsEngine?.lastTelemetry
+
+    fun isEngineInitialized(): Boolean = ttsEngine?.isInitialized ?: false
+
+    suspend fun warmUp(): Boolean {
+        return ttsEngine?.initialize() ?: false
+    }
 }
