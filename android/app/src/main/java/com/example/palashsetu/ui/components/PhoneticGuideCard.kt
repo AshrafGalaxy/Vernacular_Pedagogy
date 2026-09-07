@@ -1,6 +1,7 @@
 package com.example.palashsetu.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -19,15 +21,24 @@ import com.example.palashsetu.theme.Secondary
 import com.example.palashsetu.theme.SecondaryFixed
 import com.example.palashsetu.theme.SurfaceContainerLowest
 
+/**
+ * Stitch Architectural Geometry Phonetic Guide Card.
+ * Uses 8dp container corners and 4dp sharp controls.
+ */
 @Composable
 fun PhoneticGuideCard(
     phoneticText: String,
     modifier: Modifier = Modifier
 ) {
+    val cardCornerShape = RoundedCornerShape(8.dp)
+    val controlCornerShape = RoundedCornerShape(4.dp)
+
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(SecondaryFixed.copy(alpha = 0.5f), RoundedCornerShape(12.dp))
+            .clip(cardCornerShape)
+            .background(SecondaryFixed.copy(alpha = 0.45f))
+            .border(1.dp, Secondary.copy(alpha = 0.25f), cardCornerShape)
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -54,7 +65,8 @@ fun PhoneticGuideCard(
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF663500),
                 modifier = Modifier
-                    .background(Color(0xFFFFE0B2), RoundedCornerShape(6.dp))
+                    .clip(controlCornerShape)
+                    .background(Color(0xFFFFE0B2))
                     .padding(horizontal = 6.dp, vertical = 2.dp)
             )
         }
@@ -66,7 +78,9 @@ fun PhoneticGuideCard(
             color = Color(0xFF2F1500),
             modifier = Modifier
                 .fillMaxWidth()
-                .background(SurfaceContainerLowest.copy(alpha = 0.85f), RoundedCornerShape(8.dp))
+                .clip(controlCornerShape)
+                .background(SurfaceContainerLowest.copy(alpha = 0.95f))
+                .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                 .padding(10.dp)
         )
     }

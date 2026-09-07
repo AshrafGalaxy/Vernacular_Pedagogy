@@ -126,27 +126,33 @@ fun LiveVoiceBridgeScreen(
             // Header TopBar
             PalashTopBar()
 
+            val cardCornerShape = RoundedCornerShape(8.dp)
+            val controlCornerShape = RoundedCornerShape(4.dp)
+
             Column(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Language Bridge Indicator Card
+                // Language Bridge Indicator Card (Sharp Stitch Geometry)
                 Card(
-                    shape = RoundedCornerShape(14.dp),
+                    shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerLow),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Teacher side
+                            // Teacher side (Sharp 4dp container)
                             Row(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .background(SurfaceContainerLowest, RoundedCornerShape(8.dp))
+                                    .clip(controlCornerShape)
+                                    .background(SurfaceContainerLowest)
+                                    .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                     .padding(8.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
@@ -158,23 +164,25 @@ fun LiveVoiceBridgeScreen(
                                 }
                             }
 
-                            // Sync icon
+                            // Sync icon (Sharp 4dp container)
                             Box(
                                 modifier = Modifier
                                     .padding(horizontal = 8.dp)
                                     .size(32.dp)
-                                    .clip(CircleShape)
+                                    .clip(controlCornerShape)
                                     .background(PrimaryContainer),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(text = "⇄", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                             }
 
-                            // Student side
+                            // Student side (Sharp 4dp container)
                             Row(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .background(SurfaceContainerLowest, RoundedCornerShape(8.dp))
+                                    .clip(controlCornerShape)
+                                    .background(SurfaceContainerLowest)
+                                    .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                     .padding(8.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
@@ -187,7 +195,7 @@ fun LiveVoiceBridgeScreen(
                             }
                         }
 
-                        // Dialect Chips
+                        // Dialect Chips (Santali Only)
                         DialectChips(
                             selectedDialect = selectedDialect,
                             onDialectSelect = { selectedDialect = it }
@@ -195,11 +203,12 @@ fun LiveVoiceBridgeScreen(
                     }
                 }
 
-                // Section 1: Teacher Live ASR Input Card
+                // Section 1: Teacher Live ASR Input Card (Sharp Stitch Geometry)
                 Card(
-                    shape = RoundedCornerShape(14.dp),
+                    shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -220,7 +229,8 @@ fun LiveVoiceBridgeScreen(
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
-                                    .background(Color(0xFFE0F2FE), RoundedCornerShape(12.dp))
+                                    .clip(controlCornerShape)
+                                    .background(Color(0xFFE0F2FE))
                                     .padding(horizontal = 8.dp, vertical = 2.dp)
                             ) {
                                 Text(text = "• LIVE", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFF0369A1))
@@ -245,7 +255,9 @@ fun LiveVoiceBridgeScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(SurfaceContainerLow, RoundedCornerShape(8.dp))
+                                .clip(controlCornerShape)
+                                .background(SurfaceContainerLow)
+                                .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                 .padding(horizontal = 10.dp, vertical = 6.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
@@ -257,9 +269,10 @@ fun LiveVoiceBridgeScreen(
 
                 // Section 2: Classroom Broadcast Card (Ol Chiki + Phonetic Guide + Audio)
                 Card(
-                    shape = RoundedCornerShape(14.dp),
+                    shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerHigh),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -275,7 +288,8 @@ fun LiveVoiceBridgeScreen(
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White,
                                     modifier = Modifier
-                                        .background(Primary, RoundedCornerShape(4.dp))
+                                        .clip(controlCornerShape)
+                                        .background(Primary)
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
                                 Text(text = "संथाली (Santali - Ol Chiki)", fontSize = 11.sp, color = Color(0xFF475569))
@@ -286,16 +300,20 @@ fun LiveVoiceBridgeScreen(
                                 fontWeight = FontWeight.Bold,
                                 color = Secondary,
                                 modifier = Modifier
-                                    .background(SurfaceContainerLowest, RoundedCornerShape(12.dp))
+                                    .clip(controlCornerShape)
+                                    .background(SurfaceContainerLowest)
+                                    .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                     .padding(horizontal = 8.dp, vertical = 3.dp)
                             )
                         }
 
-                        // Large Ol Chiki Script Text
+                        // Large Ol Chiki Script Text (Sharp 4dp Box)
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(SurfaceContainerLowest, RoundedCornerShape(12.dp))
+                                .clip(controlCornerShape)
+                                .background(SurfaceContainerLowest)
+                                .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                 .padding(16.dp)
                         ) {
                             Text(
@@ -310,7 +328,7 @@ fun LiveVoiceBridgeScreen(
                         // Devanagari Teacher Phonetic Guide
                         PhoneticGuideCard(phoneticText = phoneticGuide)
 
-                        // Piper TTS Audio Controls Bar
+                        // Piper TTS Audio Controls Bar (Sharp 4dp Controls, 44dp height)
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -320,8 +338,8 @@ fun LiveVoiceBridgeScreen(
                             Button(
                                 onClick = { playAudio() },
                                 colors = ButtonDefaults.buttonColors(containerColor = Primary),
-                                shape = RoundedCornerShape(10.dp),
-                                modifier = Modifier.weight(1f).height(46.dp)
+                                shape = controlCornerShape,
+                                modifier = Modifier.weight(1f).height(44.dp)
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -343,10 +361,10 @@ fun LiveVoiceBridgeScreen(
                             // Cadence speed toggle (0.9x / 1.0x)
                             Box(
                                 modifier = Modifier
-                                    .height(46.dp)
-                                    .clip(RoundedCornerShape(10.dp))
+                                    .height(44.dp)
+                                    .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
-                                    .border(1.dp, Color(0xFFCBD5E1), RoundedCornerShape(10.dp))
+                                    .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                     .clickable { currentSpeed = audioEngine.toggleSpeed() }
                                     .padding(horizontal = 14.dp),
                                 contentAlignment = Alignment.Center
@@ -362,10 +380,10 @@ fun LiveVoiceBridgeScreen(
                             // Replay button
                             Box(
                                 modifier = Modifier
-                                    .height(46.dp)
-                                    .clip(RoundedCornerShape(10.dp))
+                                    .height(44.dp)
+                                    .clip(controlCornerShape)
                                     .background(SurfaceContainerLowest)
-                                    .border(1.dp, Color(0xFFCBD5E1), RoundedCornerShape(10.dp))
+                                    .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
                                     .clickable { playAudio() }
                                     .padding(horizontal = 14.dp),
                                 contentAlignment = Alignment.Center
@@ -376,7 +394,7 @@ fun LiveVoiceBridgeScreen(
                     }
                 }
 
-                // Section 3: Instant 1-Tap Classroom Commands (Tier-1 Room Lookups)
+                // Section 3: Instant 1-Tap Classroom Commands (Sharp 4dp Rows)
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = "त्वरित कक्षा निर्देश (Instant 1-Tap Commands):",
@@ -395,9 +413,9 @@ fun LiveVoiceBridgeScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(controlCornerShape)
                                 .background(SurfaceContainerLowest)
-                                .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(10.dp))
+                                .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                 .clickable {
                                     triggerTranslation(hindi)
                                     playAudio()
@@ -415,6 +433,7 @@ fun LiveVoiceBridgeScreen(
                     }
                 }
             }
+
         }
 
         // Push-to-Talk Floating Microphone Button
