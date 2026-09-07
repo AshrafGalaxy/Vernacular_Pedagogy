@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -106,37 +108,47 @@ fun PedagogyStudioScreen(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(44.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 listOf(1 to "कक्षा 1", 2 to "कक्षा 2", 3 to "कक्षा 3").forEach { (grade, label) ->
                     val isSelected = selectedGrade == grade
                     Box(
                         modifier = Modifier
                             .weight(1f)
+                            .fillMaxHeight()
                             .clip(controlCornerShape)
                             .background(if (isSelected) Primary else SurfaceContainerLowest)
-                            .border(1.dp, if (isSelected) Primary else Color(0xFFCBD5E1), controlCornerShape)
-                            .clickable { selectedGrade = grade }
-                            .padding(vertical = 10.dp),
+                            .border(
+                                width = if (isSelected) 1.5.dp else 1.dp,
+                                color = if (isSelected) Primary else Color(0xFFCBD5E1),
+                                shape = controlCornerShape
+                            )
+                            .clickable { selectedGrade = grade },
                         contentAlignment = Alignment.Center
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            horizontalArrangement = Arrangement.Center
                         ) {
                             Text(
                                 text = if (isHindi) label else "Grade $grade",
-                                fontSize = 12.sp,
+                                fontSize = 13.sp,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                color = if (isSelected) Color.White else Color(0xFF1E293B)
+                                color = if (isSelected) Color.White else Color(0xFF1E293B),
+                                maxLines = 1,
+                                softWrap = false
                             )
                             if (isSelected) {
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_check),
                                     contentDescription = "Selected",
                                     tint = Color.White,
-                                    modifier = Modifier.size(13.dp)
+                                    modifier = Modifier.size(14.dp)
                                 )
                             }
                         }
@@ -151,10 +163,10 @@ fun PedagogyStudioScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .height(36.dp)
                         .clip(controlCornerShape)
                         .background(PrimaryContainer)
-                        .border(1.dp, Primary, controlCornerShape)
-                        .padding(vertical = 8.dp, horizontal = 12.dp),
+                        .border(1.dp, Primary, controlCornerShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Row(
@@ -172,6 +184,8 @@ fun PedagogyStudioScreen(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
+                            maxLines = 1,
+                            softWrap = false,
                             textAlign = TextAlign.Center
                         )
                     }
