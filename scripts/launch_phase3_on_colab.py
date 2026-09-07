@@ -91,30 +91,33 @@ def run_wsl(command, desc=None, timeout=None):
         return -1
 
 
-def ensure_colab_session(session_name="phase3-tts", fallback_session="phase2-train", gpu="T4", max_retries=2):
-    """Ensure a Colab GPU session is active, checking target or reusing existing session."""
+def ensure_colab_session(session_name="phase3-tts", fallback_session="phase2-train", gpu="T4", max_retries=20, retry_delay=30):
+    """Ensure a Colab GPU session is active, retrying gracefully if the GPU pool returns 503."""
     print(f"\n[ORCHESTRATOR] Checking Colab GPU sessions...", flush=True)
 
-    for s_name in [session_name, fallback_session]:
-        try:
-            check = subprocess.run(
-                ["wsl", "-d", "Ubuntu", "bash", "-c", f"{COLAB_CLI} status -s {s_name}"],
-                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30
-            )
-            if check.returncode == 0 and ("Status:" in check.stdout or "Variant: GPU" in check.stdout):
-                print(f"[ORCHESTRATOR] Active session '{s_name}' verified on Colab server.", flush=True)
-                return s_name
-        except Exception:
-            pass
+    for attempt in range(max_retries):
+        for s_name in [session_name, fallback_session]:
+            try:
+                check = subprocess.run(
+                    ["wsl", "-d", "Ubuntu", "bash", "-c", f"{COLAB_CLI} status -s {s_name}"],
+                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30
+                )
+                if check.returncode == 0 and ("Status:" in check.stdout or "Variant: GPU" in check.stdout or "IDLE" in check.stdout):
+                    print(f"[ORCHESTRATOR] Active session '{s_name}' verified on Colab server.", flush=True)
+                    return s_name
+            except Exception:
+                pass
 
-    # Provision fresh session if none active
-    print(f"[ORCHESTRATOR] Provisioning fresh Tesla {gpu} GPU session '{session_name}'...", flush=True)
-    code = run_wsl(f"{COLAB_CLI} new -s {session_name} --gpu {gpu}", desc=f"Provisioning Colab {gpu} GPU Session")
-    if code == 0:
-        time.sleep(6)
-        return session_name
+        print(f"[ORCHESTRATOR] (Attempt {attempt+1}/{max_retries}) Provisioning fresh Tesla {gpu} GPU session '{session_name}'...", flush=True)
+        code = run_wsl(f"{COLAB_CLI} new -s {session_name} --gpu {gpu}", desc=f"Provisioning Colab {gpu} GPU Session")
+        if code == 0:
+            time.sleep(6)
+            return session_name
 
-    print(f"[ERROR] Failed to provision Colab session.")
+        print(f"[ORCHESTRATOR] Colab {gpu} GPU pool busy (503 Service Unavailable). Retrying in {retry_delay}s...", flush=True)
+        time.sleep(retry_delay)
+
+    print(f"[ERROR] Failed to provision Colab session after {max_retries} attempts.")
     sys.exit(1)
 
 
