@@ -75,8 +75,30 @@ Last Updated: Phase 3 Stack & Pipeline Hardening Complete
 
 ---
 
-## 4. Next Milestone: Phase 4 Android Edge Runtime
+## 4. Edge Storage & Memory Footprint (Audited & Proof-Backed)
 
-Proceed to **Phase 4: Unified Android Edge Runtime Engine**, binding SQLite FLN cache, CTranslate2 INT8 NMT, and Piper ONNX TTS into a unified offline Android service as specified in `docs/ANDROID_FRONTEND_SPECIFICATION.md`.
+Comprehensive breakdown available in [`docs/STORAGE_FOOTPRINT_SPECIFICATION.md`](file:///c:/Users/Ashraf/Desktop/26042/docs/STORAGE_FOOTPRINT_SPECIFICATION.md):
+- **FLN SQLite Database:** `assets/fln_lexicon.sqlite` (**184,320 bytes** / 180 KiB)
+- **Piper TTS ONNX Model:** `models/tts/sat_piper_model.onnx` (**63,516,051 bytes** / 60.57 MiB)
+- **IndicTrans2 INT8 Model:** `models/mt/indictrans2_sat_int8_ct2_unpruned.tar.gz` (**333,953,312 bytes** uncompressed / 318.48 MiB)
+- **Total Download / APK Archive:** **342.53 MiB** (359.16 MB)
+- **Total Extracted On-Device Storage:** **379.23 MiB** (397.66 MB) $\rightarrow$ **2.48%** of a 16 GB eMMC Android tablet.
+- **Dynamic Active RAM Footprint:** **~515 – 555 MB** peak $\rightarrow$ Leaves **>400 MB safe margin** on a 2 GB RAM device.
+
+---
+
+## 5. Hugging Face Model Hub & Agent Skill
+
+- **Model Hub Repository:** `Ashraf01k/vernacular-pedagogy-santhali`
+- **Automation Upload Script:** [`scripts/upload_models_to_huggingface.py`](file:///c:/Users/Ashraf/Desktop/26042/scripts/upload_models_to_huggingface.py)
+- **Agent Skill:** Registered at [`.agents/skills/hf-cli/SKILL.md`](file:///c:/Users/Ashraf/Desktop/26042/.agents/skills/hf-cli/SKILL.md) and global Antigravity skills.
+- **Status:** CLI installed and authenticated as `user=Ashraf01k`. Ready for automated upload upon granting write access.
+
+---
+
+## 6. Next Milestone: Phase 4 Android Edge Runtime
+
+Proceed to **Phase 4: Unified Android Edge Runtime Engine**, binding SQLite FLN cache, CTranslate2 INT8 NMT, and Piper ONNX TTS into a unified offline Android service as specified in [`docs/ANDROID_FRONTEND_SPECIFICATION.md`](file:///c:/Users/Ashraf/Desktop/26042/docs/ANDROID_FRONTEND_SPECIFICATION.md).
+
 
 
