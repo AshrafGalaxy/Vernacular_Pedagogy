@@ -22,15 +22,26 @@ import androidx.compose.ui.unit.sp
 import com.example.palashsetu.theme.Primary
 import com.example.palashsetu.theme.Secondary
 import com.example.palashsetu.theme.SurfaceContainerLow
+import androidx.compose.ui.platform.LocalContext
+import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.theme.TertiaryFixed
 
 @Composable
 fun PalashTopBar(
     clusterName: String = "खूंटी (Hasada)",
-    teacherName: String = "Smt. Pooja Soren",
+    teacherName: String? = null,
     isOffline: Boolean = true,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val resolvedTeacherName = teacherName ?: UserSessionManager.getTeacherDisplayName(context)
+    val initials = resolvedTeacherName.split(" ")
+        .filter { it.isNotBlank() }
+        .take(2)
+        .map { it.firstOrNull()?.toString() ?: "" }
+        .joinToString("")
+        .ifBlank { "PS" }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -93,8 +104,8 @@ fun PalashTopBar(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "PS",
-                    fontSize = 13.sp,
+                    text = initials,
+                    fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
