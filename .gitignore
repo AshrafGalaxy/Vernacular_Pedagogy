@@ -28,6 +28,7 @@ data/raw/youtube_audio/*.mp3
 data/raw/common_voice/clips/
 Santali dataset Mozilla/
 data/processed/voice_bank/
+assets/images/raw_sources/
 
 # IDE and OS files
 .DS_Store

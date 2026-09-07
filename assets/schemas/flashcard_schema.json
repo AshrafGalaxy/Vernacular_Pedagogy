@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FlashcardPayload",
+  "type": "object",
+  "required": ["card_id", "grade_level", "domain", "nipun_competency", "lexical_payload", "asset_references"],
+  "properties": {
+    "card_id": { "type": "string", "pattern": "^FC_[A-Z_0-9]+$" },
+    "grade_level": { "type": "integer", "enum": [1, 2, 3] },
+    "domain": { "type": "string" },
+    "nipun_competency": { "type": "string" },
+    "lexical_payload": {
+      "type": "object",
+      "required": ["source_hindi", "target_olchiki", "phonetic_deva"],
+      "properties": {
+        "source_hindi": { "type": "string" },
+        "target_olchiki": { "type": "string" },
+        "phonetic_deva": { "type": "string" }
+      }
+    },
+    "asset_references": {
+      "type": "object",
+      "required": ["image_asset_path"],
+      "properties": {
+        "image_asset_path": { "type": "string", "pattern": "^images/motifs/motif_[a-z_]+\\.png$" },
+        "cached_audio_path": { "type": "string" }
+      }
+    }
+  }
+}

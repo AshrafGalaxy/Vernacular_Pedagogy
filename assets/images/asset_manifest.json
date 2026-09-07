@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "asset_policy": {
+    "compiled_format": "400x400 RGBA PNG with opaque black line work and transparent background",
+    "source_policy": "Use only files with a documented public-domain, CC0, CC-BY, or CC-BY-SA license. Preserve attribution in this manifest and ATTRIBUTION.md.",
+    "selection_rule": "One isolated, culturally and pedagogically recognizable subject per motif; do not use people as generic props."
+  },
+  "assets": [
+    {
+      "motif_key": "mahua_fruit",
+      "output_file": "motif_mahua_fruit.png",
+      "source_file": "mahua_fruit.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Madhuca_longifolia_var_latifolia_(Mahua)_fruit_W_IMG_0245.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Madhuca_longifolia_var_latifolia_(Mahua)_fruit_W_IMG_0245.jpg",
+      "title": "Madhuca longifolia var. latifolia (Mahua) fruit",
+      "creator": "J.M.Garg",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "pedagogy": "Counting and local-flora vocabulary",
+      "lexicon_matches": ["महुआ"]
+    },
+    {
+      "motif_key": "sal_leaf",
+      "output_file": "motif_sal_leaf.png",
+      "source_file": "sal_leaf.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shorea_robusta_young_leaves.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shorea_robusta_young_leaves.jpg",
+      "title": "Shorea robusta young leaves",
+      "creator": "Delonix",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pedagogy": "Sorting, grouping, and local-flora vocabulary",
+      "lexicon_matches": ["सखुआ पत्ता", "पत्ता"]
+    },
+    {
+      "motif_key": "earthen_pot",
+      "output_file": "motif_earthen_pot.png",
+      "source_file": "earthen_pot.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Clay_water_pot_with_lid.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Clay_water_pot_with_lid.jpg",
+      "title": "Clay water pot with lid",
+      "creator": "Prathvi Acharya",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "pedagogy": "Object recognition and three-dimensional shapes",
+      "lexicon_matches": ["घड़ा", "हंडी"]
+    },
+    {
+      "motif_key": "indigenous_fish",
+      "output_file": "motif_indigenous_fish.png",
+      "source_file": "rohu_fish.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Labeo_rohita_Griesbach_127.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Labeo_rohita_Griesbach_127.jpg",
+      "title": "Labeo rohita (Rohu), plate 127",
+      "creator": "C. L. Griesbach",
+      "license": "Public domain (1878 illustration)",
+      "license_url": "https://commons.wikimedia.org/wiki/Commons:Copyright_rules_by_territory",
+      "pedagogy": "Subtraction by crossing out and local-fauna vocabulary",
+      "lexicon_matches": ["मछली"]
+    },
+    {
+      "motif_key": "mango_fruit",
+      "output_file": "motif_mango_fruit.png",
+      "source_file": "mango_fruit.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mango_Fruits.JPG",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Mango_Fruits.JPG",
+      "title": "Mango fruits in Kerala, India",
+      "creator": "Effulgence108",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "pedagogy": "Addition pairs and food vocabulary",
+      "lexicon_matches": ["आम"]
+    },
+    {
+      "motif_key": "drum_tamak",
+      "output_file": "motif_drum_tamak.png",
+      "source_file": "tamak.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Tamak_and_Tumdak_01.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Tamak_and_Tumdak_01.jpg",
+      "title": "Tamak and Tumdak",
+      "creator": "Kritzolina",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pedagogy": "Syllable counting and Santhal cultural vocabulary",
+      "lexicon_matches": ["मांदर", "नगाड़ा"]
+    },
+    {
+      "motif_key": "bow_arrow",
+      "output_file": "motif_bow_arrow.png",
+      "source_file": "bow_arrow.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bow-Arrow_BritishIndianArmy.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bow-Arrow_BritishIndianArmy.jpg",
+      "title": "Bow and arrow used by British Indian Army",
+      "creator": "Abhinav619",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "pedagogy": "Spatial-relation exercises; adult context is cropped out during compilation",
+      "lexicon_matches": ["धनुष-बाण"]
+    }
+  ]
+}

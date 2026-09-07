@@ -30,14 +30,24 @@ GOLD_STANDARD_TESTS = [
 ]
 
 
+sys.path.insert(0, BASE_DIR)
+try:
+    from scripts.santhali_phonemizer import santhali_to_ipa
+except ImportError:
+    santhali_to_ipa = None
+
+
 def text_to_phoneme_ids(text: str, phoneme_id_map: dict) -> list:
-    """Maps Ol Chiki text characters to Piper phoneme IDs based on model configuration."""
+    """Maps Ol Chiki text characters or IPA to Piper phoneme IDs based on model configuration."""
     bos = phoneme_id_map.get("^", [1])[0] if isinstance(phoneme_id_map.get("^"), list) else phoneme_id_map.get("^", 1)
     eos = phoneme_id_map.get("$", [2])[0] if isinstance(phoneme_id_map.get("$"), list) else phoneme_id_map.get("$", 2)
     pad = phoneme_id_map.get("_", [0])[0] if isinstance(phoneme_id_map.get("_"), list) else phoneme_id_map.get("_", 0)
 
+    # Convert Ol Chiki to IPA if phonemizer available
+    phonemes = santhali_to_ipa(text) if santhali_to_ipa else text
+
     ids = [bos]
-    for char in text:
+    for char in phonemes:
         if char in phoneme_id_map:
             val = phoneme_id_map[char]
             if isinstance(val, list):

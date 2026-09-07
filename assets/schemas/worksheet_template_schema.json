@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorksheetTemplate",
+  "type": "object",
+  "required": ["template_id", "target_grade", "nipun_outcome_code", "header", "instructions", "exercises"],
+  "properties": {
+    "template_id": { "type": "string" },
+    "target_grade": { "type": "integer", "enum": [1, 2, 3] },
+    "nipun_outcome_code": { "type": "string" },
+    "header": { "type": "object", "required": ["title_en", "title_hi", "title_olchiki"] },
+    "instructions": { "type": "object", "required": ["text_en", "text_hi", "text_olchiki"] },
+    "exercises": { "type": "array", "minItems": 1 }
+  }
+}

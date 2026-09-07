@@ -1,0 +1,4 @@
+﻿Noto Sans Ol Chiki Regular
+Source: Android Open Source Project, noto-fonts
+Source URL: https://android.googlesource.com/platform/external/noto-fonts/+/a19a3af6f202af6785a4449fb807e406a548299a/notosansolchiki/NotoSansOlChiki-Regular.ttf?format=TEXT
+License: SIL Open Font License 1.1 (OFL-1.1)

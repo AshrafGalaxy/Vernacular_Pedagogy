@@ -1,0 +1,9 @@
+[
+  {"card_id":"FC_MAHUA","grade_level":1,"domain":"flora_fauna","nipun_competency":"FLN-M1.2","lexical_payload":{"source_hindi":"महुआ","target_olchiki":"ᱢᱟᱦᱩᱣᱟ ᱡᱚ","phonetic_deva":"माहुवा जो"},"asset_references":{"image_asset_path":"images/motifs/motif_mahua_fruit.png"}},
+  {"card_id":"FC_SAL_LEAF","grade_level":1,"domain":"flora_fauna","nipun_competency":"FLN-M1.2","lexical_payload":{"source_hindi":"सखुआ पत्ता","target_olchiki":"ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ","phonetic_deva":"सारजोम साकाम"},"asset_references":{"image_asset_path":"images/motifs/motif_sal_leaf.png"}},
+  {"card_id":"FC_POT","grade_level":2,"domain":"objects","nipun_competency":"FLN-M2.3","lexical_payload":{"source_hindi":"घड़ा","target_olchiki":"ᱪᱩᱠᱟᱹᱜ","phonetic_deva":"चुकाग"},"asset_references":{"image_asset_path":"images/motifs/motif_earthen_pot.png"}},
+  {"card_id":"FC_FISH","grade_level":1,"domain":"flora_fauna","nipun_competency":"FLN-M1.4","lexical_payload":{"source_hindi":"मछली","target_olchiki":"ᱦᱟᱹᱠᱩ","phonetic_deva":"हाकु"},"asset_references":{"image_asset_path":"images/motifs/motif_indigenous_fish.png"}},
+  {"card_id":"FC_MANGO","grade_level":1,"domain":"flora_fauna","nipun_competency":"FLN-M1.3","lexical_payload":{"source_hindi":"आम","target_olchiki":"ᱩᱞ","phonetic_deva":"उल"},"asset_references":{"image_asset_path":"images/motifs/motif_mango_fruit.png"}},
+  {"card_id":"FC_TAMAK","grade_level":2,"domain":"culture","nipun_competency":"FLN-L2.2","lexical_payload":{"source_hindi":"मांदर","target_olchiki":"ᱴᱟᱢᱟᱠ","phonetic_deva":"टामाक"},"asset_references":{"image_asset_path":"images/motifs/motif_drum_tamak.png"}},
+  {"card_id":"FC_BOW_ARROW","grade_level":3,"domain":"culture","nipun_competency":"FLN-M3.1","lexical_payload":{"source_hindi":"धनुष-बाण","target_olchiki":"ᱟᱜ-ᱥᱟᱨ","phonetic_deva":"आग-सार"},"asset_references":{"image_asset_path":"images/motifs/motif_bow_arrow.png"}}
+]
