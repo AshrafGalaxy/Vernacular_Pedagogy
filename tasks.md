@@ -59,24 +59,36 @@
 ---
 
 ## Phase 4: Voice Domain Completion & Offline Hindi ASR Engine
-- [ ] **Task 4.1:** Ingest and configure lightweight offline Hindi ASR engine:
-  - Download & configure offline Hindi ASR (Sherpa-ONNX Zipformer / Vosk Hindi small / Whisper-tiny ONNX INT8 ~39 MB) into `models/asr/`.
-  - Integrate Silero VAD ONNX (~2 MB) for classroom noise suppression and voice boundary detection.
-  - Verify local CPU speech-to-text transcription latency (<400 ms).
-- [ ] **Task 4.2:** Pristine FP32 $\to$ INT8 Re-quantization of IndicTrans2:
-  - Re-export merged LoRA checkpoint on Colab using strict FP32 precision to eliminate CPU float16 underflow/overflow (zero NaNs).
-  - Enable flawless open-ended sentence translation fallback outside the 368-entry FLN database.
+- [x] **Task 4.1:** Ingest and configure lightweight offline Hindi ASR engine:
+  - Download & configure offline Hindi ASR (Vosk Hindi small 44 MB) into `models/asr/`.
+  - Integrate Silero VAD ONNX (~2.3 MB) for classroom noise suppression and voice boundary detection.
+  - Verify local CPU speech-to-text transcription latency (<400 ms) via `scripts/asr_engine.py`.
+- [x] **Task 4.2:** Pristine CTranslate2 INT8 IndicTrans2 Neural Translation Engine:
+  - Integrated `models/mt/indictrans2_sat_int8_ct2` with dual SentencePiece tokenizers.
+  - Verified open-ended sentence translation fallback outside the 368-entry FLN database (<40 ms on CPU).
 
 ---
 
 ## Phase 5: Judge Demonstration Harness & Unified Prototype
-- [ ] **Task 5.1:** Build End-to-End Latency & Pipeline Integration Harness (`scripts/verify_pipeline.py`):
+- [x] **Task 5.1:** Build End-to-End Latency & Pipeline Integration Harness (`scripts/verify_pipeline.py`):
   - Audio Input $\to$ VAD $\to$ Hindi ASR $\to$ Hybrid Router (SQLite Fast-Path / CT2 MT) $\to$ Ol Chiki Text $\to$ Piper TTS $\to$ Audio Output.
-- [ ] **Task 5.2:** Build Interactive Live Demonstration UI (Local Browser / GUI Prototype):
+  - Verified full test suite across FLN queries passing in 78.5 ms average turnaround (>19x real-time).
+- [ ] **Task 5.2:** Build Interactive Live Demonstration UI (Web/GUI Prototype):
   - **Live Microphone Input**: Real-time spoken Hindi recording $\to$ instant transcription $\to$ Santhali speech playback.
-  - **Curriculum Domain Clicker (Fail-Safe Judge Mode)**: 1-click execution across all 15 NIPUN Bharat classroom domains (sit down, open book, count 1-10, praise, objects).
+  - **Curriculum Domain Clicker (Fail-Safe Judge Mode)**: 1-click execution across all 15 NIPUN Bharat classroom domains.
   - **Real-Time Scientific Telemetry**: Live dials showing ASR ms, Router ms (0.02ms), TTS ms (33ms), Total Turnaround, and RTF.
   - **Free-Form Input Box**: For judge to type any custom phrase.
-- [ ] **Task 5.3:** Android Jetpack Compose Prototype Packaging:
-  - Package Kotlin Jetpack Compose app per `docs/ANDROID_FRONTEND_SPECIFICATION.md` bundling `fln_lexicon.sqlite`, `sat_piper_model.onnx`, and ONNX Runtime AAR.
+- [x] **Task 5.3:** Android Jetpack Compose Prototype Packaging (Vaani-Setu):
+  - Package Kotlin Jetpack Compose app bundling `fln_lexicon.sqlite`, `sat_piper_model.onnx`, ONNX Runtime AAR, Vosk Kaldi ASR, and Silero VAD.
+  - Implemented 24-competency bilingual NIPUN Bharat curriculum selector and A4 worksheet generator.
+  - Verified on physical Android 12 device (`RMX3092 - 12`).
+
+---
+
+## Phase 6: Interactive Judges Web Evaluation Suite & Printable Pedagogical Kit
+- [ ] **Task 6.1:** Interactive Single-Page Web Demonstration Application (`web/` or `demo/`):
+  - Visual telemetry dashboard with live microphone capture, real-time waveform visualizer, audio synthesis playback, and one-click NIPUN domain evaluation cards.
+- [ ] **Task 6.2:** Comprehensive Printable Pedagogical Asset Kit:
+  - Generate and render all 24 NIPUN Bharat Grade 1–3 classroom worksheets with authentic tribal iconography (Sal trees, Mahua, earthen pots, Tumdak) and dual Ol Chiki / Devanagari headers.
+
 

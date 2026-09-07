@@ -80,6 +80,8 @@ class UnifiedPedagogyPipeline:
         self.sp_tgt = None
         if os.path.exists(os.path.join(MT_MODEL_DIR, "model.bin")):
             print("  [OK] CTranslate2 model directory detected.")
+            self._ensure_ct2()
+            print("  [OK] CTranslate2 translator pre-warmed.")
         else:
             print("  [INFO] CTranslate2 model currently training on Colab.")
 
