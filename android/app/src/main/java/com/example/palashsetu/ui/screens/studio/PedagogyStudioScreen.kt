@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.domain.engine.PedagogicalAudioEngine
+import com.example.palashsetu.domain.pdf.WorksheetPdfGenerator
 import com.example.palashsetu.theme.Background
 import com.example.palashsetu.theme.Primary
 import com.example.palashsetu.theme.PrimaryContainer
@@ -411,7 +412,13 @@ fun PedagogyStudioScreen(
                     }
 
                     Button(
-                        onClick = { showPdfDownloadedNotification = true },
+                        onClick = {
+                            val pdf = WorksheetPdfGenerator.generateWorksheetPdf(context, selectedGrade, isHindi)
+                            if (pdf != null) {
+                                showPdfDownloadedNotification = true
+                                WorksheetPdfGenerator.openOrSharePdf(context, pdf)
+                            }
+                        },
                         modifier = Modifier.fillMaxWidth().height(44.dp),
                         shape = controlCornerShape,
                         colors = ButtonDefaults.buttonColors(containerColor = Primary)
