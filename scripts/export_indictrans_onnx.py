@@ -177,15 +177,54 @@ def main():
     except NameError:
         print("[INFO] Skipping remote code patches (shims not available)")
 
+    def patch_tokenizer_duplicate_kwargs():
+        search_dirs = [
+            os.path.expanduser("~/.cache/huggingface/modules/transformers_modules"),
+            merged_path
+        ]
+        for sdir in search_dirs:
+            if not os.path.exists(sdir):
+                continue
+            for root, _, files in os.walk(sdir):
+                for f in files:
+                    if f == "tokenization_indictrans.py":
+                        fpath = os.path.join(root, f)
+                        try:
+                            with open(fpath, "r", encoding="utf-8") as rf:
+                                content = rf.read()
+                            if "kwargs.pop('src_vocab_file', None)" not in content:
+                                content = content.replace(
+                                    "super().__init__(",
+                                    "kwargs.pop('src_vocab_file', None)\n        kwargs.pop('tgt_vocab_file', None)\n        super().__init__("
+                                )
+                                with open(fpath, "w", encoding="utf-8") as wf:
+                                    wf.write(content)
+                                print(f"  [PATCH] Patched duplicate kwargs in {fpath}")
+                        except Exception as pe:
+                            print(f"  [WARN] Failed to patch {fpath}: {pe}")
+
+    patch_tokenizer_duplicate_kwargs()
+
     # ──────────────────────────────────────────
     # Step 3: Load Model & Tokenizer
     # ──────────────────────────────────────────
     print("\n--- Step 3: Loading Merged FP32 Model ---")
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer  # type: ignore
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        merged_path, trust_remote_code=True, token=hf_token
-    )
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(
+            merged_path, trust_remote_code=True, token=hf_token
+        )
+    except (TypeError, AttributeError) as te:
+        print(f"[WARN] First tokenizer load attempt failed ({te}), patching and retrying...")
+        patch_tokenizer_duplicate_kwargs()
+        mods_to_clear = [k for k in list(sys.modules.keys())
+                         if "indictrans" in k.lower() or "tokenization_indictrans" in k.lower()]
+        for m in mods_to_clear:
+            del sys.modules[m]
+        tokenizer = AutoTokenizer.from_pretrained(
+            merged_path, trust_remote_code=True, token=hf_token
+        )
     model = AutoModelForSeq2SeqLM.from_pretrained(
         merged_path,
         trust_remote_code=True,
