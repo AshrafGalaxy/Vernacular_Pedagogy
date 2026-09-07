@@ -1027,12 +1027,13 @@ def main():
     # ──────────────────────────────────────────
     # Step 3: Ingest Authentic Bitext Datasets
     # ──────────────────────────────────────────
-    print("\n--- Step 3: Fetching Authentic AI4Bharat BPCC & IN22 Data ---")
+    print("\n--- Step 3: Fetching Authentic AI4Bharat BPCC & AIKosh Education Data ---")
     hf_token = get_hf_token()
     token_arg = f"--hf-token {hf_token}" if hf_token else ""
-    # Data ingestion is best-effort (may fail if BPCC terms not accepted)
+    # Data ingestion is best-effort (may fail if terms not accepted)
     run_cmd(f"python scripts/01_fetch_bpcc_bitext.py {token_arg}", cwd=repo_dir)
-    # Normalizer is critical — it generates train/val splits
+    run_cmd("python scripts/01_fetch_aikosh_education.py", cwd=repo_dir)
+    # Normalizer is critical — it merges all available datasets and generates train/val splits
     run_cmd_strict(
         "python scripts/03_bitext_normalizer.py",
         cwd=repo_dir,

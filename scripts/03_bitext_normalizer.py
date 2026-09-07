@@ -229,6 +229,18 @@ def generate_semantically_sound_bitext(fln_records):
                 bpcc_count += 1
         print(f"  Merged {bpcc_count} authentic pairs from BPCC/IN22!")
 
+    # 11. Ingest authentic AIKosh Education & Education_v2 bitext if present
+    aikosh_tsv = os.path.join(BITEXT_DIR, "aikosh_hin_sat.tsv")
+    if os.path.exists(aikosh_tsv):
+        print(f"\nMerging authentic AIKosh Education bitext from {aikosh_tsv}...")
+        aikosh_count = 0
+        with open(aikosh_tsv, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f, delimiter="\t")
+            for row in reader:
+                add_pair(row["source"], row["target"])
+                aikosh_count += 1
+        print(f"  Merged {aikosh_count} authentic pairs from AIKosh Education!")
+
     print(f"\nTotal Clean, Semantically Sound Parallel Pairs: {len(pairs)}")
     return pairs
 
