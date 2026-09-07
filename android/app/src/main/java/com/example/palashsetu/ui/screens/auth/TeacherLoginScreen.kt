@@ -7,14 +7,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -110,16 +114,16 @@ fun TeacherLoginScreen(
         modifier = modifier
             .fillMaxSize()
             .background(Background)
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .padding(horizontal = 16.dp, vertical = 10.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         // Language Toggle (Hindi / English)
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 2.dp),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -211,7 +215,7 @@ fun TeacherLoginScreen(
             Column(
                 modifier = Modifier.padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 // Centered Avatar
                 Box(
@@ -329,17 +333,17 @@ fun TeacherLoginScreen(
                             )
                         },
                         isError = nameError != null,
-                        supportingText = {
-                            if (nameError != null) {
-                                Text(text = nameError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp)
-                            }
-                        },
+                        supportingText = if (nameError != null) {
+                            { Text(text = nameError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp) }
+                        } else null,
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(44.dp),
                         shape = controlCornerShape,
                         textStyle = TextStyle(
                             color = Color(0xFF0F172A),
@@ -380,31 +384,23 @@ fun TeacherLoginScreen(
                         },
                         placeholder = {
                             Text(
-                                text = if (isHindi) "4 अंकों का पिन दर्ज करें (उदा. 2604)" else "4-digit PIN (e.g. 2604)",
+                                text = if (isHindi) "4 अंकों का पिन (उदा. 2604)" else "4-digit PIN (e.g. 2604)",
                                 fontSize = 13.sp,
                                 color = Color(0xFF94A3B8)
                             )
                         },
                         visualTransformation = if (isPinVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         isError = pinError != null,
-                        supportingText = {
-                            if (pinError != null) {
-                                Text(text = pinError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp)
-                            } else {
-                                Text(
-                                    text = if (isHindi) "ऑफलाइन सुरक्षा हेतु 4 अंकों का पिन" else "4-digit PIN for offline access",
-                                    fontSize = 10.sp,
-                                    color = Color(0xFF64748B)
-                                )
-                            }
-                        },
+                        supportingText = if (pinError != null) {
+                            { Text(text = pinError!!, color = Color(0xFFBA1A1A), fontSize = 10.sp) }
+                        } else null,
                         trailingIcon = {
                             IconButton(onClick = { isPinVisible = !isPinVisible }) {
                                 Icon(
                                     painter = painterResource(id = if (isPinVisible) R.drawable.ic_visibility_off else R.drawable.ic_visibility),
                                     contentDescription = "Toggle PIN Visibility",
                                     tint = Color(0xFF475569),
-                                    modifier = Modifier.size(20.dp)
+                                    modifier = Modifier.size(18.dp)
                                 )
                             }
                         },
@@ -416,7 +412,9 @@ fun TeacherLoginScreen(
                             onDone = { focusManager.clearFocus() }
                         ),
                         singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(44.dp),
                         shape = controlCornerShape,
                         textStyle = TextStyle(
                             color = Color(0xFF0F172A),
