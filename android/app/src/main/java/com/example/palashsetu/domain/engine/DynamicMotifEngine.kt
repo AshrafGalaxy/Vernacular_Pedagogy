@@ -20,7 +20,7 @@ object DynamicMotifEngine {
         prompt: String,
         selectedCategory: MotifCategory = MotifCategory.ALL,
         grade: Int? = null,
-        limit: Int = 50
+        limit: Int = 150
     ): List<MotifItem> {
         val allMotifs = FlashcardMotifRepository.getMotifs(context)
         if (prompt.isBlank() && selectedCategory == MotifCategory.ALL && grade == null) {

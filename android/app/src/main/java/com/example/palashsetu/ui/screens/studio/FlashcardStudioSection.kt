@@ -89,7 +89,7 @@ fun FlashcardStudioSection(
             prompt = promptQuery,
             selectedCategory = selectedCategory,
             grade = selectedGradeFilter,
-            limit = 60
+            limit = 150
         )
     }
 
