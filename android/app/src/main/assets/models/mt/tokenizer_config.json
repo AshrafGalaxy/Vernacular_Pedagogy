@@ -1,0 +1,55 @@
+{
+  "added_tokens_decoder": {
+    "0": {
+      "content": "<s>",
+      "lstrip": false,
+      "normalized": false,
+      "rstrip": false,
+      "single_word": false,
+      "special": true
+    },
+    "1": {
+      "content": "<pad>",
+      "lstrip": false,
+      "normalized": false,
+      "rstrip": false,
+      "single_word": false,
+      "special": true
+    },
+    "2": {
+      "content": "</s>",
+      "lstrip": false,
+      "normalized": false,
+      "rstrip": false,
+      "single_word": false,
+      "special": true
+    },
+    "3": {
+      "content": "<unk>",
+      "lstrip": false,
+      "normalized": false,
+      "rstrip": false,
+      "single_word": false,
+      "special": true
+    }
+  },
+  "auto_map": {
+    "AutoTokenizer": [
+      "tokenization_indictrans.IndicTransTokenizer",
+      null
+    ]
+  },
+  "backend": "custom",
+  "bos_token": "<s>",
+  "clean_up_tokenization_spaces": true,
+  "do_lower_case": false,
+  "eos_token": "</s>",
+  "is_local": false,
+  "local_files_only": false,
+  "model_max_length": 256,
+  "pad_token": "<pad>",
+  "src_vocab_file": "/root/.cache/huggingface/hub/models--ai4bharat--indictrans2-indic-indic-dist-320M/snapshots/ffb7582b6d43791f1fb26b2153fc065f2e9ea575/dict.SRC.json",
+  "tgt_vocab_file": "/root/.cache/huggingface/hub/models--ai4bharat--indictrans2-indic-indic-dist-320M/snapshots/ffb7582b6d43791f1fb26b2153fc065f2e9ea575/dict.TGT.json",
+  "tokenizer_class": "IndicTransTokenizer",
+  "unk_token": "<unk>"
+}
