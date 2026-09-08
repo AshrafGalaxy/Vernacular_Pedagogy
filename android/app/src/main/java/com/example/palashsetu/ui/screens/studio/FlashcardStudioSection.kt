@@ -126,7 +126,7 @@ fun FlashcardStudioSection(
                     color = Primary
                 )
                 Text(
-                    text = if (isHindi) "१५० सांस्कृतिक रियलिया चित्र • ३D फ्लिप व संथाली ऑडियो" else "150 Cultural Realia Motifs • 3D Flip & Santali Audio",
+                    text = if (isHindi) "३D फ्लिप व संथाली ऑडियो" else "3D Flip & Santali Audio",
                     fontSize = 11.sp,
                     color = Color(0xFF64748B)
                 )
