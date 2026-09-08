@@ -29,6 +29,8 @@ import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.theme.Primary
 import com.example.palashsetu.theme.SurfaceContainerLow
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 
 /**
  * Vaani-Setu Standard Top Navigation Bar.
@@ -44,6 +46,7 @@ fun PalashTopBar(
     teacherName: String? = null,
     isOffline: Boolean = true,
     onProfileClick: (() -> Unit)? = null,
+    onReplayWalkthrough: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -101,13 +104,15 @@ fun PalashTopBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            // Dynamic Language Switcher Pill (हिन्दी | English)
+            // Dynamic Language Switcher Pill (हिन्दी | English) — tagged for onboarding spotlight
+            val onboardingRegistry = LocalOnboardingRegistry.current
             Row(
                 modifier = Modifier
                     .clip(controlCornerShape)
                     .background(SurfaceContainerLow)
                     .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
-                    .padding(2.dp),
+                    .padding(2.dp)
+                    .onboardingTarget("language_toggle", onboardingRegistry),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
@@ -149,6 +154,26 @@ fun PalashTopBar(
                         fontSize = 11.sp,
                         fontWeight = if (!isHindi) FontWeight.Bold else FontWeight.Medium,
                         color = if (!isHindi) Color.White else Color(0xFF475569)
+                    )
+                }
+            }
+
+            // Help / Replay walkthrough "?" icon (compact 32dp, anti-bloat)
+            if (onReplayWalkthrough != null) {
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(controlCornerShape)
+                        .background(SurfaceContainerLow)
+                        .border(1.dp, Color(0xFFCBD5E1), controlCornerShape)
+                        .clickable { onReplayWalkthrough() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_help_outline),
+                        contentDescription = if (currentLanguage == "hi") "वॉकथ्रू देखें" else "Replay guide",
+                        tint = Primary,
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }

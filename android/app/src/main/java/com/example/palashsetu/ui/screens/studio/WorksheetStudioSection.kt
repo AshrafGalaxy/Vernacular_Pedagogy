@@ -82,6 +82,8 @@ import com.example.palashsetu.theme.PrimaryContainer
 import com.example.palashsetu.theme.Secondary
 import com.example.palashsetu.theme.SurfaceContainerLow
 import com.example.palashsetu.theme.SurfaceContainerLowest
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -153,12 +155,13 @@ fun WorksheetStudioSection(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // =====================================================================
-        // Section 1: Grade Selection Buttons (Grade 1, 2, 3)
-        // =====================================================================
+        // Section 1: Grade Selection Buttons — tagged for onboarding spotlight
+        val onboardingRegistry = LocalOnboardingRegistry.current
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(44.dp),
+                .height(44.dp)
+                .onboardingTarget("studio_grade_selector", onboardingRegistry),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -205,12 +208,13 @@ fun WorksheetStudioSection(
         }
 
         // =====================================================================
-        // Section 2: Active Competency Selector Card
+        // Section 2: Active Competency Selector Card — tagged for onboarding spotlight
         // =====================================================================
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onChangeCompetencyClick() },
+                .clickable { onChangeCompetencyClick() }
+                .onboardingTarget("studio_competency_chip", onboardingRegistry),
             shape = cardCornerShape,
             colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
             border = BorderStroke(1.dp, Color(0xFFCBD5E1))
@@ -756,7 +760,8 @@ fun WorksheetStudioSection(
                 },
                 modifier = Modifier
                     .weight(1f)
-                    .fillMaxHeight(),
+                    .fillMaxHeight()
+                    .onboardingTarget("studio_generate_button", onboardingRegistry),
                 shape = controlCornerShape,
                 colors = ButtonDefaults.buttonColors(containerColor = Primary),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp)

@@ -27,6 +27,8 @@ import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
 import com.example.palashsetu.theme.Primary
 import com.example.palashsetu.theme.SurfaceContainerLowest
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 
 /**
  * Stitch Architectural Geometry Bottom Navigation Tabs.
@@ -66,12 +68,23 @@ fun PalashBottomNav(
     ) {
         BottomTab.entries.forEach { tab ->
             val isSelected = tab == selectedTab
+            val onboardingRegistry = LocalOnboardingRegistry.current
+            // Tag each tab for onboarding: phrasebook_tab, studio_tab
+            val tabTag = when (tab) {
+                BottomTab.PHRASEBOOK -> "phrasebook_tab"
+                BottomTab.STUDIO     -> "studio_tab"
+                else                 -> ""
+            }
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .clip(tabCornerShape)
                     .clickable { onTabSelected(tab) }
-                    .padding(vertical = 4.dp),
+                    .padding(vertical = 4.dp)
+                    .then(
+                        if (tabTag.isNotEmpty()) Modifier.onboardingTarget(tabTag, onboardingRegistry)
+                        else Modifier
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Column(

@@ -71,6 +71,8 @@ import com.example.palashsetu.theme.SurfaceContainerHigh
 import com.example.palashsetu.theme.SurfaceContainerLow
 import com.example.palashsetu.theme.SurfaceContainerLowest
 import com.example.palashsetu.ui.components.PalashTopBar
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
@@ -96,6 +98,7 @@ private fun openPdfFile(context: Context, file: File) {
 fun PedagogyStudioScreen(
     currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     onLanguageToggle: ((String) -> Unit)? = null,
+    onReplayWalkthrough: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -152,7 +155,8 @@ fun PedagogyStudioScreen(
     ) {
         PalashTopBar(
             currentLanguage = currentLanguage,
-            onLanguageToggle = onLanguageToggle
+            onLanguageToggle = onLanguageToggle,
+            onReplayWalkthrough = onReplayWalkthrough
         )
 
         Column(
@@ -178,11 +182,13 @@ fun PedagogyStudioScreen(
                 )
             }
 
-            // Studio Mode Switcher (Worksheet vs Flashcards)
+            // Studio Mode Switcher — tagged for onboarding spotlight
+            val onboardingRegistry = LocalOnboardingRegistry.current
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(44.dp),
+                    .height(44.dp)
+                    .onboardingTarget("studio_mode_switcher", onboardingRegistry),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -247,12 +253,14 @@ fun PedagogyStudioScreen(
                     audioEngine = audioEngine
                 )
             } else {
-            // Interactive Realia Flashcard Studio Mode
-            FlashcardStudioSection(
-                isHindi = isHindi,
-                audioEngine = audioEngine
-            )
-        }
+                // Interactive Realia Flashcard Studio Mode — tagged for onboarding
+                Box(modifier = Modifier.onboardingTarget("studio_flashcard_section", onboardingRegistry)) {
+                    FlashcardStudioSection(
+                        isHindi = isHindi,
+                        audioEngine = audioEngine
+                    )
+                }
+            }
         }
     }
 

@@ -62,6 +62,8 @@ import com.example.palashsetu.theme.SecondaryFixed
 import com.example.palashsetu.theme.SurfaceContainerLow
 import com.example.palashsetu.theme.SurfaceContainerLowest
 import com.example.palashsetu.ui.components.PalashTopBar
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 import kotlinx.coroutines.launch
 
 data class PhraseCategory(val id: String, val hiLabel: String, val enLabel: String)
@@ -70,6 +72,7 @@ data class PhraseCategory(val id: String, val hiLabel: String, val enLabel: Stri
 fun FlnPhrasebookScreen(
     currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     onLanguageToggle: ((String) -> Unit)? = null,
+    onReplayWalkthrough: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -147,7 +150,8 @@ fun FlnPhrasebookScreen(
         PalashTopBar(
             currentLanguage = currentLanguage,
             onLanguageToggle = onLanguageToggle,
-            locationName = if (isHindi) "झारखंड" else "Jharkhand"
+            locationName = if (isHindi) "झारखंड" else "Jharkhand",
+            onReplayWalkthrough = onReplayWalkthrough
         )
 
         Column(
@@ -175,6 +179,8 @@ fun FlnPhrasebookScreen(
                 )
             }
 
+            // Search bar — tagged for onboarding spotlight
+            val onboardingRegistry = LocalOnboardingRegistry.current
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -192,7 +198,8 @@ fun FlnPhrasebookScreen(
                     ) {
                         searchFocusRequester.requestFocus()
                     }
-                    .padding(horizontal = 12.dp),
+                    .padding(horizontal = 12.dp)
+                    .onboardingTarget("phrasebook_search_bar", onboardingRegistry),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Row(
@@ -256,12 +263,13 @@ fun FlnPhrasebookScreen(
                 }
             }
 
-            // Category pills row with Sharp 4dp Geometry
+            // Category pills row — tagged for onboarding spotlight
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
-                    .padding(vertical = 6.dp),
+                    .padding(vertical = 6.dp)
+                    .onboardingTarget("phrasebook_category_chips", onboardingRegistry),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 categories.forEach { cat ->
@@ -293,8 +301,15 @@ fun FlnPhrasebookScreen(
             ) {
                 items(phrases, key = { it.id }) { phrase ->
                     val isPlaying = currentlyPlayingId == phrase.id
+                    // Tag only the first card for the onboarding spotlight
+                    val isFirst = phrases.indexOf(phrase) == 0
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .then(
+                                if (isFirst) Modifier.onboardingTarget("phrasebook_first_card", onboardingRegistry)
+                                else Modifier
+                            ),
                         shape = cardCornerShape,
                         colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
                         border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),

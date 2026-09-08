@@ -12,6 +12,10 @@ object UserSessionManager {
     private const val KEY_CONFIGURED = "is_configured"
     private const val KEY_LANGUAGE = "app_language" // "hi" or "en"
 
+    // Onboarding walkthrough persistence
+    private const val KEY_ONBOARDING_COMPLETE = "onboarding_complete"
+    private const val KEY_ONBOARDING_LAST_STEP = "onboarding_last_step"
+
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
@@ -69,5 +73,41 @@ object UserSessionManager {
 
     fun resetSession(context: Context) {
         getPrefs(context).edit().clear().apply()
+    }
+
+    // ── Onboarding walkthrough ────────────────────────────────────────────────
+
+    /**
+     * Returns true if the teacher has already completed (or explicitly dismissed)
+     * the first-time onboarding walkthrough.
+     */
+    fun hasCompletedOnboarding(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_ONBOARDING_COMPLETE, false)
+    }
+
+    /**
+     * Marks the walkthrough as fully completed. After this, [hasCompletedOnboarding]
+     * returns true and the overlay will never auto-trigger again (replay is manual).
+     */
+    fun markOnboardingComplete(context: Context) {
+        getPrefs(context).edit()
+            .putBoolean(KEY_ONBOARDING_COMPLETE, true)
+            .putInt(KEY_ONBOARDING_LAST_STEP, 0)
+            .apply()
+    }
+
+    /**
+     * Persists the current step index so that a mid-walkthrough power-off
+     * resumes from the last viewed step on next launch.
+     */
+    fun saveOnboardingProgress(context: Context, stepIndex: Int) {
+        getPrefs(context).edit().putInt(KEY_ONBOARDING_LAST_STEP, stepIndex).apply()
+    }
+
+    /**
+     * Returns the step index to resume from (0 if never started or after completion).
+     */
+    fun getOnboardingLastStep(context: Context): Int {
+        return getPrefs(context).getInt(KEY_ONBOARDING_LAST_STEP, 0)
     }
 }

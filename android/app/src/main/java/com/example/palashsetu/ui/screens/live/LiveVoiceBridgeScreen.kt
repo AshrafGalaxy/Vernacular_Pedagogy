@@ -72,12 +72,15 @@ import com.example.palashsetu.ui.components.AudioWaveVisualizer
 import com.example.palashsetu.ui.components.DialectChips
 import com.example.palashsetu.ui.components.PalashTopBar
 import com.example.palashsetu.ui.components.PhoneticGuideCard
+import com.example.palashsetu.ui.onboarding.LocalOnboardingRegistry
+import com.example.palashsetu.ui.onboarding.onboardingTarget
 import kotlinx.coroutines.launch
 
 @Composable
 fun LiveVoiceBridgeScreen(
     currentLanguage: String = UserSessionManager.getLanguage(LocalContext.current),
     onLanguageToggle: ((String) -> Unit)? = null,
+    onReplayWalkthrough: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -87,6 +90,7 @@ fun LiveVoiceBridgeScreen(
     val audioEngine = remember { PedagogicalAudioEngine(context) }
 
     val isHindi = currentLanguage == "hi"
+    val onboardingRegistry = LocalOnboardingRegistry.current
 
     var isMicActive by remember { mutableStateOf(false) }
     var micAudioLevel by remember { mutableStateOf(0.1f) }
@@ -191,7 +195,8 @@ fun LiveVoiceBridgeScreen(
         // Pinned Header TopBar
         PalashTopBar(
             currentLanguage = currentLanguage,
-            onLanguageToggle = onLanguageToggle
+            onLanguageToggle = onLanguageToggle,
+            onReplayWalkthrough = onReplayWalkthrough
         )
 
         Box(
@@ -321,22 +326,26 @@ fun LiveVoiceBridgeScreen(
                             }
                         }
 
-                        // Dialect Chips (Santali Only)
-                        DialectChips(
-                            selectedDialect = selectedDialect,
-                            onDialectSelect = { selectedDialect = it },
-                            currentLanguage = currentLanguage
-                        )
+                        // Dialect Chips (Santali Only) — tagged for onboarding spotlight
+                        Box(modifier = Modifier.onboardingTarget("dialect_chips", onboardingRegistry)) {
+                            DialectChips(
+                                selectedDialect = selectedDialect,
+                                onDialectSelect = { selectedDialect = it },
+                                currentLanguage = currentLanguage
+                            )
+                        }
                     }
                 }
 
-                // Section 1: Teacher Live ASR Input Card (Sharp Stitch Geometry)
+                // Section 1: Teacher Live ASR Input Card — tagged for onboarding
                 Card(
                     shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
                     border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
                     elevation = CardDefaults.cardElevation(defaultElevation = 1.5.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onboardingTarget("hindi_transcript_card", onboardingRegistry)
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(
@@ -393,13 +402,15 @@ fun LiveVoiceBridgeScreen(
                     }
                 }
 
-                // Section 2: Classroom Broadcast Card (Ol Chiki + Phonetic Guide + Audio)
+                // Section 2: Classroom Broadcast Card — tagged for onboarding
                 Card(
                     shape = cardCornerShape,
                     colors = CardDefaults.cardColors(containerColor = SurfaceContainerHigh),
                     border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onboardingTarget("olchiki_output_card", onboardingRegistry)
                 ) {
                     Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(
@@ -459,12 +470,15 @@ fun LiveVoiceBridgeScreen(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Play Button
+                            // Play Button — tagged for onboarding spotlight
                             Button(
                                 onClick = { playAudio() },
                                 colors = ButtonDefaults.buttonColors(containerColor = Primary),
                                 shape = controlCornerShape,
-                                modifier = Modifier.weight(1f).height(44.dp)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(44.dp)
+                                    .onboardingTarget("play_audio_button", onboardingRegistry)
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -631,7 +645,7 @@ fun LiveVoiceBridgeScreen(
                 }
             }
 
-            // Push-to-Talk Floating Microphone Button (Centered inside Box container)
+            // Push-to-Talk Floating Microphone Button — tagged for onboarding spotlight
             FloatingActionButton(
                 onClick = {
                     if (!isMicActive) {
@@ -657,6 +671,7 @@ fun LiveVoiceBridgeScreen(
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 16.dp)
                     .size(64.dp)
+                    .onboardingTarget("mic_fab", onboardingRegistry)
             ) {
                 Icon(
                     painter = painterResource(id = if (isMicActive) R.drawable.ic_stop else R.drawable.ic_mic),
