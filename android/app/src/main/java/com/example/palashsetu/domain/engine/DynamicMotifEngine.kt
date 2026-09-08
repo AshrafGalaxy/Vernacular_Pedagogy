@@ -97,15 +97,9 @@ object DynamicMotifEngine {
 
     /**
      * Dynamic Math Exercise Dataset for Worksheets:
-     * Returns 2 realia items with counts for an addition or counting problem (e.g. 3 mangoes + 2 bananas).
+     * Alias to com.example.palashsetu.data.model.RealiaMathExercise.
      */
-    data class MathExerciseData(
-        val item1: MotifItem,
-        val count1: Int,
-        val item2: MotifItem,
-        val count2: Int,
-        val total: Int
-    )
+    typealias MathExerciseData = com.example.palashsetu.data.model.RealiaMathExercise
 
     fun generateMathExercise(context: Context, grade: Int): MathExerciseData {
         val foodItems = FlashcardMotifRepository.filterMotifs(context, category = MotifCategory.FRUITS_VEG_FOOD, grade = grade)
@@ -132,14 +126,9 @@ object DynamicMotifEngine {
 
     /**
      * Dynamic Matching Column Dataset for Worksheets:
-     * Returns 4 paired motifs with their scrambled bilingual labels.
+     * Alias to com.example.palashsetu.data.model.MatchPairItem.
      */
-    data class MatchingPair(
-        val motif: MotifItem,
-        val labelHi: String,
-        val labelOlchiki: String,
-        val phoneticDeva: String
-    )
+    typealias MatchingPair = com.example.palashsetu.data.model.MatchPairItem
 
     fun generateMatchingColumn(context: Context, category: MotifCategory = MotifCategory.ALL, grade: Int = 1): List<MatchingPair> {
         val selected = FlashcardMotifRepository.filterMotifs(context, category = category, grade = grade)
@@ -156,4 +145,138 @@ object DynamicMotifEngine {
             )
         }
     }
+
+    /**
+     * Master Dynamic Worksheet Generation Pipeline:
+     * Transforms a WorksheetSpec into a complete, reproducible GeneratedWorksheet payload.
+     */
+    fun generateWorksheet(context: Context, spec: com.example.palashsetu.data.model.WorksheetSpec): com.example.palashsetu.data.model.GeneratedWorksheet {
+        val rng = kotlin.random.Random(spec.seed)
+        val allMotifs = FlashcardMotifRepository.getMotifs(context)
+
+        // 1. Resolve candidate motifs directly based on the chosen topic theme and grade
+        val candidates: List<MotifItem> = if (spec.topicTheme != MotifCategory.ALL) {
+            FlashcardMotifRepository.filterMotifs(
+                context = context,
+                category = spec.topicTheme,
+                grade = spec.grade
+            ).ifEmpty {
+                FlashcardMotifRepository.filterMotifs(context, category = spec.topicTheme)
+            }.ifEmpty { allMotifs }
+        } else {
+            resolveMotifsForCompetency(
+                context = context,
+                competency = spec.competency,
+                limit = 50
+            ).ifEmpty { allMotifs }
+        }
+
+        val shuffledPool = candidates.shuffled(rng).toMutableList()
+        if (shuffledPool.size < 8) {
+            val filler = allMotifs.shuffled(rng).filter { m -> !shuffledPool.any { it.id == m.id } }
+            shuffledPool.addAll(filler)
+        }
+
+        // 2. Math Addition Generation (bounded by spec.maxNumber)
+        val math1: MathExerciseData? = if (
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.MATH_ADDITION ||
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.COMPREHENSIVE_FLN ||
+            spec.competency.isNumeracy
+        ) {
+            val itemA = shuffledPool.getOrNull(0) ?: allMotifs.first()
+            val itemB = shuffledPool.getOrNull(1) ?: allMotifs.last()
+            val bound = (spec.maxNumber / 2).coerceIn(2, 6)
+            val c1 = (1..bound).random(rng)
+            val c2 = (1..bound).random(rng)
+            MathExerciseData(item1 = itemA, count1 = c1, item2 = itemB, count2 = c2, total = c1 + c2)
+        } else null
+
+        val math2: MathExerciseData? = if (spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.MATH_ADDITION) {
+            val itemC = shuffledPool.getOrNull(2) ?: allMotifs.first()
+            val itemD = shuffledPool.getOrNull(3) ?: allMotifs.last()
+            val bound = (spec.maxNumber / 2).coerceIn(2, 6)
+            val c1 = (1..bound).random(rng)
+            val c2 = (1..bound).random(rng)
+            MathExerciseData(item1 = itemC, count1 = c1, item2 = itemD, count2 = c2, total = c1 + c2)
+        } else null
+
+        // 3. Matching Pairs Generation (4 distinct motifs)
+        val matchPairs: List<MatchingPair>? = if (
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.MATCH_COLUMN ||
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.COMPREHENSIVE_FLN ||
+            spec.competency.isLiteracy
+        ) {
+            val poolStart = if (math1 != null) 4 else 0
+            val selected = (poolStart until (poolStart + 4)).mapNotNull { idx ->
+                shuffledPool.getOrNull(idx % shuffledPool.size)
+            }.distinctBy { it.id }.take(4)
+
+            val effective = if (selected.size < 4) {
+                (selected + allMotifs.shuffled(rng)).distinctBy { it.id }.take(4)
+            } else selected
+
+            effective.map { m ->
+                MatchingPair(
+                    motif = m,
+                    labelHi = m.nameHi,
+                    labelOlchiki = m.nameOlchiki,
+                    phoneticDeva = m.phoneticDeva
+                )
+            }
+        } else null
+
+        val scrambledLabels = matchPairs?.shuffled(rng)
+
+        // 4. Tracing Items Generation
+        val tracingItems: List<com.example.palashsetu.data.model.TracingItem>? = if (
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.VOCAB_TRACING ||
+            spec.activityType == com.example.palashsetu.data.model.WorksheetActivityType.COMPREHENSIVE_FLN
+        ) {
+            val tracingPool = shuffledPool.takeLast(4)
+            tracingPool.map { m ->
+                com.example.palashsetu.data.model.TracingItem(
+                    motif = m,
+                    olchikiWord = m.nameOlchiki,
+                    devaPhonetic = m.phoneticDeva,
+                    hindiMeaning = m.nameHi
+                )
+            }
+        } else null
+
+        // 5. Instruction resolution
+        val (instOlchiki, instHi) = when (spec.activityType) {
+            com.example.palashsetu.data.model.WorksheetActivityType.MATH_ADDITION ->
+                "ᱪᱤᱛᱟᱹᱨ ᱞᱮᱠᱷᱟ ᱠᱟᱛᱮ ᱡᱚᱲ ᱮᱞ ᱚᱞ ᱢᱮ᱾" to "चित्रों को गिनकर जोड़ का सही उत्तर लिखें।"
+            com.example.palashsetu.data.model.WorksheetActivityType.MATCH_COLUMN ->
+                "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱥᱟᱹᱦᱤ ᱟᱹᱲᱟᱹ ᱥᱟᱶ ᱡᱚᱲ ᱢᱮᱲ ᱢᱮ᱾" to "चित्र पहचान कर सही संथाली (ओल चिकी) शब्द से मिलान करें।"
+            com.example.palashsetu.data.model.WorksheetActivityType.VOCAB_TRACING ->
+                "ᱟᱹᱲᱟᱹ ᱪᱮᱛᱟᱱ ᱨᱮ ᱯᱮᱱᱥᱤᱞ ᱪᱟᱞᱟᱣ ᱠᱟᱛᱮ ᱪᱮᱫ ᱢᱮ᱾" to "ओल चिकी अक्षरों व शब्दों पर पेंसिल चलाकर सुंदर लेखन करें।"
+            com.example.palashsetu.data.model.WorksheetActivityType.COMPREHENSIVE_FLN -> {
+                if (spec.competency.instructionOlchiki.isNotBlank()) {
+                    spec.competency.instructionOlchiki to spec.competency.instructionHi
+                } else {
+                    "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ ᱟᱨ ᱥᱟᱹᱦᱤ ᱡᱚᱲ ᱵᱮᱱᱟᱣ ᱢᱮ᱾" to "चित्र देखकर गणना करें और सही मिलान करें।"
+                }
+            }
+        }
+
+        val dateFormat = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault())
+        val currentDate = dateFormat.format(java.util.Date())
+
+        return com.example.palashsetu.data.model.GeneratedWorksheet(
+            spec = spec,
+            generatedDate = currentDate,
+            titleHi = "बुनियादी साक्षरता एवं संख्याज्ञान (FLN) अभ्यास पत्रक",
+            titleEn = "Foundational Literacy & Numeracy (FLN) Worksheet",
+            subtitleHi = "${spec.competency.code}: ${spec.competency.getTitle(true)}",
+            instructionOlchiki = instOlchiki,
+            instructionHi = instHi,
+            mathExercise = math1,
+            mathExercise2 = math2,
+            matchingPairs = matchPairs,
+            scrambledLabels = scrambledLabels,
+            tracingItems = tracingItems
+        )
+    }
 }
+

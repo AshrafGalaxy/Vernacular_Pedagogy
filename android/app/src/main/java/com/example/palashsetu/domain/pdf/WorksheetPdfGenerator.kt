@@ -60,7 +60,42 @@ object WorksheetPdfGenerator {
     }
 
     /**
-     * Generates a single-page dynamic worksheet PDF.
+     * Generates a synchronized single-page worksheet PDF matching the exact in-app preview.
+     */
+    fun generateWorksheetPdf(
+        context: Context,
+        worksheet: com.example.palashsetu.data.model.GeneratedWorksheet
+    ): File? {
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create()
+        val page = document.startPage(pageInfo)
+        val canvas = page.canvas
+
+        try {
+            renderSynchronizedWorksheet(context, canvas, worksheet)
+            document.finishPage(page)
+
+            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
+            if (!dir.exists()) dir.mkdirs()
+
+            val code = worksheet.spec.competency.code
+            val actType = worksheet.spec.activityType.name
+            val outputFile = File(dir, "VaaniSetu_Worksheet_${code}_${actType}_Grade${worksheet.spec.grade}.pdf")
+            FileOutputStream(outputFile).use { out ->
+                document.writeTo(out)
+            }
+            Log.i(TAG, "Generated synchronized worksheet PDF at: ${outputFile.absolutePath} (${outputFile.length()} bytes)")
+            return outputFile
+        } catch (e: Exception) {
+            Log.e(TAG, "Error generating synchronized worksheet PDF: ${e.message}", e)
+            return null
+        } finally {
+            document.close()
+        }
+    }
+
+    /**
+     * Generates a single-page dynamic worksheet PDF (legacy / default spec delegate).
      */
     fun generateWorksheetPdf(
         context: Context,
@@ -69,31 +104,13 @@ object WorksheetPdfGenerator {
         competency: NipunCompetency? = null,
         prompt: String = ""
     ): File? {
-        val document = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create()
-        val page = document.startPage(pageInfo)
-        val canvas = page.canvas
-
-        try {
-            renderDynamicWorksheet(context, canvas, grade, isHindi, competency, prompt)
-            document.finishPage(page)
-
-            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
-            if (!dir.exists()) dir.mkdirs()
-
-            val code = competency?.code ?: "M${grade}.4"
-            val outputFile = File(dir, "VaaniSetu_Worksheet_${code}_Grade${grade}.pdf")
-            FileOutputStream(outputFile).use { out ->
-                document.writeTo(out)
-            }
-            Log.i(TAG, "Generated single-page worksheet PDF at: ${outputFile.absolutePath} (${outputFile.length()} bytes)")
-            return outputFile
-        } catch (e: Exception) {
-            Log.e(TAG, "Error generating worksheet PDF: ${e.message}", e)
-            return null
-        } finally {
-            document.close()
-        }
+        val comp = competency ?: com.example.palashsetu.data.local.NipunCurriculumRepository.getDefaultCompetency(context, grade)
+        val spec = com.example.palashsetu.data.model.WorksheetSpec(
+            grade = grade,
+            competency = comp
+        )
+        val worksheet = DynamicMotifEngine.generateWorksheet(context, spec)
+        return generateWorksheetPdf(context, worksheet)
     }
 
     /**
@@ -150,15 +167,12 @@ object WorksheetPdfGenerator {
     }
 
     // =========================================================================
-    // Single-Page Worksheet Rendering
+    // Single-Page Synchronized Worksheet Rendering
     // =========================================================================
-    private fun renderDynamicWorksheet(
+    private fun renderSynchronizedWorksheet(
         context: Context,
         canvas: Canvas,
-        grade: Int,
-        isHindi: Boolean,
-        competency: NipunCompetency?,
-        prompt: String
+        ws: com.example.palashsetu.data.model.GeneratedWorksheet
     ) {
         val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2f; isAntiAlias = true }
         val thinBorderPaint = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
@@ -181,7 +195,7 @@ object WorksheetPdfGenerator {
         currentY += 15f
         canvas.drawText("JCERT RANCHI, JHARKHAND • NIPUN BHARAT FLN", centerX, currentY, subHeaderPaint)
         currentY += 16f
-        canvas.drawText("बुनियादी साक्षरता एवं संख्याज्ञान (FLN) कार्यपत्रक", centerX, currentY, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
+        canvas.drawText(ws.titleHi, centerX, currentY, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
         boldTextPaint.textAlign = Paint.Align.LEFT
 
         currentY += 12f
@@ -190,11 +204,11 @@ object WorksheetPdfGenerator {
         // Metadata
         currentY += 18f
         val metaLeft = margin + 15f
-        val code = competency?.code ?: "M${grade}.4"
-        val domainLabel = if (competency?.isLiteracy == true) "साक्षरता (Literacy)" else "संख्याज्ञान (Numeracy)"
-        canvas.drawText("कक्षा (Grade): $grade", metaLeft, currentY, boldTextPaint)
+        val code = ws.spec.competency.code
+        val domainLabel = if (ws.spec.competency.isLiteracy) "साक्षरता (Literacy)" else "संख्याज्ञान (Numeracy)"
+        canvas.drawText("कक्षा (Grade): ${ws.spec.grade}", metaLeft, currentY, boldTextPaint)
         canvas.drawText("दक्षता: $code ($domainLabel)", metaLeft + 105f, currentY, boldTextPaint)
-        canvas.drawText("दिनांक: ________", PAGE_WIDTH - margin - 120f, currentY, textPaint)
+        canvas.drawText("दिनांक: ${ws.generatedDate}", PAGE_WIDTH - margin - 120f, currentY, textPaint)
 
         currentY += 18f
         canvas.drawText("विद्यार्थी का नाम (Student Name): ____________________________________", metaLeft, currentY, textPaint)
@@ -209,51 +223,165 @@ object WorksheetPdfGenerator {
         canvas.drawRoundRect(boxRect, 6f, 6f, fillBoxPaint)
         canvas.drawRoundRect(boxRect, 6f, 6f, thinBorderPaint)
 
-        val olchikiInst = competency?.instructionOlchiki ?: "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ ᱟᱨ ᱥᱟᱹᱦᱤ ᱡᱚᱲ ᱵᱮᱱᱟᱣ ᱢᱮ᱾"
-        val hindiInst = competency?.instructionHi ?: "चित्र देखकर गणना करें और सही मिलान करें।"
+        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (${ws.spec.activityType.labelHi}):", margin + 22f, currentY + 16f, boldTextPaint)
+        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: ${ws.instructionOlchiki}", margin + 22f, currentY + 32f, boldTextPaint)
+        canvas.drawText("हिन्दी: ${ws.instructionHi}", margin + 22f, currentY + 48f, textPaint)
 
-        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (NIPUN $code):", margin + 22f, currentY + 16f, boldTextPaint)
-        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: $olchikiInst", margin + 22f, currentY + 32f, boldTextPaint)
-        canvas.drawText("हिन्दी: $hindiInst", margin + 22f, currentY + 48f, textPaint)
+        currentY += 66f
 
-        currentY += 68f
+        when (ws.spec.activityType) {
+            com.example.palashsetu.data.model.WorksheetActivityType.MATH_ADDITION -> {
+                // Section 1: Math Exercise 1
+                if (ws.mathExercise != null) {
+                    canvas.drawText("अभ्यास १: गिनो और जोड़ो (Problem 1 - Realia Addition)", margin + 15f, currentY, boldTextPaint)
+                    currentY += 14f
+                    renderMathRow(context, canvas, margin, currentY, ws.mathExercise, borderPaint, thinBorderPaint, boldTextPaint, symbolPaint)
+                    currentY += 105f
+                }
 
-        // Section 1: Realia Math Addition with Real Images
-        canvas.drawText("अभ्यास १: गिनो और जोड़ो (Realia Count and Add)", margin + 15f, currentY, boldTextPaint)
-        currentY += 14f
+                // Section 2: Math Exercise 2
+                if (ws.mathExercise2 != null) {
+                    canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+                    currentY += 14f
+                    canvas.drawText("अभ्यास २: गिनो और जोड़ो (Problem 2 - Realia Addition)", margin + 15f, currentY, boldTextPaint)
+                    currentY += 14f
+                    renderMathRow(context, canvas, margin, currentY, ws.mathExercise2, borderPaint, thinBorderPaint, boldTextPaint, symbolPaint)
+                    currentY += 105f
+                }
 
-        val mathData = DynamicMotifEngine.generateMathExercise(context, grade)
+                // Section 3: Numeral Tracing
+                canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+                currentY += 14f
+                canvas.drawText("अभ्यास ३: संथाली अंक व शब्द लेखन (Ol Chiki Numerals & Tracing)", margin + 15f, currentY, boldTextPaint)
+                currentY += 16f
+                renderNumeralTracing(canvas, margin, currentY, thinBorderPaint, boldTextPaint, textPaint, symbolPaint)
+            }
+
+            com.example.palashsetu.data.model.WorksheetActivityType.MATCH_COLUMN -> {
+                // Matching Column
+                if (ws.matchingPairs != null && ws.scrambledLabels != null) {
+                    canvas.drawText("अभ्यास: चित्र पहचान कर सही संथाली नाम से मिलान करें (Match Picture to Word)", margin + 15f, currentY, boldTextPaint)
+                    currentY += 18f
+                    renderMatchingColumns(context, canvas, margin, currentY, ws.matchingPairs, ws.scrambledLabels, thinBorderPaint, boldTextPaint, textPaint)
+                    currentY += (ws.matchingPairs.size * 56f) + 10f
+                }
+
+                // Numeral Tracing below
+                canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+                currentY += 14f
+                canvas.drawText("पूरक अभ्यास: संथाली अंक व शब्द (Ol Chiki Numerals)", margin + 15f, currentY, boldTextPaint)
+                currentY += 16f
+                renderNumeralTracing(canvas, margin, currentY, thinBorderPaint, boldTextPaint, textPaint, symbolPaint)
+            }
+
+            com.example.palashsetu.data.model.WorksheetActivityType.VOCAB_TRACING -> {
+                // Vocabulary tracing cards
+                val items = ws.tracingItems ?: emptyList()
+                canvas.drawText("अभ्यास: चित्र पहचान कर शब्द व अक्षर सुंदर लिखें (Word Tracing & Writing)", margin + 15f, currentY, boldTextPaint)
+                currentY += 16f
+
+                val rowH = 68f
+                for (i in items.indices) {
+                    val item = items[i]
+                    val rowY = currentY + (i * (rowH + 12f))
+                    val rowRect = RectF(margin + 15f, rowY, PAGE_WIDTH - margin - 15f, rowY + rowH)
+                    canvas.drawRoundRect(rowRect, 6f, 6f, thinBorderPaint)
+
+                    // Image
+                    val imgRect = RectF(rowRect.left + 8f, rowRect.top + 6f, rowRect.left + 70f, rowRect.bottom - 6f)
+                    val bmp = loadAssetBitmap(context, item.motif.assetPath)
+                    if (bmp != null) {
+                        drawBitmapPreservingAspect(canvas, bmp, imgRect)
+                    }
+
+                    // Ol Chiki script & phonetics
+                    canvas.drawText(item.olchikiWord, rowRect.left + 85f, rowY + 28f, symbolPaint.apply { textAlign = Paint.Align.LEFT })
+                    symbolPaint.textAlign = Paint.Align.CENTER
+                    canvas.drawText("${item.hindiMeaning} ${item.devaPhonetic}", rowRect.left + 85f, rowY + 50f, boldTextPaint)
+
+                    // Dotted Tracing Box for handwriting
+                    val traceRect = RectF(rowRect.right - 180f, rowY + 12f, rowRect.right - 15f, rowY + rowH - 12f)
+                    canvas.drawRoundRect(traceRect, 4f, 4f, thinBorderPaint)
+                    canvas.drawLine(traceRect.left + 10f, traceRect.centerY(), traceRect.right - 10f, traceRect.centerY(), thinBorderPaint)
+                    canvas.drawText("लेखन अभ्यास", traceRect.left + 12f, traceRect.top + 14f, textPaint)
+                }
+            }
+
+            com.example.palashsetu.data.model.WorksheetActivityType.COMPREHENSIVE_FLN -> {
+                // 1. Math Addition
+                if (ws.mathExercise != null) {
+                    canvas.drawText("अभ्यास १: गिनो और जोड़ो (Realia Count and Add)", margin + 15f, currentY, boldTextPaint)
+                    currentY += 14f
+                    renderMathRow(context, canvas, margin, currentY, ws.mathExercise, borderPaint, thinBorderPaint, boldTextPaint, symbolPaint)
+                    currentY += 105f
+                }
+
+                // 2. Numeral Tracing
+                canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+                currentY += 12f
+                canvas.drawText("अभ्यास २: संथाली अंक व शब्द लेखन (Ol Chiki Numerals)", margin + 15f, currentY, boldTextPaint)
+                currentY += 14f
+                renderNumeralTracing(canvas, margin, currentY, thinBorderPaint, boldTextPaint, textPaint, symbolPaint)
+                currentY += 88f
+
+                // 3. Match the Column
+                if (ws.matchingPairs != null && ws.scrambledLabels != null) {
+                    canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+                    currentY += 12f
+                    canvas.drawText("अभ्यास ३: चित्र पहचान कर सही नाम से मिलान करें (Match Picture to Word)", margin + 15f, currentY, boldTextPaint)
+                    currentY += 14f
+                    renderMatchingColumns(context, canvas, margin, currentY, ws.matchingPairs, ws.scrambledLabels, thinBorderPaint, boldTextPaint, textPaint)
+                }
+            }
+        }
+
+        // Footer Teacher Evaluation
+        val footerY = PAGE_HEIGHT - margin - 20f
+        canvas.drawLine(margin + 10f, footerY - 10f, PAGE_WIDTH - margin - 10f, footerY - 10f, thinBorderPaint)
+        canvas.drawText("शिक्षक हस्ताक्षर: ____________________", margin + 15f, footerY + 5f, textPaint)
+        canvas.drawText("ग्रेड/मूल्यांकन: [ A ]  [ B ]  [ C ]", PAGE_WIDTH - margin - 160f, footerY + 5f, boldTextPaint)
+    }
+
+    private fun renderMathRow(
+        context: Context,
+        canvas: Canvas,
+        margin: Float,
+        currentY: Float,
+        mathData: DynamicMotifEngine.MathExerciseData,
+        borderPaint: Paint,
+        thinBorderPaint: Paint,
+        boldTextPaint: Paint,
+        symbolPaint: Paint
+    ) {
         val cardW = 140f
-        val cardH = 95f
-
+        val cardH = 90f
         val b1X = margin + 20f
         val b2X = b1X + cardW + 35f
         val b3X = b2X + cardW + 35f
 
-        // Card 1
         drawRealiaCard(context, canvas, b1X, currentY, cardW, cardH, mathData.item1, mathData.count1)
-        canvas.drawText("+", b1X + cardW + 17f, currentY + 50f, symbolPaint)
+        canvas.drawText("+", b1X + cardW + 17f, currentY + 48f, symbolPaint)
 
-        // Card 2
         drawRealiaCard(context, canvas, b2X, currentY, cardW, cardH, mathData.item2, mathData.count2)
-        canvas.drawText("=", b2X + cardW + 17f, currentY + 50f, symbolPaint)
+        canvas.drawText("=", b2X + cardW + 17f, currentY + 48f, symbolPaint)
 
-        // Answer Box
         val ansRect = RectF(b3X, currentY, b3X + cardW, currentY + cardH)
         canvas.drawRoundRect(ansRect, 6f, 6f, borderPaint)
         canvas.drawText("ᱡᱚᱛᱚ ᱛᱮ (कुल योग):", b3X + 12f, currentY + 22f, boldTextPaint)
-        val ansInner = RectF(b3X + 25f, currentY + 35f, b3X + cardW - 25f, currentY + 80f)
+        val ansInner = RectF(b3X + 25f, currentY + 32f, b3X + cardW - 25f, currentY + 76f)
         canvas.drawRect(ansInner, thinBorderPaint)
-        canvas.drawText("?", b3X + (cardW / 2f), currentY + 65f, symbolPaint)
+        canvas.drawText("?", b3X + (cardW / 2f), currentY + 62f, symbolPaint)
+    }
 
-        currentY += cardH + 20f
-
-        // Section 2: Realia Word Tracing / Writing
-        canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
-        currentY += 16f
-        canvas.drawText("अभ्यास २: संथाली अंक व शब्द लेखन (Ol Chiki Numerals & Tracing)", margin + 15f, currentY, boldTextPaint)
-        currentY += 18f
-
+    private fun renderNumeralTracing(
+        canvas: Canvas,
+        margin: Float,
+        currentY: Float,
+        thinBorderPaint: Paint,
+        boldTextPaint: Paint,
+        textPaint: Paint,
+        symbolPaint: Paint
+    ) {
         val digits = listOf(
             Triple("१", "᱑", "ᱢᱤᱫ (एक)"),
             Triple("२", "᱒", "ᱵᱟᱨ (दो)"),
@@ -265,32 +393,33 @@ object WorksheetPdfGenerator {
         for (i in digits.indices) {
             val (deva, olchiki, word) = digits[i]
             val x = margin + 20f + (i * dWidth)
-            val dRect = RectF(x, currentY, x + dWidth - 8f, currentY + 80f)
+            val dRect = RectF(x, currentY, x + dWidth - 8f, currentY + 72f)
             canvas.drawRoundRect(dRect, 4f, 4f, thinBorderPaint)
 
-            canvas.drawText(olchiki, x + (dWidth / 2f) - 4f, currentY + 32f, symbolPaint)
-            canvas.drawText(deva, x + (dWidth / 2f) - 4f, currentY + 50f, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
-            canvas.drawText(word, x + (dWidth / 2f) - 4f, currentY + 68f, textPaint.apply { textAlign = Paint.Align.CENTER })
+            canvas.drawText(olchiki, x + (dWidth / 2f) - 4f, currentY + 28f, symbolPaint)
+            canvas.drawText(deva, x + (dWidth / 2f) - 4f, currentY + 46f, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
+            canvas.drawText(word, x + (dWidth / 2f) - 4f, currentY + 62f, textPaint.apply { textAlign = Paint.Align.CENTER })
             boldTextPaint.textAlign = Paint.Align.LEFT
             textPaint.textAlign = Paint.Align.LEFT
         }
+    }
 
-        currentY += 100f
-
-        // Section 3: Match the Column (चित्र देखकर सही नाम से मिलाओ)
-        canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
-        currentY += 16f
-        canvas.drawText("अभ्यास ३: चित्र पहचान कर सही नाम से मिलान करें (Match Picture to Word)", margin + 15f, currentY, boldTextPaint)
-        currentY += 18f
-
-        val matchPairs = DynamicMotifEngine.generateMatchingColumn(context, MotifCategory.ALL, grade)
-        val scrambled = matchPairs.shuffled()
-        val rowH = 46f
-
+    private fun renderMatchingColumns(
+        context: Context,
+        canvas: Canvas,
+        margin: Float,
+        currentY: Float,
+        matchPairs: List<DynamicMotifEngine.MatchingPair>,
+        scrambled: List<DynamicMotifEngine.MatchingPair>,
+        thinBorderPaint: Paint,
+        boldTextPaint: Paint,
+        textPaint: Paint
+    ) {
+        val rowH = 44f
         for (i in matchPairs.indices) {
             val p = matchPairs[i]
             val s = scrambled[i]
-            val rowY = currentY + (i * (rowH + 10f))
+            val rowY = currentY + (i * (rowH + 8f))
 
             // Column A: Picture Card
             val imgRect = RectF(margin + 25f, rowY, margin + 25f + 70f, rowY + rowH)
@@ -308,15 +437,9 @@ object WorksheetPdfGenerator {
             // Column B: Ol Chiki & Hindi Label
             val labelRect = RectF(PAGE_WIDTH - margin - 155f, rowY, PAGE_WIDTH - margin - 20f, rowY + rowH)
             canvas.drawRoundRect(labelRect, 4f, 4f, thinBorderPaint)
-            canvas.drawText(s.motif.nameOlchiki, labelRect.left + 10f, rowY + 20f, boldTextPaint)
-            canvas.drawText("${s.motif.nameHi} ${s.motif.phoneticDeva}", labelRect.left + 10f, rowY + 36f, textPaint)
+            canvas.drawText(s.motif.nameOlchiki, labelRect.left + 10f, rowY + 18f, boldTextPaint)
+            canvas.drawText("${s.motif.nameHi} ${s.motif.phoneticDeva}", labelRect.left + 10f, rowY + 34f, textPaint)
         }
-
-        // Footer Teacher Evaluation
-        val footerY = PAGE_HEIGHT - margin - 20f
-        canvas.drawLine(margin + 10f, footerY - 10f, PAGE_WIDTH - margin - 10f, footerY - 10f, thinBorderPaint)
-        canvas.drawText("शिक्षक हस्ताक्षर: ____________________", margin + 15f, footerY + 5f, textPaint)
-        canvas.drawText("ग्रेड/मूल्यांकन: [ A ]  [ B ]  [ C ]", PAGE_WIDTH - margin - 160f, footerY + 5f, boldTextPaint)
     }
 
     private fun drawRealiaCard(
