@@ -6,5 +6,7 @@ data class TranslationResult(
     val phoneticGuide: String,
     val isTier1FastPath: Boolean = true,
     val latencyMs: Long = 420,
-    val verifiedByJcert: Boolean = true
+    val verifiedByJcert: Boolean = true,
+    val tier: String = "Tier-1 SQLite"
 )
+

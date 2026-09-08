@@ -41,6 +41,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.core.content.ContextCompat
 import com.example.palashsetu.R
 import com.example.palashsetu.data.local.UserSessionManager
+import com.example.palashsetu.data.model.TranslationResult
+import kotlinx.coroutines.Job
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -101,6 +103,8 @@ fun LiveVoiceBridgeScreen(
     var playProgress by remember { mutableStateOf(0f) }
     var currentSpeed by remember { mutableStateOf(0.9f) }
     var selectedDialect by remember { mutableStateOf("ᱥᱟᱱᱛᱟᱲᱤ") }
+    var lastResult by remember { mutableStateOf<TranslationResult?>(null) }
+    var playbackJob by remember { mutableStateOf<Job?>(null) }
 
     // Pre-warm ASR, VAD, Piper TTS, and ONNX NMT models in background
     LaunchedEffect(Unit) {
@@ -109,17 +113,10 @@ fun LiveVoiceBridgeScreen(
         audioEngine.warmUp()
     }
 
-    fun triggerTranslation(hindiSentence: String) {
-        teacherHindiText = hindiSentence
-        coroutineScope.launch {
-            val result = nmtEngine.translate(hindiSentence)
-            santaliOlChikiText = result.targetOlChiki
-            phoneticGuide = if (result.phoneticGuide.isNotBlank()) {
-                result.phoneticGuide
-            } else {
-                com.example.palashsetu.domain.engine.SanthaliPhonemizer.toPhoneticDevanagari(result.targetOlChiki)
-            }
-            audioEngine.playSynthesizedAudio(result.targetOlChiki).collect { state ->
+    fun playAudio(targetText: String = santaliOlChikiText) {
+        playbackJob?.cancel()
+        playbackJob = coroutineScope.launch {
+            audioEngine.playSynthesizedAudio(targetText).collect { state ->
                 when (state) {
                     is AudioPlayerState.Synthesizing -> isAudioPlaying = true
                     is AudioPlayerState.Playing -> {
@@ -135,21 +132,18 @@ fun LiveVoiceBridgeScreen(
         }
     }
 
-    fun playAudio() {
+    fun triggerTranslation(hindiSentence: String) {
+        teacherHindiText = hindiSentence
         coroutineScope.launch {
-            audioEngine.playSynthesizedAudio(santaliOlChikiText).collect { state ->
-                when (state) {
-                    is AudioPlayerState.Synthesizing -> isAudioPlaying = true
-                    is AudioPlayerState.Playing -> {
-                        isAudioPlaying = true
-                        playProgress = state.progress
-                    }
-                    is AudioPlayerState.Finished, AudioPlayerState.Idle -> {
-                        isAudioPlaying = false
-                        playProgress = 0f
-                    }
-                }
+            val result = nmtEngine.translate(hindiSentence)
+            lastResult = result
+            santaliOlChikiText = result.targetOlChiki
+            phoneticGuide = if (result.phoneticGuide.isNotBlank()) {
+                result.phoneticGuide
+            } else {
+                com.example.palashsetu.domain.engine.SanthaliPhonemizer.toPhoneticDevanagari(result.targetOlChiki)
             }
+            playAudio(result.targetOlChiki)
         }
     }
 
@@ -571,8 +565,9 @@ fun LiveVoiceBridgeScreen(
                             val rtfFormatted = if (tts != null && tts.realTimeFactor > 0f) String.format(java.util.Locale.US, "%.2f", tts.realTimeFactor) else "0.04"
                             val ttsMs = if (tts != null && tts.synthesisDurationMs > 0) "${tts.synthesisDurationMs}ms" else "<45ms"
                             val cacheHitNotice = if (tts?.isCacheHit == true) " • LRU" else ""
+                            val routerText = lastResult?.let { "${it.tier} ${it.latencyMs}ms" } ?: "Router <1ms"
                             Text(
-                                text = "ASR ~380ms • Router <1ms • TTS $ttsMs$cacheHitNotice (RTF $rtfFormatted)",
+                                text = "ASR ~380ms • $routerText • TTS $ttsMs$cacheHitNotice (RTF $rtfFormatted)",
                                 fontSize = 9.sp,
                                 lineHeight = 9.sp,
                                 fontWeight = FontWeight.Bold,
@@ -616,7 +611,6 @@ fun LiveVoiceBridgeScreen(
                                 .border(1.dp, Color(0xFFE2E8F0), controlCornerShape)
                                 .clickable {
                                     triggerTranslation(hindi)
-                                    playAudio()
                                 }
                                 .padding(12.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,

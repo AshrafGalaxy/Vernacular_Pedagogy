@@ -256,21 +256,28 @@ class PiperTtsEngine(private val context: Context) {
         track.write(audioPcm, 0, audioPcm.size)
         track.play()
 
-        val totalDurationMs = (audioPcm.size.toFloat() / sampleRate.toFloat() * 1000f).toLong().coerceAtLeast(300L)
-        val startTime = System.currentTimeMillis()
+        val totalDurationMs = (audioPcm.size.toFloat() / sampleRate.toFloat() * 1000f).toLong()
+        val totalSamples = audioPcm.size
+        val playStartTime = System.currentTimeMillis()
+        val maxPlaybackTimeoutMs = totalDurationMs + 1500L
 
         while (track.playState == AudioTrack.PLAYSTATE_PLAYING) {
-            val elapsed = System.currentTimeMillis() - startTime
-            val progress = (elapsed.toFloat() / totalDurationMs.toFloat()).coerceIn(0f, 1f)
+            val headPosition = track.playbackHeadPosition.coerceIn(0, totalSamples)
+            val progress = (headPosition.toFloat() / totalSamples.toFloat()).coerceIn(0f, 1f)
             emit(AudioPlayerState.Playing(progress, speed))
-            if (elapsed >= totalDurationMs) {
+            if (headPosition >= totalSamples) {
+                break
+            }
+            if (System.currentTimeMillis() - playStartTime > maxPlaybackTimeoutMs) {
+                Log.w(tag, "Audio playback reached timeout guard (${maxPlaybackTimeoutMs}ms), finishing")
                 break
             }
             delay(50)
         }
 
+        // Emit final progress and allow 250ms hardware buffer drain so final syllables aren't clipped
         emit(AudioPlayerState.Playing(1f, speed))
-        delay(40)
+        delay(250)
         stopAudio()
         emit(AudioPlayerState.Finished)
         delay(150)

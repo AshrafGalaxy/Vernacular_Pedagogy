@@ -114,7 +114,7 @@ class OnnxTranslator(private val context: Context) {
      * @param maxLength Maximum number of output tokens
      * @return Translated Ol Chiki text, or null if translation fails
      */
-    suspend fun translate(hindiText: String, maxLength: Int = 40): TranslationOutput? =
+    suspend fun translate(hindiText: String, maxLength: Int = 30): TranslationOutput? =
         withContext(Dispatchers.IO) {
             if (!isInitialized) {
                 Log.w(tag, "Engine not initialized, attempting init...")
@@ -128,12 +128,14 @@ class OnnxTranslator(private val context: Context) {
             val startTime = System.currentTimeMillis()
 
             try {
-                // Step 1: Tokenize input with IndicTrans2 format: [hin_Deva, sat_Olck, ...tokens, </s>]
+                // Step 1: Tokenize input with IndicTrans2 format: [hin_Deva, ...tokens, </s>]
+                // NOTE: Target language tag (sat_Olck) is injected in the DECODER, not encoder
                 val inputTokenIds = tokenizeSource(hindiText)
                 if (inputTokenIds.isEmpty()) {
                     Log.w(tag, "Empty tokenization result for: $hindiText")
                     return@withContext null
                 }
+                Log.d(tag, "Encoder input tokens (${inputTokenIds.size}): ${inputTokenIds.take(10)}...")
 
                 val seqLen = inputTokenIds.size
                 val inputIdArray = LongArray(seqLen) { inputTokenIds[it].toLong() }
@@ -161,8 +163,12 @@ class OnnxTranslator(private val context: Context) {
                 val encoderHiddenStates = encResults[0].value // float[1][seqLen][d_model]
 
                 // Step 3: Autoregressive Decoding
+                // IndicTrans2 decoder init: [</s>] (decoder_start_token_id = 2)
                 val generatedTokens = mutableListOf<Int>()
-                val runningDecoderTokens = mutableListOf<Long>(decoderStartTokenId.toLong())
+                val runningDecoderTokens = mutableListOf<Long>(
+                    decoderStartTokenId.toLong()  // </s> (ID 2) — standard decoder start
+                )
+                Log.d(tag, "Decoder start: [</s>=$decoderStartTokenId]")
 
                 // First decoder step
                 val firstDecoderInput = OnnxTensor.createTensor(
@@ -189,14 +195,24 @@ class OnnxTranslator(private val context: Context) {
                 val firstLogits = firstDecResults[0].value as Array<Array<FloatArray>>
                 var currentTokenId = argmax(firstLogits[0][firstLogits[0].size - 1])
 
+                var repeatCount = 0
+                var lastTokenId = -1
+
                 if (currentTokenId != eosTokenId && currentTokenId != padTokenId) {
                     generatedTokens.add(currentTokenId)
                     runningDecoderTokens.add(currentTokenId.toLong())
+                    lastTokenId = currentTokenId
                 }
 
-                // Iterative decoding loop
-                for (step in 1 until maxLength) {
+                // Iterative decoding loop with fast early exit and timeout
+                val stepStartTime = System.currentTimeMillis()
+                val maxSteps = maxLength.coerceIn(5, 20)
+                for (step in 1 until maxSteps) {
                     if (currentTokenId == eosTokenId) break
+                    if (System.currentTimeMillis() - stepStartTime > 1200L) {
+                        Log.w(tag, "Decoding timeout reached at step $step (>1200ms), breaking")
+                        break
+                    }
 
                     val stepTokens = runningDecoderTokens.toLongArray()
                     val stepInput = OnnxTensor.createTensor(
@@ -224,8 +240,23 @@ class OnnxTranslator(private val context: Context) {
                     if (currentTokenId != padTokenId) {
                         generatedTokens.add(currentTokenId)
                         runningDecoderTokens.add(currentTokenId.toLong())
+
+                        // Fast repetition detection: break if same token 2x in a row
+                        if (currentTokenId == lastTokenId) {
+                            repeatCount++
+                            if (repeatCount >= 2) {
+                                Log.w(tag, "Repetition detected at step $step (token $currentTokenId repeated), breaking")
+                                repeat(repeatCount) { generatedTokens.removeLastOrNull() }
+                                break
+                            }
+                        } else {
+                            repeatCount = 0
+                        }
+                        lastTokenId = currentTokenId
                     }
                 }
+                val decodingMs = System.currentTimeMillis() - stepStartTime
+                Log.d(tag, "Decoding completed: ${generatedTokens.size} tokens in ${decodingMs}ms")
 
                 // Step 4: Detokenize output
                 val outputText = detokenizeTarget(generatedTokens)
@@ -259,7 +290,7 @@ class OnnxTranslator(private val context: Context) {
     private fun tokenizeSource(text: String): List<Int> {
         val tokens = mutableListOf<Int>()
 
-        // Add IndicTrans2 language direction tags
+        // Add IndicTrans2 language direction tags: [src_lang, tgt_lang, ...tokens..., </s>]
         if (srcLangTagId >= 0) tokens.add(srcLangTagId)
         if (tgtLangTagId >= 0) tokens.add(tgtLangTagId)
 

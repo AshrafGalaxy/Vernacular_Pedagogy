@@ -59,11 +59,14 @@ class NmtEngine {
         val fastPathResult = FlnRepository.findExactMatch(hindiInput)
         if (fastPathResult != null) {
             val latency = System.currentTimeMillis() - startTime
+            Log.i(tag, "Tier-1 SQLite HIT: '$hindiInput' → '${fastPathResult.targetOlChiki}' (${latency}ms)")
             return fastPathResult.copy(
                 latencyMs = latency.coerceAtLeast(1),
-                isTier1FastPath = true
+                isTier1FastPath = true,
+                tier = "Tier-1 SQLite"
             )
         }
+        Log.d(tag, "Tier-1 SQLite MISS for: '$hindiInput' — routing to Tier-2 ONNX NMT")
 
         // ─── Tier 2: On-Device ONNX Neural Inference ───
         if (isOnnxAvailable) {
@@ -71,29 +74,58 @@ class NmtEngine {
                 val onnxResult = onnxTranslator?.translate(hindiInput)
                 if (onnxResult != null && onnxResult.targetText.isNotBlank()) {
                     val latency = System.currentTimeMillis() - startTime
-                    return TranslationResult(
-                        sourceHindi = hindiInput,
-                        targetOlChiki = onnxResult.targetText,
-                        phoneticGuide = SanthaliPhonemizer.toPhoneticDevanagari(onnxResult.targetText),
-                        isTier1FastPath = false,
-                        latencyMs = latency,
-                        verifiedByJcert = false // Neural translations are not JCERT-verified
-                    )
+
+                    // Validate output contains Ol Chiki characters (U+1C50–U+1C7F)
+                    val hasOlChiki = onnxResult.targetText.any { ch ->
+                        ch.code in 0x1C50..0x1C7F
+                    }
+                    if (hasOlChiki) {
+                        Log.i(tag, "Tier-2 ONNX OK: '$hindiInput' → '${onnxResult.targetText}' (${latency}ms, ${onnxResult.tokenCount} tokens)")
+                        return TranslationResult(
+                            sourceHindi = hindiInput,
+                            targetOlChiki = onnxResult.targetText,
+                            phoneticGuide = SanthaliPhonemizer.toPhoneticDevanagari(onnxResult.targetText),
+                            isTier1FastPath = false,
+                            latencyMs = latency,
+                            verifiedByJcert = false, // Neural translations are not JCERT-verified
+                            tier = "Tier-2 ONNX"
+                        )
+                    } else {
+                        Log.w(tag, "Tier-2 ONNX output contains NO Ol Chiki characters: '${onnxResult.targetText}' — falling through to Tier-3 Pedagogical Bridge")
+                    }
+                } else {
+                    Log.w(tag, "Tier-2 ONNX returned null or blank for '$hindiInput'")
                 }
             } catch (e: Exception) {
                 Log.w(tag, "ONNX inference failed for '$hindiInput': ${e.message}")
             }
+        } else {
+            Log.d(tag, "ONNX not available — routing to Tier-3 Pedagogical Bridge")
         }
 
-        // ─── Fallback: Generic response when all tiers fail ───
+        // ─── Tier 3: Intelligent Pedagogical Semantic Engine ───
+        val pedagogicalResult = PedagogicalFallbackEngine.translate(hindiInput)
+        if (pedagogicalResult != null) {
+            val latency = System.currentTimeMillis() - startTime
+            Log.i(tag, "Tier-3 Pedagogical HIT: '$hindiInput' → '${pedagogicalResult.targetOlChiki}' (${latency}ms)")
+            return pedagogicalResult.copy(
+                latencyMs = latency.coerceAtLeast(1),
+                isTier1FastPath = false,
+                tier = "Tier-3 Bridge"
+            )
+        }
+
+        // ─── Tier 4: Fallback when all tiers fail ───
         val latency = System.currentTimeMillis() - startTime
+        Log.w(tag, "ALL TIERS FAILED for '$hindiInput' — returning fallback (${latency}ms)")
         return TranslationResult(
             sourceHindi = hindiInput,
             targetOlChiki = "⚠ ᱛᱟᱨᱡᱚᱢᱟ ᱵᱟᱝ ᱧᱟᱢ ᱟᱠᱟᱱᱟ", // "Translation not available" in Ol Chiki
             phoneticGuide = "[तारजोमा बांग ञाम आकाना]",
             isTier1FastPath = false,
             latencyMs = latency,
-            verifiedByJcert = false
+            verifiedByJcert = false,
+            tier = "Tier-4 Fallback"
         )
     }
 
