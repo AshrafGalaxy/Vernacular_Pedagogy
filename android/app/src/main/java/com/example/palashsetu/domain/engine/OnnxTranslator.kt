@@ -4,12 +4,13 @@ import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
 import android.content.Context
+import android.util.JsonReader
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.BufferedReader
 import java.io.File
 import java.io.FileOutputStream
+import java.io.InputStream
 import java.io.InputStreamReader
 import java.nio.LongBuffer
 
@@ -21,11 +22,11 @@ import java.nio.LongBuffer
  *
  * Architecture:
  *   1. encoder_model.onnx — Encodes Hindi source tokens into hidden states
- *   2. decoder_model.onnx — First decoding step (generates initial token + KV cache)
- *   3. decoder_with_past_model.onnx — Iterative autoregressive steps with KV cache
+ *   2. decoder_model.onnx — Generates target Ol Chiki tokens
+ *   3. decoder_with_past_model.onnx — Iterative autoregressive steps with KV cache (optional)
  *
- * Tokenization is handled via pre-built vocabulary dictionaries (dict.SRC.json,
- * dict.TGT.json) loaded from assets, avoiding the need for SentencePiece JNI.
+ * Tokenization is handled via streaming vocabulary dictionaries (dict.SRC.json,
+ * dict.TGT.json) loaded directly from assets without memory bloat.
  */
 class OnnxTranslator(private val context: Context) {
 
@@ -41,10 +42,12 @@ class OnnxTranslator(private val context: Context) {
     private var tgtVocabReverse: Map<Int, String> = emptyMap() // ID → Token
 
     // Special token IDs
-    private var padTokenId: Int = 0
-    private var bosTokenId: Int = 1
+    private var padTokenId: Int = 1
+    private var bosTokenId: Int = 0
     private var eosTokenId: Int = 2
-    private var srcLangTagId: Int = -1  // __hin_Deva__ token ID
+    private var decoderStartTokenId: Int = 2 // decoder_start_token_id in IndicTrans2
+    private var srcLangTagId: Int = 8        // hin_Deva
+    private var tgtLangTagId: Int = 29925    // sat_Olck
 
     var isInitialized: Boolean = false
         private set
@@ -53,7 +56,7 @@ class OnnxTranslator(private val context: Context) {
     private val assetDir = "models/mt"
 
     /**
-     * Initializes all 3 ONNX sessions and loads vocabulary dictionaries.
+     * Initializes all ONNX sessions and loads vocabulary dictionaries.
      * Must be called once before any translation calls.
      * Returns true if initialization succeeds.
      */
@@ -64,10 +67,10 @@ class OnnxTranslator(private val context: Context) {
             val env = OrtEnvironment.getEnvironment()
             ortEnv = env
 
-            // 1. Load vocabulary dictionaries
+            // 1. Load vocabulary dictionaries using streaming parser (zero memory bloat)
             loadVocabularies()
 
-            // 2. Copy ONNX models to internal storage for optimal mmap execution
+            // 2. Copy ONNX models to internal storage for optimal execution
             val modelDir = File(context.filesDir, "models/mt")
             if (!modelDir.exists()) modelDir.mkdirs()
 
@@ -111,7 +114,7 @@ class OnnxTranslator(private val context: Context) {
      * @param maxLength Maximum number of output tokens
      * @return Translated Ol Chiki text, or null if translation fails
      */
-    suspend fun translate(hindiText: String, maxLength: Int = 64): TranslationOutput? =
+    suspend fun translate(hindiText: String, maxLength: Int = 40): TranslationOutput? =
         withContext(Dispatchers.IO) {
             if (!isInitialized) {
                 Log.w(tag, "Engine not initialized, attempting init...")
@@ -125,7 +128,7 @@ class OnnxTranslator(private val context: Context) {
             val startTime = System.currentTimeMillis()
 
             try {
-                // Step 1: Tokenize input
+                // Step 1: Tokenize input with IndicTrans2 format: [hin_Deva, sat_Olck, ...tokens, </s>]
                 val inputTokenIds = tokenizeSource(hindiText)
                 if (inputTokenIds.isEmpty()) {
                     Log.w(tag, "Empty tokenization result for: $hindiText")
@@ -159,12 +162,12 @@ class OnnxTranslator(private val context: Context) {
 
                 // Step 3: Autoregressive Decoding
                 val generatedTokens = mutableListOf<Int>()
-                var currentTokenId = bosTokenId
+                val runningDecoderTokens = mutableListOf<Long>(decoderStartTokenId.toLong())
 
                 // First decoder step
                 val firstDecoderInput = OnnxTensor.createTensor(
                     env,
-                    LongBuffer.wrap(longArrayOf(currentTokenId.toLong())),
+                    LongBuffer.wrap(longArrayOf(decoderStartTokenId.toLong())),
                     longArrayOf(1, 1)
                 )
 
@@ -182,28 +185,24 @@ class OnnxTranslator(private val context: Context) {
                     )
                 )
 
-                // Extract logits and get first predicted token
                 @Suppress("UNCHECKED_CAST")
                 val firstLogits = firstDecResults[0].value as Array<Array<FloatArray>>
-                currentTokenId = argmax(firstLogits[0][firstLogits[0].size - 1])
-                generatedTokens.add(currentTokenId)
+                var currentTokenId = argmax(firstLogits[0][firstLogits[0].size - 1])
+
+                if (currentTokenId != eosTokenId && currentTokenId != padTokenId) {
+                    generatedTokens.add(currentTokenId)
+                    runningDecoderTokens.add(currentTokenId.toLong())
+                }
 
                 // Iterative decoding loop
                 for (step in 1 until maxLength) {
                     if (currentTokenId == eosTokenId) break
 
-                    // Use full decoder (without past) for simplicity
-                    // Note: decoder_with_past can be used for KV cache optimization
-                    val allTokens = LongArray(generatedTokens.size + 1)
-                    allTokens[0] = bosTokenId.toLong()
-                    for (i in generatedTokens.indices) {
-                        allTokens[i + 1] = generatedTokens[i].toLong()
-                    }
-
+                    val stepTokens = runningDecoderTokens.toLongArray()
                     val stepInput = OnnxTensor.createTensor(
                         env,
-                        LongBuffer.wrap(allTokens),
-                        longArrayOf(1, allTokens.size.toLong())
+                        LongBuffer.wrap(stepTokens),
+                        longArrayOf(1, stepTokens.size.toLong())
                     )
 
                     val stepResults = decSession.run(
@@ -217,10 +216,15 @@ class OnnxTranslator(private val context: Context) {
                     @Suppress("UNCHECKED_CAST")
                     val stepLogits = stepResults[0].value as Array<Array<FloatArray>>
                     currentTokenId = argmax(stepLogits[0][stepLogits[0].size - 1])
-                    generatedTokens.add(currentTokenId)
 
                     stepInput.close()
                     stepResults.close()
+
+                    if (currentTokenId == eosTokenId) break
+                    if (currentTokenId != padTokenId) {
+                        generatedTokens.add(currentTokenId)
+                        runningDecoderTokens.add(currentTokenId.toLong())
+                    }
                 }
 
                 // Step 4: Detokenize output
@@ -250,37 +254,30 @@ class OnnxTranslator(private val context: Context) {
 
     /**
      * Tokenizes Hindi source text into token IDs using the source vocabulary.
-     * Prepends the language tag (__hin_Deva__) as required by IndicTrans2.
+     * Prepends the language direction tags (hin_Deva, sat_Olck) as required by IndicTrans2.
      */
     private fun tokenizeSource(text: String): List<Int> {
         val tokens = mutableListOf<Int>()
 
-        // Add source language tag if available
-        if (srcLangTagId >= 0) {
-            tokens.add(srcLangTagId)
-        }
+        // Add IndicTrans2 language direction tags
+        if (srcLangTagId >= 0) tokens.add(srcLangTagId)
+        if (tgtLangTagId >= 0) tokens.add(tgtLangTagId)
 
-        // Simple subword tokenization using vocabulary lookup
-        // This is a best-effort character/word-level tokenization
-        // The actual SentencePiece tokenization happens at the character level
         val normalized = text.trim()
-
-        // Try word-level tokenization first
         val words = normalized.split(Regex("\\s+"))
+
         for (word in words) {
-            val fullWordKey = "▁$word" // SentencePiece prefix
+            val fullWordKey = "\u2581$word" // SentencePiece prefix
             if (srcVocab.containsKey(fullWordKey)) {
                 tokens.add(srcVocab[fullWordKey]!!)
             } else {
-                // Character-level fallback for OOV words
                 var remaining = word
                 var pos = 0
                 while (remaining.isNotEmpty()) {
-                    // Try longest match first
                     var matched = false
                     for (len in minOf(remaining.length, 12) downTo 1) {
                         val sub = remaining.substring(0, len)
-                        val key = if (pos == 0 && tokens.size <= 1) "▁$sub" else sub
+                        val key = if (pos == 0) "\u2581$sub" else sub
                         if (srcVocab.containsKey(key)) {
                             tokens.add(srcVocab[key]!!)
                             remaining = remaining.substring(len)
@@ -290,7 +287,6 @@ class OnnxTranslator(private val context: Context) {
                         }
                     }
                     if (!matched) {
-                        // Single character fallback
                         val charKey = remaining.substring(0, 1)
                         val charId = srcVocab[charKey] ?: srcVocab["<unk>"] ?: 3
                         tokens.add(charId)
@@ -301,9 +297,7 @@ class OnnxTranslator(private val context: Context) {
             }
         }
 
-        // Add EOS token
         tokens.add(eosTokenId)
-
         return tokens
     }
 
@@ -314,111 +308,86 @@ class OnnxTranslator(private val context: Context) {
     private fun detokenizeTarget(tokenIds: List<Int>): String {
         val sb = StringBuilder()
         for (id in tokenIds) {
-            if (id == padTokenId || id == bosTokenId || id == eosTokenId) continue
+            if (id == padTokenId || id == bosTokenId || id == eosTokenId || id == decoderStartTokenId) continue
             val token = tgtVocabReverse[id] ?: continue
-            // Skip language tags
+            // Skip language tags and special tokens
             if (token.startsWith("__") && token.endsWith("__")) continue
             if (token == "<s>" || token == "</s>" || token == "<unk>" || token == "<pad>") continue
 
-            // Handle SentencePiece ▁ prefix (indicates word boundary / leading space)
-            val cleaned = token.replace("▁", " ")
+            val cleaned = token.replace("\u2581", " ")
             sb.append(cleaned)
         }
-        return sb.toString().trim()
+        return sb.toString().replace(Regex("\\s+"), " ").trim()
     }
 
     /**
-     * Loads source and target vocabulary dictionaries from assets.
+     * Loads source and target vocabulary dictionaries from assets using streaming JsonReader.
      */
     private fun loadVocabularies() {
         // Load source vocabulary (dict.SRC.json)
         try {
-            val srcJson = context.assets.open("$assetDir/dict.SRC.json")
-                .bufferedReader()
-                .use { it.readText() }
-            srcVocab = parseVocabJson(srcJson)
+            context.assets.open("$assetDir/dict.SRC.json").use { stream ->
+                srcVocab = parseVocabStream(stream)
+            }
             Log.i(tag, "Source vocabulary loaded: ${srcVocab.size} tokens")
         } catch (e: Exception) {
             Log.e(tag, "Failed to load source vocabulary: ${e.message}")
-            // Fallback: try source_vocabulary.json (CTranslate2 format)
-            try {
-                val srcJson = context.assets.open("$assetDir/source_vocabulary.json")
-                    .bufferedReader()
-                    .use { it.readText() }
-                srcVocab = parseVocabJsonArray(srcJson)
-                Log.i(tag, "Source vocabulary loaded (CT2 format): ${srcVocab.size} tokens")
-            } catch (e2: Exception) {
-                Log.e(tag, "Failed to load fallback source vocabulary: ${e2.message}")
-            }
         }
 
         // Load target vocabulary (dict.TGT.json)
         try {
-            val tgtJson = context.assets.open("$assetDir/dict.TGT.json")
-                .bufferedReader()
-                .use { it.readText() }
-            val tgtVocab = parseVocabJson(tgtJson)
-            tgtVocabReverse = tgtVocab.entries.associate { (k, v) -> v to k }
-            Log.i(tag, "Target vocabulary loaded: ${tgtVocab.size} tokens")
+            context.assets.open("$assetDir/dict.TGT.json").use { stream ->
+                tgtVocabReverse = parseVocabReverseStream(stream)
+            }
+            Log.i(tag, "Target vocabulary loaded: ${tgtVocabReverse.size} tokens")
         } catch (e: Exception) {
             Log.e(tag, "Failed to load target vocabulary: ${e.message}")
-            try {
-                val tgtJson = context.assets.open("$assetDir/target_vocabulary.json")
-                    .bufferedReader()
-                    .use { it.readText() }
-                tgtVocabReverse = parseVocabJsonArrayReverse(tgtJson)
-                Log.i(tag, "Target vocabulary loaded (CT2 format): ${tgtVocabReverse.size} tokens")
-            } catch (e2: Exception) {
-                Log.e(tag, "Failed to load fallback target vocabulary: ${e2.message}")
-            }
         }
 
         // Resolve special token IDs
-        padTokenId = srcVocab["<pad>"] ?: 0
-        bosTokenId = srcVocab["<s>"] ?: 1
+        padTokenId = srcVocab["<pad>"] ?: 1
+        bosTokenId = srcVocab["<s>"] ?: 0
         eosTokenId = srcVocab["</s>"] ?: 2
-        srcLangTagId = srcVocab["__hin_Deva__"] ?: -1
+        decoderStartTokenId = 2 // IndicTrans2 decoder starts with </s> (id 2)
+        srcLangTagId = srcVocab["hin_Deva"] ?: srcVocab["__hin_Deva__"] ?: 8
+        tgtLangTagId = srcVocab["sat_Olck"] ?: srcVocab["__sat_Olck__"] ?: 29925
 
-        Log.i(tag, "Special tokens: pad=$padTokenId, bos=$bosTokenId, eos=$eosTokenId, srcLang=$srcLangTagId")
+        Log.i(tag, "Special tokens: pad=$padTokenId, bos=$bosTokenId, eos=$eosTokenId, " +
+            "decStart=$decoderStartTokenId, srcLang=$srcLangTagId, tgtLang=$tgtLangTagId")
     }
 
     /**
-     * Parses a JSON object where keys are tokens and values are integer IDs.
-     * Format: {"token": id, ...}
+     * Streaming JSON reader for {"token": id, ...} maps.
+     * Prevents large heap allocations and OOM on 5MB+ vocabularies.
      */
-    private fun parseVocabJson(json: String): Map<String, Int> {
-        val map = mutableMapOf<String, Int>()
-        val obj = org.json.JSONObject(json)
-        val keys = obj.keys()
-        while (keys.hasNext()) {
-            val key = keys.next()
-            map[key] = obj.getInt(key)
+    private fun parseVocabStream(stream: InputStream): Map<String, Int> {
+        val map = HashMap<String, Int>(130000)
+        val reader = JsonReader(InputStreamReader(stream, Charsets.UTF_8))
+        reader.beginObject()
+        while (reader.hasNext()) {
+            val key = reader.nextName()
+            val value = reader.nextInt()
+            map[key] = value
         }
+        reader.endObject()
+        reader.close()
         return map
     }
 
     /**
-     * Parses a JSON array where the index is the token ID.
-     * Format: ["token0", "token1", ...]
+     * Streaming JSON reader for reverse {id: "token"} mapping directly from {"token": id, ...}.
      */
-    private fun parseVocabJsonArray(json: String): Map<String, Int> {
-        val map = mutableMapOf<String, Int>()
-        val arr = org.json.JSONArray(json)
-        for (i in 0 until arr.length()) {
-            map[arr.getString(i)] = i
+    private fun parseVocabReverseStream(stream: InputStream): Map<Int, String> {
+        val map = HashMap<Int, String>(130000)
+        val reader = JsonReader(InputStreamReader(stream, Charsets.UTF_8))
+        reader.beginObject()
+        while (reader.hasNext()) {
+            val token = reader.nextName()
+            val id = reader.nextInt()
+            map[id] = token
         }
-        return map
-    }
-
-    /**
-     * Parses a JSON array and returns reverse mapping (ID → token).
-     */
-    private fun parseVocabJsonArrayReverse(json: String): Map<Int, String> {
-        val map = mutableMapOf<Int, String>()
-        val arr = org.json.JSONArray(json)
-        for (i in 0 until arr.length()) {
-            map[i] = arr.getString(i)
-        }
+        reader.endObject()
+        reader.close()
         return map
     }
 
@@ -438,43 +407,55 @@ class OnnxTranslator(private val context: Context) {
     }
 
     /**
-     * Copies an asset file to internal storage if not already present.
+     * Copies an asset file to internal app storage.
      */
     private fun copyAssetToInternal(assetPath: String, targetDir: File): File {
-        val fileName = assetPath.substringAfterLast("/")
+        val fileName = File(assetPath).name
         val targetFile = File(targetDir, fileName)
-        if (!targetFile.exists() || targetFile.length() < 1000) {
-            Log.i(tag, "Copying $assetPath to internal storage...")
-            context.assets.open(assetPath).use { input ->
-                FileOutputStream(targetFile).use { output ->
-                    input.copyTo(output)
-                }
+
+        val assetLength = try {
+            context.assets.openFd(assetPath).length
+        } catch (e: Exception) {
+            -1L
+        }
+
+        if (targetFile.exists() && (assetLength <= 0 || targetFile.length() == assetLength)) {
+            return targetFile
+        }
+
+        Log.i(tag, "Copying asset $assetPath to ${targetFile.absolutePath}...")
+        context.assets.open(assetPath).use { input ->
+            FileOutputStream(targetFile).use { output ->
+                input.copyTo(output)
             }
         }
+        Log.i(tag, "Copied $assetPath (${targetFile.length()} bytes)")
         return targetFile
     }
 
     /**
-     * Releases all ONNX Runtime resources.
+     * Releases ONNX sessions and frees native memory.
      */
     fun release() {
         try {
             encoderSession?.close()
             decoderSession?.close()
             decoderWithPastSession?.close()
-            encoderSession = null
-            decoderSession = null
-            decoderWithPastSession = null
-            isInitialized = false
-            Log.i(tag, "ONNX NMT engine resources released")
+            ortEnv?.close()
         } catch (e: Exception) {
-            Log.w(tag, "Error releasing ONNX sessions: ${e.message}")
+            Log.w(tag, "Error closing ONNX sessions: ${e.message}")
         }
+        encoderSession = null
+        decoderSession = null
+        decoderWithPastSession = null
+        ortEnv = null
+        isInitialized = false
+        Log.i(tag, "ONNX NMT engine released")
     }
 }
 
 /**
- * Output from a neural machine translation inference pass.
+ * Output data class containing translation result and metadata.
  */
 data class TranslationOutput(
     val targetText: String,

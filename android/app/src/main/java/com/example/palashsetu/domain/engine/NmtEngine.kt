@@ -74,7 +74,7 @@ class NmtEngine {
                     return TranslationResult(
                         sourceHindi = hindiInput,
                         targetOlChiki = onnxResult.targetText,
-                        phoneticGuide = "", // Neural output has no phonetic guide
+                        phoneticGuide = SanthaliPhonemizer.toPhoneticDevanagari(onnxResult.targetText),
                         isTier1FastPath = false,
                         latencyMs = latency,
                         verifiedByJcert = false // Neural translations are not JCERT-verified

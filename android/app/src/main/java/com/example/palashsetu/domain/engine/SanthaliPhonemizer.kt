@@ -227,4 +227,61 @@ object SanthaliPhonemizer {
         }
         return result
     }
+
+    /**
+     * Converts Ol Chiki text into an authentic Devanagari phonetic reading guide
+     * for Hindi-speaking primary school teachers.
+     */
+    fun toPhoneticDevanagari(olChikiText: String): String {
+        if (olChikiText.isBlank()) return ""
+
+        val compMap = listOf(
+            "ᱛᱷ" to "थ", "ᱠᱷ" to "ख", "ᱜᱷ" to "घ", "ᱪᱷ" to "छ", "ᱡᱷ" to "झ",
+            "ᱴᱷ" to "ठ", "ᱰᱷ" to "ढ", "ᱫᱷ" to "ध", "ᱯᱷ" to "फ", "ᱵᱷ" to "भ",
+            "ᱜᱽ" to "ग", "ᱡᱽ" to "ज", "ᱫᱽ" to "द", "ᱵᱽ" to "ब",
+            "ᱟᱹ" to "ा", "ᱚᱹ" to "ो", "ᱮᱹ" to "े", "ᱩᱹ" to "ु", "ᱤᱹ" to "ि"
+        )
+
+        val devaMap = mapOf(
+            "ᱚ" to "ो", "ᱛ" to "त", "ᱜ" to "ग", "ᱝ" to "ङ", "ᱞ" to "ल",
+            "ᱟ" to "ा", "ᱠ" to "क", "ᱡ" to "ज", "ᱢ" to "म", "ᱣ" to "व",
+            "ᱤ" to "ि", "ᱥ" to "स", "ᱦ" to "ह", "ᱧ" to "ञ", "ᱨ" to "र",
+            "ᱩ" to "ु", "ᱪ" to "च", "ᱫ" to "द", "ᱬ" to "ण", "ᱭ" to "य",
+            "ᱮ" to "े", "ᱯ" to "प", "ᱰ" to "ड", "ᱱ" to "न", "ᱲ" to "ड़",
+            "ᱳ" to "ो", "ᱴ" to "ट", "ᱵ" to "ब", "ᱶ" to "ँ", "᱾" to "।"
+        )
+
+        val vowelStart = mapOf(
+            "ᱚ" to "ओ", "ᱟ" to "आ", "ᱤ" to "इ", "ᱩ" to "उ", "ᱮ" to "ए", "ᱳ" to "ओ"
+        )
+
+        var processed = olChikiText
+        for ((k, v) in compMap) {
+            processed = processed.replace(k, v)
+        }
+
+        val words = processed.split(Regex("\\s+"))
+        val outWords = mutableListOf<String>()
+
+        for (w in words) {
+            val sb = java.lang.StringBuilder()
+            for (idx in w.indices) {
+                val ch = w[idx].toString()
+                if (idx == 0 && vowelStart.containsKey(ch)) {
+                    sb.append(vowelStart[ch])
+                } else if (devaMap.containsKey(ch)) {
+                    sb.append(devaMap[ch])
+                } else if (ch !in listOf("ᱽ", "ᱹ", "ᱻ")) {
+                    sb.append(ch)
+                }
+            }
+            if (sb.isNotEmpty()) {
+                outWords.add(sb.toString())
+            }
+        }
+
+        val guide = outWords.joinToString(" ").trim()
+        return if (guide.isNotBlank()) "[$guide]" else ""
+    }
 }
+

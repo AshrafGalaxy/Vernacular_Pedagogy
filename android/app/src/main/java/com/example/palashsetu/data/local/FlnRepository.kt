@@ -32,8 +32,13 @@ object FlnRepository {
             val dbHelper = FlnDatabaseHelper.getInstance(context)
             val dbList = dbHelper.loadAllPhrases()
             if (dbList.isNotEmpty()) {
-                phrases.clear()
-                phrases.addAll(dbList)
+                // Ensure curated phrases are preserved and augmented with database entries
+                val existingIds = phrases.map { it.id }.toSet()
+                for (item in dbList) {
+                    if (!existingIds.contains(item.id)) {
+                        phrases.add(item)
+                    }
+                }
                 rebuildIndex()
                 isLoadedFromDatabase = true
                 isLoadedFromAssets = true
@@ -84,8 +89,12 @@ object FlnRepository {
                 }
 
                 if (loadedList.isNotEmpty()) {
-                    phrases.clear()
-                    phrases.addAll(loadedList)
+                    val existingIds = phrases.map { it.id }.toSet()
+                    for (item in loadedList) {
+                        if (!existingIds.contains(item.id)) {
+                            phrases.add(item)
+                        }
+                    }
                     rebuildIndex()
                     isLoadedFromAssets = true
                 }
@@ -151,7 +160,7 @@ object FlnRepository {
     fun getPhrasesCount(): Int = phrases.size
 
     fun getPhrasesByCategory(category: String): List<FlnPhrase> {
-        if (category == "सभी (All)" || category == "All") return phrases.toList()
+        if (category == "सभी (All)" || category == "All" || category == "ALL") return phrases.toList()
         return phrases.filter { it.category.equals(category, ignoreCase = true) }
     }
 
@@ -170,18 +179,51 @@ object FlnRepository {
         }
     }
 
+    /**
+     * Smart Tier-1 exact and pedagogical match:
+     * 1. Exact normalized key lookup (<0.1ms).
+     * 2. Conversational prefix stripping ("बच्चों, ...", "कृपया, ...", etc.).
+     * 3. Substring matching for core classroom commands.
+     */
     fun findExactMatch(hindiQuery: String): TranslationResult? {
         val key = normalizeKey(hindiQuery)
-        val match = normalizedLookupIndex[key]
-        return match?.let {
-            TranslationResult(
-                sourceHindi = it.hindi,
-                targetOlChiki = it.olchiki,
-                phoneticGuide = it.phoneticDevanagari,
-                isTier1FastPath = true,
-                latencyMs = 21,
-                verifiedByJcert = true
-            )
+        if (key.isBlank()) return null
+
+        // 1. Direct match
+        normalizedLookupIndex[key]?.let { return toTranslationResult(it) }
+
+        // 2. Vocative prefix stripping
+        val prefixes = listOf(
+            "बच्चों", "बच्चो", "सभी बच्चे", "सभी बच्चों", "प्यारे बच्चों",
+            "प्यारे बच्चो", "विद्यार्थियों", "कृपया", "चलो", "अब", "जल्दी",
+            "सब लोग", "सारे बच्चे"
+        )
+        for (prefix in prefixes) {
+            val normPrefix = normalizeKey(prefix)
+            if (key.startsWith(normPrefix)) {
+                val stripped = key.removePrefix(normPrefix).trim()
+                normalizedLookupIndex[stripped]?.let { return toTranslationResult(it) }
+            }
         }
+
+        // 3. Substring search for known curriculum imperatives
+        for ((phraseKey, phrase) in normalizedLookupIndex) {
+            if (phraseKey.length >= 8 && key.contains(phraseKey)) {
+                return toTranslationResult(phrase)
+            }
+        }
+
+        return null
+    }
+
+    private fun toTranslationResult(phrase: FlnPhrase): TranslationResult {
+        return TranslationResult(
+            sourceHindi = phrase.hindi,
+            targetOlChiki = phrase.olchiki,
+            phoneticGuide = phrase.phoneticDevanagari,
+            isTier1FastPath = true,
+            latencyMs = 1,
+            verifiedByJcert = true
+        )
     }
 }

@@ -114,7 +114,24 @@ fun LiveVoiceBridgeScreen(
         coroutineScope.launch {
             val result = nmtEngine.translate(hindiSentence)
             santaliOlChikiText = result.targetOlChiki
-            phoneticGuide = result.phoneticGuide
+            phoneticGuide = if (result.phoneticGuide.isNotBlank()) {
+                result.phoneticGuide
+            } else {
+                com.example.palashsetu.domain.engine.SanthaliPhonemizer.toPhoneticDevanagari(result.targetOlChiki)
+            }
+            audioEngine.playSynthesizedAudio(result.targetOlChiki).collect { state ->
+                when (state) {
+                    is AudioPlayerState.Synthesizing -> isAudioPlaying = true
+                    is AudioPlayerState.Playing -> {
+                        isAudioPlaying = true
+                        playProgress = state.progress
+                    }
+                    is AudioPlayerState.Finished, AudioPlayerState.Idle -> {
+                        isAudioPlaying = false
+                        playProgress = 0f
+                    }
+                }
+            }
         }
     }
 
@@ -151,7 +168,6 @@ fun LiveVoiceBridgeScreen(
                         isMicActive = false
                         micAudioLevel = 0.1f
                         triggerTranslation(state.finalSentence)
-                        playAudio()
                     }
                     AsrState.Idle -> {
                         isMicActive = false
