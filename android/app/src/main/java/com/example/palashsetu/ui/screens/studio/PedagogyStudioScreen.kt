@@ -52,6 +52,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+import androidx.core.content.FileProvider
 import com.example.palashsetu.R
 import com.example.palashsetu.data.local.NipunCurriculumRepository
 import com.example.palashsetu.data.local.UserSessionManager
@@ -69,6 +73,24 @@ import com.example.palashsetu.theme.SurfaceContainerLowest
 import com.example.palashsetu.ui.components.PalashTopBar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.io.File
+
+enum class StudioMode {
+    WORKSHEET, FLASHCARDS
+}
+
+private fun openPdfFile(context: Context, file: File) {
+    try {
+        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/pdf")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        context.startActivity(Intent.createChooser(intent, "Open PDF"))
+    } catch (e: Exception) {
+        Log.e("PedagogyStudio", "Error opening PDF: ${e.message}")
+    }
+}
 
 @Composable
 fun PedagogyStudioScreen(
@@ -111,10 +133,9 @@ fun PedagogyStudioScreen(
         }
     }
 
-    var isFlashcardMode by remember { mutableStateOf(false) }
-    var isCardFlipped by remember { mutableStateOf(false) }
-    var showPdfDownloadedNotification by remember { mutableStateOf(false) }
+    var selectedStudioMode by remember { mutableStateOf(StudioMode.WORKSHEET) }
     var isInstructionAudioPlaying by remember { mutableStateOf(false) }
+    var isGeneratingPdf by remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
     val audioEngine = remember { PedagogicalAudioEngine(context) }
@@ -158,6 +179,61 @@ fun PedagogyStudioScreen(
                     color = Color(0xFF64748B)
                 )
             }
+
+            // Studio Mode Switcher (Worksheet vs Flashcards)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(44.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                listOf(
+                    StudioMode.WORKSHEET to if (isHindi) "कार्यपत्रक (Worksheets)" else "Worksheets",
+                    StudioMode.FLASHCARDS to if (isHindi) "फ्लैशकार्ड (Flashcards)" else "Flashcards"
+                ).forEach { (mode, label) ->
+                    val isSelected = selectedStudioMode == mode
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .clip(controlCornerShape)
+                            .background(if (isSelected) Primary else SurfaceContainerLowest)
+                            .border(
+                                width = if (isSelected) 1.5.dp else 1.dp,
+                                color = if (isSelected) Primary else Color(0xFFCBD5E1),
+                                shape = controlCornerShape
+                            )
+                            .clickable { selectedStudioMode = mode },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = label,
+                                fontSize = 12.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                color = if (isSelected) Color.White else Color(0xFF1E293B),
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                            if (isSelected) {
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_check),
+                                    contentDescription = "Active",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (selectedStudioMode == StudioMode.WORKSHEET) {
 
             // Section 1: Grade Selection Buttons (Grade 1, Grade 2, Grade 3)
             Row(
@@ -731,33 +807,51 @@ fun PedagogyStudioScreen(
                         }
                     }
 
-                    // Download Printable PDF Button
+                    // Printable Worksheet PDF Download Button
                     Button(
                         onClick = {
-                            val pdf = WorksheetPdfGenerator.generateWorksheetPdf(
-                                context = context,
-                                grade = selectedGrade,
-                                isHindi = isHindi,
-                                competency = selectedCompetency
-                            )
-                            if (pdf != null) {
-                                showPdfDownloadedNotification = true
-                                WorksheetPdfGenerator.openOrSharePdf(context, pdf)
+                            if (!isGeneratingPdf) {
+                                coroutineScope.launch {
+                                    isGeneratingPdf = true
+                                    val file = WorksheetPdfGenerator.generateWorksheetPdf(
+                                        context = context,
+                                        grade = selectedGrade,
+                                        isHindi = isHindi,
+                                        competency = selectedCompetency
+                                    )
+                                    isGeneratingPdf = false
+                                    if (file != null) {
+                                        openPdfFile(context, file)
+                                    }
+                                }
                             }
                         },
-                        modifier = Modifier.fillMaxWidth().height(44.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(44.dp),
                         shape = controlCornerShape,
                         colors = ButtonDefaults.buttonColors(containerColor = Primary)
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_print),
-                                contentDescription = "Print PDF",
-                                tint = Color.White,
-                                modifier = Modifier.size(18.dp)
-                            )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            if (isGeneratingPdf) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(16.dp),
+                                    color = Color.White,
+                                    strokeWidth = 2.dp
+                                )
+                            } else {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_print),
+                                    contentDescription = "Download Worksheet",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
                             Text(
-                                text = if (isHindi) "प्रिंट योग्य B&W PDF डाउनलोड" else "Download Printable B&W PDF",
+                                text = if (isHindi) "कार्यपत्रक डाउनलोड करें (A4 PDF)" else "Download Worksheet (A4 PDF)",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White,
@@ -766,158 +860,15 @@ fun PedagogyStudioScreen(
                             )
                         }
                     }
-
-                    // Interactive Flashcard Toggle Button
-                    OutlinedButton(
-                        onClick = { isFlashcardMode = !isFlashcardMode },
-                        modifier = Modifier.fillMaxWidth().height(44.dp),
-                        shape = controlCornerShape
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_studio),
-                                contentDescription = "Flashcards",
-                                tint = Primary,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Text(
-                                text = if (isFlashcardMode) {
-                                    if (isHindi) "फ्लैशकार्ड बंद करें" else "Close Flashcard"
-                                } else {
-                                    if (isHindi) "इंटरएक्टिव ऑडियो फ्लैशकार्ड खोलें" else "Open Audio Flashcards"
-                                },
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Primary,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        }
-                    }
-
-                    AnimatedVisibility(visible = showPdfDownloadedNotification) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            modifier = Modifier
-                                .clip(controlCornerShape)
-                                .background(Color(0xFFE8F5E9))
-                                .border(1.dp, Color(0xFFC8E6C9), controlCornerShape)
-                                .padding(8.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_check_circle),
-                                contentDescription = "Success",
-                                tint = Color(0xFF1B5E20),
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Text(
-                                text = if (isHindi) "PDF सफलतापूर्वक स्थानीय मेमोरी में डाउनलोड हो गया (Ready for Offline Print)" else "PDF downloaded to local storage (Ready for Offline Print)",
-                                fontSize = 11.sp,
-                                color = Color(0xFF1B5E20),
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                    }
                 }
             }
-
-            // Interactive Flashcard Section
-            AnimatedVisibility(visible = isFlashcardMode) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(cardCornerShape)
-                        .clickable { isCardFlipped = !isCardFlipped },
-                    shape = cardCornerShape,
-                    colors = CardDefaults.cardColors(containerColor = SurfaceContainerHigh),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(24.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Text(
-                            text = if (isCardFlipped) {
-                                if (isHindi) "कार्ड पृष्ठ - क्लिक करके पलटें" else "Card Back - Tap to flip"
-                            } else {
-                                if (isHindi) "कार्ड सम्मुख - क्लिक करके पलटें" else "Card Front - Tap to flip"
-                            },
-                            fontSize = 11.sp,
-                            color = Color(0xFF64748B)
-                        )
-
-                        if (!isCardFlipped) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_eco),
-                                contentDescription = "Flashcard Motif",
-                                tint = Color(0xFF2E7D32),
-                                modifier = Modifier.size(64.dp)
-                            )
-                            Text(
-                                text = "ᱥᱟᱨᱡᱚᱢ",
-                                fontSize = 28.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Primary
-                            )
-                            Text(
-                                text = if (isHindi) "सखुआ (साल)" else "Sal Tree",
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = Color(0xFF334155)
-                            )
-                        } else {
-                            Text(
-                                text = "ᱯᱮᱭᱟ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ",
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Secondary
-                            )
-                            Text(
-                                text = if (isHindi) "तीन सखुआ के पत्ते" else "Three Sal Leaves",
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = Color(0xFF334155)
-                            )
-                            Text(
-                                text = "3 Sal Leaves (Visual Realia Practice)",
-                                fontSize = 14.sp,
-                                color = Color(0xFF64748B)
-                            )
-                        }
-
-                        Button(
-                            onClick = {
-                                coroutineScope.launch {
-                                    audioEngine.playSynthesizedAudio("ᱥᱟᱨᱡᱚᱢ ᱫᱟᱨᱮ").collect {}
-                                }
-                            },
-                            modifier = Modifier.height(44.dp),
-                            shape = controlCornerShape,
-                            colors = ButtonDefaults.buttonColors(containerColor = Secondary)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_volume_up),
-                                    contentDescription = "Pronounce",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Text(
-                                    text = if (isHindi) "उच्चारण सुनें (Ol Chiki)" else "Listen Audio (Ol Chiki)",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.White,
-                                    maxLines = 1,
-                                    softWrap = false
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+        } else {
+            // Interactive Realia Flashcard Studio Mode
+            FlashcardStudioSection(
+                isHindi = isHindi,
+                audioEngine = audioEngine
+            )
+        }
         }
     }
 

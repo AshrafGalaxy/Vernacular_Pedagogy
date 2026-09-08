@@ -1,7 +1,8 @@
 package com.example.palashsetu.domain.pdf
 
 import android.content.Context
-import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -11,17 +12,20 @@ import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.os.Environment
 import android.util.Log
-import androidx.core.content.FileProvider
+import com.example.palashsetu.data.local.FlashcardMotifRepository
+import com.example.palashsetu.data.model.MotifCategory
+import com.example.palashsetu.data.model.MotifItem
+import com.example.palashsetu.data.model.NipunCompetency
+import com.example.palashsetu.domain.engine.DynamicMotifEngine
 import java.io.File
 import java.io.FileOutputStream
-import com.example.palashsetu.data.model.NipunCompetency
 
 /**
- * Production Offline Worksheet Vector PDF Generator.
+ * Production Offline Dynamic Worksheet & Multi-Page Student Workbook PDF Generator.
  *
- * Generates crisp, printable 72-DPI vector A4 worksheets (595 x 842 points)
- * containing authentic Jharkhand JCERT headers, Ol Chiki & Hindi instructions,
- * cultural realia motifs (Sal leaves, Mahua fruits), and practice rubrics.
+ * Generates crisp, printable 72-DPI vector & bitmap A4 worksheets and multi-page workbooks
+ * (595 x 842 points) containing authentic Jharkhand JCERT headers, Ol Chiki & Hindi instructions,
+ * cultural realia illustrations (WebP bitmaps with aspect-ratio preservation), and pedagogical rubrics.
  */
 object WorksheetPdfGenerator {
 
@@ -29,11 +33,41 @@ object WorksheetPdfGenerator {
     const val PAGE_WIDTH = 595
     const val PAGE_HEIGHT = 842
 
+    private val bitmapCache = mutableMapOf<String, Bitmap>()
+
+    private fun loadAssetBitmap(context: Context, assetPath: String): Bitmap? {
+        bitmapCache[assetPath]?.let { return it }
+        return try {
+            context.assets.open(assetPath).use { stream ->
+                val bmp = BitmapFactory.decodeStream(stream)
+                if (bmp != null) bitmapCache[assetPath] = bmp
+                bmp
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading asset bitmap '$assetPath': ${e.message}")
+            null
+        }
+    }
+
+    private fun drawBitmapPreservingAspect(canvas: Canvas, bitmap: Bitmap, targetRect: RectF, paint: Paint = Paint()) {
+        val scale = minOf(targetRect.width() / bitmap.width.toFloat(), targetRect.height() / bitmap.height.toFloat())
+        val drawW = bitmap.width * scale
+        val drawH = bitmap.height * scale
+        val left = targetRect.left + (targetRect.width() - drawW) / 2f
+        val top = targetRect.top + (targetRect.height() - drawH) / 2f
+        val destRect = RectF(left, top, left + drawW, top + drawH)
+        canvas.drawBitmap(bitmap, null, destRect, paint)
+    }
+
+    /**
+     * Generates a single-page dynamic worksheet PDF.
+     */
     fun generateWorksheetPdf(
         context: Context,
         grade: Int = 2,
         isHindi: Boolean = true,
-        competency: NipunCompetency? = null
+        competency: NipunCompetency? = null,
+        prompt: String = ""
     ): File? {
         val document = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create()
@@ -41,11 +75,10 @@ object WorksheetPdfGenerator {
         val canvas = page.canvas
 
         try {
-            renderWorksheet(canvas, grade, isHindi, competency)
+            renderDynamicWorksheet(context, canvas, grade, isHindi, competency, prompt)
             document.finishPage(page)
 
-            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-                ?: context.filesDir
+            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
             if (!dir.exists()) dir.mkdirs()
 
             val code = competency?.code ?: "M${grade}.4"
@@ -53,7 +86,7 @@ object WorksheetPdfGenerator {
             FileOutputStream(outputFile).use { out ->
                 document.writeTo(out)
             }
-            Log.i(TAG, "Generated worksheet PDF at: ${outputFile.absolutePath} (${outputFile.length()} bytes)")
+            Log.i(TAG, "Generated single-page worksheet PDF at: ${outputFile.absolutePath} (${outputFile.length()} bytes)")
             return outputFile
         } catch (e: Exception) {
             Log.e(TAG, "Error generating worksheet PDF: ${e.message}", e)
@@ -63,160 +96,163 @@ object WorksheetPdfGenerator {
         }
     }
 
-    private fun renderWorksheet(canvas: Canvas, grade: Int, isHindi: Boolean, competency: NipunCompetency? = null) {
-        // Paints
-        val borderPaint = Paint().apply {
-            color = Color.BLACK
-            style = Paint.Style.STROKE
-            strokeWidth = 2f
-            isAntiAlias = true
-        }
+    /**
+     * Generates a comprehensive 4-page printable student workbook (कार्यपुस्तिका).
+     */
+    fun generateWorkbookPdf(
+        context: Context,
+        grade: Int = 1,
+        isHindi: Boolean = true,
+        theme: String = "समग्र बुनियादी साक्षरता एवं संख्याज्ञान"
+    ): File? {
+        val document = PdfDocument()
 
-        val thinBorderPaint = Paint().apply {
-            color = Color.DKGRAY
-            style = Paint.Style.STROKE
-            strokeWidth = 1f
-            isAntiAlias = true
-        }
+        try {
+            // Page 1: Cover Page
+            val p1Info = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create()
+            val p1 = document.startPage(p1Info)
+            renderWorkbookCoverPage(context, p1.canvas, grade, isHindi, theme)
+            document.finishPage(p1)
 
-        val headerPaint = Paint().apply {
-            color = Color.BLACK
-            textSize = 15f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
-            isAntiAlias = true
-        }
+            // Page 2: वर्णमाला व चित्र मिलान (Alphabet & Animal/Nature Realia)
+            val p2Info = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 2).create()
+            val p2 = document.startPage(p2Info)
+            renderWorkbookPage2AlphabetAnimals(context, p2.canvas, grade, isHindi)
+            document.finishPage(p2)
 
-        val subHeaderPaint = Paint().apply {
-            color = Color.DKGRAY
-            textSize = 11f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
-            isAntiAlias = true
-        }
+            // Page 3: परिवेश व दैनिक वस्तुएं (Classroom & Body Parts)
+            val p3Info = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 3).create()
+            val p3 = document.startPage(p3Info)
+            renderWorkbookPage3DailyLife(context, p3.canvas, grade, isHindi)
+            document.finishPage(p3)
 
-        val textPaint = Paint().apply {
-            color = Color.BLACK
-            textSize = 10f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            isAntiAlias = true
-        }
+            // Page 4: संख्याज्ञान व फल गणना (Math & Counting Realia)
+            val p4Info = PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 4).create()
+            val p4 = document.startPage(p4Info)
+            renderWorkbookPage4Numeracy(context, p4.canvas, grade, isHindi)
+            document.finishPage(p4)
 
-        val boldTextPaint = Paint().apply {
-            color = Color.BLACK
-            textSize = 11f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            isAntiAlias = true
-        }
+            val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
+            if (!dir.exists()) dir.mkdirs()
 
-        val symbolPaint = Paint().apply {
-            color = Color.BLACK
-            textSize = 24f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
-            isAntiAlias = true
+            val outputFile = File(dir, "VaaniSetu_Workbook_Grade${grade}_FLN.pdf")
+            FileOutputStream(outputFile).use { out ->
+                document.writeTo(out)
+            }
+            Log.i(TAG, "Generated 4-page student workbook PDF at: ${outputFile.absolutePath} (${outputFile.length()} bytes)")
+            return outputFile
+        } catch (e: Exception) {
+            Log.e(TAG, "Error generating workbook PDF: ${e.message}", e)
+            return null
+        } finally {
+            document.close()
         }
+    }
 
-        val fillBoxPaint = Paint().apply {
-            color = Color.rgb(248, 250, 252)
-            style = Paint.Style.FILL
-            isAntiAlias = true
-        }
+    // =========================================================================
+    // Single-Page Worksheet Rendering
+    // =========================================================================
+    private fun renderDynamicWorksheet(
+        context: Context,
+        canvas: Canvas,
+        grade: Int,
+        isHindi: Boolean,
+        competency: NipunCompetency?,
+        prompt: String
+    ) {
+        val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2f; isAntiAlias = true }
+        val thinBorderPaint = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val headerPaint = Paint().apply { color = Color.BLACK; textSize = 15f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+        val subHeaderPaint = Paint().apply { color = Color.DKGRAY; textSize = 11f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 10f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL); isAntiAlias = true }
+        val boldTextPaint = Paint().apply { color = Color.BLACK; textSize = 11f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val symbolPaint = Paint().apply { color = Color.BLACK; textSize = 22f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+        val fillBoxPaint = Paint().apply { color = Color.rgb(248, 250, 252); style = Paint.Style.FILL; isAntiAlias = true }
 
-        // 1. Outer Page Margins & Decorative Double Border
+        // Outer Borders
         val margin = 30f
         canvas.drawRect(margin, margin, PAGE_WIDTH - margin, PAGE_HEIGHT - margin, borderPaint)
         canvas.drawRect(margin + 4f, margin + 4f, PAGE_WIDTH - margin - 4f, PAGE_HEIGHT - margin - 4f, thinBorderPaint)
 
-        // 2. Header: Jharkhand State / JCERT Header
+        // Header: Jharkhand JCERT
         val centerX = PAGE_WIDTH / 2f
-        var currentY = margin + 28f
-
+        var currentY = margin + 26f
         canvas.drawText("झारखंड शैक्षिक अनुसंधान एवं प्रशिक्षण परिषद (JCERT)", centerX, currentY, headerPaint)
-        currentY += 16f
+        currentY += 15f
         canvas.drawText("JCERT RANCHI, JHARKHAND • NIPUN BHARAT FLN", centerX, currentY, subHeaderPaint)
-        currentY += 18f
+        currentY += 16f
         canvas.drawText("बुनियादी साक्षरता एवं संख्याज्ञान (FLN) कार्यपत्रक", centerX, currentY, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
         boldTextPaint.textAlign = Paint.Align.LEFT
 
-        // Divider Line
         currentY += 12f
         canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, borderPaint)
 
-        // 3. Metadata Row (Class, Date, Name, Roll)
+        // Metadata
         currentY += 18f
         val metaLeft = margin + 15f
         val code = competency?.code ?: "M${grade}.4"
         val domainLabel = if (competency?.isLiteracy == true) "साक्षरता (Literacy)" else "संख्याज्ञान (Numeracy)"
         canvas.drawText("कक्षा (Grade): $grade", metaLeft, currentY, boldTextPaint)
         canvas.drawText("दक्षता: $code ($domainLabel)", metaLeft + 105f, currentY, boldTextPaint)
-        canvas.drawText("दिनांक: ०८/०९/२०२६", PAGE_WIDTH - margin - 140f, currentY, textPaint)
+        canvas.drawText("दिनांक: ________", PAGE_WIDTH - margin - 120f, currentY, textPaint)
 
         currentY += 18f
         canvas.drawText("विद्यार्थी का नाम (Student Name): ____________________________________", metaLeft, currentY, textPaint)
-        canvas.drawText("क्रमांक (Roll No): ________", PAGE_WIDTH - margin - 150f, currentY, textPaint)
+        canvas.drawText("क्रमांक: ____", PAGE_WIDTH - margin - 120f, currentY, textPaint)
 
-        // Divider Line
         currentY += 12f
         canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
 
-        // 4. Instruction Box (Vernacular Ol Chiki & Hindi)
+        // Instructions Box
         currentY += 14f
-        val boxRect = RectF(margin + 12f, currentY, PAGE_WIDTH - margin - 12f, currentY + 68f)
+        val boxRect = RectF(margin + 12f, currentY, PAGE_WIDTH - margin - 12f, currentY + 54f)
         canvas.drawRoundRect(boxRect, 6f, 6f, fillBoxPaint)
         canvas.drawRoundRect(boxRect, 6f, 6f, thinBorderPaint)
 
-        val olchikiInstruction = competency?.instructionOlchiki ?: "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ ᱟᱨ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ ᱞᱮᱠᱷᱟᱭ ᱢᱮ ᱟᱨ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ᱾"
-        val hindiInstruction = competency?.instructionHi ?: "महुआ फल और सखुआ (साल) के पत्तों को गिनें और जोड़कर सही संख्या लिखें।"
+        val olchikiInst = competency?.instructionOlchiki ?: "ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ ᱟᱨ ᱥᱟᱹᱦᱤ ᱡᱚᱲ ᱵᱮᱱᱟᱣ ᱢᱮ᱾"
+        val hindiInst = competency?.instructionHi ?: "चित्र देखकर गणना करें और सही मिलान करें।"
 
-        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (NIPUN $code):", margin + 22f, currentY + 18f, boldTextPaint)
-        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: $olchikiInstruction", margin + 22f, currentY + 36f, boldTextPaint)
-        canvas.drawText("हिन्दी: $hindiInstruction", margin + 22f, currentY + 54f, textPaint)
+        canvas.drawText("निर्देश / ᱟᱹᱭᱫᱟᱹᱨᱤ (NIPUN $code):", margin + 22f, currentY + 16f, boldTextPaint)
+        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ: $olchikiInst", margin + 22f, currentY + 32f, boldTextPaint)
+        canvas.drawText("हिन्दी: $hindiInst", margin + 22f, currentY + 48f, textPaint)
 
-        currentY += 85f
+        currentY += 68f
 
-        // 5. Section 1: Visual Realia Math Exercise (3 Sal leaves + 2 Mahua fruits = 5)
-        canvas.drawText("अभ्यास १: गिनो और जोड़ो (Count and Add)", margin + 15f, currentY, boldTextPaint)
-        currentY += 15f
+        // Section 1: Realia Math Addition with Real Images
+        canvas.drawText("अभ्यास १: गिनो और जोड़ो (Realia Count and Add)", margin + 15f, currentY, boldTextPaint)
+        currentY += 14f
 
-        // Draw 3 Boxes: [Leaves Box] + [Fruits Box] = [Result Box]
-        val cardWidth = 135f
-        val cardHeight = 110f
-        val spacing = 20f
+        val mathData = DynamicMotifEngine.generateMathExercise(context, grade)
+        val cardW = 140f
+        val cardH = 95f
 
-        val box1X = margin + 20f
-        val box2X = box1X + cardWidth + 35f
-        val box3X = box2X + cardWidth + 35f
+        val b1X = margin + 20f
+        val b2X = b1X + cardW + 35f
+        val b3X = b2X + cardW + 35f
 
-        // Box 1: Sal Leaves (ᱥᱟᱨᱡᱚᱢ)
-        drawExerciseCard(canvas, box1X, currentY, cardWidth, cardHeight, "ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ", "सखुआ पत्ते: ३", 3, isLeaf = true)
+        // Card 1
+        drawRealiaCard(context, canvas, b1X, currentY, cardW, cardH, mathData.item1, mathData.count1)
+        canvas.drawText("+", b1X + cardW + 17f, currentY + 50f, symbolPaint)
 
-        // Plus Symbol
-        canvas.drawText("+", box1X + cardWidth + 17f, currentY + 55f, symbolPaint)
+        // Card 2
+        drawRealiaCard(context, canvas, b2X, currentY, cardW, cardH, mathData.item2, mathData.count2)
+        canvas.drawText("=", b2X + cardW + 17f, currentY + 50f, symbolPaint)
 
-        // Box 2: Mahua Fruits (ᱢᱟᱹᱦᱩᱣᱟᱹ)
-        drawExerciseCard(canvas, box2X, currentY, cardWidth, cardHeight, "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ", "महुआ फल: २", 2, isLeaf = false)
+        // Answer Box
+        val ansRect = RectF(b3X, currentY, b3X + cardW, currentY + cardH)
+        canvas.drawRoundRect(ansRect, 6f, 6f, borderPaint)
+        canvas.drawText("ᱡᱚᱛᱚ ᱛᱮ (कुल योग):", b3X + 12f, currentY + 22f, boldTextPaint)
+        val ansInner = RectF(b3X + 25f, currentY + 35f, b3X + cardW - 25f, currentY + 80f)
+        canvas.drawRect(ansInner, thinBorderPaint)
+        canvas.drawText("?", b3X + (cardW / 2f), currentY + 65f, symbolPaint)
 
-        // Equals Symbol
-        canvas.drawText("=", box2X + cardWidth + 17f, currentY + 55f, symbolPaint)
+        currentY += cardH + 20f
 
-        // Box 3: Student Answer Box
-        val answerRect = RectF(box3X, currentY, box3X + cardWidth, currentY + cardHeight)
-        canvas.drawRoundRect(answerRect, 8f, 8f, borderPaint)
-        canvas.drawText("ᱡᱚᱛᱚ ᱛᱮ (कुल योग):", box3X + 12f, currentY + 22f, boldTextPaint)
-
-        // Dotted answer line
-        val answerBoxInner = RectF(box3X + 25f, currentY + 35f, box3X + cardWidth - 25f, currentY + 85f)
-        canvas.drawRect(answerBoxInner, thinBorderPaint)
-        canvas.drawText("?", box3X + (cardWidth / 2f), currentY + 68f, symbolPaint)
-
-        currentY += cardHeight + 25f
-
-        // 6. Section 2: Ol Chiki Number Tracing & Writing Rubric
+        // Section 2: Realia Word Tracing / Writing
         canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+        currentY += 16f
+        canvas.drawText("अभ्यास २: संथाली अंक व शब्द लेखन (Ol Chiki Numerals & Tracing)", margin + 15f, currentY, boldTextPaint)
         currentY += 18f
-        canvas.drawText("अभ्यास २: संथाली अंक लेखन अभ्यास (Ol Chiki Numerals 1 to 5)", margin + 15f, currentY, boldTextPaint)
-        currentY += 20f
 
         val digits = listOf(
             Triple("१", "᱑", "ᱢᱤᱫ (एक)"),
@@ -225,147 +261,329 @@ object WorksheetPdfGenerator {
             Triple("४", "᱔", "ᱯᱳᱱ (चार)"),
             Triple("५", "᱕", "ᱢᱚᱬᱮ (पाँच)")
         )
-
-        val digitBoxWidth = (PAGE_WIDTH - (margin * 2) - 40f) / 5f
+        val dWidth = (PAGE_WIDTH - (margin * 2) - 40f) / 5f
         for (i in digits.indices) {
             val (deva, olchiki, word) = digits[i]
-            val x = margin + 20f + (i * digitBoxWidth)
-            val dRect = RectF(x, currentY, x + digitBoxWidth - 8f, currentY + 90f)
+            val x = margin + 20f + (i * dWidth)
+            val dRect = RectF(x, currentY, x + dWidth - 8f, currentY + 80f)
             canvas.drawRoundRect(dRect, 4f, 4f, thinBorderPaint)
 
-            canvas.drawText(olchiki, x + (digitBoxWidth / 2f) - 4f, currentY + 38f, symbolPaint)
-            canvas.drawText(deva, x + (digitBoxWidth / 2f) - 4f, currentY + 58f, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
-            canvas.drawText(word, x + (digitBoxWidth / 2f) - 4f, currentY + 76f, textPaint.apply { textAlign = Paint.Align.CENTER })
+            canvas.drawText(olchiki, x + (dWidth / 2f) - 4f, currentY + 32f, symbolPaint)
+            canvas.drawText(deva, x + (dWidth / 2f) - 4f, currentY + 50f, boldTextPaint.apply { textAlign = Paint.Align.CENTER })
+            canvas.drawText(word, x + (dWidth / 2f) - 4f, currentY + 68f, textPaint.apply { textAlign = Paint.Align.CENTER })
             boldTextPaint.textAlign = Paint.Align.LEFT
             textPaint.textAlign = Paint.Align.LEFT
         }
 
-        currentY += 115f
+        currentY += 100f
 
-        // 7. Section 3: Word Pairing Exercise (Match the column)
+        // Section 3: Match the Column (चित्र देखकर सही नाम से मिलाओ)
         canvas.drawLine(margin + 10f, currentY, PAGE_WIDTH - margin - 10f, currentY, thinBorderPaint)
+        currentY += 16f
+        canvas.drawText("अभ्यास ३: चित्र पहचान कर सही नाम से मिलान करें (Match Picture to Word)", margin + 15f, currentY, boldTextPaint)
         currentY += 18f
-        canvas.drawText("अभ्यास ३: सही मिलान करें (Match the column)", margin + 15f, currentY, boldTextPaint)
-        currentY += 20f
 
-        val colA = listOf("१. ᱥᱟᱨᱡᱚᱢ (सखुआ)", "२. ᱢᱟᱹᱦᱩᱣᱟᱹ (महुआ)", "३. ᱯᱚᱛᱚᱵ (किताब)", "४. ᱡᱚᱦᱟᱨ (नमस्ते)")
-        val colB = listOf("(   ) Greetings / Johar", "(   ) State Tree / Sal Leaf", "(   ) Indigenous Fruit", "(   ) Classroom Book")
+        val matchPairs = DynamicMotifEngine.generateMatchingColumn(context, MotifCategory.ALL, grade)
+        val scrambled = matchPairs.shuffled()
+        val rowH = 46f
 
-        for (j in colA.indices) {
-            canvas.drawText(colA[j], margin + 30f, currentY + (j * 20f), textPaint)
-            canvas.drawText("○ .............................. ○", centerX - 30f, currentY + (j * 20f), textPaint)
-            canvas.drawText(colB[j], centerX + 80f, currentY + (j * 20f), textPaint)
+        for (i in matchPairs.indices) {
+            val p = matchPairs[i]
+            val s = scrambled[i]
+            val rowY = currentY + (i * (rowH + 10f))
+
+            // Column A: Picture Card
+            val imgRect = RectF(margin + 25f, rowY, margin + 25f + 70f, rowY + rowH)
+            canvas.drawRoundRect(imgRect, 4f, 4f, thinBorderPaint)
+            val bmp = loadAssetBitmap(context, p.motif.assetPath)
+            if (bmp != null) {
+                drawBitmapPreservingAspect(canvas, bmp, RectF(imgRect.left + 4f, imgRect.top + 4f, imgRect.right - 4f, imgRect.bottom - 4f))
+            }
+            // Dot A
+            canvas.drawCircle(margin + 115f, rowY + (rowH / 2f), 4f, Paint().apply { color = Color.BLACK })
+
+            // Dot B
+            canvas.drawCircle(PAGE_WIDTH - margin - 170f, rowY + (rowH / 2f), 4f, Paint().apply { color = Color.BLACK })
+
+            // Column B: Ol Chiki & Hindi Label
+            val labelRect = RectF(PAGE_WIDTH - margin - 155f, rowY, PAGE_WIDTH - margin - 20f, rowY + rowH)
+            canvas.drawRoundRect(labelRect, 4f, 4f, thinBorderPaint)
+            canvas.drawText(s.motif.nameOlchiki, labelRect.left + 10f, rowY + 20f, boldTextPaint)
+            canvas.drawText("${s.motif.nameHi} ${s.motif.phoneticDeva}", labelRect.left + 10f, rowY + 36f, textPaint)
         }
 
-        // 8. Footer Rubric & Signature
-        val footerY = PAGE_HEIGHT - margin - 45f
-        canvas.drawLine(margin + 10f, footerY, PAGE_WIDTH - margin - 10f, footerY, borderPaint)
-
-        canvas.drawText("मूल्यांकन (Rubric):  [ ] उत्कृष्ट (A)   [ ] संतोषजनक (B)   [ ] पुनरावृत्ति (C)", margin + 15f, footerY + 20f, textPaint)
-        canvas.drawText("शिक्षक हस्ताक्षर: ____________________", PAGE_WIDTH - margin - 180f, footerY + 20f, boldTextPaint)
-
-        canvas.drawText("वाणी सेतु (Vaani-Setu) • भाषाई समावेशन मंच • JCERT अनुमोदित शिक्षण सामग्री", centerX, footerY + 36f, subHeaderPaint)
+        // Footer Teacher Evaluation
+        val footerY = PAGE_HEIGHT - margin - 20f
+        canvas.drawLine(margin + 10f, footerY - 10f, PAGE_WIDTH - margin - 10f, footerY - 10f, thinBorderPaint)
+        canvas.drawText("शिक्षक हस्ताक्षर: ____________________", margin + 15f, footerY + 5f, textPaint)
+        canvas.drawText("ग्रेड/मूल्यांकन: [ A ]  [ B ]  [ C ]", PAGE_WIDTH - margin - 160f, footerY + 5f, boldTextPaint)
     }
 
-    private fun drawExerciseCard(
+    private fun drawRealiaCard(
+        context: Context,
         canvas: Canvas,
         x: Float,
         y: Float,
         w: Float,
         h: Float,
-        titleOlChiki: String,
-        subTitleHindi: String,
-        count: Int,
-        isLeaf: Boolean
+        item: MotifItem,
+        count: Int
     ) {
-        val rect = RectF(x, y, x + w, y + h)
-        val borderPaint = Paint().apply {
-            color = Color.BLACK
-            style = Paint.Style.STROKE
-            strokeWidth = 1.5f
-            isAntiAlias = true
+        val thinBorder = Paint().apply { color = Color.GRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 9f; isAntiAlias = true }
+        val boldPaint = Paint().apply { color = Color.BLACK; textSize = 10f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+
+        val cardRect = RectF(x, y, x + w, y + h)
+        canvas.drawRoundRect(cardRect, 6f, 6f, thinBorder)
+
+        // Draw Realia Bitmap
+        val bmp = loadAssetBitmap(context, item.assetPath)
+        val imgRect = RectF(x + 8f, y + 8f, x + w - 8f, y + h - 30f)
+        if (bmp != null) {
+            drawBitmapPreservingAspect(canvas, bmp, imgRect)
         }
 
-        val textPaint = Paint().apply {
-            color = Color.BLACK
-            textSize = 10f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
-            isAntiAlias = true
-        }
+        // Bilingual Label + Count
+        canvas.drawText("${item.nameOlchiki} (${count})", x + 10f, y + h - 16f, boldPaint)
+        canvas.drawText("${item.nameHi}: $count", x + 10f, y + h - 6f, textPaint)
+    }
 
-        val subTextPaint = Paint().apply {
-            color = Color.DKGRAY
-            textSize = 9f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            textAlign = Paint.Align.CENTER
-            isAntiAlias = true
-        }
+    // =========================================================================
+    // Multi-Page Student Workbook Rendering
+    // =========================================================================
 
-        canvas.drawRoundRect(rect, 6f, 6f, borderPaint)
+    private fun renderWorkbookCoverPage(context: Context, canvas: Canvas, grade: Int, isHindi: Boolean, theme: String) {
+        val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2.5f; isAntiAlias = true }
+        val thinBorderPaint = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val titlePaint = Paint().apply { color = Color.rgb(0, 35, 111); textSize = 22f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+        val subTitlePaint = Paint().apply { color = Color.rgb(180, 83, 9); textSize = 14f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+        val boldPaint = Paint().apply { color = Color.BLACK; textSize = 11f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 11f; isAntiAlias = true }
 
-        // Draw items
-        val itemPaint = Paint().apply {
-            color = Color.DKGRAY
-            style = Paint.Style.STROKE
-            strokeWidth = 2f
-            isAntiAlias = true
-        }
+        val margin = 32f
+        canvas.drawRect(margin, margin, PAGE_WIDTH - margin, PAGE_HEIGHT - margin, borderPaint)
+        canvas.drawRect(margin + 5f, margin + 5f, PAGE_WIDTH - margin - 5f, PAGE_HEIGHT - margin - 5f, thinBorderPaint)
 
-        val centerX = x + (w / 2f)
-        val centerY = y + 40f
+        var y = margin + 50f
+        val cx = PAGE_WIDTH / 2f
 
-        if (isLeaf) {
-            // Draw 3 Sal leaves
-            for (k in -1..1) {
-                val lx = centerX + (k * 30f)
-                drawSalLeafVector(canvas, lx, centerY, itemPaint)
+        canvas.drawText("झारखंड शैक्षिक अनुसंधान एवं प्रशिक्षण परिषद (JCERT)", cx, y, boldPaint.apply { textAlign = Paint.Align.CENTER; textSize = 13f })
+        y += 18f
+        canvas.drawText("JCERT RANCHI, JHARKHAND", cx, y, textPaint.apply { textAlign = Paint.Align.CENTER; textSize = 10f })
+        y += 40f
+
+        canvas.drawText("बुनियादी साक्षरता एवं संख्याज्ञान (FLN)", cx, y, titlePaint)
+        y += 24f
+        canvas.drawText("ᱥᱟᱱᱛᱟᱲᱤ ᱟᱨ ᱦᱤᱱᱫᱤ ᱯᱟᱹᱴᱷᱩᱣᱟᱹ ᱠᱟᱹᱢᱤ ᱯᱩᱛᱷᱤ", cx, y, subTitlePaint)
+        y += 18f
+        canvas.drawText("संथाली एवं हिन्दी छात्र अभ्यास कार्यपुस्तिका (Grade $grade)", cx, y, boldPaint.apply { textAlign = Paint.Align.CENTER; textSize = 12f })
+
+        // Hero Motif Illustration: Classroom / Tree
+        y += 30f
+        val heroMotif = FlashcardMotifRepository.getMotifById(context, "motif_school_building")
+            ?: FlashcardMotifRepository.getMotifById(context, "motif_mahua_tree")
+        if (heroMotif != null) {
+            val bmp = loadAssetBitmap(context, heroMotif.assetPath)
+            if (bmp != null) {
+                val heroRect = RectF(cx - 150f, y, cx + 150f, y + 170f)
+                drawBitmapPreservingAspect(canvas, bmp, heroRect)
+                y += 185f
             }
         } else {
-            // Draw 2 Mahua fruits
-            drawMahuaFruitVector(canvas, centerX - 22f, centerY, itemPaint)
-            drawMahuaFruitVector(canvas, centerX + 22f, centerY, itemPaint)
+            y += 140f
         }
 
-        canvas.drawText(titleOlChiki, centerX, y + h - 22f, textPaint)
-        canvas.drawText(subTitleHindi, centerX, y + h - 8f, subTextPaint)
+        // Student Information Card
+        val formRect = RectF(margin + 30f, y, PAGE_WIDTH - margin - 30f, y + 150f)
+        canvas.drawRoundRect(formRect, 8f, 8f, thinBorderPaint)
+
+        boldPaint.textAlign = Paint.Align.LEFT
+        boldPaint.textSize = 11f
+        textPaint.textAlign = Paint.Align.LEFT
+        textPaint.textSize = 11f
+
+        var fy = formRect.top + 28f
+        val fx = formRect.left + 20f
+        canvas.drawText("विद्यार्थी का नाम (Student Name): ____________________________________", fx, fy, textPaint)
+        fy += 26f
+        canvas.drawText("कक्षा (Grade): $grade          क्रमांक (Roll No): ____________", fx, fy, textPaint)
+        fy += 26f
+        canvas.drawText("विद्यालय का नाम (School): __________________________________________", fx, fy, textPaint)
+        fy += 26f
+        canvas.drawText("प्रखंड व जिला (Block & District): ____________________________________", fx, fy, textPaint)
+
+        // Footer Note
+        val footY = PAGE_HEIGHT - margin - 30f
+        canvas.drawText("राष्ट्रीय शिक्षा नीति (NEP 2020) • निपुण भारत मिशन • वाणी-सेतु डिजिटल नवाचार", cx, footY, boldPaint.apply { textAlign = Paint.Align.CENTER; textSize = 9f })
     }
 
-    private fun drawSalLeafVector(canvas: Canvas, cx: Float, cy: Float, paint: Paint) {
-        val path = Path()
-        path.moveTo(cx, cy - 20f)
-        path.quadTo(cx + 12f, cy - 5f, cx, cy + 15f)
-        path.quadTo(cx - 12f, cy - 5f, cx, cy - 20f)
-        canvas.drawPath(path, paint)
-        // Center vein
-        canvas.drawLine(cx, cy - 20f, cx, cy + 22f, paint)
-    }
+    private fun renderWorkbookPage2AlphabetAnimals(context: Context, canvas: Canvas, grade: Int, isHindi: Boolean) {
+        val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2f; isAntiAlias = true }
+        val thinBorder = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val headerPaint = Paint().apply { color = Color.BLACK; textSize = 13f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val boldPaint = Paint().apply { color = Color.BLACK; textSize = 10f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 9f; isAntiAlias = true }
 
-    private fun drawMahuaFruitVector(canvas: Canvas, cx: Float, cy: Float, paint: Paint) {
-        // Fruit body
-        canvas.drawCircle(cx, cy, 14f, paint)
-        // Stem
-        canvas.drawLine(cx, cy - 14f, cx + 4f, cy - 22f, paint)
-        // Inner seed outline
-        canvas.drawCircle(cx, cy, 5f, paint)
-    }
+        val margin = 30f
+        canvas.drawRect(margin, margin, PAGE_WIDTH - margin, PAGE_HEIGHT - margin, borderPaint)
 
-    fun openOrSharePdf(context: Context, pdfFile: File) {
-        try {
-            val uri = FileProvider.getUriForFile(
-                context,
-                "${context.packageName}.fileprovider",
-                pdfFile
-            )
+        var y = margin + 25f
+        canvas.drawText("पाठ १: वन्य जीव व पशु-पक्षी (Animals & Birds Realia)", margin + 15f, y, headerPaint)
+        y += 14f
+        canvas.drawText("ᱪᱤᱛᱟᱹᱨ ᱧᱮᱞ ᱠᱟᱛᱮ ᱧᱩᱛᱩᱢ ᱯᱟᱲᱦᱟᱣ ᱢᱮ ᱟᱨ ᱞᱟᱛᱟᱨ ᱨᱮ ᱚᱞ ᱢᱮ᱾ (चित्र देखकर नाम पढ़ें व लिखें)", margin + 15f, y, textPaint)
+        y += 20f
 
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(uri, "application/pdf")
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val animals = FlashcardMotifRepository.filterMotifs(context, category = MotifCategory.ANIMALS, grade = 1).take(6)
+        val gridCols = 2
+        val colW = (PAGE_WIDTH - (margin * 2) - 30f) / 2f
+        val cardH = 200f
+
+        for (i in animals.indices) {
+            val item = animals[i]
+            val row = i / gridCols
+            val col = i % gridCols
+            val cx = margin + 10f + (col * (colW + 10f))
+            val cy = y + (row * (cardH + 12f))
+
+            val cRect = RectF(cx, cy, cx + colW, cy + cardH)
+            canvas.drawRoundRect(cRect, 6f, 6f, thinBorder)
+
+            // Bitmap
+            val bmp = loadAssetBitmap(context, item.assetPath)
+            if (bmp != null) {
+                val bRect = RectF(cx + 8f, cy + 8f, cx + colW - 8f, cy + cardH - 70f)
+                drawBitmapPreservingAspect(canvas, bmp, bRect)
             }
-            context.startActivity(Intent.createChooser(intent, "कार्यपत्रक PDF खोलें / प्रिंट करें"))
-        } catch (e: Exception) {
-            Log.e(TAG, "Cannot open PDF intent: ${e.message}")
+
+            // Labels
+            val ly = cy + cardH - 52f
+            canvas.drawText(item.nameOlchiki, cx + 12f, ly, boldPaint.apply { textSize = 14f })
+            canvas.drawText("${item.nameHi}  ${item.phoneticDeva}", cx + 12f, ly + 18f, textPaint.apply { textSize = 10f })
+
+            // Tracing Guide Line
+            canvas.drawLine(cx + 12f, cy + cardH - 12f, cx + colW - 12f, cy + cardH - 12f, thinBorder)
         }
+
+        // Page Number
+        canvas.drawText("पृष्ठ २ (Page 2)", PAGE_WIDTH / 2f, PAGE_HEIGHT - margin - 12f, textPaint.apply { textAlign = Paint.Align.CENTER })
+    }
+
+    private fun renderWorkbookPage3DailyLife(context: Context, canvas: Canvas, grade: Int, isHindi: Boolean) {
+        val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2f; isAntiAlias = true }
+        val thinBorder = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val headerPaint = Paint().apply { color = Color.BLACK; textSize = 13f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val boldPaint = Paint().apply { color = Color.BLACK; textSize = 10f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 9f; isAntiAlias = true }
+
+        val margin = 30f
+        canvas.drawRect(margin, margin, PAGE_WIDTH - margin, PAGE_HEIGHT - margin, borderPaint)
+
+        var y = margin + 25f
+        canvas.drawText("पाठ २: हमारा शरीर व दैनिक क्रियाएं (Body Parts & Healthy Habits)", margin + 15f, y, headerPaint)
+        y += 14f
+        canvas.drawText("ᱦᱚᱲᱢᱚ ᱨᱮᱭᱟᱜ ᱦᱟᱹᱴᱤᱧ ᱩᱨᱩᱢ ᱢᱮ ᱟᱨ ᱥᱟᱯᱷᱟ-ᱥᱟᱹᱯᱷᱤ ᱪᱮᱫ ᱢᱮ᱾ (शरीर के अंग पहचानें व स्वच्छता सीखें)", margin + 15f, y, textPaint)
+        y += 20f
+
+        val bodyItems = FlashcardMotifRepository.filterMotifs(context, category = MotifCategory.BODY_PARTS).take(4)
+        val habits = FlashcardMotifRepository.filterMotifs(context, category = MotifCategory.PEOPLE_ACTIONS).take(2)
+        val combined = bodyItems + habits
+
+        val gridCols = 2
+        val colW = (PAGE_WIDTH - (margin * 2) - 30f) / 2f
+        val cardH = 200f
+
+        for (i in combined.indices) {
+            val item = combined[i]
+            val row = i / gridCols
+            val col = i % gridCols
+            val cx = margin + 10f + (col * (colW + 10f))
+            val cy = y + (row * (cardH + 12f))
+
+            val cRect = RectF(cx, cy, cx + colW, cy + cardH)
+            canvas.drawRoundRect(cRect, 6f, 6f, thinBorder)
+
+            val bmp = loadAssetBitmap(context, item.assetPath)
+            if (bmp != null) {
+                val bRect = RectF(cx + 8f, cy + 8f, cx + colW - 8f, cy + cardH - 70f)
+                drawBitmapPreservingAspect(canvas, bmp, bRect)
+            }
+
+            val ly = cy + cardH - 52f
+            canvas.drawText(item.nameOlchiki, cx + 12f, ly, boldPaint.apply { textSize = 14f })
+            canvas.drawText("${item.nameHi}  ${item.phoneticDeva}", cx + 12f, ly + 18f, textPaint.apply { textSize = 10f })
+            canvas.drawLine(cx + 12f, cy + cardH - 12f, cx + colW - 12f, cy + cardH - 12f, thinBorder)
+        }
+
+        canvas.drawText("पृष्ठ ३ (Page 3)", PAGE_WIDTH / 2f, PAGE_HEIGHT - margin - 12f, textPaint.apply { textAlign = Paint.Align.CENTER })
+    }
+
+    private fun renderWorkbookPage4Numeracy(context: Context, canvas: Canvas, grade: Int, isHindi: Boolean) {
+        val borderPaint = Paint().apply { color = Color.BLACK; style = Paint.Style.STROKE; strokeWidth = 2f; isAntiAlias = true }
+        val thinBorder = Paint().apply { color = Color.DKGRAY; style = Paint.Style.STROKE; strokeWidth = 1f; isAntiAlias = true }
+        val headerPaint = Paint().apply { color = Color.BLACK; textSize = 13f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val boldPaint = Paint().apply { color = Color.BLACK; textSize = 10f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); isAntiAlias = true }
+        val textPaint = Paint().apply { color = Color.BLACK; textSize = 9f; isAntiAlias = true }
+        val symbolPaint = Paint().apply { color = Color.BLACK; textSize = 20f; typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textAlign = Paint.Align.CENTER; isAntiAlias = true }
+
+        val margin = 30f
+        canvas.drawRect(margin, margin, PAGE_WIDTH - margin, PAGE_HEIGHT - margin, borderPaint)
+
+        var y = margin + 25f
+        canvas.drawText("पाठ ३: संख्याज्ञान व फल गणना (Counting Realia & Addition 1 to 10)", margin + 15f, y, headerPaint)
+        y += 14f
+        canvas.drawText("ᱩᱞ ᱟᱨ ᱡᱚ ᱞᱮᱠᱷᱟᱭ ᱢᱮ ᱟᱨ ᱮᱞᱠᱷᱟ ᱯᱩᱨᱟᱹᱣ ᱢᱮ᱾ (आम और फलों को गिनें और जोड़ पूरा करें)", margin + 15f, y, textPaint)
+        y += 22f
+
+        // 3 Realia Addition Exercises
+        val exercises = listOf(
+            Triple(2, 3, 5),
+            Triple(3, 4, 7),
+            Triple(4, 5, 9)
+        )
+
+        val mangoItem = FlashcardMotifRepository.getMotifById(context, "motif_mango")
+            ?: FlashcardMotifRepository.getMotifs(context).first()
+        val bananaItem = FlashcardMotifRepository.getMotifById(context, "motif_banana")
+            ?: FlashcardMotifRepository.getMotifs(context).last()
+
+        val exCardH = 175f
+        for (i in exercises.indices) {
+            val (c1, c2, tot) = exercises[i]
+            val ey = y + (i * (exCardH + 15f))
+            val eRect = RectF(margin + 15f, ey, PAGE_WIDTH - margin - 15f, ey + exCardH)
+            canvas.drawRoundRect(eRect, 6f, 6f, thinBorder)
+
+            canvas.drawText("सवाल ${i + 1}:", eRect.left + 15f, ey + 22f, boldPaint)
+
+            // Box 1
+            val b1 = RectF(eRect.left + 25f, ey + 35f, eRect.left + 155f, ey + exCardH - 25f)
+            canvas.drawRoundRect(b1, 4f, 4f, thinBorder)
+            val bmp1 = loadAssetBitmap(context, mangoItem.assetPath)
+            if (bmp1 != null) drawBitmapPreservingAspect(canvas, bmp1, RectF(b1.left + 5f, b1.top + 5f, b1.right - 5f, b1.bottom - 22f))
+            canvas.drawText("${mangoItem.nameOlchiki} : $c1", b1.left + 10f, b1.bottom - 8f, boldPaint)
+
+            // Plus
+            canvas.drawText("+", eRect.left + 175f, ey + 85f, symbolPaint)
+
+            // Box 2
+            val b2 = RectF(eRect.left + 195f, ey + 35f, eRect.left + 325f, ey + exCardH - 25f)
+            canvas.drawRoundRect(b2, 4f, 4f, thinBorder)
+            val bmp2 = loadAssetBitmap(context, bananaItem.assetPath)
+            if (bmp2 != null) drawBitmapPreservingAspect(canvas, bmp2, RectF(b2.left + 5f, b2.top + 5f, b2.right - 5f, b2.bottom - 22f))
+            canvas.drawText("${bananaItem.nameOlchiki} : $c2", b2.left + 10f, b2.bottom - 8f, boldPaint)
+
+            // Equals
+            canvas.drawText("=", eRect.left + 345f, ey + 85f, symbolPaint)
+
+            // Student Answer Box
+            val b3 = RectF(eRect.left + 365f, ey + 45f, eRect.left + 465f, ey + exCardH - 35f)
+            canvas.drawRect(b3, borderPaint)
+            canvas.drawText("?", b3.centerX(), b3.centerY() + 8f, symbolPaint)
+        }
+
+        // Footer evaluation
+        val footerY = PAGE_HEIGHT - margin - 20f
+        canvas.drawText("विद्यार्थी प्रगति मूल्यांकन: [ उत्कृष्ट ]  [ संतोषजनक ]  [ सुधार अपेक्षित ]", margin + 25f, footerY + 5f, boldPaint)
+        canvas.drawText("पृष्ठ ४ (Page 4)", PAGE_WIDTH / 2f, footerY + 14f, textPaint.apply { textAlign = Paint.Align.CENTER })
     }
 }

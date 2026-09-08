@@ -1,0 +1,3467 @@
+[
+  {
+    "id": "motif_ant",
+    "filename": "motif_ant.webp",
+    "asset_path": "images/flashcards/motif_ant.webp",
+    "name_hi": "चींटी",
+    "name_olchiki": "ᱢᱩᱡᱽ",
+    "phonetic_deva": "[मुज]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 28.16,
+    "tags": [
+      "चींटी",
+      "ant",
+      "मुज",
+      "कीट",
+      "छोटे जीव"
+    ],
+    "context_prompts": [
+      "छोटे जीव",
+      "कीट पतंग",
+      "प्रकृति",
+      "परिश्रम"
+    ]
+  },
+  {
+    "id": "motif_back",
+    "filename": "motif_back.webp",
+    "asset_path": "images/flashcards/motif_back.webp",
+    "name_hi": "पीठ",
+    "name_olchiki": "ᱫᱮᱭᱟ",
+    "phonetic_deva": "[देया]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 7.73,
+    "tags": [
+      "पीठ",
+      "back",
+      "देया",
+      "शरीर"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "मानव शरीर"
+    ]
+  },
+  {
+    "id": "motif_banana",
+    "filename": "motif_banana.webp",
+    "asset_path": "images/flashcards/motif_banana.webp",
+    "name_hi": "केला",
+    "name_olchiki": "ᱠᱟᱭᱨᱟ",
+    "phonetic_deva": "[कायरा]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 24.01,
+    "tags": [
+      "केला",
+      "banana",
+      "कायरा",
+      "फल",
+      "पीला केला"
+    ],
+    "context_prompts": [
+      "फल और सब्जियां",
+      "पोषण",
+      "स्वास्थ्य",
+      "मीठे फल"
+    ]
+  },
+  {
+    "id": "motif_bear",
+    "filename": "motif_bear.webp",
+    "asset_path": "images/flashcards/motif_bear.webp",
+    "name_hi": "भालू",
+    "name_olchiki": "ᱵᱟᱱᱟ",
+    "phonetic_deva": "[बाना]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 27.21,
+    "tags": [
+      "भालू",
+      "bear",
+      "बाना",
+      "जंगली जानवर"
+    ],
+    "context_prompts": [
+      "जंगली जानवर",
+      "जंगल के जीव",
+      "वन्य प्राणी"
+    ]
+  },
+  {
+    "id": "motif_ber_fruit",
+    "filename": "motif_ber_fruit.webp",
+    "asset_path": "images/flashcards/motif_ber_fruit.webp",
+    "name_hi": "बेर",
+    "name_olchiki": "ᱡᱟᱱᱩᱢ ᱡᱚ",
+    "phonetic_deva": "[जानुम जो]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.43,
+    "tags": [
+      "बेर",
+      "berry",
+      "जानुम",
+      "फल",
+      "झाड़ी"
+    ],
+    "context_prompts": [
+      "स्थानीय फल",
+      "झारखंड के फल",
+      "जंगली बेर"
+    ]
+  },
+  {
+    "id": "motif_big_small_pots",
+    "filename": "motif_big_small_pots.webp",
+    "asset_path": "images/flashcards/motif_big_small_pots.webp",
+    "name_hi": "बड़ा और छोटा घड़ा",
+    "name_olchiki": "ᱢᱟᱨᱟᱝ ᱟᱨ ᱦᱩᱰᱤᱧ ᱴᱩᱠᱩᱡ",
+    "phonetic_deva": "[मारांग आर हुडिंज टुकुज]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.55,
+    "tags": [
+      "बड़ा छोटा",
+      "तुलना",
+      "बर्तन",
+      "घड़ा",
+      "shapes",
+      "comparison"
+    ],
+    "context_prompts": [
+      "आकार की तुलना",
+      "बड़ा और छोटा",
+      "आकृतियां"
+    ]
+  },
+  {
+    "id": "motif_bird_in_sky",
+    "filename": "motif_bird_in_sky.webp",
+    "asset_path": "images/flashcards/motif_bird_in_sky.webp",
+    "name_hi": "आकाश में पक्षी",
+    "name_olchiki": "ᱥᱮᱨᱢᱟ ᱨᱮ ᱪᱮᱬᱮ",
+    "phonetic_deva": "[सेरमा रे चेणॆ]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 19.98,
+    "tags": [
+      "पक्षी",
+      "चिड़िया",
+      "आकाश",
+      "bird",
+      "उड़ना"
+    ],
+    "context_prompts": [
+      "पक्षी और आकाश",
+      "उड़ने वाले जीव",
+      "नीला आकाश"
+    ]
+  },
+  {
+    "id": "motif_bitter_gourd",
+    "filename": "motif_bitter_gourd.webp",
+    "asset_path": "images/flashcards/motif_bitter_gourd.webp",
+    "name_hi": "करेला",
+    "name_olchiki": "ᱠᱟᱨᱞᱟ",
+    "phonetic_deva": "[कारला]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 41.99,
+    "tags": [
+      "करेला",
+      "bitter gourd",
+      "कारला",
+      "सब्जी"
+    ],
+    "context_prompts": [
+      "सब्जियों के नाम",
+      "स्वाद",
+      "कड़वा"
+    ]
+  },
+  {
+    "id": "motif_blackboard",
+    "filename": "motif_blackboard.webp",
+    "asset_path": "images/flashcards/motif_blackboard.webp",
+    "name_hi": "श्यामपट्ट (ब्लैकबोर्ड)",
+    "name_olchiki": "ᱦᱮᱸᱫᱮ ᱯᱟᱴᱷᱟ",
+    "phonetic_deva": "[हेंदे पाठा]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 20.21,
+    "tags": [
+      "ब्लैकबोर्ड",
+      "श्यामपट्ट",
+      "blackboard",
+      "कक्षा"
+    ],
+    "context_prompts": [
+      "कक्षा की वस्तुएं",
+      "विद्यालय",
+      "पढ़ाई"
+    ]
+  },
+  {
+    "id": "motif_book",
+    "filename": "motif_book.webp",
+    "asset_path": "images/flashcards/motif_book.webp",
+    "name_hi": "पुस्तक / किताब",
+    "name_olchiki": "ᱯᱩᱛᱷᱤ",
+    "phonetic_deva": "[पुथी]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 23.6,
+    "tags": [
+      "किताब",
+      "पुस्तक",
+      "book",
+      "पुथी"
+    ],
+    "context_prompts": [
+      "पढ़ाई लिखाई",
+      "कक्षा",
+      "साक्षरता"
+    ]
+  },
+  {
+    "id": "motif_bottle_gourd",
+    "filename": "motif_bottle_gourd.webp",
+    "asset_path": "images/flashcards/motif_bottle_gourd.webp",
+    "name_hi": "लौकी / कद्दू",
+    "name_olchiki": "ᱦᱚᱛᱚᱫ",
+    "phonetic_deva": "[होतोद]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 16.44,
+    "tags": [
+      "लौकी",
+      "कद्दू",
+      "bottle gourd",
+      "होतोद"
+    ],
+    "context_prompts": [
+      "हरी सब्जियां",
+      "खेती",
+      "पोषण"
+    ]
+  },
+  {
+    "id": "motif_buffalo",
+    "filename": "motif_buffalo.webp",
+    "asset_path": "images/flashcards/motif_buffalo.webp",
+    "name_hi": "भैंस",
+    "name_olchiki": "ᱠᱟᱰᱟ",
+    "phonetic_deva": "[काडा]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 26.02,
+    "tags": [
+      "भैंस",
+      "buffalo",
+      "काडा",
+      "पालतू पशु"
+    ],
+    "context_prompts": [
+      "पालतू पशु",
+      "ग्रामीण जीवन",
+      "दूध"
+    ]
+  },
+  {
+    "id": "motif_butterfly",
+    "filename": "motif_butterfly.webp",
+    "asset_path": "images/flashcards/motif_butterfly.webp",
+    "name_hi": "तितली",
+    "name_olchiki": "ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ",
+    "phonetic_deva": "[पिपिड़ियांग]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 39.35,
+    "tags": [
+      "तितली",
+      "butterfly",
+      "पिपिड़ियांग",
+      "रंग बिरंगी"
+    ],
+    "context_prompts": [
+      "सुंदर कीट",
+      "रंग बिरंगी तितली",
+      "उड़ान"
+    ]
+  },
+  {
+    "id": "motif_butterfly_on_flower",
+    "filename": "motif_butterfly_on_flower.webp",
+    "asset_path": "images/flashcards/motif_butterfly_on_flower.webp",
+    "name_hi": "फूल पर तितली",
+    "name_olchiki": "ᱵᱟᱦᱟ ᱨᱮ ᱯᱤᱯᱤᱲᱤᱭᱟᱹᱝ",
+    "phonetic_deva": "[बाहा रे पिपिड़ियांग]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 24.1,
+    "tags": [
+      "फूल और तितली",
+      "फूल",
+      "baha",
+      "प्रकृति"
+    ],
+    "context_prompts": [
+      "प्रकृति और परिवेश",
+      "फूल",
+      "सुंदर दृश्य"
+    ]
+  },
+  {
+    "id": "motif_calf",
+    "filename": "motif_calf.webp",
+    "asset_path": "images/flashcards/motif_calf.webp",
+    "name_hi": "बछड़ा",
+    "name_olchiki": "ᱫᱟᱢᱲᱟ",
+    "phonetic_deva": "[दामड़ा]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 24.49,
+    "tags": [
+      "बछड़ा",
+      "calf",
+      "दामड़ा",
+      "गाय का बच्चा"
+    ],
+    "context_prompts": [
+      "पशु और उनके बच्चे",
+      "पालतू जीव"
+    ]
+  },
+  {
+    "id": "motif_cat",
+    "filename": "motif_cat.webp",
+    "asset_path": "images/flashcards/motif_cat.webp",
+    "name_hi": "बिल्ली",
+    "name_olchiki": "ᱵᱤᱞᱟᱹᱭ",
+    "phonetic_deva": "[बिलाई]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 17.48,
+    "tags": [
+      "बिल्ली",
+      "cat",
+      "बिलाई",
+      "पुसी"
+    ],
+    "context_prompts": [
+      "पालतू जानवर",
+      "घर के जीव"
+    ]
+  },
+  {
+    "id": "motif_chair",
+    "filename": "motif_chair.webp",
+    "asset_path": "images/flashcards/motif_chair.webp",
+    "name_hi": "कुर्सी",
+    "name_olchiki": "ᱢᱟᱹᱪᱤ",
+    "phonetic_deva": "[माची]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 12.28,
+    "tags": [
+      "कुर्सी",
+      "chair",
+      "माची",
+      "फर्नीचर"
+    ],
+    "context_prompts": [
+      "कक्षा का फर्नीचर",
+      "बैठने की जगह"
+    ]
+  },
+  {
+    "id": "motif_chalk",
+    "filename": "motif_chalk.webp",
+    "asset_path": "images/flashcards/motif_chalk.webp",
+    "name_hi": "खली (चाक)",
+    "name_olchiki": "ᱪᱚᱠ",
+    "phonetic_deva": "[चोक]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 20.7,
+    "tags": [
+      "चाक",
+      "chalk",
+      "लिखना",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "लिखने की सामग्री",
+      "कक्षा",
+      "शिक्षक"
+    ]
+  },
+  {
+    "id": "motif_chest",
+    "filename": "motif_chest.webp",
+    "asset_path": "images/flashcards/motif_chest.webp",
+    "name_hi": "छाती",
+    "name_olchiki": "ᱠᱚᱲᱟᱢ",
+    "phonetic_deva": "[कोड़ाम]",
+    "category": "BODY_PARTS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 14.5,
+    "tags": [
+      "छाती",
+      "chest",
+      "कोड़ाम",
+      "शरीर"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "स्वास्थ्य"
+    ]
+  },
+  {
+    "id": "motif_child_giving_object",
+    "filename": "motif_child_giving_object.webp",
+    "asset_path": "images/flashcards/motif_child_giving_object.webp",
+    "name_hi": "वस्तु देना",
+    "name_olchiki": "ᱡᱤᱱᱤᱥ ᱮᱢ",
+    "phonetic_deva": "[जिनिस एम]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 35.83,
+    "tags": [
+      "देना",
+      "सहयोग",
+      "give object",
+      "मदद"
+    ],
+    "context_prompts": [
+      "सद्गुण और सहयोग",
+      "क्रिया",
+      "सहानुभूति"
+    ]
+  },
+  {
+    "id": "motif_child_listening",
+    "filename": "motif_child_listening.webp",
+    "asset_path": "images/flashcards/motif_child_listening.webp",
+    "name_hi": "ध्यान से सुनना",
+    "name_olchiki": "ᱟᱸᱡᱚᱢ",
+    "phonetic_deva": "[आंजोम]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 20.49,
+    "tags": [
+      "सुनना",
+      "listening",
+      "आंजोम",
+      "ध्यान"
+    ],
+    "context_prompts": [
+      "कक्षा निर्देश",
+      "श्रवण कौशल",
+      "ध्यान"
+    ]
+  },
+  {
+    "id": "motif_child_playing",
+    "filename": "motif_child_playing.webp",
+    "asset_path": "images/flashcards/motif_child_playing.webp",
+    "name_hi": "खेलना",
+    "name_olchiki": "ᱮᱱᱮᱡ",
+    "phonetic_deva": "[एनेज]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 12.72,
+    "tags": [
+      "खेलना",
+      "playing",
+      "एनेज",
+      "खुशी"
+    ],
+    "context_prompts": [
+      "दैनिक क्रियाएं",
+      "आनंद",
+      "बाल सुलभ खेल"
+    ]
+  },
+  {
+    "id": "motif_child_reading",
+    "filename": "motif_child_reading.webp",
+    "asset_path": "images/flashcards/motif_child_reading.webp",
+    "name_hi": "पढ़ना",
+    "name_olchiki": "ᱯᱟᱲᱦᱟᱣ",
+    "phonetic_deva": "[पड़हाव]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 16.76,
+    "tags": [
+      "पढ़ना",
+      "reading",
+      "पड़हाव",
+      "किताब"
+    ],
+    "context_prompts": [
+      "साक्षरता",
+      "पढ़ने की आदत",
+      "विद्या"
+    ]
+  },
+  {
+    "id": "motif_child_showing_object",
+    "filename": "motif_child_showing_object.webp",
+    "asset_path": "images/flashcards/motif_child_showing_object.webp",
+    "name_hi": "वस्तु दिखाना",
+    "name_olchiki": "ᱩᱫᱩᱜ",
+    "phonetic_deva": "[उदुक]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 11.52,
+    "tags": [
+      "दिखाना",
+      "show object",
+      "उदुक",
+      "प्रदर्शन"
+    ],
+    "context_prompts": [
+      "कक्षा गतिविधि",
+      "दिखाना"
+    ]
+  },
+  {
+    "id": "motif_child_sitting",
+    "filename": "motif_child_sitting.webp",
+    "asset_path": "images/flashcards/motif_child_sitting.webp",
+    "name_hi": "बैठना",
+    "name_olchiki": "ᱫᱩᱲᱩᱵ",
+    "phonetic_deva": "[दुड़ुब]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 23.62,
+    "tags": [
+      "बैठना",
+      "sit",
+      "दुड़ुब",
+      "आसन"
+    ],
+    "context_prompts": [
+      "कक्षा अनुशासन",
+      "आसन",
+      "शांति"
+    ]
+  },
+  {
+    "id": "motif_child_speaking",
+    "filename": "motif_child_speaking.webp",
+    "asset_path": "images/flashcards/motif_child_speaking.webp",
+    "name_hi": "बोलना",
+    "name_olchiki": "ᱨᱚᱲ",
+    "phonetic_deva": "[रोड़]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 29.31,
+    "tags": [
+      "बोलना",
+      "speak",
+      "रोड़",
+      "बातचीत"
+    ],
+    "context_prompts": [
+      "मौखिक अभिव्यक्ति",
+      "संवाद",
+      "वार्तालाप"
+    ]
+  },
+  {
+    "id": "motif_child_standing",
+    "filename": "motif_child_standing.webp",
+    "asset_path": "images/flashcards/motif_child_standing.webp",
+    "name_hi": "खड़ा होना",
+    "name_olchiki": "ᱛᱤᱸᱜᱩ",
+    "phonetic_deva": "[तिंगु]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 11.94,
+    "tags": [
+      "खड़ा होना",
+      "stand",
+      "तिंगु",
+      "सावधान"
+    ],
+    "context_prompts": [
+      "कक्षा शिष्टाचार",
+      "खड़ा होना"
+    ]
+  },
+  {
+    "id": "motif_child_writing",
+    "filename": "motif_child_writing.webp",
+    "asset_path": "images/flashcards/motif_child_writing.webp",
+    "name_hi": "लिखना",
+    "name_olchiki": "ᱚᱞ",
+    "phonetic_deva": "[ओल]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 19.94,
+    "tags": [
+      "लिखना",
+      "write",
+      "ओल",
+      "कलम"
+    ],
+    "context_prompts": [
+      "लेखन कौशल",
+      "अभ्यास",
+      "अक्षर ज्ञान"
+    ]
+  },
+  {
+    "id": "motif_children_ball_game",
+    "filename": "motif_children_ball_game.webp",
+    "asset_path": "images/flashcards/motif_children_ball_game.webp",
+    "name_hi": "गेंद का खेल",
+    "name_olchiki": "ᱵᱚᱞ ᱮᱱᱮᱡ",
+    "phonetic_deva": "[बोल एनेज]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 31.91,
+    "tags": [
+      "गेंद खेल",
+      "खेलकूद",
+      "ball game",
+      "साथी"
+    ],
+    "context_prompts": [
+      "खेल और व्यायाम",
+      "मित्रता",
+      "मैदान"
+    ]
+  },
+  {
+    "id": "motif_circle_shape",
+    "filename": "motif_circle_shape.webp",
+    "asset_path": "images/flashcards/motif_circle_shape.webp",
+    "name_hi": "वृत्त (गोल)",
+    "name_olchiki": "ᱜᱩᱞᱟᱹᱭ",
+    "phonetic_deva": "[गुलाई]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 8.72,
+    "tags": [
+      "गोला",
+      "वृत्त",
+      "circle",
+      "गुलाई",
+      "आकार"
+    ],
+    "context_prompts": [
+      "आकृतियां और आकार",
+      "गोल वस्तुएं"
+    ]
+  },
+  {
+    "id": "motif_classroom",
+    "filename": "motif_classroom.webp",
+    "asset_path": "images/flashcards/motif_classroom.webp",
+    "name_hi": "कक्षा कक्ष",
+    "name_olchiki": "ᱪᱟᱱᱟᱪ ᱚᱲᱟᱜ",
+    "phonetic_deva": "[चानाच ओड़ाग]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 65.31,
+    "tags": [
+      "कक्षा कक्ष",
+      "क्लासरूम",
+      "विद्यालय",
+      "कमरा"
+    ],
+    "context_prompts": [
+      "हमारा विद्यालय",
+      "सीखने का स्थान",
+      "कक्षा"
+    ]
+  },
+  {
+    "id": "motif_clay_pot_water",
+    "filename": "motif_clay_pot_water.webp",
+    "asset_path": "images/flashcards/motif_clay_pot_water.webp",
+    "name_hi": "मिट्टी का घड़ा (जल)",
+    "name_olchiki": "ᱦᱟᱥᱟ ᱴᱩᱠᱩᱡ",
+    "phonetic_deva": "[हासा टुकुज]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 20.54,
+    "tags": [
+      "घड़ा",
+      "जल",
+      "पानी",
+      "pot",
+      "शीतल"
+    ],
+    "context_prompts": [
+      "जल संरक्षण",
+      "पारंपरिक वस्तुएं",
+      "पीने का पानी"
+    ]
+  },
+  {
+    "id": "motif_cooked_rice_bowl",
+    "filename": "motif_cooked_rice_bowl.webp",
+    "asset_path": "images/flashcards/motif_cooked_rice_bowl.webp",
+    "name_hi": "भात (पका चावल)",
+    "name_olchiki": "ᱫᱟᱠᱟ",
+    "phonetic_deva": "[दाका]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 37.09,
+    "tags": [
+      "भात",
+      "चावल",
+      "दाल-भात",
+      "daka",
+      "भोजन"
+    ],
+    "context_prompts": [
+      "भोजन",
+      "मध्याह्न भोजन (MDM)",
+      "दैनिक आहार"
+    ]
+  },
+  {
+    "id": "motif_count_mango_01",
+    "filename": "motif_count_mango_01.webp",
+    "asset_path": "images/flashcards/motif_count_mango_01.webp",
+    "name_hi": "१ एक आम",
+    "name_olchiki": "ᱢᱤᱫ ᱩᱞ",
+    "phonetic_deva": "[मिद उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 8.23,
+    "tags": [
+      "एक",
+      "1",
+      "आम",
+      "mid",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 1",
+      "गिनो और लिखो"
+    ]
+  },
+  {
+    "id": "motif_count_mango_02",
+    "filename": "motif_count_mango_02.webp",
+    "asset_path": "images/flashcards/motif_count_mango_02.webp",
+    "name_hi": "२ दो आम",
+    "name_olchiki": "ᱵᱟᱨ ᱩᱞ",
+    "phonetic_deva": "[बार उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 15.78,
+    "tags": [
+      "दो",
+      "2",
+      "आम",
+      "bar",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 2",
+      "जोड़ा"
+    ]
+  },
+  {
+    "id": "motif_count_mango_03",
+    "filename": "motif_count_mango_03.webp",
+    "asset_path": "images/flashcards/motif_count_mango_03.webp",
+    "name_hi": "३ तीन आम",
+    "name_olchiki": "ᱯᱮ ᱩᱞ",
+    "phonetic_deva": "[पे उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 16.04,
+    "tags": [
+      "तीन",
+      "3",
+      "आम",
+      "pe",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 3"
+    ]
+  },
+  {
+    "id": "motif_count_mango_04",
+    "filename": "motif_count_mango_04.webp",
+    "asset_path": "images/flashcards/motif_count_mango_04.webp",
+    "name_hi": "४ चार आम",
+    "name_olchiki": "ᱯᱳᱱ ᱩᱞ",
+    "phonetic_deva": "[पोन उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.0,
+    "compressed_size_kb": 48.98,
+    "tags": [
+      "चार",
+      "4",
+      "आम",
+      "pon",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 4"
+    ]
+  },
+  {
+    "id": "motif_count_mango_05",
+    "filename": "motif_count_mango_05.webp",
+    "asset_path": "images/flashcards/motif_count_mango_05.webp",
+    "name_hi": "५ पाँच आम",
+    "name_olchiki": "ᱢᱚᱬᱮ ᱩᱞ",
+    "phonetic_deva": "[मोणे उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 19.89,
+    "tags": [
+      "पाँच",
+      "5",
+      "आम",
+      "more",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 5",
+      "हाथ की उंगलियां"
+    ]
+  },
+  {
+    "id": "motif_count_mango_06",
+    "filename": "motif_count_mango_06.webp",
+    "asset_path": "images/flashcards/motif_count_mango_06.webp",
+    "name_hi": "६ छह आम",
+    "name_olchiki": "ᱛᱩᱨᱩᱭ ᱩᱞ",
+    "phonetic_deva": "[तुरुय उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.5,
+    "compressed_size_kb": 46.23,
+    "tags": [
+      "छह",
+      "6",
+      "आम",
+      "turui",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 6"
+    ]
+  },
+  {
+    "id": "motif_count_mango_07",
+    "filename": "motif_count_mango_07.webp",
+    "asset_path": "images/flashcards/motif_count_mango_07.webp",
+    "name_hi": "७ सात आम",
+    "name_olchiki": "ᱮᱭᱟᱭ ᱩᱞ",
+    "phonetic_deva": "[एयाय उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.5,
+    "compressed_size_kb": 48.18,
+    "tags": [
+      "सात",
+      "7",
+      "आम",
+      "eyay",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 7",
+      "सप्ताह के दिन"
+    ]
+  },
+  {
+    "id": "motif_count_mango_08",
+    "filename": "motif_count_mango_08.webp",
+    "asset_path": "images/flashcards/motif_count_mango_08.webp",
+    "name_hi": "८ आठ आम",
+    "name_olchiki": "ᱤᱨᱟᱹᱞ ᱩᱞ",
+    "phonetic_deva": "[इरल उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.5,
+    "compressed_size_kb": 56.14,
+    "tags": [
+      "आठ",
+      "8",
+      "आम",
+      "iral",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 8"
+    ]
+  },
+  {
+    "id": "motif_count_mango_09",
+    "filename": "motif_count_mango_09.webp",
+    "asset_path": "images/flashcards/motif_count_mango_09.webp",
+    "name_hi": "९ नौ आम",
+    "name_olchiki": "ᱟᱨᱮ ᱩᱞ",
+    "phonetic_deva": "[आरे उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.0,
+    "compressed_size_kb": 75.79,
+    "tags": [
+      "नौ",
+      "9",
+      "आम",
+      "are",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 9"
+    ]
+  },
+  {
+    "id": "motif_count_mango_10",
+    "filename": "motif_count_mango_10.webp",
+    "asset_path": "images/flashcards/motif_count_mango_10.webp",
+    "name_hi": "१० दस आम",
+    "name_olchiki": "ᱜᱮᱞ ᱩᱞ",
+    "phonetic_deva": "[गेल उल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 2.0,
+    "compressed_size_kb": 50.85,
+    "tags": [
+      "दस",
+      "10",
+      "आम",
+      "gel",
+      "गिनती"
+    ],
+    "context_prompts": [
+      "संख्याज्ञान १ से १०",
+      "गिनती 10",
+      "दहाई"
+    ]
+  },
+  {
+    "id": "motif_cow",
+    "filename": "motif_cow.webp",
+    "asset_path": "images/flashcards/motif_cow.webp",
+    "name_hi": "गाय",
+    "name_olchiki": "ᱜᱟᱹᱭ",
+    "phonetic_deva": "[गाई]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 29.73,
+    "tags": [
+      "गाय",
+      "cow",
+      "गाई",
+      "पशु",
+      "दूध"
+    ],
+    "context_prompts": [
+      "पालतू पशु",
+      "दुधारू पशु",
+      "गौ माता"
+    ]
+  },
+  {
+    "id": "motif_crow",
+    "filename": "motif_crow.webp",
+    "asset_path": "images/flashcards/motif_crow.webp",
+    "name_hi": "कौआ",
+    "name_olchiki": "ᱠᱟᱦᱩ",
+    "phonetic_deva": "[काहु]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 28.81,
+    "tags": [
+      "कौआ",
+      "crow",
+      "काहु",
+      "पक्षी",
+      "काला"
+    ],
+    "context_prompts": [
+      "हमारे आसपास के पक्षी",
+      "चतुर कौआ"
+    ]
+  },
+  {
+    "id": "motif_cucumber",
+    "filename": "motif_cucumber.webp",
+    "asset_path": "images/flashcards/motif_cucumber.webp",
+    "name_hi": "खीरा",
+    "name_olchiki": "ᱛᱟᱹᱦᱤᱧ",
+    "phonetic_deva": "[ताहिंज]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.5,
+    "compressed_size_kb": 25.81,
+    "tags": [
+      "खीरा",
+      "cucumber",
+      "ताहिंज",
+      "सलाद"
+    ],
+    "context_prompts": [
+      "हरी सब्जियां",
+      "सलाद",
+      "शीतल"
+    ]
+  },
+  {
+    "id": "motif_deer",
+    "filename": "motif_deer.webp",
+    "asset_path": "images/flashcards/motif_deer.webp",
+    "name_hi": "हिरण",
+    "name_olchiki": "ᱡᱷᱟᱝᱠᱟᱨ",
+    "phonetic_deva": "[झांकार]",
+    "category": "ANIMALS",
+    "grade": 2,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 16.54,
+    "tags": [
+      "हिरण",
+      "deer",
+      "झांकार",
+      "तेज दौड़ना"
+    ],
+    "context_prompts": [
+      "जंगली जानवर",
+      "वन्य जीव",
+      "सुंदर जीव"
+    ]
+  },
+  {
+    "id": "motif_doctor_child",
+    "filename": "motif_doctor_child.webp",
+    "asset_path": "images/flashcards/motif_doctor_child.webp",
+    "name_hi": "बाल चिकित्सक (डॉक्टर)",
+    "name_olchiki": "ᱰᱟᱠᱛᱚᱨ ᱜᱤᱫᱽᱨᱟᱹ",
+    "phonetic_deva": "[डाकतर गिदरा]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 32.39,
+    "tags": [
+      "चिकित्सक",
+      "डॉक्टर",
+      "doctor",
+      "इलाज"
+    ],
+    "context_prompts": [
+      "हमारे सहायक",
+      "व्यवसाय",
+      "स्वास्थ्य"
+    ]
+  },
+  {
+    "id": "motif_dog",
+    "filename": "motif_dog.webp",
+    "asset_path": "images/flashcards/motif_dog.webp",
+    "name_hi": "कुत्ता",
+    "name_olchiki": "ᱥᱮᱛᱟ",
+    "phonetic_deva": "[सेता]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 18.64,
+    "tags": [
+      "कुत्ता",
+      "dog",
+      "सेता",
+      "वफादार"
+    ],
+    "context_prompts": [
+      "पालतू जानवर",
+      "वफादार जीव",
+      "घर की रखवाली"
+    ]
+  },
+  {
+    "id": "motif_dry_leaves_pile",
+    "filename": "motif_dry_leaves_pile.webp",
+    "asset_path": "images/flashcards/motif_dry_leaves_pile.webp",
+    "name_hi": "सूखे पत्तों का ढेर",
+    "name_olchiki": "ᱨᱚᱦᱚᱲ ᱥᱟᱠᱟᱢ",
+    "phonetic_deva": "[रोहोड़ साकाम]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 38.3,
+    "tags": [
+      "सूखे पत्ते",
+      "पतझड़",
+      "sakam",
+      "पत्ते"
+    ],
+    "context_prompts": [
+      "प्रकृति और ऋतुएं",
+      "पतझड़",
+      "जंगल"
+    ]
+  },
+  {
+    "id": "motif_duck",
+    "filename": "motif_duck.webp",
+    "asset_path": "images/flashcards/motif_duck.webp",
+    "name_hi": "बत्तख",
+    "name_olchiki": "ᱜᱮᱰᱮ",
+    "phonetic_deva": "[गेडे]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 26.97,
+    "tags": [
+      "बत्तख",
+      "duck",
+      "गेडे",
+      "तैरना"
+    ],
+    "context_prompts": [
+      "जलचर पक्षी",
+      "तालाब",
+      "तैरने वाले पक्षी"
+    ]
+  },
+  {
+    "id": "motif_ears",
+    "filename": "motif_ears.webp",
+    "asset_path": "images/flashcards/motif_ears.webp",
+    "name_hi": "कान",
+    "name_olchiki": "ᱞᱩᱛᱩᱨ",
+    "phonetic_deva": "[लुतुर]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 14.59,
+    "tags": [
+      "कान",
+      "ear",
+      "लुतुर",
+      "सुनना"
+    ],
+    "context_prompts": [
+      "ज्ञानेंद्रियां",
+      "शरीर के अंग",
+      "सुनने की शक्ति"
+    ]
+  },
+  {
+    "id": "motif_eggplant",
+    "filename": "motif_eggplant.webp",
+    "asset_path": "images/flashcards/motif_eggplant.webp",
+    "name_hi": "बैंगन",
+    "name_olchiki": "ᱵᱮᱸᱜᱟᱲ",
+    "phonetic_deva": "[बेंगाड़]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 19.18,
+    "tags": [
+      "बैंगन",
+      "eggplant",
+      "बेंगाड़",
+      "सब्जी"
+    ],
+    "context_prompts": [
+      "सब्जियों के नाम",
+      "रसोई"
+    ]
+  },
+  {
+    "id": "motif_elephant",
+    "filename": "motif_elephant.webp",
+    "asset_path": "images/flashcards/motif_elephant.webp",
+    "name_hi": "हाथी",
+    "name_olchiki": "ᱦᱟᱹᱛᱤ",
+    "phonetic_deva": "[हाती]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 24.17,
+    "tags": [
+      "हाथी",
+      "elephant",
+      "हाती",
+      "विशाल"
+    ],
+    "context_prompts": [
+      "विशाल वन्य जीव",
+      "जंगल",
+      "झारखंड का राजकीय पशु"
+    ]
+  },
+  {
+    "id": "motif_eyes",
+    "filename": "motif_eyes.webp",
+    "asset_path": "images/flashcards/motif_eyes.webp",
+    "name_hi": "आँखें",
+    "name_olchiki": "ᱢᱮᱫ",
+    "phonetic_deva": "[मेद]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.0,
+    "compressed_size_kb": 44.0,
+    "tags": [
+      "आँख",
+      "eye",
+      "मेद",
+      "देखना"
+    ],
+    "context_prompts": [
+      "ज्ञानेंद्रियां",
+      "शरीर के अंग",
+      "दृष्टि"
+    ]
+  },
+  {
+    "id": "motif_farmer_field",
+    "filename": "motif_farmer_field.webp",
+    "asset_path": "images/flashcards/motif_farmer_field.webp",
+    "name_hi": "किसान (खेत)",
+    "name_olchiki": "ᱪᱟᱹᱥᱤ",
+    "phonetic_deva": "[चासी]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 0.8333,
+    "compressed_size_kb": 61.56,
+    "tags": [
+      "किसान",
+      "खेत",
+      "farmer",
+      "chasi",
+      "मेहनत"
+    ],
+    "context_prompts": [
+      "अन्नदाता",
+      "खेती किसानी",
+      "हमारा गांव"
+    ]
+  },
+  {
+    "id": "motif_feet",
+    "filename": "motif_feet.webp",
+    "asset_path": "images/flashcards/motif_feet.webp",
+    "name_hi": "पैर",
+    "name_olchiki": "ᱡᱟᱸᱜᱟ",
+    "phonetic_deva": "[जांगा]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 35.62,
+    "tags": [
+      "पैर",
+      "feet",
+      "जांगा",
+      "चलना"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "चलना",
+      "दौड़ना"
+    ]
+  },
+  {
+    "id": "motif_finger",
+    "filename": "motif_finger.webp",
+    "asset_path": "images/flashcards/motif_finger.webp",
+    "name_hi": "उँगली",
+    "name_olchiki": "ᱠᱟᱹᱴᱩᱵ",
+    "phonetic_deva": "[काटुब]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 8.92,
+    "tags": [
+      "उँगली",
+      "finger",
+      "काटुब",
+      "हाथ"
+    ],
+    "context_prompts": [
+      "हाथ की उँगलियाँ",
+      "गिनती",
+      "इशारा"
+    ]
+  },
+  {
+    "id": "motif_fingernails",
+    "filename": "motif_fingernails.webp",
+    "asset_path": "images/flashcards/motif_fingernails.webp",
+    "name_hi": "नाखून",
+    "name_olchiki": "ᱨᱟᱢᱟ",
+    "phonetic_deva": "[रामा]",
+    "category": "BODY_PARTS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 15.76,
+    "tags": [
+      "नाखून",
+      "nails",
+      "रामा",
+      "सफाई"
+    ],
+    "context_prompts": [
+      "स्वच्छता और स्वास्थ्य",
+      "नाखून काटना"
+    ]
+  },
+  {
+    "id": "motif_fish",
+    "filename": "motif_fish.webp",
+    "asset_path": "images/flashcards/motif_fish.webp",
+    "name_hi": "मछली",
+    "name_olchiki": "ᱦᱟᱠᱳ",
+    "phonetic_deva": "[हाको]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 25.99,
+    "tags": [
+      "मछली",
+      "fish",
+      "हाको",
+      "जलचर"
+    ],
+    "context_prompts": [
+      "जलीय जीव",
+      "तालाब",
+      "जल ही जीवन है"
+    ]
+  },
+  {
+    "id": "motif_fish_pond",
+    "filename": "motif_fish_pond.webp",
+    "asset_path": "images/flashcards/motif_fish_pond.webp",
+    "name_hi": "मछली का तालाब",
+    "name_olchiki": "ᱦᱟᱠᱳ ᱯᱩᱠᱷᱨᱤ",
+    "phonetic_deva": "[हाको पुखरी]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 30.94,
+    "tags": [
+      "तालाब",
+      "pond",
+      "मछली",
+      "पानी"
+    ],
+    "context_prompts": [
+      "जलस्रोत",
+      "गांव का परिवेश",
+      "तालाब"
+    ]
+  },
+  {
+    "id": "motif_frog",
+    "filename": "motif_frog.webp",
+    "asset_path": "images/flashcards/motif_frog.webp",
+    "name_hi": "मेंढक",
+    "name_olchiki": "ᱨᱳᱴᱮ",
+    "phonetic_deva": "[रोटे]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 24.27,
+    "tags": [
+      "मेंढक",
+      "frog",
+      "रोटे",
+      "फुदकना"
+    ],
+    "context_prompts": [
+      "वर्षा ऋतु के जीव",
+      "तालाब के किनारे"
+    ]
+  },
+  {
+    "id": "motif_garlic",
+    "filename": "motif_garlic.webp",
+    "asset_path": "images/flashcards/motif_garlic.webp",
+    "name_hi": "लहसुन",
+    "name_olchiki": "ᱨᱟᱹᱥᱩᱬ",
+    "phonetic_deva": "[रासुण]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 35.39,
+    "tags": [
+      "लहसुन",
+      "garlic",
+      "रासुण",
+      "मसाले"
+    ],
+    "context_prompts": [
+      "रसोई और मसाले",
+      "स्वास्थ्य"
+    ]
+  },
+  {
+    "id": "motif_ginger",
+    "filename": "motif_ginger.webp",
+    "asset_path": "images/flashcards/motif_ginger.webp",
+    "name_hi": "अदरक",
+    "name_olchiki": "ᱟᱫᱟ",
+    "phonetic_deva": "[आदा]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 36.58,
+    "tags": [
+      "अदरक",
+      "ginger",
+      "आदा",
+      "मसाला"
+    ],
+    "context_prompts": [
+      "रसोई और औषधि",
+      "घरेलू नुस्खे"
+    ]
+  },
+  {
+    "id": "motif_girls_playing",
+    "filename": "motif_girls_playing.webp",
+    "asset_path": "images/flashcards/motif_girls_playing.webp",
+    "name_hi": "बालिकाओं का खेल",
+    "name_olchiki": "ᱠᱩᱲᱤ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ ᱮᱱᱮᱡ",
+    "phonetic_deva": "[कुड़ी गिदरा को एनेज]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 36.58,
+    "tags": [
+      "बालिकाएं",
+      "खेल",
+      "साथी",
+      "girls"
+    ],
+    "context_prompts": [
+      "मित्रता और खेल",
+      "लड़कियों की शिक्षा"
+    ]
+  },
+  {
+    "id": "motif_goat",
+    "filename": "motif_goat.webp",
+    "asset_path": "images/flashcards/motif_goat.webp",
+    "name_hi": "बकरी",
+    "name_olchiki": "ᱢᱮᱨᱚᱢ",
+    "phonetic_deva": "[मेरोम]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 19.51,
+    "tags": [
+      "बकरी",
+      "goat",
+      "मेरोम",
+      "घास"
+    ],
+    "context_prompts": [
+      "पालतू पशु",
+      "घरेलू जीव",
+      "गांव"
+    ]
+  },
+  {
+    "id": "motif_grandparent_story",
+    "filename": "motif_grandparent_story.webp",
+    "asset_path": "images/flashcards/motif_grandparent_story.webp",
+    "name_hi": "दादा-दादी की कहानी",
+    "name_olchiki": "ᱦᱟᱲᱟᱢ ᱵᱩᱰᱷᱤ ᱠᱟᱹᱦᱱᱤ",
+    "phonetic_deva": "[हाड़ाम बुढी काहनी]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 48.68,
+    "tags": [
+      "कहानी",
+      "दादा-दादी",
+      "story",
+      "संस्कार"
+    ],
+    "context_prompts": [
+      "परिवार और संस्कार",
+      "कहानी सुनना",
+      "बुजुर्गों का आदर"
+    ]
+  },
+  {
+    "id": "motif_green_chilli",
+    "filename": "motif_green_chilli.webp",
+    "asset_path": "images/flashcards/motif_green_chilli.webp",
+    "name_hi": "हरी मिर्च",
+    "name_olchiki": "ᱵᱮᱨᱮᱞ ᱢᱟᱹᱨᱤᱪ",
+    "phonetic_deva": "[बेरेल मारीच]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 24.08,
+    "tags": [
+      "मिर्च",
+      "chilli",
+      "मारीच",
+      "तीखा"
+    ],
+    "context_prompts": [
+      "सब्जियां और स्वाद",
+      "तीखा स्वाद"
+    ]
+  },
+  {
+    "id": "motif_green_sal_leaf",
+    "filename": "motif_green_sal_leaf.webp",
+    "asset_path": "images/flashcards/motif_green_sal_leaf.webp",
+    "name_hi": "हरा सखुआ (साल) पत्ता",
+    "name_olchiki": "ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱥᱟᱨᱡᱚᱢ ᱥᱟᱠᱟᱢ",
+    "phonetic_deva": "[हरियाड़ सारजोम साकाम]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 20.65,
+    "tags": [
+      "साल पत्ता",
+      "सखुआ",
+      "sal leaf",
+      "सारजोम",
+      "पवित्र"
+    ],
+    "context_prompts": [
+      "झारखंड का राजकीय वृक्ष",
+      "संस्कृति",
+      "सरहुल"
+    ]
+  },
+  {
+    "id": "motif_guava",
+    "filename": "motif_guava.webp",
+    "asset_path": "images/flashcards/motif_guava.webp",
+    "name_hi": "अमरूद",
+    "name_olchiki": "ᱟᱢᱨᱩᱫᱽ",
+    "phonetic_deva": "[अमरुद]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 9.99,
+    "tags": [
+      "अमरूद",
+      "guava",
+      "फल",
+      "मीठा"
+    ],
+    "context_prompts": [
+      "मौसमी फल",
+      "विटामिन",
+      "बाग"
+    ]
+  },
+  {
+    "id": "motif_hair",
+    "filename": "motif_hair.webp",
+    "asset_path": "images/flashcards/motif_hair.webp",
+    "name_hi": "बाल",
+    "name_olchiki": "ᱩᱵ",
+    "phonetic_deva": "[उब]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 26.0,
+    "tags": [
+      "बाल",
+      "hair",
+      "उब",
+      "सिर"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "सफाई",
+      "कंघी"
+    ]
+  },
+  {
+    "id": "motif_hand_washing",
+    "filename": "motif_hand_washing.webp",
+    "asset_path": "images/flashcards/motif_hand_washing.webp",
+    "name_hi": "हाथ धोना",
+    "name_olchiki": "ᱛᱤ ᱟᱹᱨᱩᱵ",
+    "phonetic_deva": "[ती आरुब]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 15.91,
+    "tags": [
+      "हाथ धोना",
+      "hand wash",
+      "स्वच्छता",
+      "साबुन"
+    ],
+    "context_prompts": [
+      "स्वास्थ्य और स्वच्छता",
+      "भोजन से पहले",
+      "बीमारी से बचाव"
+    ]
+  },
+  {
+    "id": "motif_hands",
+    "filename": "motif_hands.webp",
+    "asset_path": "images/flashcards/motif_hands.webp",
+    "name_hi": "हाथ",
+    "name_olchiki": "ᱛᱤ",
+    "phonetic_deva": "[ती]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 21.21,
+    "tags": [
+      "हाथ",
+      "hands",
+      "ती",
+      "काम करना"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "हाथ धोना",
+      "कर्म"
+    ]
+  },
+  {
+    "id": "motif_head",
+    "filename": "motif_head.webp",
+    "asset_path": "images/flashcards/motif_head.webp",
+    "name_hi": "सिर",
+    "name_olchiki": "ᱵᱚᱦᱚᱜ",
+    "phonetic_deva": "[बोहोक]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 19.62,
+    "tags": [
+      "सिर",
+      "head",
+      "बोहोक",
+      "मस्तिष्क"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "सोचना"
+    ]
+  },
+  {
+    "id": "motif_heavy_light_objects",
+    "filename": "motif_heavy_light_objects.webp",
+    "asset_path": "images/flashcards/motif_heavy_light_objects.webp",
+    "name_hi": "भारी और हल्का",
+    "name_olchiki": "ᱦᱟᱢᱟᱞ ᱟᱨ ᱨᱟᱣᱟᱞ",
+    "phonetic_deva": "[हामाल आर रावाल]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 23.28,
+    "tags": [
+      "भारी",
+      "हल्का",
+      "वजन",
+      "heavy light",
+      "तुलना"
+    ],
+    "context_prompts": [
+      "माप और तुलना",
+      "वजन",
+      "भौतिक समझ"
+    ]
+  },
+  {
+    "id": "motif_hen",
+    "filename": "motif_hen.webp",
+    "asset_path": "images/flashcards/motif_hen.webp",
+    "name_hi": "मुर्गी",
+    "name_olchiki": "ᱥᱤᱢ",
+    "phonetic_deva": "[सीम]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 16.39,
+    "tags": [
+      "मुर्गी",
+      "hen",
+      "सीम",
+      "पक्षी"
+    ],
+    "context_prompts": [
+      "घरेलू पक्षी",
+      "अंडे"
+    ]
+  },
+  {
+    "id": "motif_honeybee",
+    "filename": "motif_honeybee.webp",
+    "asset_path": "images/flashcards/motif_honeybee.webp",
+    "name_hi": "मधुमक्खी",
+    "name_olchiki": "ᱧᱮᱞᱮ",
+    "phonetic_deva": "[ञेले]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 31.01,
+    "tags": [
+      "मधुमक्खी",
+      "honeybee",
+      "ञेले",
+      "शहद"
+    ],
+    "context_prompts": [
+      "उपयोगी कीट",
+      "शहद",
+      "फूलों का रस"
+    ]
+  },
+  {
+    "id": "motif_honeycomb",
+    "filename": "motif_honeycomb.webp",
+    "asset_path": "images/flashcards/motif_honeycomb.webp",
+    "name_hi": "मधुमक्खी का छत्ता",
+    "name_olchiki": "ᱧᱮᱞᱮ ᱪᱷᱟᱛᱟ",
+    "phonetic_deva": "[ञेले छाता]",
+    "category": "NATURE",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 26.46,
+    "tags": [
+      "छत्ता",
+      "honeycomb",
+      "शहद",
+      "मोम"
+    ],
+    "context_prompts": [
+      "प्रकृति के अजूबे",
+      "जंगल"
+    ]
+  },
+  {
+    "id": "motif_horse",
+    "filename": "motif_horse.webp",
+    "asset_path": "images/flashcards/motif_horse.webp",
+    "name_hi": "घोड़ा",
+    "name_olchiki": "ᱥᱟᱫᱚᱢ",
+    "phonetic_deva": "[सादोम]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 19.85,
+    "tags": [
+      "घोड़ा",
+      "horse",
+      "सादोम",
+      "सवारी"
+    ],
+    "context_prompts": [
+      "पशु",
+      "सवारी",
+      "तेज दौड़"
+    ]
+  },
+  {
+    "id": "motif_housefly",
+    "filename": "motif_housefly.webp",
+    "asset_path": "images/flashcards/motif_housefly.webp",
+    "name_hi": "मक्खी",
+    "name_olchiki": "ᱨᱳ",
+    "phonetic_deva": "[रो]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 27.88,
+    "tags": [
+      "मक्खी",
+      "housefly",
+      "रो",
+      "कीट"
+    ],
+    "context_prompts": [
+      "कीट पतंग",
+      "रोग और सफाई",
+      "भोजन को ढंकना"
+    ]
+  },
+  {
+    "id": "motif_jackfruit",
+    "filename": "motif_jackfruit.webp",
+    "asset_path": "images/flashcards/motif_jackfruit.webp",
+    "name_hi": "कटहल",
+    "name_olchiki": "ᱠᱟᱱᱴᱷᱟᱲ",
+    "phonetic_deva": "[कांठाड़]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 37.45,
+    "tags": [
+      "कटहल",
+      "jackfruit",
+      "कांठाड़",
+      "सब्जी"
+    ],
+    "context_prompts": [
+      "झारखंड का फल",
+      "सब्जी",
+      "बड़ा फल"
+    ]
+  },
+  {
+    "id": "motif_jaggery_piece",
+    "filename": "motif_jaggery_piece.webp",
+    "asset_path": "images/flashcards/motif_jaggery_piece.webp",
+    "name_hi": "गुड़ का टुकड़ा",
+    "name_olchiki": "ᱜᱩᱲ",
+    "phonetic_deva": "[गुड़]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.65,
+    "tags": [
+      "गुड़",
+      "jaggery",
+      "मीठा",
+      "गन्ना"
+    ],
+    "context_prompts": [
+      "पारंपरिक आहार",
+      "ऊर्जा",
+      "स्वास्थ्य"
+    ]
+  },
+  {
+    "id": "motif_jamun",
+    "filename": "motif_jamun.webp",
+    "asset_path": "images/flashcards/motif_jamun.webp",
+    "name_hi": "जामुन",
+    "name_olchiki": "ᱠᱩᱫᱽ",
+    "phonetic_deva": "[कुद]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 12.89,
+    "tags": [
+      "जामुन",
+      "jamun",
+      "कुद",
+      "फल",
+      "बैंगनी"
+    ],
+    "context_prompts": [
+      "जंगली फल",
+      "वनोपज",
+      "वर्षा ऋतु"
+    ]
+  },
+  {
+    "id": "motif_leafy_greens",
+    "filename": "motif_leafy_greens.webp",
+    "asset_path": "images/flashcards/motif_leafy_greens.webp",
+    "name_hi": "हरी साग",
+    "name_olchiki": "ᱟᱲᱟᱜ",
+    "phonetic_deva": "[आड़ाक]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 51.18,
+    "tags": [
+      "साग",
+      "greens",
+      "आड़ाक",
+      "पत्तेदार"
+    ],
+    "context_prompts": [
+      "पारंपरिक साग",
+      "स्वास्थ्य",
+      "हरी सब्जियां"
+    ]
+  },
+  {
+    "id": "motif_lentil_bowl",
+    "filename": "motif_lentil_bowl.webp",
+    "asset_path": "images/flashcards/motif_lentil_bowl.webp",
+    "name_hi": "दाल की कटोरी",
+    "name_olchiki": "ᱫᱟᱹᱞ",
+    "phonetic_deva": "[दाल]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 21.44,
+    "tags": [
+      "दाल",
+      "lentil",
+      "दाल",
+      "कटोरी"
+    ],
+    "context_prompts": [
+      "पौष्टिक भोजन",
+      "दाल-भात",
+      "प्रोटीन"
+    ]
+  },
+  {
+    "id": "motif_long_short_rope",
+    "filename": "motif_long_short_rope.webp",
+    "asset_path": "images/flashcards/motif_long_short_rope.webp",
+    "name_hi": "लंबी और छोटी रस्सी",
+    "name_olchiki": "ᱡᱤᱞᱤᱧ ᱟᱨ ᱠᱷᱟᱴᱚ ᱵᱟᱵᱮᱨ",
+    "phonetic_deva": "[जिलिंज आर खाटो बाबेर]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.8,
+    "tags": [
+      "लंबा छोटा",
+      "रस्सी",
+      "लंबाई",
+      "long short",
+      "तुलना"
+    ],
+    "context_prompts": [
+      "माप और तुलना",
+      "लंबाई",
+      "आकार"
+    ]
+  },
+  {
+    "id": "motif_mahua_fruit",
+    "filename": "motif_mahua_fruit.webp",
+    "asset_path": "images/flashcards/motif_mahua_fruit.webp",
+    "name_hi": "महुआ फल",
+    "name_olchiki": "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱡᱚ",
+    "phonetic_deva": "[माहुवा जो]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 18.39,
+    "tags": [
+      "महुआ",
+      "mahua",
+      "फल",
+      "पेड़"
+    ],
+    "context_prompts": [
+      "संथाली संस्कृति",
+      "वनोपज",
+      "महुआ फल"
+    ]
+  },
+  {
+    "id": "motif_mahua_tree",
+    "filename": "motif_mahua_tree.webp",
+    "asset_path": "images/flashcards/motif_mahua_tree.webp",
+    "name_hi": "महुआ का पेड़",
+    "name_olchiki": "ᱢᱟᱹᱦᱩᱣᱟᱹ ᱫᱟᱨᱮ",
+    "phonetic_deva": "[माहुवा दारे]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 45.74,
+    "tags": [
+      "महुआ पेड़",
+      "वृक्ष",
+      "dare",
+      "छांव"
+    ],
+    "context_prompts": [
+      "पेड़-पौधे",
+      "हमारा पर्यावरण",
+      "पवित्र वृक्ष"
+    ]
+  },
+  {
+    "id": "motif_mango",
+    "filename": "motif_mango.webp",
+    "asset_path": "images/flashcards/motif_mango.webp",
+    "name_hi": "आम",
+    "name_olchiki": "ᱩᱞ",
+    "phonetic_deva": "[उल]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.93,
+    "tags": [
+      "आम",
+      "mango",
+      "उल",
+      "फलों का राजा"
+    ],
+    "context_prompts": [
+      "मीठे फल",
+      "गर्मी का मौसम",
+      "फलों का राजा"
+    ]
+  },
+  {
+    "id": "motif_milk_cup",
+    "filename": "motif_milk_cup.webp",
+    "asset_path": "images/flashcards/motif_milk_cup.webp",
+    "name_hi": "दूध का कटोरा",
+    "name_olchiki": "ᱛᱳᱣᱟ",
+    "phonetic_deva": "[तोवा]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 10.45,
+    "tags": [
+      "दूध",
+      "milk",
+      "तोवा",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "संपूर्ण आहार",
+      "स्वास्थ्य",
+      "मजबूत हड्डियां"
+    ]
+  },
+  {
+    "id": "motif_monkey",
+    "filename": "motif_monkey.webp",
+    "asset_path": "images/flashcards/motif_monkey.webp",
+    "name_hi": "बंदर",
+    "name_olchiki": "ᱜᱟᱹᱰᱤ",
+    "phonetic_deva": "[गाड़ी]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 22.08,
+    "tags": [
+      "बंदर",
+      "monkey",
+      "गाड़ी",
+      "कूदना"
+    ],
+    "context_prompts": [
+      "पेड़ों पर रहने वाले जीव",
+      "शरारती जीव"
+    ]
+  },
+  {
+    "id": "motif_moon_night",
+    "filename": "motif_moon_night.webp",
+    "asset_path": "images/flashcards/motif_moon_night.webp",
+    "name_hi": "रात का चाँद",
+    "name_olchiki": "ᱧᱤᱫᱟᱹ ᱪᱟᱸᱫᱚ",
+    "phonetic_deva": "[ञिदा चांदो]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 12.24,
+    "tags": [
+      "चाँद",
+      "चंद्रमा",
+      "रात",
+      "moon",
+      "प्रकाश"
+    ],
+    "context_prompts": [
+      "रात और आकाश",
+      "प्रकृति",
+      "चाँदनी"
+    ]
+  },
+  {
+    "id": "motif_mother_child",
+    "filename": "motif_mother_child.webp",
+    "asset_path": "images/flashcards/motif_mother_child.webp",
+    "name_hi": "माँ और बच्चा",
+    "name_olchiki": "ᱟᱭᱳ ᱟᱨ ᱜᱤᱫᱽᱨᱟᱹ",
+    "phonetic_deva": "[आयो आर गिदरा]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 0.8333,
+    "compressed_size_kb": 59.29,
+    "tags": [
+      "माँ और बच्चा",
+      "ममता",
+      "परिवार",
+      "स्नेह"
+    ],
+    "context_prompts": [
+      "हमारा परिवार",
+      "प्यार",
+      "ममता"
+    ]
+  },
+  {
+    "id": "motif_mountain",
+    "filename": "motif_mountain.webp",
+    "asset_path": "images/flashcards/motif_mountain.webp",
+    "name_hi": "पहाड़ / पर्वत",
+    "name_olchiki": "ᱵᱩᱨᱩ",
+    "phonetic_deva": "[बुरु]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 16.69,
+    "tags": [
+      "पहाड़",
+      "पर्वत",
+      "mountain",
+      "बुरु",
+      "ऊंचा"
+    ],
+    "context_prompts": [
+      "झारखंड की प्रकृति",
+      "पहाड़",
+      "मरांग बुरु"
+    ]
+  },
+  {
+    "id": "motif_mouse",
+    "filename": "motif_mouse.webp",
+    "asset_path": "images/flashcards/motif_mouse.webp",
+    "name_hi": "चूहा",
+    "name_olchiki": "ᱪᱩᱴᱤᱭᱟᱹ",
+    "phonetic_deva": "[चुटिया]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 21.71,
+    "tags": [
+      "चूहा",
+      "mouse",
+      "चुटिया",
+      "बिल"
+    ],
+    "context_prompts": [
+      "छोटे जानवर",
+      "कुतरना"
+    ]
+  },
+  {
+    "id": "motif_mouth",
+    "filename": "motif_mouth.webp",
+    "asset_path": "images/flashcards/motif_mouth.webp",
+    "name_hi": "मुँह",
+    "name_olchiki": "ᱢᱚᱪᱟ",
+    "phonetic_deva": "[मोचा]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 18.05,
+    "tags": [
+      "मुँह",
+      "mouth",
+      "मोचा",
+      "खाना",
+      "बोलना"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "बोलना",
+      "भोजन"
+    ]
+  },
+  {
+    "id": "motif_mushroom",
+    "filename": "motif_mushroom.webp",
+    "asset_path": "images/flashcards/motif_mushroom.webp",
+    "name_hi": "मशरूम (खुखड़ी)",
+    "name_olchiki": "ᱚᱛ",
+    "phonetic_deva": "[ओत]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 61.5,
+    "tags": [
+      "खुखड़ी",
+      "मशरूम",
+      "mushroom",
+      "रुगड़ा",
+      "ot"
+    ],
+    "context_prompts": [
+      "झारखंड के व्यंजन",
+      "जंगल की खुखड़ी",
+      "वर्षा ऋतु"
+    ]
+  },
+  {
+    "id": "motif_mustard_oil_bottle",
+    "filename": "motif_mustard_oil_bottle.webp",
+    "asset_path": "images/flashcards/motif_mustard_oil_bottle.webp",
+    "name_hi": "सरसों का तेल",
+    "name_olchiki": "ᱛᱩᱲᱤ ᱥᱩᱱᱩᱢ",
+    "phonetic_deva": "[तुड़ी सुनुम]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 7.75,
+    "tags": [
+      "सरसों तेल",
+      "mustard oil",
+      "सुनुम",
+      "रसोई"
+    ],
+    "context_prompts": [
+      "रसोई और तेल",
+      "मालिश",
+      "स्वास्थ्य"
+    ]
+  },
+  {
+    "id": "motif_neck",
+    "filename": "motif_neck.webp",
+    "asset_path": "images/flashcards/motif_neck.webp",
+    "name_hi": "गर्दन",
+    "name_olchiki": "ᱦᱚᱴᱚᱜ",
+    "phonetic_deva": "[होटोक]",
+    "category": "BODY_PARTS",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 17.47,
+    "tags": [
+      "गर्दन",
+      "neck",
+      "होटोक",
+      "शरीर"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "गर्दन"
+    ]
+  },
+  {
+    "id": "motif_nose",
+    "filename": "motif_nose.webp",
+    "asset_path": "images/flashcards/motif_nose.webp",
+    "name_hi": "नाक",
+    "name_olchiki": "ᱢᱩ",
+    "phonetic_deva": "[मु]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 13.3,
+    "tags": [
+      "नाक",
+      "nose",
+      "मु",
+      "सूंघना"
+    ],
+    "context_prompts": [
+      "ज्ञानेंद्रियां",
+      "शरीर के अंग",
+      "सांस लेना"
+    ]
+  },
+  {
+    "id": "motif_notebook",
+    "filename": "motif_notebook.webp",
+    "asset_path": "images/flashcards/motif_notebook.webp",
+    "name_hi": "कॉपी / अभ्यास पुस्तिका",
+    "name_olchiki": "ᱚᱞ ᱯᱩᱛᱷᱤ",
+    "phonetic_deva": "[ओल पुथी]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 29.38,
+    "tags": [
+      "कॉपी",
+      "notebook",
+      "अभ्यास",
+      "लिखना"
+    ],
+    "context_prompts": [
+      "कक्षा सामग्री",
+      "लिखना",
+      "गृहकार्य"
+    ]
+  },
+  {
+    "id": "motif_older_sister_school",
+    "filename": "motif_older_sister_school.webp",
+    "asset_path": "images/flashcards/motif_older_sister_school.webp",
+    "name_hi": "बड़ी बहन (विद्यालय)",
+    "name_olchiki": "ᱫᱟᱹᱭ",
+    "phonetic_deva": "[दाई]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 0.8333,
+    "compressed_size_kb": 33.28,
+    "tags": [
+      "बड़ी बहन",
+      "दीदी",
+      "sister",
+      "स्कूल"
+    ],
+    "context_prompts": [
+      "हमारा परिवार",
+      "विद्यालय जाना",
+      "बड़ी दीदी"
+    ]
+  },
+  {
+    "id": "motif_onion",
+    "filename": "motif_onion.webp",
+    "asset_path": "images/flashcards/motif_onion.webp",
+    "name_hi": "प्याज",
+    "name_olchiki": "ᱯᱮᱭᱟᱸᱡᱽ",
+    "phonetic_deva": "[पेयांज]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 30.91,
+    "tags": [
+      "प्याज",
+      "onion",
+      "पेयांज",
+      "सब्जी"
+    ],
+    "context_prompts": [
+      "सब्जियों के नाम",
+      "रसोई"
+    ]
+  },
+  {
+    "id": "motif_ox",
+    "filename": "motif_ox.webp",
+    "asset_path": "images/flashcards/motif_ox.webp",
+    "name_hi": "बैल",
+    "name_olchiki": "ᱰᱟᱝᱜᱽᱨᱟ",
+    "phonetic_deva": "[डांगरा]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 28.31,
+    "tags": [
+      "बैल",
+      "ox",
+      "डांगरा",
+      "खेती"
+    ],
+    "context_prompts": [
+      "पालतू पशु",
+      "खेती किसानी",
+      "मेहनत"
+    ]
+  },
+  {
+    "id": "motif_ox_ploughing",
+    "filename": "motif_ox_ploughing.webp",
+    "asset_path": "images/flashcards/motif_ox_ploughing.webp",
+    "name_hi": "हल जोतता बैल",
+    "name_olchiki": "ᱥᱤ ᱰᱟᱝᱜᱽᱨᱟ",
+    "phonetic_deva": "[सी डांगरा]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 2,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 27.44,
+    "tags": [
+      "हल जोतना",
+      "ploughing",
+      "खेती",
+      "हल"
+    ],
+    "context_prompts": [
+      "कृषि कार्य",
+      "मेहनत",
+      "खेत की जुताई"
+    ]
+  },
+  {
+    "id": "motif_papaya",
+    "filename": "motif_papaya.webp",
+    "asset_path": "images/flashcards/motif_papaya.webp",
+    "name_hi": "पपीता",
+    "name_olchiki": "ᱯᱚᱯᱮᱭᱟ",
+    "phonetic_deva": "[पोपेया]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 26.41,
+    "tags": [
+      "पपीता",
+      "papaya",
+      "फल",
+      "पीला"
+    ],
+    "context_prompts": [
+      "पौष्टिक फल",
+      "विटामिन",
+      "पाचन"
+    ]
+  },
+  {
+    "id": "motif_paper",
+    "filename": "motif_paper.webp",
+    "asset_path": "images/flashcards/motif_paper.webp",
+    "name_hi": "कागज",
+    "name_olchiki": "ᱠᱟᱜᱚᱡᱽ",
+    "phonetic_deva": "[कागोज]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 2.18,
+    "tags": [
+      "कागज",
+      "paper",
+      "कागोज",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "लिखने की सामग्री",
+      "कागज की नाव",
+      "कक्षा"
+    ]
+  },
+  {
+    "id": "motif_parrot",
+    "filename": "motif_parrot.webp",
+    "asset_path": "images/flashcards/motif_parrot.webp",
+    "name_hi": "तोता",
+    "name_olchiki": "ᱢᱤᱨᱩ",
+    "phonetic_deva": "[मीरु]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 39.64,
+    "tags": [
+      "तोता",
+      "parrot",
+      "मीरु",
+      "हरा पक्षी"
+    ],
+    "context_prompts": [
+      "पक्षी",
+      "सुंदर पक्षी",
+      "लाल चोंच"
+    ]
+  },
+  {
+    "id": "motif_peacock",
+    "filename": "motif_peacock.webp",
+    "asset_path": "images/flashcards/motif_peacock.webp",
+    "name_hi": "मोर",
+    "name_olchiki": "ᱢᱟᱨᱟᱜ",
+    "phonetic_deva": "[माराक]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 33.86,
+    "tags": [
+      "मोर",
+      "peacock",
+      "माराक",
+      "राष्ट्रीय पक्षी"
+    ],
+    "context_prompts": [
+      "सुंदर पक्षी",
+      "झारखंड के वन",
+      "मोर पंख",
+      "नृत्य"
+    ]
+  },
+  {
+    "id": "motif_pen",
+    "filename": "motif_pen.webp",
+    "asset_path": "images/flashcards/motif_pen.webp",
+    "name_hi": "कलम (पेन)",
+    "name_olchiki": "ᱠᱚᱞᱚᱢ",
+    "phonetic_deva": "[कोलोम]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 16.21,
+    "tags": [
+      "पेन",
+      "कलम",
+      "pen",
+      "कोलोम"
+    ],
+    "context_prompts": [
+      "लिखने का साधन",
+      "कक्षा",
+      "स्याही"
+    ]
+  },
+  {
+    "id": "motif_pencil",
+    "filename": "motif_pencil.webp",
+    "asset_path": "images/flashcards/motif_pencil.webp",
+    "name_hi": "पेंसिल",
+    "name_olchiki": "ᱯᱮᱱᱥᱤᱞ",
+    "phonetic_deva": "[पेन्सिल]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 13.9,
+    "tags": [
+      "पेंसिल",
+      "pencil",
+      "चित्रकारी",
+      "रबर"
+    ],
+    "context_prompts": [
+      "सीखने की शुरुआत",
+      "कक्षा",
+      "ड्राइंग"
+    ]
+  },
+  {
+    "id": "motif_pig",
+    "filename": "motif_pig.webp",
+    "asset_path": "images/flashcards/motif_pig.webp",
+    "name_hi": "सूअर",
+    "name_olchiki": "ᱥᱩᱠᱨᱤ",
+    "phonetic_deva": "[सुकरी]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 23.15,
+    "tags": [
+      "सूअर",
+      "pig",
+      "सुकरी",
+      "जानवर"
+    ],
+    "context_prompts": [
+      "घरेलू जानवर",
+      "पशु"
+    ]
+  },
+  {
+    "id": "motif_pigeon",
+    "filename": "motif_pigeon.webp",
+    "asset_path": "images/flashcards/motif_pigeon.webp",
+    "name_hi": "कबूतर",
+    "name_olchiki": "ᱯᱚᱛᱟᱢ",
+    "phonetic_deva": "[पोताम]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 25.77,
+    "tags": [
+      "कबूतर",
+      "pigeon",
+      "पोताम",
+      "पक्षी"
+    ],
+    "context_prompts": [
+      "शांत पक्षी",
+      "पक्षी",
+      "गुटर गूं"
+    ]
+  },
+  {
+    "id": "motif_planting_sapling",
+    "filename": "motif_planting_sapling.webp",
+    "asset_path": "images/flashcards/motif_planting_sapling.webp",
+    "name_hi": "पौधा लगाना",
+    "name_olchiki": "ᱫᱟᱨᱮ ᱨᱚᱦᱚᱭ",
+    "phonetic_deva": "[दारे रोहोय]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 23.08,
+    "tags": [
+      "पौधारोपण",
+      "वृक्षारोपण",
+      "planting",
+      "पौधा"
+    ],
+    "context_prompts": [
+      "पर्यावरण संरक्षण",
+      "पेड़ लगाओ",
+      "हरियाली"
+    ]
+  },
+  {
+    "id": "motif_potato",
+    "filename": "motif_potato.webp",
+    "asset_path": "images/flashcards/motif_potato.webp",
+    "name_hi": "आलू",
+    "name_olchiki": "ᱟᱹᱞᱩ",
+    "phonetic_deva": "[आलू]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 15.41,
+    "tags": [
+      "आलू",
+      "potato",
+      "आलू",
+      "सब्जी"
+    ],
+    "context_prompts": [
+      "दैनिक भोजन",
+      "सब्जियां",
+      "सब्जियों का राजा"
+    ]
+  },
+  {
+    "id": "motif_pumpkin",
+    "filename": "motif_pumpkin.webp",
+    "asset_path": "images/flashcards/motif_pumpkin.webp",
+    "name_hi": "कद्दू / कोहड़ा",
+    "name_olchiki": "ᱠᱚᱦᱰᱟ",
+    "phonetic_deva": "[कोहड़ा]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 32.75,
+    "tags": [
+      "कद्दू",
+      "कोहड़ा",
+      "pumpkin",
+      "बड़ा फल"
+    ],
+    "context_prompts": [
+      "सब्जियां",
+      "सब्जियों के नाम",
+      "पीला कद्दू"
+    ]
+  },
+  {
+    "id": "motif_rabbit",
+    "filename": "motif_rabbit.webp",
+    "asset_path": "images/flashcards/motif_rabbit.webp",
+    "name_hi": "खरगोश",
+    "name_olchiki": "ᱠᱩᱞᱟᱹᱭ",
+    "phonetic_deva": "[कुलाई]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 18.71,
+    "tags": [
+      "खरगोश",
+      "rabbit",
+      "कुलाई",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "कोमल जीव",
+      "जंगल के जीव",
+      "तेज दौड़"
+    ]
+  },
+  {
+    "id": "motif_radish",
+    "filename": "motif_radish.webp",
+    "asset_path": "images/flashcards/motif_radish.webp",
+    "name_hi": "मूली",
+    "name_olchiki": "ᱢᱩᱞᱟᱹ",
+    "phonetic_deva": "[मूला]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 0.8333,
+    "compressed_size_kb": 34.57,
+    "tags": [
+      "मूली",
+      "radish",
+      "मूला",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "सब्जियां",
+      "सफेद मूली",
+      "सलाद"
+    ]
+  },
+  {
+    "id": "motif_rain_cloud",
+    "filename": "motif_rain_cloud.webp",
+    "asset_path": "images/flashcards/motif_rain_cloud.webp",
+    "name_hi": "बारिश के बादल",
+    "name_olchiki": "ᱫᱟᱜ ᱨᱤᱢᱤᱞ",
+    "phonetic_deva": "[दाग रिमिल]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 12.57,
+    "tags": [
+      "बादल",
+      "वर्षा",
+      "rain cloud",
+      "रिमिल",
+      "पानी"
+    ],
+    "context_prompts": [
+      "वर्षा ऋतु",
+      "मौसम",
+      "काले बादल"
+    ]
+  },
+  {
+    "id": "motif_raw_rice_grains",
+    "filename": "motif_raw_rice_grains.webp",
+    "asset_path": "images/flashcards/motif_raw_rice_grains.webp",
+    "name_hi": "कच्चे चावल के दाने",
+    "name_olchiki": "ᱪᱟᱣᱞᱮ",
+    "phonetic_deva": "[चावले]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 38.32,
+    "tags": [
+      "चावल",
+      "अक्षत",
+      "rice grains",
+      "अनाज"
+    ],
+    "context_prompts": [
+      "अनाज",
+      "हमारा भोजन",
+      "चावल"
+    ]
+  },
+  {
+    "id": "motif_red_mango",
+    "filename": "motif_red_mango.webp",
+    "asset_path": "images/flashcards/motif_red_mango.webp",
+    "name_hi": "लाल/पका आम",
+    "name_olchiki": "ᱟᱨᱟᱜ ᱩᱞ",
+    "phonetic_deva": "[आराक उल]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 12.5,
+    "tags": [
+      "पका आम",
+      "लाल आम",
+      "मीठा आम",
+      "फल"
+    ],
+    "context_prompts": [
+      "फलों की मिठास",
+      "रंग",
+      "स्वादिष्ट आम"
+    ]
+  },
+  {
+    "id": "motif_ripe_rice_plant",
+    "filename": "motif_ripe_rice_plant.webp",
+    "asset_path": "images/flashcards/motif_ripe_rice_plant.webp",
+    "name_hi": "पकी धान की फसल",
+    "name_olchiki": "ᱵᱤᱞᱤ ᱦᱳᱲᱳ",
+    "phonetic_deva": "[बिली होड़ो]",
+    "category": "NATURE",
+    "grade": 2,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 26.26,
+    "tags": [
+      "धान",
+      "फसल",
+      "rice crop",
+      "होड़ो",
+      "खेत"
+    ],
+    "context_prompts": [
+      "कृषि और फसल",
+      "सोना धान",
+      "फसल कटाई"
+    ]
+  },
+  {
+    "id": "motif_river",
+    "filename": "motif_river.webp",
+    "asset_path": "images/flashcards/motif_river.webp",
+    "name_hi": "नदी",
+    "name_olchiki": "ᱜᱟᱰᱟ",
+    "phonetic_deva": "[गाडा]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 26.73,
+    "tags": [
+      "नदी",
+      "river",
+      "गाडा",
+      "जल",
+      "धारा"
+    ],
+    "context_prompts": [
+      "जलस्रोत",
+      "प्रकृति",
+      "स्वर्णरेखा नदी"
+    ]
+  },
+  {
+    "id": "motif_rooster",
+    "filename": "motif_rooster.webp",
+    "asset_path": "images/flashcards/motif_rooster.webp",
+    "name_hi": "मुर्गा",
+    "name_olchiki": "ᱥᱟᱺᱰᱤ ᱥᱤᱢ",
+    "phonetic_deva": "[सांडी सीम]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 25.69,
+    "tags": [
+      "मुर्गा",
+      "rooster",
+      "सांडी सीम",
+      "सुबह"
+    ],
+    "context_prompts": [
+      "सुबह की बांग",
+      "पक्षी",
+      "सवेरा"
+    ]
+  },
+  {
+    "id": "motif_roti",
+    "filename": "motif_roti.webp",
+    "asset_path": "images/flashcards/motif_roti.webp",
+    "name_hi": "रोटी",
+    "name_olchiki": "ᱯᱤᱴᱷᱟᱹ",
+    "phonetic_deva": "[पीठा]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 11.91,
+    "tags": [
+      "रोटी",
+      "पीठा",
+      "bread",
+      "गेहूं"
+    ],
+    "context_prompts": [
+      "दैनिक भोजन",
+      "अनाज",
+      "मां के हाथ की रोटी"
+    ]
+  },
+  {
+    "id": "motif_sal_forest",
+    "filename": "motif_sal_forest.webp",
+    "asset_path": "images/flashcards/motif_sal_forest.webp",
+    "name_hi": "साल (सखुआ) का जंगल",
+    "name_olchiki": "ᱥᱟᱨᱡᱚᱢ ᱵᱤᱨ",
+    "phonetic_deva": "[सारजोम बीर]",
+    "category": "NATURE",
+    "grade": 2,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 29.96,
+    "tags": [
+      "साल जंगल",
+      "सखुआ वन",
+      "forest",
+      "बीर",
+      "पेड़"
+    ],
+    "context_prompts": [
+      "झारखंड के वन",
+      "प्रकृति",
+      "सारंडा वन"
+    ]
+  },
+  {
+    "id": "motif_salt_bowl",
+    "filename": "motif_salt_bowl.webp",
+    "asset_path": "images/flashcards/motif_salt_bowl.webp",
+    "name_hi": "नमक की कटोरी",
+    "name_olchiki": "ᱵᱩᱞᱩᱝ",
+    "phonetic_deva": "[बुलुंग]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 25.59,
+    "tags": [
+      "नमक",
+      "salt",
+      "बुलुंग",
+      "स्वाद"
+    ],
+    "context_prompts": [
+      "स्वाद और स्वास्थ्य",
+      "रसोई"
+    ]
+  },
+  {
+    "id": "motif_school_bag",
+    "filename": "motif_school_bag.webp",
+    "asset_path": "images/flashcards/motif_school_bag.webp",
+    "name_hi": "बस्ता / स्कूल बैग",
+    "name_olchiki": "ᱛᱷᱟᱹᱞᱤ",
+    "phonetic_deva": "[थाली]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 22.12,
+    "tags": [
+      "बस्ता",
+      "स्कूल बैग",
+      "school bag",
+      "किताबें"
+    ],
+    "context_prompts": [
+      "विद्यालय की तैयारी",
+      "कक्षा",
+      "बस्ता"
+    ]
+  },
+  {
+    "id": "motif_school_bell",
+    "filename": "motif_school_bell.webp",
+    "asset_path": "images/flashcards/motif_school_bell.webp",
+    "name_hi": "स्कूल की घंटी",
+    "name_olchiki": "ᱟᱥᱲᱟ ᱜᱷᱟᱱᱴᱤ",
+    "phonetic_deva": "[आसड़ा घान्टी]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 12.12,
+    "tags": [
+      "घंटी",
+      "school bell",
+      "आसड़ा",
+      "समय"
+    ],
+    "context_prompts": [
+      "समय चक्र",
+      "कक्षा का समय",
+      "छुट्टी"
+    ]
+  },
+  {
+    "id": "motif_school_building",
+    "filename": "motif_school_building.webp",
+    "asset_path": "images/flashcards/motif_school_building.webp",
+    "name_hi": "विद्यालय भवन",
+    "name_olchiki": "ᱟᱥᱲᱟ ᱚᱲᱟᱜ",
+    "phonetic_deva": "[आसड़ा ओड़ाक]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 52.45,
+    "tags": [
+      "विद्यालय",
+      "स्कूल",
+      "school building",
+      "भवन"
+    ],
+    "context_prompts": [
+      "हमारा प्यारा स्कूल",
+      "ज्ञान का मंदिर"
+    ]
+  },
+  {
+    "id": "motif_sheep",
+    "filename": "motif_sheep.webp",
+    "asset_path": "images/flashcards/motif_sheep.webp",
+    "name_hi": "भेड़",
+    "name_olchiki": "ᱵᱷᱤᱰᱤ",
+    "phonetic_deva": "[भीडी]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 24.63,
+    "tags": [
+      "भेड़",
+      "sheep",
+      "भीडी",
+      "ऊन"
+    ],
+    "context_prompts": [
+      "पालतू पशु",
+      "ऊन",
+      "घास"
+    ]
+  },
+  {
+    "id": "motif_slate",
+    "filename": "motif_slate.webp",
+    "asset_path": "images/flashcards/motif_slate.webp",
+    "name_hi": "स्लेट (पाटी)",
+    "name_olchiki": "ᱯᱟᱴᱷᱟ",
+    "phonetic_deva": "[पाठा]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 34.31,
+    "tags": [
+      "स्लेट",
+      "पाटी",
+      "slate",
+      "पाठा",
+      "पेंसिल"
+    ],
+    "context_prompts": [
+      "आरंभिक लेखन",
+      "कक्षा",
+      "वर्णमाला"
+    ]
+  },
+  {
+    "id": "motif_small_bird",
+    "filename": "motif_small_bird.webp",
+    "asset_path": "images/flashcards/motif_small_bird.webp",
+    "name_hi": "छोटी चिड़िया",
+    "name_olchiki": "ᱦᱩᱰᱤᱧ ᱪᱮᱬᱮ",
+    "phonetic_deva": "[हुडिंज चेणॆ]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 40.31,
+    "tags": [
+      "चिड़िया",
+      "पक्षी",
+      "small bird",
+      "चीं चीं"
+    ],
+    "context_prompts": [
+      "छोटे पक्षी",
+      "प्रकृति",
+      "पेड़ पर घोंसला"
+    ]
+  },
+  {
+    "id": "motif_snake",
+    "filename": "motif_snake.webp",
+    "asset_path": "images/flashcards/motif_snake.webp",
+    "name_hi": "साँप",
+    "name_olchiki": "ᱵᱤᱧ",
+    "phonetic_deva": "[बिंज]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 25.58,
+    "tags": [
+      "साँप",
+      "snake",
+      "बिंज",
+      "सरीसृप"
+    ],
+    "context_prompts": [
+      "सरीसृप जीव",
+      "सावधानी",
+      "जंगल"
+    ]
+  },
+  {
+    "id": "motif_square_shape",
+    "filename": "motif_square_shape.webp",
+    "asset_path": "images/flashcards/motif_square_shape.webp",
+    "name_hi": "वर्ग (चौकोर)",
+    "name_olchiki": "ᱪᱟᱹᱣᱠᱟᱹ",
+    "phonetic_deva": "[चावका]",
+    "category": "NUMERACY_SHAPES",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 8.15,
+    "tags": [
+      "वर्ग",
+      "चौकोर",
+      "square",
+      "चावका",
+      "चार भुजा"
+    ],
+    "context_prompts": [
+      "आकृतियां और ज्यामिति",
+      "चौकोर वस्तुएं"
+    ]
+  },
+  {
+    "id": "motif_stomach",
+    "filename": "motif_stomach.webp",
+    "asset_path": "images/flashcards/motif_stomach.webp",
+    "name_hi": "पेट",
+    "name_olchiki": "ᱞᱟᱡ",
+    "phonetic_deva": "[लाज]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 12.05,
+    "tags": [
+      "पेट",
+      "stomach",
+      "लाज",
+      "भूख"
+    ],
+    "context_prompts": [
+      "शरीर के अंग",
+      "पाचन",
+      "संतुलित आहार"
+    ]
+  },
+  {
+    "id": "motif_sunrise",
+    "filename": "motif_sunrise.webp",
+    "asset_path": "images/flashcards/motif_sunrise.webp",
+    "name_hi": "सूर्योदय (सवेरा)",
+    "name_olchiki": "ᱵᱮᱲᱟ ᱨᱟᱠᱟᱵ",
+    "phonetic_deva": "[बेड़ा राकाब]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 11.1,
+    "tags": [
+      "सूर्योदय",
+      "सवेरा",
+      "sunrise",
+      "सूरज",
+      "सुबह"
+    ],
+    "context_prompts": [
+      "प्रातः काल",
+      "दिन की शुरुआत",
+      "सूर्य नमस्कार"
+    ]
+  },
+  {
+    "id": "motif_table",
+    "filename": "motif_table.webp",
+    "asset_path": "images/flashcards/motif_table.webp",
+    "name_hi": "मेज (टेबल)",
+    "name_olchiki": "ᱢᱮᱡᱽ",
+    "phonetic_deva": "[मेज]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 17.44,
+    "tags": [
+      "मेज",
+      "टेबल",
+      "table",
+      "मेज",
+      "कक्षा"
+    ],
+    "context_prompts": [
+      "कक्षा का फर्नीचर",
+      "पढ़ाई की मेज"
+    ]
+  },
+  {
+    "id": "motif_tamarind_pod",
+    "filename": "motif_tamarind_pod.webp",
+    "asset_path": "images/flashcards/motif_tamarind_pod.webp",
+    "name_hi": "इमली",
+    "name_olchiki": "ᱡᱚᱡᱚ",
+    "phonetic_deva": "[जोजो]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 24.45,
+    "tags": [
+      "इमली",
+      "tamarind",
+      "जोजो",
+      "खट्टा"
+    ],
+    "context_prompts": [
+      "स्वाद और फल",
+      "पेड़",
+      "खट्टा स्वाद"
+    ]
+  },
+  {
+    "id": "motif_teacher_class",
+    "filename": "motif_teacher_class.webp",
+    "asset_path": "images/flashcards/motif_teacher_class.webp",
+    "name_hi": "शिक्षक (कक्षा में)",
+    "name_olchiki": "ᱢᱟᱪᱮᱛ",
+    "phonetic_deva": "[माचेत]",
+    "category": "CLASSROOM",
+    "grade": 1,
+    "aspect_ratio": 1.0942,
+    "compressed_size_kb": 52.59,
+    "tags": [
+      "शिक्षक",
+      "गुरुजी",
+      "teacher",
+      "माचेत",
+      "गुरु"
+    ],
+    "context_prompts": [
+      "आदरणीय शिक्षक",
+      "कक्षा",
+      "मार्गदर्शन"
+    ]
+  },
+  {
+    "id": "motif_teeth",
+    "filename": "motif_teeth.webp",
+    "asset_path": "images/flashcards/motif_teeth.webp",
+    "name_hi": "दाँत",
+    "name_olchiki": "ᱰᱟᱴᱟ",
+    "phonetic_deva": "[डाटा]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 15.17,
+    "tags": [
+      "दाँत",
+      "teeth",
+      "डाटा",
+      "चबाना",
+      "सफेद"
+    ],
+    "context_prompts": [
+      "स्वच्छता और स्वास्थ्य",
+      "शरीर के अंग",
+      "ब्रश करना"
+    ]
+  },
+  {
+    "id": "motif_tendu_fruit",
+    "filename": "motif_tendu_fruit.webp",
+    "asset_path": "images/flashcards/motif_tendu_fruit.webp",
+    "name_hi": "केंदू फल",
+    "name_olchiki": "ᱛᱤᱨᱤᱞ ᱡᱚ",
+    "phonetic_deva": "[तिरील जो]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 19.7,
+    "tags": [
+      "केंदू फल",
+      "tendu",
+      "तिरील",
+      "मीठा फल"
+    ],
+    "context_prompts": [
+      "झारखंड के फल",
+      "वनोपज",
+      "केंदू पत्ता"
+    ]
+  },
+  {
+    "id": "motif_tiger",
+    "filename": "motif_tiger.webp",
+    "asset_path": "images/flashcards/motif_tiger.webp",
+    "name_hi": "बाघ",
+    "name_olchiki": "ᱛᱟᱹᱨᱩᱵ",
+    "phonetic_deva": "[तारुब]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 38.65,
+    "tags": [
+      "बाघ",
+      "tiger",
+      "तारुब",
+      "जंगली जानवर",
+      "धारीदार"
+    ],
+    "context_prompts": [
+      "राष्ट्रीय पशु",
+      "जंगल के जीव",
+      "पलामू टाइगर रिजर्व"
+    ]
+  },
+  {
+    "id": "motif_tomato",
+    "filename": "motif_tomato.webp",
+    "asset_path": "images/flashcards/motif_tomato.webp",
+    "name_hi": "टमाटर",
+    "name_olchiki": "ᱵᱤᱞᱟᱹᱛᱤ",
+    "phonetic_deva": "[बिलाती]",
+    "category": "FRUITS_VEG_FOOD",
+    "grade": 1,
+    "aspect_ratio": 1.2,
+    "compressed_size_kb": 22.66,
+    "tags": [
+      "टमाटर",
+      "tomato",
+      "बिलाती",
+      "सब्जी",
+      "लाल"
+    ],
+    "context_prompts": [
+      "लाल टमाटर",
+      "सब्जियां",
+      "सब्जियों के नाम"
+    ]
+  },
+  {
+    "id": "motif_tongue",
+    "filename": "motif_tongue.webp",
+    "asset_path": "images/flashcards/motif_tongue.webp",
+    "name_hi": "जीभ",
+    "name_olchiki": "ᱟᱞᱟᱝ",
+    "phonetic_deva": "[आलांग]",
+    "category": "BODY_PARTS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 21.07,
+    "tags": [
+      "जीभ",
+      "tongue",
+      "आलांग",
+      "स्वाद"
+    ],
+    "context_prompts": [
+      "ज्ञानेंद्रियां",
+      "स्वाद",
+      "बोलना"
+    ]
+  },
+  {
+    "id": "motif_turtle",
+    "filename": "motif_turtle.webp",
+    "asset_path": "images/flashcards/motif_turtle.webp",
+    "name_hi": "कछुआ",
+    "name_olchiki": "ᱦᱚᱨᱚ",
+    "phonetic_deva": "[होरो]",
+    "category": "ANIMALS",
+    "grade": 1,
+    "aspect_ratio": 1.8318,
+    "compressed_size_kb": 51.52,
+    "tags": [
+      "कछुआ",
+      "turtle",
+      "होरो",
+      "जलचर",
+      "कवच"
+    ],
+    "context_prompts": [
+      "जलीय जीव",
+      "धैर्य",
+      "धीमी चाल"
+    ]
+  },
+  {
+    "id": "motif_two_friends",
+    "filename": "motif_two_friends.webp",
+    "asset_path": "images/flashcards/motif_two_friends.webp",
+    "name_hi": "दो मित्र",
+    "name_olchiki": "ᱵᱟᱨ ᱜᱟᱛᱮ",
+    "phonetic_deva": "[बार गाते]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 24.76,
+    "tags": [
+      "दो दोस्त",
+      "मित्र",
+      "friends",
+      "गाते",
+      "दोस्ती"
+    ],
+    "context_prompts": [
+      "मित्रता और सहयोग",
+      "साथ-साथ खेलना",
+      "दोस्ती"
+    ]
+  },
+  {
+    "id": "motif_water_lota",
+    "filename": "motif_water_lota.webp",
+    "asset_path": "images/flashcards/motif_water_lota.webp",
+    "name_hi": "लोटा (जल पात्र)",
+    "name_olchiki": "ᱞᱳᱴᱟ",
+    "phonetic_deva": "[लोटा]",
+    "category": "NATURE",
+    "grade": 1,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 10.37,
+    "tags": [
+      "लोटा",
+      "जल पात्र",
+      "पानी",
+      "बर्तन"
+    ],
+    "context_prompts": [
+      "पारंपरिक बर्तन",
+      "स्वच्छ जल",
+      "स्वागत"
+    ]
+  },
+  {
+    "id": "motif_yellow_rice_stalk",
+    "filename": "motif_yellow_rice_stalk.webp",
+    "asset_path": "images/flashcards/motif_yellow_rice_stalk.webp",
+    "name_hi": "पीली धान की बाली",
+    "name_olchiki": "ᱥᱟᱥᱟᱝ ᱦᱳᱲᱳ ᱜᱮᱞᱮ",
+    "phonetic_deva": "[सासांग होड़ो गेले]",
+    "category": "NATURE",
+    "grade": 2,
+    "aspect_ratio": 1.8333,
+    "compressed_size_kb": 41.71,
+    "tags": [
+      "धान की बाली",
+      "धान",
+      "फसल",
+      "पीली बाली"
+    ],
+    "context_prompts": [
+      "कृषि और खुशहाली",
+      "सोहराय पर्व",
+      "फसल"
+    ]
+  },
+  {
+    "id": "motif_younger_brother",
+    "filename": "motif_younger_brother.webp",
+    "asset_path": "images/flashcards/motif_younger_brother.webp",
+    "name_hi": "छोटा भाई",
+    "name_olchiki": "ᱦᱩᱰᱤᱧ ᱵᱚᱭᱦᱟ",
+    "phonetic_deva": "[हुडिंज बोयहा]",
+    "category": "PEOPLE_ACTIONS",
+    "grade": 1,
+    "aspect_ratio": 0.8333,
+    "compressed_size_kb": 33.2,
+    "tags": [
+      "छोटा भाई",
+      "भाई",
+      "brother",
+      "बोयहा",
+      "परिवार"
+    ],
+    "context_prompts": [
+      "हमारा परिवार",
+      "स्नेह",
+      "भाई-बहन"
+    ]
+  }
+]
